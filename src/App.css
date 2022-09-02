@@ -60,7 +60,11 @@ html, #root{
 
 #nav-search {
 	border-radius: var(--radius);
-	background-color: var(--color-secondary)
+	background-color: var(--color-secondary);
+}
+
+#offcanvas-nav {
+	background-color: var(--color-primary);
 }
 
 /* Main */
@@ -68,4 +72,12 @@ main {
 	background-color: white;
 	height: 100%;
 	border-radius: var(--radius)
+}
+
+.nav-dropdown{
+	background-color: var(--color-secondary);
+	border: none;
+}
+.nav-dropdown .dropdown-item:hover{
+	/* background-color: var(--color-primary); */
 }
