@@ -1,12 +1,13 @@
-import {Outlet, Link} from "react-router-dom";
+import {Outlet} from "react-router-dom";
+import Nav from "../components/Nav";
 
 const Layout = () => {
 	return (
 		<>
-			<nav>
-				<p>Hello there</p>
-			</nav>
-			<Outlet/>
+			<Nav />
+			<main className="m-4 p-3">
+				<Outlet/>
+			</main>
 		</>
 	)
 }

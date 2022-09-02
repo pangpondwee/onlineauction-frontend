@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+/*
+ * Custom Colors
+*/
+
+:root{
+	--color-primary: #C3D3E0;
+	--color-secondary: #A3BCD0;
+	--color-dark: #091235;
+	--radius: 20px;
+}
+/* General */
+html, #root{
+	background-color: var(--color-primary);
+}
+
+
+/* Nav Bar*/
+.navbar, .navbar .navbar-brand{
+	background-color: var(--color-primary);
+	color: var(--color-dark);
+}
+
+#nav-search {
+	border-radius: var(--radius);
+	background-color: var(--color-secondary)
+}
+
+/* Main */
+main {
+	background-color: white;
+	height: 100%;
+	border-radius: var(--radius)
+}
