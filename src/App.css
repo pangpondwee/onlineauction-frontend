@@ -84,4 +84,12 @@ main {
 
 .card{
 	width: 18rem;
+  margin: auto 5px;
+}
+
+.test{
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-around;
+  
 }
