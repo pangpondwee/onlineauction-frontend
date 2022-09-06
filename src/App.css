@@ -84,12 +84,46 @@ main {
 
 .card{
 	width: 18rem;
-  margin: auto 5px;
+  /* height: 16.7rem; */
+  margin: auto 20px;
+  /* box-shadow: 10px 10px 20px -15px; */
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px; */
 }
 
 .test{
   display: flex;
   box-sizing: border-box;
-  justify-content: space-around;
-  
+  justify-content: space-around;  
+}
+
+.headHome{
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.detail{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pictureBox{
+  border: 1px solid black;
+  border-radius: 5px 5px 0px 0px;
+  height: 193.08px;
+}
+
+.itemName{
+  font-size: 16px;
+}
+
+.timeBox{
+  border: 1px solid black;
+  position: absolute;
+  top: 5.8rem;
+  left: 0.5rem;
+  background-color: white;
+  width: 7rem;
+  border-radius: 15px;
 }

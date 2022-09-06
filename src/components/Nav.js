@@ -42,7 +42,16 @@ const Nav = () => {
 						<Link to="#" className="ps-4 dropdown-item nav-link">Home Improvement</Link>
 						<Link to="#" className="ps-4 dropdown-item nav-link">Jewellery</Link>
 						<Link to="#" className="ps-4 dropdown-item nav-link">Coins, Currency, Stamps</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Watches</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Fashion</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Arts</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Antiques & Collectables and Amulet</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Electronics</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Cars & Automotive</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Handbags</Link>
+						<Link to="#" className="ps-4 dropdown-item nav-link">Miscellaneous</Link>
 					</div>
+					<Link to="#" className="nav-link nav-item">Place Auction</Link>
 					<Link to="#" className="nav-link nav-item">Currently Bidding</Link>
 					<Link to="#" className="nav-link nav-item">Currently on Auction</Link>
 					<Link to="#" className="nav-link nav-item">My Following List</Link>
