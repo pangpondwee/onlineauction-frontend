@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
 	return (
-		<nav className="navbar d-flex sticky-top">
+		<nav className="navbar d-flex sticky-top">{/* add sticky-top */}
 			{/* Nav Bar BEGIN*/}
 			<button className="ms-2 navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-nav">
 				<span className="navbar-toggler-icon"></span>
