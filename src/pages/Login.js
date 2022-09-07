@@ -2,60 +2,62 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div>
-      <h1>Login</h1>
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
-            Active
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            data-bs-toggle="dropdown"
-            href="#"
-            role="button"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" href="#">
-                Action
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                Another action
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                Something else here
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider"></hr>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                Separated link
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            Link
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-    </div>
+    <form>
+      {/* <!-- Email input --> */}
+      <div class="form-outline mb-4">
+        <input type="email" id="form2Example1" class="form-control" />
+        <label class="form-label" for="form2Example1">
+          Email address
+        </label>
+      </div>
+
+      {/* <!-- Password input --> */}
+      <div class="form-outline mb-4">
+        <input type="password" id="form2Example2" class="form-control" />
+        <label class="form-label" for="form2Example2">
+          Password
+        </label>
+      </div>
+
+      {/* <!-- 2 column grid layout for inline styling --> */}
+      <div class="row mb-4">
+        <div class="col d-flex justify-content-center">
+          {/* <!-- Checkbox --> */}
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="form2Example31"
+              checked
+            />
+            <label class="form-check-label" for="form2Example31">
+              {" "}
+              Remember me{" "}
+            </label>
+          </div>
+        </div>
+
+        <div class="col">
+          {/* <!-- Simple link --> */}
+          <a href="#!">Forgot password?</a>
+        </div>
+      </div>
+
+      {/* <!-- Submit button --> */}
+      <div class="text-center">
+        <button type="button" class="btn btn-primary btn-block mb-4">
+          Sign in
+        </button>
+      </div>
+
+      {/* <!-- Register buttons --> */}
+      <div class="text-center">
+        <p>
+          Not a member? <a href="#!">Register</a>
+        </p>
+      </div>
+    </form>
   );
 };
 export default Login;
