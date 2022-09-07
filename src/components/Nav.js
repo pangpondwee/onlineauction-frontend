@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
 	return (
-		<nav className="navbar d-flex">
+		<nav className="navbar d-flex sticky-top">
 			{/* Nav Bar BEGIN*/}
 			<button className="ms-2 navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-nav">
 				<span className="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@ const Nav = () => {
 				<Link id="offcanvas-profile" className="nav-link p-3" to="#">Username</Link>
 				<div className="navbar-nav">
 					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
-					<div className="dropdown-menu nav-dropdown show">
+					<div className="dropdown-menu nav-dropdown show" >
 						<Link to="#" className="ps-4 dropdown-item nav-link">Home Improvement</Link>
 						<Link to="#" className="ps-4 dropdown-item nav-link">Jewellery</Link>
 						<Link to="#" className="ps-4 dropdown-item nav-link">Coins, Currency, Stamps</Link>
