@@ -27,7 +27,7 @@ function VerifyEmail() {
               <h1 className="mb-4 text-center fw-bold text-primary">
                 Email is Verified!
               </h1>
-              <p className="mb-4 text-center fw-bold">for peeranat.sri@ku.th</p>
+              <p className="mb-4 text-center fw-bold">for kittipak.wi@ku.th</p>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
