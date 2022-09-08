@@ -1,5 +1,5 @@
 #content{
-    max-width: 1280px;
+    max-width: 1000px;
     margin: auto;
     /* background-color: red; */
 }
@@ -29,8 +29,9 @@
     height: 5em;
 }
 #main-picture{
-    height: 100%;
-    object-fit: cover;
+    /* height: 100%; */
+    width: 100%;
+    object-fit: contain;
 }
 .list-picture{
     height: 5em;
@@ -42,8 +43,16 @@
     margin: 0 auto;
     float: right;
 }
-.button{
+.picture-button, .picture-button:focus{
     height: 100%;
+    background-color: var(--color-primary);
+    border: none;
+}
+.picture-button:hover{
+    background-color: var(--color-secondary);
+}
+.picture-button:active{
+    background-color: var(--color-dark);
 }
 
 /*** Bid Field ***/
@@ -121,10 +130,29 @@
     background-color: var(--color-accent-reverse);
     color: #ffffff;
 }
+.bid-button:active{
+    background-color: var(--color-dark);
+}
+#bid-group{
+    display: flex;
+    align-items: center;
+    padding: 0 1em;
+}
+#bid-price{
+    width: 80%;
+    border: 2px solid var(--color-accent);
+}
+#bid-price-button{
+    border: 2px solid var(--color-accent);
+}
 #history-button{
     float: right;
     border-color: var(--color-dark);
 }
 #history-button:hover{
     background-color: var(--color-accent-reverse);
+}
+#history-button:active{
+    background-color: var(--color-dark);
+    color: #ffffff;
 }

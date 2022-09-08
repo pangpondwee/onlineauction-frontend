@@ -1,7 +1,7 @@
 // import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "./Auction.css";
-import example from "../example2.jpeg"
+import example from "../example.jpeg"
 
 // async function fetchData(setData){
 // 	try{
@@ -23,11 +23,11 @@ const Gallery = (props)=>{
 			<img id="main-picture" src={example} className=""/>
 			</div>
 			<div id="picture-list">
-				<button className="btn button" id="button-left">&lt;</button>
+				<button className="btn picture-button" id="button-left">&lt;</button>
 				<img className="list-picture" src={example} />
 				<img className="list-picture" src={example} />
 				<img className="list-picture" src={example} />
-				<button className="btn button" id="button-right">&gt;</button>
+				<button className="btn picture-button" id="button-right">&gt;</button>
 			</div>
 		</div>
 	);
@@ -54,9 +54,9 @@ const Bidfield = (props)=>{
 					<button className='bid-button btn'>+200$</button>
 				</div>
 				<div id="or-wrapper"><p>OR</p></div>
-				<div class="input-group">
-					<input type="text" placeholder="Enter bid price" className='form-control'></input>
-					<button type="button" className='bid-button btn'>Bid</button>
+				<div id="bid-group" class="input-group">
+					<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
+					<button id="bid-price-button" type="button" className='bid-button btn'>Bid</button>
 				</div>
 			</div>
 			<div id="history-wrapper">
