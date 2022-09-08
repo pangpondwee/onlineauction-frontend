@@ -54,7 +54,7 @@ const Bidfield = (props)=>{
 					<button className='bid-button btn'>+200$</button>
 				</div>
 				<div id="or-wrapper"><p>OR</p></div>
-				<div id="bid-group" class="input-group">
+				<div id="bid-group" className="input-group">
 					<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
 					<button id="bid-price-button" type="button" className='bid-button btn'>Bid</button>
 				</div>
