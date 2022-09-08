@@ -43,6 +43,8 @@
 :root{
 	--color-primary: #C3D3E0;
 	--color-secondary: #A3BCD0;
+  --color-accent: #228BE6;
+  --color-accent-reverse: #c2dcf3;
 	--color-dark: #091235;
 	--radius: 20px;
 }

@@ -1,5 +1,130 @@
+#content{
+    max-width: 1280px;
+    margin: auto;
+    /* background-color: red; */
+}
+#auction-main{
+    width: 100%;
+    /* background-color: blue; */
+    display: inline-block;
+}
+#auction-detail{
+    width: 100%;
+    background-color: green;
+}
+
+/*** Gallery ***/
+
+#gallery{
+    float: left;
+    width: 55%;
+    height: 700px;
+}
+#main-picture-wrapper{
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+#picture-list{
+    height: 5em;
+}
 #main-picture{
-    width: 30rem;
-    height: 30rem;
+    height: 100%;
     object-fit: cover;
+}
+.list-picture{
+    height: 5em;
+    width: 5em;
+    object-fit:cover;
+    margin: auto 5px;
+}
+#button-right{
+    margin: 0 auto;
+    float: right;
+}
+.button{
+    height: 100%;
+}
+
+/*** Bid Field ***/
+
+#bid-field{
+    display: inline;
+    justify-content: center;
+    float: right;
+    width: 45%;
+    height: 700px;
+    padding: 3rem;
+}
+#item-wrapper{
+    display: block;
+}
+#name-wrapper{
+    display: block;
+}
+/** Statistics **/
+#statistics{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+#statistics div{
+    width: 45%;
+    display: inline;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+.stat-name{
+    font-size: 18px;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+#highest-bid{
+    font-size: 2.5rem;
+    margin-top: 1em;
+}
+#time-remaining{
+    font-size: 2rem;
+}
+#select-wrapper, #or-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1em auto;
+}
+#select-wrapper{
+    margin-bottom: 0;
+    font-size: 18;
+}
+#or-wrapper p{
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+/** Price **/
+#bidding{
+    margin-bottom: 1em;
+}
+#static-price{
+    display: flex;
+    justify-content: space-around;
+}
+#static-price .btn{
+    font-size: 1.5em;
+}
+.bid-button, .bid-button:focus{
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border: none;
+}
+.bid-button:hover{
+    background-color: var(--color-accent-reverse);
+    color: #ffffff;
+}
+#history-button{
+    float: right;
+    border-color: var(--color-dark);
+}
+#history-button:hover{
+    background-color: var(--color-accent-reverse);
 }
