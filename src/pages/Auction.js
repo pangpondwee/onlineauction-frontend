@@ -1,20 +1,40 @@
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "./Auction.css";
 import example from "../example.jpeg"
 
-// async function fetchData(setData){
-// 	try{
-// 		const res = await fetch("http://localhost:9000/");
-// 		if(!res.ok){
-// 			throw new Error("Error: ",res.status);
-// 		}
-// 		const res_data = await res.json();
-// 		setData(res_data.data);
-// 	} catch(error){
-// 		setData()
-// 	}
-// }
+async function fetchData(){
+	try{
+		const res = await fetch("http://localhost:9000/");
+		if(!res.ok){
+			throw new Error("Error: ",res.status);
+		}
+		const res_data = await res.json();
+		return res_data
+	} catch(error){
+		return {
+			status : "fail",
+			message : "Error" + error
+		}
+	}
+}
+
+function getDate(timeRemaining){
+	const d = new Date(timeRemaining);
+	const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
+	const d_hour = d.getHours();
+	const d_minute = d.getMinutes();
+	const d_seconds = d.getSeconds();
+	if(timeRemaining <= 0){
+		return "Ended";
+	}
+	if(d_days > 2){
+		return `${d_days} day(s)`;
+	}
+	else{
+		return `${d_hour}hr ${d_minute}m ${d_seconds}s`;
+	}
+}
 
 const Gallery = (props)=>{
 	return (
@@ -34,24 +54,34 @@ const Gallery = (props)=>{
 }
 
 const Bidfield = (props)=>{
+	const timeRemaining = props.endDate - Date.now()
+	// TODO make date lighter
+	const f_date = getDate(timeRemaining);
+	const bidStep = props.bidStep;
 	return (
 		<div id="bid-field">
 			<div id="item-wrapper">
 				<div id="name-wrapper">
-					<h1>Item Name</h1>
+					<h1>{props.productName}</h1>
 				</div>
 				<p>by Auctioneer</p>
 			</div>
 			<div id="statistics">
-				<div><p className="stat-name">Hightest Bid</p><span id="highest-bid">200$</span></div>
-				<div><p className="stat-name">Time Remaining</p><span id="time-remaining">3hr 20min</span></div>
+				<div>
+					<p className="stat-name">Hightest Bid</p>
+					<span id="highest-bid">${props.currentPrice}</span>
+				</div>
+				<div>
+					<p className="stat-name">Time Remaining</p>
+					<span id="time-remaining">{f_date}</span>
+				</div>
 			</div>
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="bidding">
 				<div id="static-price">
-					<button className='bid-button btn'>+200$</button>
-					<button className='bid-button btn'>+200$</button>
-					<button className='bid-button btn'>+200$</button>
+					<button className='bid-button btn'>+${bidStep}</button>
+					<button className='bid-button btn'>+{bidStep*2}$</button>
+					<button className='bid-button btn'>+${bidStep*3}</button>
 				</div>
 				<div id="or-wrapper"><p>OR</p></div>
 				<div id="bid-group" className="input-group">
@@ -68,18 +98,48 @@ const Bidfield = (props)=>{
 
 const Auction = (props) =>{
 	const { auctionId } = useParams();
-	return (
-		<div id="content">
-			<div id="auction-main">
-				<Gallery />
-				<Bidfield />
+	const [res,setres] = useState({
+		status : "unknown"
+	})
+	useEffect(()=>{
+		fetchData().then((d)=>{
+			setres(d)
+		})
+	},[]);
+	if(res.status === "success"){
+		return (
+			<div id="content">
+				<div id="auction-main">
+					<Gallery />
+					<Bidfield 
+					currentPrice={res.data.currentPrice}
+					endDate={res.data.endDate}
+					bidStep={res.data.bidStep}
+					/>
+				</div>
+				<hr/>
+				<div id="auction-detail">
+					<h2 id="detail-heading">Description</h2>
+					<p id="description">{res.data.productDetail.description}</p>
+				</div>
 			</div>
-			<hr/>
-			<div id="auction-detail">
-				<h2 id="detail-heading">Description</h2>
-				<p id="description">Glasses are really versatile. First, you can have glasses-wearing girls take them off and suddenly become beautiful, or have girls wearing glasses flashing those cute grins, or have girls stealing the protagonist's glasses and putting them on like, "Haha, got your glasses!" That's just way too cute! Also, boys with glasses! I really like when their glasses have that suspicious looking gleam, and it's amazing how it can look really cool or just be a joke. I really like how it can fulfill all those abstract needs. Being able to switch up the styles and colors of glasses based on your mood is a lot of fun too! It's actually so much fun! You have those half rim glasses, or the thick frame glasses, everything! It's like you're enjoying all these kinds of glasses at a buffet. I really want Luna to try some on or Marine to try some on to replace her eyepatch. We really need glasses to become a thing in hololive and start selling them for HoloComi. Don't. You. Think. We. Really. Need. To. Officially. Give. Everyone. Glasses?</p>
+		)
+	}
+	else if(res.status === "fail"){
+		return (
+			<div>
+				<h1>Error</h1>
+				<p>{res.message}</p>
 			</div>
-		</div>
-	)
+		)
+	}
+	else{
+		return (
+			<div>
+				<p>Loading...</p>
+			</div>
+		)
+	}
+	
 }
 export default Auction;
