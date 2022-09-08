@@ -1,16 +1,14 @@
 #content{
     max-width: 1000px;
     margin: auto;
-    /* background-color: red; */
 }
 #auction-main{
     width: 100%;
-    /* background-color: blue; */
     display: inline-block;
 }
 #auction-detail{
     width: 100%;
-    background-color: green;
+    margin: auto 1rem;
 }
 
 /*** Gallery ***/
@@ -155,4 +153,10 @@
 #history-button:active{
     background-color: var(--color-dark);
     color: #ffffff;
+}
+
+/*** Auction Detail ***/
+#description{
+    font-size: 1.2rem;
+    margin: 1em 1em 3em 1em;
 }
