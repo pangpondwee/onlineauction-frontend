@@ -112,9 +112,11 @@ const Bidfield = (props)=>{
 				</div>
 			</div>
 			<Bidding bidStep={bidStep} isAuctioneer={isAuctioneer}/>
-			{canSeeHistory ? <div id="history-wrapper">
-				<button id="history-button" className='btn'>Bid History</button>
-			</div> : <></>}
+			
+			<div id="history-wrapper">
+				{lastBid > 0 ? <span>Your Last bid: {lastBid}$</span> : <></>}
+				{canSeeHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
+			</div>
 		</div>
 	)
 }
