@@ -112,6 +112,14 @@
 #bidding{
     margin-bottom: 1em;
 }
+#bidding-is-auctioneer{
+    border: 2px solid #000;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    padding: 30% 20%;
+    margin-bottom: 1em;
+}
 #static-price{
     display: flex;
     justify-content: space-around;

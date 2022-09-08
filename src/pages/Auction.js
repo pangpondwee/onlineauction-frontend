@@ -57,6 +57,32 @@ const Gallery = (props)=>{
 	);
 }
 
+const Bidding = (props)=>{
+	const bidStep = props.bidStep;
+	if(props.isAuctioneer){
+		return(
+			<div id="bidding-is-auctioneer">
+				<p>You cannot bid on your own auction</p>
+			</div>
+		)
+	}
+	return(
+		<div id="bidding">
+			<div id="select-wrapper"><p>Select your bid price</p></div>
+			<div id="static-price">
+				<button className='bid-button btn'>+${bidStep}</button>
+				<button className='bid-button btn'>+{bidStep*2}$</button>
+				<button className='bid-button btn'>+${bidStep*3}</button>
+			</div>
+			<div id="or-wrapper"><p>OR</p></div>
+			<div id="bid-group" className="input-group">
+				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
+				<button id="bid-price-button" type="button" className='bid-button btn'>Bid</button>
+			</div>
+		</div>
+	)
+}
+
 const Bidfield = (props)=>{
 	const timeRemaining = props.endDate - Date.now()
 	const f_date = getDate(timeRemaining);
@@ -64,6 +90,9 @@ const Bidfield = (props)=>{
 	const bidStep = props.bidStep;
 	const currentPrice=props.currentPrice;
 	const auctioneerName = props.auctioneerName;
+	const isAuctioneer = props.isAuctioneer;
+	const canSeeHistory = props.canSeeHistory;
+	const lastBid = props.lastBid;
 	return (
 		<div id="bid-field">
 			<div id="item-wrapper">
@@ -82,22 +111,10 @@ const Bidfield = (props)=>{
 					<span id="time-remaining">{f_date}</span>
 				</div>
 			</div>
-			<div id="select-wrapper"><p>Select your bid price</p></div>
-			<div id="bidding">
-				<div id="static-price">
-					<button className='bid-button btn'>+${bidStep}</button>
-					<button className='bid-button btn'>+{bidStep*2}$</button>
-					<button className='bid-button btn'>+${bidStep*3}</button>
-				</div>
-				<div id="or-wrapper"><p>OR</p></div>
-				<div id="bid-group" className="input-group">
-					<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
-					<button id="bid-price-button" type="button" className='bid-button btn'>Bid</button>
-				</div>
-			</div>
-			<div id="history-wrapper">
+			<Bidding bidStep={bidStep} isAuctioneer={isAuctioneer}/>
+			{canSeeHistory ? <div id="history-wrapper">
 				<button id="history-button" className='btn'>Bid History</button>
-			</div>
+			</div> : <></>}
 		</div>
 	)
 }
@@ -106,6 +123,10 @@ const Auction = (props) =>{
 	const { auctionId } = useParams();
 	const [data,setData] = useState({});
 	const [status,setStatus]=useState("unknown");
+	const isAuctioneer=true; // Testing
+	const auctioneerName="Waku Waku"; // testing
+	const canSeeHistory=true; // testing
+	const lastBid=122; // testing
 	useEffect(()=>{
 		fetchData(auctionId).then(([s,d])=>{
 			setStatus(s);
@@ -123,6 +144,10 @@ const Auction = (props) =>{
 					productName={data.productDetail.productName}
 					endDate={data.endDate}
 					bidStep={data.bidStep}
+					auctioneerName={auctioneerName}
+					isAuctioneer={isAuctioneer}
+					lastBid={lastBid}
+					canSeeHistory={canSeeHistory}
 					/>
 				</div>
 				<hr/>
