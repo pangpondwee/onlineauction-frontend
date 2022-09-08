@@ -40,6 +40,47 @@ function getDate(timeRemaining){
 	}
 }
 
+const Ranking = (props)=>{
+	// [{name:"K***a", price:200}]
+	const ranking = [
+		{name:"K***a", price:5000},
+		{name:"F***a", price:4000},
+		{name:"K***a", price:5000},
+		{name:"F***a", price:4000},
+		{name:"K***a", price:5000},
+		{name:"F***a", price:4000},
+		{name:"K***a", price:5000},
+		{name:"F***a", price:4000},
+		{name:"K***a", price:5000},
+		{name:"F***a", price:4000},
+		{name:"K***a", price:5000},
+		{name:"F***a", price:4000},
+	]
+	let rank_elements = []
+	for(let i=0;i<6;i++){
+		rank_elements.push(
+		<tr key={i}>
+			<td>{ranking[i] ? `${i+1}. ${ranking[i].name} $${ranking[i].price}` : "-"}</td>
+			<td>{ranking[i+6] ? `${i+7}. ${ranking[i+6].name} $${ranking[i+6].price}` : "-"}</td>
+		</tr>
+		);
+	}
+	return (
+		<div id="ranking">
+			<table id="ranking-table">
+				<thead>
+					<tr>
+						<th colSpan="2">Realtime Ranking</th>
+					</tr>
+				</thead>
+				<tbody>
+					{rank_elements}
+				</tbody>
+			</table>
+		</div>
+	)
+}
+
 const Gallery = (props)=>{
 	return (
 		<div id="gallery">
@@ -91,7 +132,7 @@ const Bidfield = (props)=>{
 	const currentPrice=props.currentPrice;
 	const auctioneerName = props.auctioneerName;
 	const isAuctioneer = props.isAuctioneer;
-	const canSeeHistory = props.canSeeHistory;
+	const showHistory = props.showHistory;
 	const lastBid = props.lastBid;
 	return (
 		<div id="bid-field">
@@ -115,7 +156,7 @@ const Bidfield = (props)=>{
 			
 			<div id="history-wrapper">
 				{lastBid > 0 ? <span>Your Last bid: {lastBid}$</span> : <></>}
-				{canSeeHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
+				{showHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
 			</div>
 		</div>
 	)
@@ -127,7 +168,8 @@ const Auction = (props) =>{
 	const [status,setStatus]=useState("unknown");
 	const isAuctioneer=true; // Testing
 	const auctioneerName="Waku Waku"; // testing
-	const canSeeHistory=true; // testing
+	const showHistory=true; // testing
+	const showRanking=false; //show ranking and move gallery // testing
 	const lastBid=122; // testing
 	useEffect(()=>{
 		fetchData(auctionId).then(([s,d])=>{
@@ -139,7 +181,10 @@ const Auction = (props) =>{
 		return (
 			<div id="content">
 				<div id="auction-main">
-					<Gallery />
+					{/* <Gallery /> */}
+					{showRanking ?
+						<Ranking />:
+						<Gallery/>}
 					<Bidfield 
 					auctioneer={data.auctioneer}
 					currentPrice={data.currentPrice}
@@ -149,13 +194,20 @@ const Auction = (props) =>{
 					auctioneerName={auctioneerName}
 					isAuctioneer={isAuctioneer}
 					lastBid={lastBid}
-					canSeeHistory={canSeeHistory}
+					showHistory={showHistory}
 					/>
 				</div>
 				<hr/>
 				<div id="auction-detail">
+					{showRanking ?
+						<Gallery/>:
+						<></>}
+					<p id={showRanking ? 
+						"description-with-gallery" : 
+						"description" }>
 					<h2 id="detail-heading">Description</h2>
-					<p id="description">{data.productDetail.description}</p>
+						{data.productDetail.description}
+					</p>
 				</div>
 			</div>
 		)
