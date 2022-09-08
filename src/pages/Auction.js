@@ -3,23 +3,27 @@ import { useParams } from 'react-router-dom';
 import "./Auction.css";
 import example from "../example.jpeg"
 
-async function fetchData(){
+async function fetchData(auctionId){
+	// TODO use auctionId
 	try{
 		const res = await fetch("http://localhost:9000/");
 		if(!res.ok){
-			throw new Error("Error: ",res.status);
+			throw new Error(res.status); // Error 400 500 
 		}
 		const res_data = await res.json();
-		return res_data
-	} catch(error){
-		return {
-			status : "fail",
-			message : "Error" + error
+		if(res_data.status == "success"){
+			return ["success",res_data.data]; // success
 		}
+		else{
+			throw new Error(res_data.message); // 200 status:error
+		}
+	} catch(error){
+		return ["fail",{message : error.message}]
 	}
 }
 
 function getDate(timeRemaining){
+	// TODO make date lighter
 	const d = new Date(timeRemaining);
 	const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
 	const d_hour = d.getHours();
@@ -55,21 +59,23 @@ const Gallery = (props)=>{
 
 const Bidfield = (props)=>{
 	const timeRemaining = props.endDate - Date.now()
-	// TODO make date lighter
 	const f_date = getDate(timeRemaining);
+	const productName = props.productName;
 	const bidStep = props.bidStep;
+	const currentPrice=props.currentPrice;
+	const auctioneerName = props.auctioneerName;
 	return (
 		<div id="bid-field">
 			<div id="item-wrapper">
 				<div id="name-wrapper">
-					<h1>{props.productName}</h1>
+					<h1>{productName}</h1>
 				</div>
-				<p>by Auctioneer</p>
+				<p>by {auctioneerName}</p>
 			</div>
 			<div id="statistics">
 				<div>
 					<p className="stat-name">Hightest Bid</p>
-					<span id="highest-bid">${props.currentPrice}</span>
+					<span id="highest-bid">${currentPrice}</span>
 				</div>
 				<div>
 					<p className="stat-name">Time Remaining</p>
@@ -98,38 +104,40 @@ const Bidfield = (props)=>{
 
 const Auction = (props) =>{
 	const { auctionId } = useParams();
-	const [res,setres] = useState({
-		status : "unknown"
-	})
+	const [data,setData] = useState({});
+	const [status,setStatus]=useState("unknown");
 	useEffect(()=>{
-		fetchData().then((d)=>{
-			setres(d)
+		fetchData(auctionId).then(([s,d])=>{
+			setStatus(s);
+			setData(d);
 		})
 	},[]);
-	if(res.status === "success"){
+	if(status === "success"){
 		return (
 			<div id="content">
 				<div id="auction-main">
 					<Gallery />
 					<Bidfield 
-					currentPrice={res.data.currentPrice}
-					endDate={res.data.endDate}
-					bidStep={res.data.bidStep}
+					auctioneer={data.auctioneer}
+					currentPrice={data.currentPrice}
+					productName={data.productDetail.productName}
+					endDate={data.endDate}
+					bidStep={data.bidStep}
 					/>
 				</div>
 				<hr/>
 				<div id="auction-detail">
 					<h2 id="detail-heading">Description</h2>
-					<p id="description">{res.data.productDetail.description}</p>
+					<p id="description">{data.productDetail.description}</p>
 				</div>
 			</div>
 		)
 	}
-	else if(res.status === "fail"){
+	else if(status === "fail"){
 		return (
 			<div>
 				<h1>Error</h1>
-				<p>{res.message}</p>
+				<p>{data.message}</p>
 			</div>
 		)
 	}
