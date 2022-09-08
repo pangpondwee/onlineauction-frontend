@@ -10,10 +10,11 @@ import {
   MDBCardBody,
   MDBInput,
   MDBCheckbox,
+  MDBIcon,
 } from "mdb-react-ui-kit";
-import "../UI/Login.css";
+import "../UI/SignUp.css";
 
-function Login() {
+function SignUp() {
   return (
     <MDBContainer fluid className="p-4">
       <MDBRow>
@@ -21,8 +22,9 @@ function Login() {
           md="6"
           className="text-center text-md-start d-flex flex-column justify-content-center"
         >
-          <h1 className="my-5 display-3 fw-bold ls-tight px-3">
-            <span className="text-primary">Login to Start Bidding Now!</span>
+          <h1 className="my-5 display-5 fw-bold ls-tight px-3">
+            <p>Anything You Want, At A Super Satisfying Price!</p>
+            <span className="text-primary">Create An Account Now!</span>
           </h1>
         </MDBCol>
 
@@ -31,11 +33,28 @@ function Login() {
             <MDBCardBody className="p-5">
               <MDBInput
                 wrapperClass="mb-4"
+                // label="Display Name"
+                id="form1"
+                type="name"
+                placeholder="Display Name"
+              />
+
+              <MDBInput
+                wrapperClass="mb-4"
                 // label="Email"
                 id="form1"
                 type="email"
                 placeholder="Email"
               />
+
+              <MDBInput
+                wrapperClass="mb-4"
+                // label="Confirm Email"
+                id="form1"
+                type="email"
+                placeholder="Confirm Email"
+              />
+
               <MDBInput
                 wrapperClass="mb-4"
                 // label="Password"
@@ -44,28 +63,26 @@ function Login() {
                 placeholder="Password"
               />
 
+              <MDBInput
+                wrapperClass="mb-4"
+                // label="Confirm Password"
+                id="form1"
+                type="password"
+                placeholder="Confirm Password"
+              />
+
               <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox
                   name="flexCheck"
                   value=""
                   id="flexCheckDefault"
-                  label="Remember me"
+                  label="Agree to Terms and Services"
                 />
-                <a href="!#">Forgot password?</a>
               </div>
 
               <MDBBtn className="w-100 mb-4" size="md">
-                LOGIN
+                SIGN UP
               </MDBBtn>
-
-              <div>
-                <p className="mb-0">
-                  Don't have an account?{" "}
-                  <a href="#!" class="text-blue-50 fw-bold">
-                    Sign Up
-                  </a>
-                </p>
-              </div>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
@@ -74,4 +91,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;
