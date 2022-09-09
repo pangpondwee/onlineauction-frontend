@@ -1,26 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "./Auction.css";
+import fetchData from '../components/fetchData';
 import example from "../example.jpeg"
 
-async function fetchData(auctionId){
-	// TODO use auctionId
-	try{
-		const res = await fetch("http://localhost:9000/");
-		if(!res.ok){
-			throw new Error(res.status); // Error 400 500 
-		}
-		const res_data = await res.json();
-		if(res_data.status == "success"){
-			return ["success",res_data.data]; // success
-		}
-		else{
-			throw new Error(res_data.message); // 200 status:error
-		}
-	} catch(error){
-		return ["fail",{message : error.message}]
-	}
-}
 
 function getDate(timeRemaining){
 	// TODO make date lighter
@@ -172,7 +155,7 @@ const Auction = (props) =>{
 	const showRanking=false; //show ranking and move gallery // testing
 	const lastBid=122; // testing
 	useEffect(()=>{
-		fetchData(auctionId).then(([s,d])=>{
+		fetchData(`http://localhost:9000/`).then(([s,d])=>{
 			setStatus(s);
 			setData(d);
 		})
