@@ -11,6 +11,8 @@ const AuctionCard = (props) =>{
 					<img src="{props.picture}"></img>
 				</div> */}
 				<div className="timeBox">{props.time} left</div>
+				{/* <div className="itemTime">{props.time} left</div> */}
+				
 				{/* <p className="itemName">{props.name}</p> */}
 				<p className="itemName">{props.name}</p>
 				<p className="card-text">{props.price}</p>			

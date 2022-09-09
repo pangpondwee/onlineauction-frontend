@@ -65,6 +65,16 @@ html, #root{
 
 #offcanvas-nav {
 	background-color: var(--color-primary);
+  /* add overflow-y: auto; for scroll categories */
+  overflow-y: auto;
+  /* add line-height: 1rem; for shrink white space between nav*/
+  line-height: 1rem;
+  width: 20.8rem;
+}
+
+#offcanvas-nav::-webkit-scrollbar{
+  display: none;
+  /* -webkit-scrollbar{display: none;} for hide scrollbar */
 }
 
 /* Main */
@@ -84,11 +94,9 @@ main {
 
 .card{
 	width: 18rem;
-  /* height: 16.7rem; */
   margin: auto 20px;
-  /* box-shadow: 10px 10px 20px -15px; */
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px; */
+  background-color: #F8F9FA;
 }
 
 .test{
@@ -121,17 +129,16 @@ main {
 }
 
 .timeBox{
-  border: 1px solid black;
   position: absolute;
-  top: 9rem;
-  left: 0.5rem;
+  margin-top: -1rem;
+  margin-left: 0.5rem;
   background-color: white;
   width: 7rem;
   border-radius: 15px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .card-img-top{
-  /* max-width: fit-content; */
   height: 15vw;
   object-fit: cover; /* add object-fit: cover; to fit image for card*/
 }
@@ -141,4 +148,21 @@ main {
   font-weight: bold;
   margin-top: -18px;
   margin-bottom: -10px;
+}
+
+.itemTime{
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-bottom: -5px;
+}
+
+.button{
+  width: 1rem;
+  opacity: 50%;
+  margin-top: 6.5rem;
+}
+
+.filter{
+  position: absolute;
+  left: 85.1%;
 }
