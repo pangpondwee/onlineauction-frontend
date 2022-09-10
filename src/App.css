@@ -109,3 +109,8 @@ main {
 .form-control {
   border-width: 5px;
 }
+
+.preview-picture {
+  max-width: 100%;
+  height: auto;
+}

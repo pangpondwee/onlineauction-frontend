@@ -34,8 +34,8 @@ const AuctionDetail = () => {
               <label for="uploadPicture" class="form-label">
                 UPLOAD PICTURE
               </label>
-              <div class="imagePreview">
-                <img src={bunny} alt="bunny"></img>
+              <div class="mb-3">
+                <img class="preview-picture" src={bunny} alt="bunny"></img>
               </div>
               <input type="file" class="form-control" id="inputFile"></input>
             </div>
