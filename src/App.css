@@ -45,36 +45,11 @@
 	--color-secondary: #A3BCD0;
 	--color-dark: #091235;
 	--radius: 20px;
+  --box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0;
 }
 /* General */
 html, #root{
 	background-color: var(--color-primary);
-}
-
-
-/* Nav Bar*/
-.navbar, .navbar .navbar-brand{
-	background-color: var(--color-primary);
-	color: var(--color-dark);
-}
-
-#nav-search {
-	border-radius: var(--radius);
-	background-color: var(--color-secondary);
-}
-
-#offcanvas-nav {
-	background-color: var(--color-primary);
-  /* add overflow-y: auto; for scroll categories */
-  overflow-y: auto;
-  /* add line-height: 1rem; for shrink white space between nav*/
-  line-height: 1rem;
-  width: 20.8rem;
-}
-
-#offcanvas-nav::-webkit-scrollbar{
-  display: none;
-  /* -webkit-scrollbar{display: none;} for hide scrollbar */
 }
 
 /* Main */
@@ -82,87 +57,4 @@ main {
 	background-color: white;
 	height: 100%;
 	border-radius: var(--radius)
-}
-
-.nav-dropdown{
-	background-color: var(--color-primary);
-	border: none;
-}
-.nav-dropdown .dropdown-item:hover{
-	background-color: var(--color-secondary);
-}
-
-.card{
-	width: 18rem;
-  margin: auto 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  background-color: #F8F9FA;
-}
-
-.test{
-  display: flex;
-  box-sizing: border-box;
-  justify-content: space-around;  
-}
-
-.headHome{
-  text-align: center;
-  font-size: 36px;
-  font-weight: bold;
-}
-
-.detail{
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.pictureBox{
-  border: 1px solid black;
-  border-radius: 5px 5px 0px 0px;
-  height: 193.08px;
-}
-
-.itemName{
-  font-size: medium;
-  font-weight: normal;
-  margin-top: 10px;
-}
-
-.timeBox{
-  position: absolute;
-  margin-top: -1rem;
-  margin-left: 0.5rem;
-  background-color: white;
-  width: 7rem;
-  border-radius: 15px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-}
-
-.card-img-top{
-  height: 15vw;
-  object-fit: cover; /* add object-fit: cover; to fit image for card*/
-}
-
-.card-text{
-  font-size: x-large;
-  font-weight: bold;
-  margin-top: -18px;
-  margin-bottom: -10px;
-}
-
-.itemTime{
-  border: 1px solid black;
-  border-radius: 15px;
-  margin-bottom: -5px;
-}
-
-.button{
-  width: 1rem;
-  opacity: 50%;
-  margin-top: 6.5rem;
-}
-
-.filter{
-  position: absolute;
-  left: 85.1%;
 }
