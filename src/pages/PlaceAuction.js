@@ -107,20 +107,27 @@ const AuctionDetail = () => {
               ></input>
             </div>
           </div>
-          <div class="mt-3 mb-3 attention">
-            IMPORTANT NOTE: BIDDING FEES WILL BE CALCULATED AFTER THE BIDDING
-            TIME ENDS
+          <div class="form-footer">
+            <div class="mt-3 mb-3 attention">
+              IMPORTANT NOTE: BIDDING FEES WILL BE CALCULATED AFTER THE BIDDING
+              TIME ENDS
+            </div>
+            <div class="mt-3 mb-3">
+              By clicking Place Auction below, you agree to our Terms of Service
+              and our Privacy Policy.
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="btn btn-primary place-auction-button"
+              >
+                Place Auction
+              </button>
+              <button type="submit" class="btn btn-outline-primary">
+                Cancel
+              </button>
+            </div>
           </div>
-          <div class="mt-3 mb-3">
-            By clicking Place Auction below, you agree to our Terms of Service
-            and our Privacy Policy.
-          </div>
-          <button type="submit" class="btn btn-primary">
-            Place Auction
-          </button>
-          <button type="submit" class="btn btn-outline-primary">
-            Cancel
-          </button>
         </div>
       </form>
     </div>
