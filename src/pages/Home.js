@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
+import "../css/Home.css";
 const Home = () =>{
 	return (
 		<>
