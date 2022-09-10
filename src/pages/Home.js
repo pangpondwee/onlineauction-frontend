@@ -45,7 +45,7 @@ const Home = () =>{
 				<img src="https://cdn-icons-png.flaticon.com/512/130/130884.png" className="button"></img>
 			</Link>
 		</div>
-		<p className="detail">Poppular</p>
+		<p className="detail">Popular</p>
 		<div className="test">
 			<AuctionCard name="first"/>
 			<AuctionCard name="second"/>
