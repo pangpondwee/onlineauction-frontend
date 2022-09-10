@@ -1,4 +1,5 @@
 import promptpayqr from '../pictures/PromptpayQR.png'
+import slip from '../pictures/slip.JPG'
 
 const Payment = () => {
   return (
@@ -55,7 +56,7 @@ const Payment = () => {
           </div>
           <div class="formHeading1">TRANSACTION INFO</div>
           <div class="subForm col-5">
-            <div class="promptpayqr mb-3">
+            <div class="center-pic mb-3">
               <img
                 class="promptpayqrpic"
                 src={promptpayqr}
@@ -83,13 +84,24 @@ const Payment = () => {
                 placeholder="e.g. 500"
               ></input>
             </div>
+            <div class="mb-3">
+              <label for="uploadTransactionSlip" class="form-label">
+                UPLOAD TRANSACTION SLIP
+              </label>
+              <div class="mb-3 center-pic">
+                <img class="transaction-slip-pic" src={slip} alt="slip"></img>
+              </div>
+              <input type="file" class="form-control" id="inputFile"></input>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary first-button">
+                Place Auction
+              </button>
+              <button type="submit" class="btn btn-outline-primary">
+                Cancel
+              </button>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
-            Place Auction
-          </button>
-          <button type="submit" class="btn btn-outline-primary">
-            Cancel
-          </button>
         </div>
       </form>
     </div>
