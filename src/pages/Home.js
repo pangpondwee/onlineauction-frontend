@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
 import "../css/Home.css";
-import arrow_left from "../images/arrow_left.png";
-import arrow_right from "../images/arrow_right.png";
+import arrow_left from "../pictures/arrow_left.png";
+import arrow_right from "../pictures/arrow_right.png";
 const Home = () =>{
 	return (
 		<>
