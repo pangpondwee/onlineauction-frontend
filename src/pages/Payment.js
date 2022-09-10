@@ -95,7 +95,7 @@ const Payment = () => {
             </div>
             <div>
               <button type="submit" class="btn btn-primary first-button">
-                Place Auction
+                Proceed
               </button>
               <button type="submit" class="btn btn-outline-primary">
                 Cancel
