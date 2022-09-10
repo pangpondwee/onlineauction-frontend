@@ -151,10 +151,7 @@ const AuctionDetail = () => {
               and our Privacy Policy.
             </div>
             <div>
-              <button
-                type="submit"
-                class="btn btn-primary place-auction-button"
-              >
+              <button type="submit" class="btn btn-primary first-button">
                 Place Auction
               </button>
               <button type="submit" class="btn btn-outline-primary">
