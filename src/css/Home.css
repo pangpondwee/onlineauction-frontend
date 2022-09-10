@@ -1,7 +1,7 @@
 .card{
 	width: 18rem;
   margin: auto 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: var(--box-shadow);
   background-color: #F8F9FA;
 }
 
@@ -41,7 +41,7 @@
   background-color: white;
   width: 7rem;
   border-radius: 15px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: var(--box-shadow);
 }
 
 .card-img-top{

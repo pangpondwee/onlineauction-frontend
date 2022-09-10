@@ -45,6 +45,7 @@
 	--color-secondary: #A3BCD0;
 	--color-dark: #091235;
 	--radius: 20px;
+  --box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0;
 }
 /* General */
 html, #root{
