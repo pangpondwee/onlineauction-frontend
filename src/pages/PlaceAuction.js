@@ -31,6 +31,32 @@ const AuctionDetail = () => {
               ></textarea>
             </div>
             <div class="mb-3">
+              <label for="itemCategory" class="form-label">
+                ITEM CATEGORY
+              </label>
+              <select
+                class="form-select form-control"
+                aria-label="Default select example"
+              >
+                <option selected>Select Category</option>
+                <option value="homeImprovement">Home Improvement</option>
+                <option value="jewellery">Jewellery</option>
+                <option value="coinsCurrencyStamps">
+                  Coins, Currency, Stamps
+                </option>
+                <option value="watches">Watches</option>
+                <option value="fashion">Fashion</option>
+                <option value="arts">Arts</option>
+                <option value="antiquesCollectablesAmulet">
+                  Antiques & Collectables and Amulet
+                </option>
+                <option value="electronics">Electronics</option>
+                <option value="carsAutomotive">Cars & Automotive</option>
+                <option value="handbags">Handbags</option>
+                <option value="miscellaneous">Miscellaneous</option>
+              </select>
+            </div>
+            <div class="mb-3">
               <label for="uploadPicture" class="form-label">
                 UPLOAD PICTURE
               </label>
@@ -43,7 +69,9 @@ const AuctionDetail = () => {
           <div class="formHeading1">AUCTION DETAILS</div>
           <div class="subForm col-5">
             <div class="mb-3">
-              <label for="startingPrice">STARTING PRICE</label>
+              <label for="startingPrice" class="form-label">
+                STARTING PRICE
+              </label>
               <input
                 type="number"
                 class="form-control"
@@ -81,7 +109,9 @@ const AuctionDetail = () => {
               </div>
             </div>
             <div class="mb-3">
-              <label for="endDate">END DATE</label>
+              <label for="endDate" class="form-label">
+                END DATE
+              </label>
               <input
                 type="datetime-local"
                 class="form-control"
@@ -89,7 +119,9 @@ const AuctionDetail = () => {
               ></input>
             </div>
             <div class="mb-3">
-              <label for="minimumBidStep">MINIMUM BID STEP (OPTIONAL)</label>
+              <label for="minimumBidStep" class="form-label">
+                MINIMUM BID STEP (OPTIONAL)
+              </label>
               <input
                 type="number"
                 class="form-control"
@@ -98,7 +130,9 @@ const AuctionDetail = () => {
               ></input>
             </div>
             <div class="mb-3">
-              <label for="expectedPrice">EXPECTED PRICE (OPTIONAL)</label>
+              <label for="expectedPrice" class="form-label">
+                EXPECTED PRICE (OPTIONAL)
+              </label>
               <input
                 type="number"
                 class="form-control"
