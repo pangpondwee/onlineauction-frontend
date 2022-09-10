@@ -1,3 +1,5 @@
+import bunny from '../pictures/bunny.jpeg'
+
 const AuctionDetail = () => {
   return (
     <div>
@@ -32,12 +34,8 @@ const AuctionDetail = () => {
               <label for="uploadPicture" class="form-label">
                 UPLOAD PICTURE
               </label>
-              <div class="picture-preview" id="picturePreview">
-                <img
-                  src=""
-                  alt="Preview"
-                  class="picture-preview__picture"
-                ></img>
+              <div class="imagePreview">
+                <img src={bunny} alt="bunny"></img>
               </div>
               <input type="file" class="form-control" id="inputFile"></input>
             </div>
