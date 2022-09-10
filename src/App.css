@@ -51,43 +51,9 @@ html, #root{
 	background-color: var(--color-primary);
 }
 
-
-/* Nav Bar*/
-.navbar, .navbar .navbar-brand{
-	background-color: var(--color-primary);
-	color: var(--color-dark);
-}
-
-#nav-search {
-	border-radius: var(--radius);
-	background-color: var(--color-secondary);
-}
-
-#offcanvas-nav {
-	background-color: var(--color-primary);
-  /* add overflow-y: auto; for scroll categories */
-  overflow-y: auto;
-  /* add line-height: 1rem; for shrink white space between nav*/
-  line-height: 1rem;
-  width: 20.8rem;
-}
-
-#offcanvas-nav::-webkit-scrollbar{
-  display: none;
-  /* -webkit-scrollbar{display: none;} for hide scrollbar */
-}
-
 /* Main */
 main {
 	background-color: white;
 	height: 100%;
 	border-radius: var(--radius)
-}
-
-.nav-dropdown{
-	background-color: var(--color-primary);
-	border: none;
-}
-.nav-dropdown .dropdown-item:hover{
-	background-color: var(--color-secondary);
 }
