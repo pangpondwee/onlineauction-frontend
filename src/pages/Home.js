@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
 import "../css/Home.css";
+import arrow_left from "../images/arrow_left.png";
+import arrow_right from "../images/arrow_right.png";
 const Home = () =>{
 	return (
 		<>
@@ -18,7 +20,7 @@ const Home = () =>{
 		<div className="test">
 			{/* previous button */}
 			<Link to={"#"}>
-				<img src="https://cdn-icons-png.flaticon.com/512/130/130882.png" className="button"></img>
+				<img src={arrow_left} className="button"></img>
 			</Link>
 			<AuctionCard name="first" price="2000$" time="18:30:22" picture="https://images.unsplash.com/photo-1472457897821-70d3819a0e24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGx8ZW58MHx8MHx8&w=1000&q=80"/>
 			<AuctionCard name="second" price="100$" time="time" picture="https://www.skipprichard.com/wp-content/uploads/2015/12/bigstock-D-Small-People-Newtons-Crad-65362909.jpg"/>
@@ -27,14 +29,14 @@ const Home = () =>{
 			<AuctionCard name="e"/>
 			{/* next button */}
 			<Link to={"#"}>
-				<img src="https://cdn-icons-png.flaticon.com/512/130/130884.png" className="button"></img>
+				<img src={arrow_right} className="button"></img>
 			</Link>
 		</div>
 		<p className="detail">Recent Following List</p>
 		<div className="test">
 			{/* Add previous button */}
 			<Link to={"#"}>
-				<img src="https://cdn-icons-png.flaticon.com/512/130/130882.png" className="button"></img>
+				<img src={arrow_left} className="button"></img>
 			</Link>
 			<AuctionCard name="first"/>
 			<AuctionCard name="second"/>
@@ -43,7 +45,7 @@ const Home = () =>{
 			<AuctionCard name="e"/>
 			{/* Add next button */}
 			<Link to={"#"}>
-				<img src="https://cdn-icons-png.flaticon.com/512/130/130884.png" className="button"></img>
+				<img src={arrow_right} className="button"></img>
 			</Link>
 		</div>
 		<p className="detail">Poppular</p>
