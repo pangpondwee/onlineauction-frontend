@@ -40,32 +40,88 @@
  * Custom Colors
 */
 
-:root{
-	--color-primary: #C3D3E0;
-	--color-secondary: #A3BCD0;
-	--color-dark: #091235;
-	--radius: 20px;
+:root {
+  --color-primary: #c3d3e0;
+  --color-secondary: #a3bcd0;
+  --color-text: #2b4257;
+  --color-dark: #091235;
+  --color-attention: #f08c00;
+  --radius: 20px;
 }
 /* General */
-html, #root{
-	background-color: var(--color-primary);
+html,
+#root {
+  background-color: var(--color-primary);
 }
 
-
 /* Nav Bar*/
-.navbar, .navbar .navbar-brand{
-	background-color: var(--color-primary);
-	color: var(--color-dark);
+.navbar,
+.navbar .navbar-brand {
+  background-color: var(--color-primary);
+  color: var(--color-dark);
 }
 
 #nav-search {
-	border-radius: var(--radius);
-	background-color: var(--color-secondary)
+  border-radius: var(--radius);
+  background-color: var(--color-secondary);
 }
 
 /* Main */
 main {
-	background-color: white;
-	height: 100%;
-	border-radius: var(--radius)
+  background-color: white;
+  height: 100%;
+  border-radius: var(--radius);
+}
+
+/* Place Auction */
+.form {
+  color: var(--color-text);
+  margin: 1rem 0 1rem 10rem;
+}
+
+.subForm {
+  margin: 1rem 0 1rem 10rem;
+}
+
+.formHeading1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.formLabel {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.header {
+  color: var(--color-text);
+  padding: 1rem 0 0 2rem;
+}
+
+.form-control {
+  border-color: var(--color-primary);
+}
+
+.attention {
+  color: var(--color-attention);
+}
+
+.form-control {
+  border-width: 5px;
+}
+.image-preview {
+  width: 300px;
+  min-height: 100px;
+  border: 2px solid #dddddd;
+  margin-top: 15px;
+
+  /* Default Text*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #cccccc;
+}
+
+.image-preview__image {
 }

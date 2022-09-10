@@ -1,22 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import logo from './logo.svg'
+import './App.css'
 // Pages
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import NoPage from "./pages/NoPage";
+import Layout from './pages/Layout'
+import Home from './pages/Home'
+import NoPage from './pages/NoPage'
+import PlaceAuction from './pages/PlaceAuction'
 
 function App() {
   return (
-	  <BrowserRouter>
-		  <Routes>
-		  <Route path="/" element={<Layout />}>
-			  <Route index element={<Home />} />
-			  <Route path="*" element={<NoPage />} />
-		  </Route>
-		  </Routes>
-	  </BrowserRouter>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="auction_detail" element={<PlaceAuction />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
