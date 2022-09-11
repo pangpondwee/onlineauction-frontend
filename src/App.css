@@ -241,3 +241,74 @@ main {
   height: 250px;
   margin-top: 20px;
 }
+
+.faq-title {
+  margin: 20px 0px 30px 20px;
+}
+
+.Q1-1,
+.Q2-1,
+.Q3-1 {
+  background-color: #eaeff1;
+  /* position: relative;
+  left: -16px;
+  right: 25px; */
+  margin-left: -16px;
+  margin-right: -16px;
+  height: 50px;
+  padding-top: 10px;
+  margin-bottom: 15px;
+}
+
+.question {
+  margin-left: 75px;
+}
+
+.Q1-2,
+.Q2-2 {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.Q1-2 h4,
+.Q2-2 h4 {
+  margin-left: 61px;
+  /* border: 1px solid black; */
+  width: 30px
+}
+
+.Q1-2 div,
+.Q2-2 div {
+  /* border: 1px solid black; */
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.Q2-2 div {
+  width: 800px;
+}
+
+.bid-step-table {
+  /* border: 1px solid black; */
+  border-radius: 25%;
+  margin: auto;
+  width: 750px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.bid-step-table thead {
+  background-color: var(--color-secondary);
+  justify-content: center;
+  height: 50px;
+}
+
+.bid-step-table tbody {
+  background-color: var(--color-primary);
+  justify-content: center;
+  height: 100px;
+}
+
+.table-body td {
+  font-weight: bold;
+}
