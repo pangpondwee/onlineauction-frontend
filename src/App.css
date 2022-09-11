@@ -123,21 +123,19 @@ li.menu-dropdown {
 .edit-profile {
   background-color: #2B4257;
   color: white;
-  width: fit-content;
-  padding: 10px 20px;
+  width: 120px;
+  height: 50px;
+  padding: 10px 10px 0 10px;
   border-radius: 5%;
-}
-
-.head-profile {
-  display: flex;
-  justify-content: space-between;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .profile-pic {
   width: 350px;
   height: 350px;
-  border-color: black;
-  border-style: solid;
+  /* border-color: black;
+  border-style: solid; */
 }
 
 .main-info-profile {
@@ -171,10 +169,22 @@ li.menu-dropdown {
 
 .badge-pic {
   width: 50px;
-  height: 100px;
-  border-color: black;
-  border-style: solid;
+  height: 50px;
+  margin: 0 10px;
 }
+
+.star {
+  width: 20px;
+  height: 20px;
+}
+
+.link-button {
+  text-decoration: none;
+  color: white;
+}
+
+/* EditProfilePage */
+
 
 /* MyOrderNav */
 .My-Order-Nav {
@@ -207,6 +217,11 @@ li.menu-dropdown {
   padding: 20px 25px 30px 25px;
 }
 
+.mini-pic-goods {
+  width: 180px;
+  height: 120px;
+}
+
 /* AccountPage(Following) */
 
 button.Follow-button {
@@ -218,5 +233,11 @@ button.Follow-button {
   width: 150px;
   padding: 5px 20px;
   color: #228BE6;
-  margin-left: 500px;
+  justify-content: center;
+}
+
+.followHeart {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
