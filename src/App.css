@@ -184,7 +184,39 @@ li.menu-dropdown {
 }
 
 /* EditProfilePage */
+.editing {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
 
+.cancel {
+  background-color: white;
+  color: var(--color-dark);
+  border: 3px var(--color-dark) solid;
+}
+
+.main-editing-page {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 380px auto;
+}
+
+.input-editing {
+  border: 3px var(--color-secondary) solid;
+  border-radius: 5px;
+  padding: 3px 8px;
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+.choose-image {
+  text-align: center;
+  border: 3px var(--color-primary) solid;
+  border-radius: 5px;
+  color: var(--color-dark);
+  background-color: white;
+  margin: 20px 0 0 230px;
+}
 
 /* MyOrderNav */
 .My-Order-Nav {
