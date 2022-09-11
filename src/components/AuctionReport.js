@@ -13,10 +13,10 @@ const AuctionReport = () => {
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="reportModalLabel">Report Pakkapol Kong</h5>
+                            <h5 className="modal-report-header-text" class="modal-title" id="reportModalLabel">Report Pakkapol Kong</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body-report">
                             <h6>Please specify the reason (up to 3 choices)</h6>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
@@ -54,7 +54,7 @@ const AuctionReport = () => {
                                     Other, please specify
                                 </label>
                             </div>
-                            <input class="report-text" type="text"></input>
+                            <textarea className="report-box" type="text" placeholder="Detail..."></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

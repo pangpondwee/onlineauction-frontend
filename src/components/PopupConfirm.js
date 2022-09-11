@@ -1,4 +1,5 @@
 import React from "react";
+import confirm from "../pictures/confirm.png";
 
 const PopupConfirm = () => {
     return (
@@ -13,11 +14,14 @@ const PopupConfirm = () => {
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirmModalLabel">Your item is on its way</h5>
-                            <h6 class="modal-title" id="confirmModalLabel">Check item information and a tracking number below</h6>
+                            <img className="popup-confirm-img" src={confirm} alt="shipping"/>
+                            <div className="modal-confirm-header-text">
+                                <div className="modal-confirm-head-st" class="modal-title" id="confirmModalLabel">Your item is on its way</div>
+                                <h6 class="modal-title" id="confirmModalLabel">Check item information and a tracking number below</h6>
+                            </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body-confirm">
                             <button className="billing btn-link">Billing Info</button>
                             <h6>Item Name : Nintendo Switch</h6>
                             <h6>Auctioneer Name : Kong Pakkapol</h6>
@@ -26,7 +30,7 @@ const PopupConfirm = () => {
                             <div className="tracking-img"></div>
                             <h6>Do you confirm that the package has arrived correctly?</h6>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer-confirm">
                             <button type="button" class="btn btn-primary">Confirm</button>
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Deny</button>
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Not Yet</button>

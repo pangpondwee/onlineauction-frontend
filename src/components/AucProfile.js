@@ -1,5 +1,4 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const AucProfile = () => {
     return (
@@ -17,11 +16,6 @@ const AucProfile = () => {
                     <div className="AucRating">
                         <h6>Rating</h6>
                         <h6>4</h6>
-                        <FontAwesomeIcon icon="fa-solid fa-star" />
-                        <FontAwesomeIcon icon="fa-solid fa-star" />
-                        <FontAwesomeIcon icon="fa-solid fa-star" />
-                        <FontAwesomeIcon icon="fa-solid fa-star" />
-                        <FontAwesomeIcon icon="fa-regular fa-star" />
                     </div>
                     <div className="AucBadges">
                         <h6>Badges</h6>

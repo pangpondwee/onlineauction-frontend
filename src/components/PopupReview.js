@@ -1,4 +1,5 @@
 import React from "react";
+import review from "../pictures/review.png";
 
 const PopupReview = () => {
     return (
@@ -13,8 +14,11 @@ const PopupReview = () => {
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="reviewModalLabel">What did you think of your recent bidding item?</h5>
-                            <h6 class="modal-title" id="reviewModalLabel">Your feedback is valuable to us and everyone</h6>
+                            <img className="popup-review-img" src={review} alt="review" />
+                            <div className="modal-review-header-text">
+                                <div class="modal-title" id="reviewModalLabel">What did you think of your recent bidding item?</div>
+                                <h6 class="modal-title" id="reviewModalLabel">Your feedback is valuable to us and everyone</h6>
+                            </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body-review">
@@ -22,9 +26,9 @@ const PopupReview = () => {
                             <h6>Auctioneer Name : Kong Pakkapol</h6>
                             <h6>Rating : </h6>
                             <h6>Review : </h6>
-                            <div className="review-box"></div>
+                            <textarea className="review-box" type="text" placeholder="Write a review here..."></textarea>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer-review">
                             <button type="button" class="btn btn-primary">Confirm</button>
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Skip</button>
                         </div>
