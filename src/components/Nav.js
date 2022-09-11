@@ -14,7 +14,9 @@ const Nav = () =>{
 			<div className="dropdown ms-auto p-2">
 				<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Username</Link>
 				<ul className="dropdown-menu dropdown-menu-end ms-auto p-2" to="#">
-					<li className="dropdown-item">Profile</li>
+					<li className="dropdown-item">
+						<Link to="/account/profile">Profile</Link>
+					</li>
 					<li className="dropdown-item">Bid & Auction</li>
 					<li className="dropdown-item">Place Auction</li>
 					<li className="dropdown-item">FAQs</li>

@@ -69,3 +69,154 @@ main {
 	height: 100%;
 	border-radius: var(--radius)
 }
+
+
+/* lefthand-nav */
+.lefthand-nav {
+  margin: 25px;
+  width: 235px;
+  border-right: 1px var(--color-primary) solid;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  margin-bottom: 25px;
+  padding: 10px 12px;
+  width: fit-content;
+  border-radius: 8%;
+}
+
+ul.no-bullets {
+  list-style: none;
+  margin: 0;
+}
+
+li.menu-dropdown {
+  margin-top: 10px;
+  padding: 10px 12px;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+.menu-link {
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+.current-tab {
+  background-color: var(--color-primary);
+}
+
+/* AccountPage(Profile) */
+.main-account-page {
+  display: grid;
+  grid-template-columns: 235px auto;
+  column-gap: 60px;
+}
+
+.profile-page {
+  padding: 15px 25px;
+}
+
+.edit-profile {
+  background-color: #2B4257;
+  color: white;
+  width: fit-content;
+  padding: 10px 20px;
+  border-radius: 5%;
+}
+
+.head-profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-pic {
+  width: 350px;
+  height: 350px;
+  border-color: black;
+  border-style: solid;
+}
+
+.main-info-profile {
+  margin: 10px 10px 30px 10px;
+  display: grid;
+  grid-template-columns: 400px auto;
+  column-gap: 50px;
+}
+
+.sub-info-profile {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-evenly;
+}
+
+.account-info {
+  width: 300px;
+  padding-left: 30px;
+}
+
+.about-you {
+  margin: 10px;
+  padding: 12px 20px 12px 20px;
+  width: 400px;
+  height: fit-content;
+  box-shadow: 0px 3px 3px gray;
+  border-radius: 3%;
+  background-color: #F8F9FA;
+}
+
+.badge-pic {
+  width: 50px;
+  height: 100px;
+  border-color: black;
+  border-style: solid;
+}
+
+/* MyOrderNav */
+.My-Order-Nav {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.Order-Menu {
+  margin: 20px;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 10px;
+}
+
+/* AccountPage(Review) */
+
+.all-review {
+  margin: 25px auto;
+}
+
+.Review-box {
+  border: 2px var(--color-primary) solid;
+  border-radius: 10px;
+  display: grid;
+  height: fit-content;
+  max-height: 180px;
+  grid-template-columns: 200px 250px auto;
+  overflow: hidden;
+  padding: 20px 25px 30px 25px;
+}
+
+/* AccountPage(Following) */
+
+button.Follow-button {
+  border: 3px #228BE6 solid;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  height: 40px;
+  width: 150px;
+  padding: 5px 20px;
+  color: #228BE6;
+  margin-left: 500px;
+}
