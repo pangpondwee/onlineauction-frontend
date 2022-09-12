@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import NoPage from './pages/NoPage'
 import PlaceAuction from './pages/PlaceAuction'
 import Payment from './pages/Payment'
+import Shipping from './pages/Shipping'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="place_auction" element={<PlaceAuction />} />
           <Route path="payment" element={<Payment />} />
+          <Route path="shipping" element={<Shipping />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
