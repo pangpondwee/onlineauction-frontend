@@ -105,7 +105,11 @@ const Shipping = () => {
               <div class="mb-3 center-pic">
                 <img class="preview-picture" src={Package} alt="package"></img>
               </div>
-              <input type="file" class="form-control" id="inputFile"></input>
+              <input
+                type="file"
+                class="form-control"
+                id="inputPackagePicture"
+              ></input>
             </div>
             <div>
               <button type="submit" class="btn btn-primary first-button">
