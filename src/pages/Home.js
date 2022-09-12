@@ -6,18 +6,9 @@ import arrow_right from "../pictures/arrow_right.png";
 const Home = () =>{
 	return (
 		<>
-		<p className="headHome">Welcome, Peeranat! Let’s see what you got...</p>
-		<div className="filter ms-auto p-2">
-			<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Sort By</Link>
-			<ul className="dropdown-menu dropdown-menu-end ms-auto p-2">
-				<li className="dropdown-item">Time remaining</li>
-				<li className="dropdown-item">Lowest Bid Price</li>
-				<li className="dropdown-item">Highest Bid Price</li>
-				<li className="dropdown-item">Newest</li>
-			</ul>
-		</div>
+		<p className="headHome">Welcome, Peeranat! Let’s see what you got...</p>		
 		<p className="detail">Your Recent Bids</p>
-		<div className="test">
+		<div className="flexRow">
 			{/* previous button */}
 			<Link to={"#"}>
 				<img src={arrow_left} className="button"></img>
@@ -33,7 +24,7 @@ const Home = () =>{
 			</Link>
 		</div>
 		<p className="detail">Recent Following List</p>
-		<div className="test">
+		<div className="flexRow">
 			{/* Add previous button */}
 			<Link to={"#"}>
 				<img src={arrow_left} className="button"></img>
@@ -49,7 +40,7 @@ const Home = () =>{
 			</Link>
 		</div>
 		<p className="detail">Popular</p>
-		<div className="test">
+		<div className="flexRow">
 			<AuctionCard name="first"/>
 			<AuctionCard name="second"/>
 			<AuctionCard name="c"/>
@@ -57,7 +48,7 @@ const Home = () =>{
 			<AuctionCard name="e"/>
 		</div>
 		<p className="detail">Ending soon</p>
-		<div className="test">
+		<div className="flexRow">
 			<AuctionCard name="first"/>
 			<AuctionCard name="second"/>
 			<AuctionCard name="c"/>

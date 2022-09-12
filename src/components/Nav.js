@@ -40,7 +40,7 @@ const Nav = () => {
 				<div className="navbar-nav">
 					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
 					<div className="dropdown-menu nav-dropdown show" >
-						<Link to="#" className="ps-4 dropdown-item nav-link">Home Improvement</Link>
+						<Link to="search/" className="ps-4 dropdown-item nav-link">Home Improvement</Link>
 						<Link to="#" className="ps-4 dropdown-item nav-link">Jewellery</Link>
 						<Link to="#" className="ps-4 dropdown-item nav-link">Coins, Currency, Stamps</Link>
 						<Link to="#" className="ps-4 dropdown-item nav-link">Watches</Link>
