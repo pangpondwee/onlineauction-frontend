@@ -46,6 +46,7 @@
   --color-text: #2b4257;
   --color-dark: #091235;
   --color-attention: #f08c00;
+  --color-grey-box: #f8f9fa;
   --radius: 20px;
 }
 /* General */
@@ -136,4 +137,11 @@ main {
 .transaction-slip-pic {
   max-width: 50%;
   height: auto;
+}
+
+.address-box {
+  background-color: var(--color-grey-box);
+  border-radius: var(--radius);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  padding: 20px;
 }
