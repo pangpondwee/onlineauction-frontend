@@ -14,13 +14,13 @@ const Nav = () => {
 			</form>
 			<div className="dropdown ms-auto p-2">
 				<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Username</Link>
-				<ul className="dropdown-menu dropdown-menu-end ms-auto p-2">
-					<li className="dropdown-item">Profile</li>
-					<li className="dropdown-item">Bid & Auction</li>
-					<li className="dropdown-item">Place Auction</li>
-					<li className="dropdown-item">FAQs</li>
-					<li className="dropdown-item">Log out</li>
-				</ul>
+				<div className="dropdown-menu dropdown-menu-end ms-auto p-2">
+					<Link to="#" className="dropdown-item">Profile</Link>
+					<Link to="#" className="dropdown-item">Bid & Auction</Link>
+					<Link to="/place-auction" className="dropdown-item">Place Auction</Link>
+					<Link to="#" className="dropdown-item">FAQs</Link>
+					<Link to="#" className="dropdown-item">Log out</Link>
+				</div>
 			</div>
 			<div className="dropdown p-2">
 				<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Noti</Link>
