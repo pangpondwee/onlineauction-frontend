@@ -1,15 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import logo from "./logo.svg"
+import "./App.css"
 // Pages
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import NoPage from "./pages/NoPage";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import ForgetPassword from "./pages/ForgetPassword";
-import ResetPassword from "./pages/ResetPassword";
-import VerifyEmail from "./pages/VerifyEmail";
+import Layout from "./pages/Layout"
+import Home from "./pages/Home"
+import NoPage from "./pages/NoPage"
+import Login from "./pages/Login"
+import SignUp from "./pages/SignUp"
+import ForgetPassword from "./pages/ForgetPassword"
+import ResetPassword from "./pages/ResetPassword"
+import VerifyEmail from "./pages/VerifyEmail"
+import PlaceAuction from './pages/PlaceAuction'
+import Payment from './pages/Payment'
+import Shipping from './pages/Shipping'
+import BillingInfo from './pages/BillingInfo'
+
 
 function App() {
   return (
@@ -22,6 +27,10 @@ function App() {
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="verify-email" element={<VerifyEmail />} />
+          <Route path="place-auction" element={<PlaceAuction />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="shipping" element={<Shipping />} />
+          <Route path="billing-info" element={<BillingInfo />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
@@ -29,4 +38,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
