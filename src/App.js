@@ -14,6 +14,8 @@ import PlaceAuction from './pages/PlaceAuction'
 import Payment from './pages/Payment'
 import Shipping from './pages/Shipping'
 import BillingInfo from './pages/BillingInfo'
+import ViewAuctioneer from "./pages/ViewAuctioneer"
+import FAQ from "./pages/FAQ"
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route path="payment" element={<Payment />} />
           <Route path="shipping" element={<Shipping />} />
           <Route path="billing-info" element={<BillingInfo />} />
+          <Route path="view-auctioneer" element={<ViewAuctioneer />} />
+          <Route path="faq" element={<FAQ />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
