@@ -74,7 +74,7 @@ main {
   border-radius: var(--radius);
 }
 
-/* Place Auction */
+/* Form */
 .form {
   color: var(--color-text);
   margin: 1rem 0 1rem 10rem;
@@ -111,11 +111,6 @@ main {
   border-width: 5px;
 }
 
-.preview-picture {
-  max-width: 100%;
-  height: auto;
-}
-
 .form-footer {
   margin: 1rem 0 1rem 10rem;
 }
@@ -124,6 +119,13 @@ main {
   margin-right: 20px;
 }
 
+/* Preview Picture */
+.preview-picture {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Promptpay QR Picture */
 .promptpayqrpic {
   max-width: 40%;
   height: auto;
@@ -134,14 +136,51 @@ main {
   justify-content: center;
 }
 
+/* Preview Transaction Slip Pic */
 .transaction-slip-pic {
   max-width: 50%;
   height: auto;
 }
 
+/* Billing Info Page */
+.billing-info-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Address Card */
 .address-box {
   background-color: var(--color-grey-box);
   border-radius: var(--radius);
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   padding: 20px;
+}
+
+/* Billing Info Section */
+.billing-info {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Item Card */
+.item-card {
+  display: flex;
+  align-items: row;
+  border: solid var(--color-secondary);
+  border-radius: var(--radius);
+  padding: 20px;
+  width: 70%;
+  height: 200px;
+}
+
+/* Item Picture in Item Card */
+.item-picture {
+  width: auto;
+  height: 100%;
+}
+
+/* Item Detail in Item Card */
+.item-card-detail {
+  margin-left: 30px;
 }
