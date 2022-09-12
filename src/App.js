@@ -5,7 +5,7 @@ import './App.css';
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
-import AucAccView from "./pages/AucAccView";
+import ViewAuctioneer from "./pages/ViewAuctioneer";
 import FAQ from "./pages/FAQ";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
 		  <Routes>
 		  <Route path="/" element={<Layout />}>
 			  <Route index element={<Home />} />
-			  <Route path="auc-acc-view" element={<AucAccView />} />
+			  <Route path="view-auctioneer" element={<ViewAuctioneer />} />
 			  <Route path="faq" element={<FAQ />} />
 			  <Route path="*" element={<NoPage />} />
 		  </Route>

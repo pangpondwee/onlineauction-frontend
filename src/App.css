@@ -204,18 +204,27 @@ main {
 }
 
 .btn-scroll {
-  height: 50px;
-  width: 25px;
+  height: 40px;
+  width: 40px;
 }
 
 .review-card {
   border: 1px solid black;
   width: 300px;
-  height: 250px;
+  height: 300px;
   border-radius: 10%;
   margin-left: 15px;
   margin-right: 15px;
   /* padding: 15px; */
+}
+
+.review-star-zone {
+  margin-bottom: 10px;
+}
+
+.review-star-zone img {
+  height: 25px;
+  width: 25px;
 }
 
 .auction-card {
@@ -237,24 +246,27 @@ main {
   display: flex;
   margin-left: 20px;
   margin-right: 20px;
+  justify-content: space-between;
 }
 
 .btn-scroll {
-  margin-top: 110px;
+  margin-top: 140px;
 }
 
 .review-list,
 .auction-list {
   display: flex;
   padding: 15px;
+  /* justify-content: space-between; */
 }
 
 .review-detail {
-  margin: 10px
+  margin: 15px
 }
 
 .review-text {
-  margin-top: 10px;
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .modal-report-header-text {

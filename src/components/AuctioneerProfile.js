@@ -7,7 +7,7 @@ import badge2 from "../pictures/badge2.png";
 import badge3 from "../pictures/badge3.png";
 import stat from "../pictures/stat.png";
 
-const AucProfile = () => {
+const AuctioneerProfile = () => {
     return (
         <div className="AucPro">
             <img className="AucProImg" src={kong} alt="this-is-kong-desuwa" />
@@ -52,4 +52,4 @@ const AucProfile = () => {
     )
 }
 
-export default AucProfile;
+export default AuctioneerProfile;

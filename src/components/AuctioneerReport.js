@@ -1,6 +1,6 @@
 import React from "react";
 
-const AuctionReport = () => {
+const AuctioneerReport = () => {
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
@@ -67,4 +67,4 @@ const AuctionReport = () => {
     )
 }
 
-export default AuctionReport;
+export default AuctioneerReport;
