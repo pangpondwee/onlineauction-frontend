@@ -1,4 +1,5 @@
 import blank_profile from "../pictures/blank_profile.png";
+import { Link } from "react-router-dom";
 
 const AccountEdit = () =>{
 	return (
@@ -37,7 +38,9 @@ const AccountEdit = () =>{
             <div>
                 <div className="edit-profile editing">Edit Profile</div>
                 <div className="edit-profile">Save Changes</div>
-                <div className="edit-profile cancel">Cancel</div>
+                <div className="edit-profile cancel">
+                    <Link to="/account/profile" className="link-button text-body">Cancel</Link>
+                </div>
             </div>
         </div>
 	)
