@@ -34,10 +34,7 @@ const AuctionDetail = () => {
               <label for="itemCategory" class="form-label">
                 ITEM CATEGORY
               </label>
-              <select
-                class="form-select form-control"
-                aria-label="Default select example"
-              >
+              <select class="form-select form-control">
                 <option selected>Select Category</option>
                 <option value="homeImprovement">Home Improvement</option>
                 <option value="jewellery">Jewellery</option>
