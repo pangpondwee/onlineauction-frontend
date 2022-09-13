@@ -1,20 +1,20 @@
 /* Form */
-.form {
+form {
   color: var(--color-text);
-  margin: 1rem 0 1rem 10rem;
+  margin: 1% 10% 1% 15%;
 }
 
 .subForm {
-  margin: 1rem 0 1rem 10rem;
+  margin: 1% 0 1% 10%;
 }
 
 .formHeading1 {
-  font-size: 1.5rem;
+  font-size: 150%;
   font-weight: 600;
 }
 
 .formLabel {
-  font-size: 1rem;
+  font-size: 100%;
   font-weight: 400;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .form-footer {
-  margin: 1rem 0 1rem 10rem;
+  margin: 1% 0 1% 10%;
 }
 
 .first-button {
@@ -89,6 +89,7 @@
   justify-content: space-between;
   width: 80%;
   margin-top: 30px;
+  row-gap: 10px;
 }
 
 /* Item Card */
@@ -116,6 +117,7 @@
 .billing-info-subcard {
   width: 48%;
   height: auto;
+  row-gap: 10px;
 }
 
 .package-picture {
@@ -158,11 +160,30 @@
 .payment-summary-card {
   position: sticky;
   top: 200px;
-  width: 300px;
-  height: auto;
+  width: 60%;
+  height: 25%;
 }
 
 .payment-summary-card img {
-  width: 200px;
+  width: 80%;
   height: auto;
+}
+
+@media only screen and (min-width: 800px) {
+  .payment-form {
+    max-width: 50%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .payment-summary-section {
+    display: none;
+  }
+  .form-section {
+    width: 100%;
+    height: auto;
+  }
+  .billing-info {
+    flex-direction: column;
+  }
 }
