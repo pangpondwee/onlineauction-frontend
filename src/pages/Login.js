@@ -13,6 +13,22 @@ import {
 } from "mdb-react-ui-kit";
 import "../css/Login.css";
 
+function al(){
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  fetch("http://13.250.98.9/api/api/user/signin",{
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type' : "application/json"
+    },
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value
+    })
+  })
+}
+
 function Login() {
   return (
     <MDBContainer fluid className="p-4">
@@ -32,14 +48,14 @@ function Login() {
               <MDBInput
                 wrapperClass="mb-4"
                 // label="Email"
-                id="form1"
+                id="email"
                 type="email"
                 placeholder="Email"
               />
               <MDBInput
                 wrapperClass="mb-4"
                 // label="Password"
-                id="form1"
+                id="password"
                 type="password"
                 placeholder="Password"
               />
@@ -54,14 +70,14 @@ function Login() {
                 <a href="!#">Forgot password?</a>
               </div>
 
-              <MDBBtn className="w-100 mb-4" size="md">
+              <MDBBtn onClick={al} className="w-100 mb-4" size="md">
                 LOGIN
               </MDBBtn>
 
               <div>
                 <p className="mb-0">
                   Don't have an account?{" "}
-                  <a href="#!" class="text-blue-50 fw-bold">
+                  <a href="#!" className="text-blue-50 fw-bold">
                     Sign Up
                   </a>
                 </p>
