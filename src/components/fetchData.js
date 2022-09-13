@@ -1,18 +1,23 @@
 export default async function fetchData(url){
 	// TODO use auctionId
-	try{
-		const res = await fetch(url);
-		if(!res.ok){
-			throw new Error(res.status); // Error 400 500 
-		}
-		const res_data = await res.json();
+	return fetch(url)
+	.then((res)=>{
+		// if(!res.ok){
+		// 	throw new Error(res.status); // Error 400 500
+		// }
+		// else{
+			return res.json();
+		// }
+	})
+	.then(res_data=>{
 		if(res_data.status == "success"){
-			return ["success",res_data.data]; // success
+			return ["success",res_data.data];
 		}
 		else{
-			throw new Error(res_data.message); // 200 status:error
+			throw new Error(res_data.message);
 		}
-	} catch(error){
+	})
+	.catch(error=>{
 		return ["fail",{message : error.message}]
-	}
+	})
 }
