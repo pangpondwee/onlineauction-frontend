@@ -1,0 +1,239 @@
+/* lefthand-nav */
+.lefthand-nav {
+    margin: 25px;
+    /* width: 235px; */
+    width: 30vh;
+    border-right: 1px var(--color-primary) solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu {
+    margin-bottom: 25px;
+    padding: 10px 12px;
+    width: fit-content;
+    border-radius: 8%;
+}
+
+ul.no-bullets {
+    list-style: none;
+    margin: 0;
+}
+
+li.menu-dropdown {
+    margin-top: 10px;
+    padding: 10px 12px;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.menu-link {
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--color-dark);
+}
+
+.current-tab {
+    background-color: var(--color-primary);
+}
+
+/* AccountPage(Profile) */
+.main-account-page {
+    display: grid;
+    /* grid-template-columns: 235px auto; */
+    grid-template-columns: 30vh auto;
+    column-gap: 60px;
+}
+
+.profile-page {
+    padding: 15px 25px;
+}
+
+.edit-profile {
+    background-color: #2B4257;
+    color: white;
+    width: 120px;
+    height: 50px;
+    padding: 10px 10px 0 10px;
+    border-radius: 5%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 350px;
+    height: 350px;
+    /* border-color: black;
+  border-style: solid; */
+}
+
+.main-info-profile {
+    margin: 10px 10px 30px 10px;
+    display: grid;
+    grid-template-columns: 380px auto;
+    column-gap: 30px;
+}
+
+.sub-info-profile {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-evenly;
+}
+
+.account-info {
+    width: 300px;
+    padding-left: 30px;
+}
+
+.about-you {
+    margin: 10px;
+    padding: 20px 30px 20px 30px;
+    width: fit-content;
+    height: fit-content;
+    box-shadow: 0px 3px 3px gray;
+    border-radius: 3%;
+    background-color: #F8F9FA;
+}
+
+.badge-pic {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+}
+
+.star {
+    width: 20px;
+    height: 20px;
+}
+
+.link-button {
+    text-decoration: none;
+    color: white;
+}
+
+/* EditProfilePage */
+.editing {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+.cancel {
+    background-color: white;
+    color: var(--color-dark);
+    border: 3px var(--color-dark) solid;
+}
+
+.main-editing-page {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 380px auto;
+}
+
+.input-editing {
+    border: 3px var(--color-secondary) solid;
+    border-radius: 5px;
+    padding: 3px 8px;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.choose-image {
+    text-align: center;
+    border: 3px var(--color-primary) solid;
+    border-radius: 5px;
+    color: var(--color-dark);
+    background-color: white;
+    margin: 20px 0 0 230px;
+}
+
+/* MyOrderNav */
+.My-Order-Nav {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.Order-Menu {
+    margin: 20px;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
+}
+
+/* AccountPage(Review) */
+
+.all-review {
+    margin: 25px auto;
+}
+
+.Review-box {
+    border: 2px var(--color-primary) solid;
+    border-radius: 10px;
+    display: grid;
+    height: fit-content;
+    max-height: 180px;
+    grid-template-columns: 200px 250px auto;
+    overflow: hidden;
+    padding: 20px 25px 30px 25px;
+    margin-bottom: 20px;
+}
+
+.mini-pic-goods {
+    width: 180px;
+    height: 120px;
+}
+
+/* AccountPage(Following) */
+
+.Follow-button {
+    border: 3px #228BE6 solid;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    height: 40px;
+    width: 150px;
+    padding: 5px 20px;
+    color: #228BE6;
+    justify-content: center;
+}
+
+.followHeart {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* MyOrderPage */
+.status-text {
+    margin-top: 25px;
+    color: #FA5252;
+    font-size: 20px;
+    /* visibility: hidden; */
+}
+
+.Order-box {
+    grid-template-columns: 200px 500px auto;
+    height: fit-content;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+/* fontcolor&bordercolor in myorder */
+
+.currently-bid .bidder-to-pay-wait-admin .to-delivered .on-auction .auctioneer-to-pay .auctioneer-to-confirm {
+    color: #228BE6;
+    border-color: #228BE6;
+}
+
+.bidder-to-pay,
+.bidder-to-confirm,
+.to-shipped {
+    color: #FA5252;
+    border-color: #FA5252;
+}
+
+.completed {
+    color: #2F9E44;
+    border-color: #2F9E44;
+}

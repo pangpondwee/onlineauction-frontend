@@ -16,6 +16,12 @@ import Shipping from './pages/Shipping'
 import BillingInfo from './pages/BillingInfo'
 import ViewAuctioneer from "./pages/ViewAuctioneer"
 import FAQ from "./pages/FAQ"
+import AccountLayout from "./pages/AccountLayout"
+import AccountPage from "./pages/AccountPage"
+import AccountEdit from "./pages/AccountEdit"
+import MyOrder from "./pages/MyOrder"
+import MyReview from "./pages/MyReview"
+import MyFollowing from "./pages/MyFollowing"
 
 
 function App() {
@@ -35,6 +41,13 @@ function App() {
           <Route path="billing-info" element={<BillingInfo />} />
           <Route path="view-auctioneer" element={<ViewAuctioneer />} />
           <Route path="faq" element={<FAQ />} />
+          <Route path="account" element={<AccountLayout/>}>
+            <Route path="profile" element={<AccountPage/>}/>
+            <Route path="edit" element={<AccountEdit/>}/>
+            <Route path="myorder" element={<MyOrder/>} />
+            <Route path="review" element={<MyReview/>} />
+            <Route path="following" element={<MyFollowing/>} />
+          </Route>
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
