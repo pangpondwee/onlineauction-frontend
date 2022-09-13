@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import "./Auction.css";
+import "../css/Auction.css";
 import fetchData from '../components/fetchData';
 import example from "../example.jpeg"
 
