@@ -155,7 +155,7 @@ const Auction = (props) =>{
 	const showRanking=false; //show ranking and move gallery // testing
 	const lastBid=122; // testing
 	useEffect(()=>{
-		fetchData(`http://13.250.98.9/api/api/auction/631f2bf3462175116ce365b4`).then(([s,d])=>{
+		fetchData(`http://13.250.98.9/api/auction/${auctionId}`).then(([s,d])=>{
 			setStatus(s);
 			setData(d);
 		})
