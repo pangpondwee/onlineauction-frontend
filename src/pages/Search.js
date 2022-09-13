@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
+import AuctionCardRow from "../components/AuctionCardRow";
 import "../css/Home.css";
 import "../css/Search.css";
 import arrow_left from "../pictures/arrow_left.png";
@@ -25,13 +26,24 @@ const Search = () =>{
 			<AuctionCard name="Omnitrix" price="20$" time="08:53:05"picture="https://cdn.estore.nu/68744-thickbox_default/ben-10---deluxe-omnitrix-creator-set.jpg"/>
 			<AuctionCard name="e"/>
 		</div>
-		<div className="flexRow">
-			<AuctionCard name="first"/>
+        {/* test */}
+        <p>Test</p>
+        <AuctionCardRow name1="first test" 
+		name2="second test"
+		name3="kong"/>
+        
+		{/* <div className="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2"> */}
+		{/* <div className="row row-cols-1 row-cols-md-5 g-5"> */}
+			{/* <AuctionCard name="first"/>
 			<AuctionCard name="second"/>
 			<AuctionCard name="c"/>
 			<AuctionCard name="d"/>
 			<AuctionCard name="e"/>
-		</div>
+			<AuctionCard name="e"/>
+			<AuctionCard name="e"/>
+			<AuctionCard name="e"/>
+		</div> */}
+        <p>End Test</p>
 		<div className="flexRow">
 			<AuctionCard name="first"/>
 			<AuctionCard name="second"/>
@@ -75,9 +87,9 @@ const Search = () =>{
                         <span className="sr-only"></span>
                     </Link>
                 </li>
-                <li className="page-item active"><Link class="page-link" to="#">1</Link></li>
-                <li className="page-item"><Link class="page-link" to="#">2</Link></li>
-                <li className="page-item"><Link class="page-link" to="#">3</Link></li>
+                <li className="page-item active"><Link className="page-link" to="#">1</Link></li>
+                <li className="page-item"><Link className="page-link" to="#">2</Link></li>
+                <li className="page-item"><Link className="page-link" to="#">3</Link></li>
                 <li className="page-item">
                     <Link className="page-link" to="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>

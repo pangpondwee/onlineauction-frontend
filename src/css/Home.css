@@ -1,5 +1,6 @@
 .card{
 	width: 18rem;
+  min-width: 10rem;
   margin: auto 20px;
   box-shadow: var(--box-shadow);
   background-color: #F8F9FA;
