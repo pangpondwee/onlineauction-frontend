@@ -26,24 +26,7 @@ const Search = () =>{
 			<AuctionCard name="Omnitrix" price="20$" time="08:53:05"picture="https://cdn.estore.nu/68744-thickbox_default/ben-10---deluxe-omnitrix-creator-set.jpg"/>
 			<AuctionCard name="e"/>
 		</div>
-        {/* test */}
-        <p>Test</p>
-        <AuctionCardRow name1="first test" 
-		name2="second test"
-		name3="kong"/>
         
-		{/* <div className="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2"> */}
-		{/* <div className="row row-cols-1 row-cols-md-5 g-5"> */}
-			{/* <AuctionCard name="first"/>
-			<AuctionCard name="second"/>
-			<AuctionCard name="c"/>
-			<AuctionCard name="d"/>
-			<AuctionCard name="e"/>
-			<AuctionCard name="e"/>
-			<AuctionCard name="e"/>
-			<AuctionCard name="e"/>
-		</div> */}
-        <p>End Test</p>
 		<div className="flexRow">
 			<AuctionCard name="first"/>
 			<AuctionCard name="second"/>
