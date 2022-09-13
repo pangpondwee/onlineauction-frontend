@@ -17,7 +17,9 @@ const Nav = () =>{
 					<li className="dropdown-item">
 						<Link to="/account/profile">Profile</Link>
 					</li>
-					<li className="dropdown-item">Bid & Auction</li>
+					<li className="dropdown-item">
+						<Link to="/account/myorder">Bid & Auction</Link>
+					</li>
 					<li className="dropdown-item">Place Auction</li>
 					<li className="dropdown-item">FAQs</li>
 					<li className="dropdown-item">Log out</li>

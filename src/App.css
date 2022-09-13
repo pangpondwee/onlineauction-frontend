@@ -74,7 +74,8 @@ main {
 /* lefthand-nav */
 .lefthand-nav {
   margin: 25px;
-  width: 235px;
+  /* width: 235px; */
+  width: 30vh;
   border-right: 1px var(--color-primary) solid;
   display: flex;
   flex-direction: column;
@@ -112,7 +113,8 @@ li.menu-dropdown {
 /* AccountPage(Profile) */
 .main-account-page {
   display: grid;
-  grid-template-columns: 235px auto;
+  /* grid-template-columns: 235px auto; */
+  grid-template-columns: 30vh auto;
   column-gap: 60px;
 }
 
@@ -141,8 +143,8 @@ li.menu-dropdown {
 .main-info-profile {
   margin: 10px 10px 30px 10px;
   display: grid;
-  grid-template-columns: 400px auto;
-  column-gap: 50px;
+  grid-template-columns: 380px auto;
+  column-gap: 30px;
 }
 
 .sub-info-profile {
@@ -159,8 +161,8 @@ li.menu-dropdown {
 
 .about-you {
   margin: 10px;
-  padding: 12px 20px 12px 20px;
-  width: 400px;
+  padding: 20px 30px 20px 30px;
+  width: fit-content;
   height: fit-content;
   box-shadow: 0px 3px 3px gray;
   border-radius: 3%;
@@ -247,6 +249,7 @@ li.menu-dropdown {
   grid-template-columns: 200px 250px auto;
   overflow: hidden;
   padding: 20px 25px 30px 25px;
+  margin-bottom: 20px;
 }
 
 .mini-pic-goods {
@@ -256,7 +259,7 @@ li.menu-dropdown {
 
 /* AccountPage(Following) */
 
-button.Follow-button {
+.Follow-button {
   border: 3px #228BE6 solid;
   border-radius: 20px;
   background-color: white;
@@ -272,4 +275,36 @@ button.Follow-button {
   width: 20px;
   height: 20px;
   margin-right: 5px;
+}
+
+/* MyOrderPage */
+.status-text {
+  margin-top: 25px;
+  color: #FA5252;
+  font-size: 20px;
+  /* visibility: hidden; */
+}
+
+.Order-box {
+  grid-template-columns: 200px 500px auto;
+  height: fit-content;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+/* fontcolor&bordercolor in myorder */
+
+.currently-bid .bidder-to-pay-wait-admin .to-delivered .on-auction .auctioneer-to-pay .auctioneer-to-confirm{
+  color: #228BE6;
+  border-color: #228BE6;
+}
+
+.bidder-to-pay, .bidder-to-confirm, .to-shipped{
+  color: #FA5252;
+  border-color: #FA5252;
+}
+
+.completed {
+  color: #2F9E44;
+  border-color: #2F9E44;
 }

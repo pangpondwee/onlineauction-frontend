@@ -11,10 +11,10 @@ const AccountNav = () =>{
 				<h5>My Order</h5>
 				<ul className="no-bullets">
 					<li className="menu-dropdown">
-						<Link to="/account/mybid" className="menu-link">My Bid</Link>
+						<Link to="/account/myorder?bid" className="menu-link">My Bid</Link>
 					</li>
 					<li className="menu-dropdown">
-						<Link to="/account/myauction" className="menu-link">My Auction</Link>
+						<Link to="/account/myorder?auction" className="menu-link">My Auction</Link>
 					</li>
 				</ul>
 			</div>
