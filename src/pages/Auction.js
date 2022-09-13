@@ -155,7 +155,7 @@ const Auction = (props) =>{
 	const showRanking=false; //show ranking and move gallery // testing
 	const lastBid=122; // testing
 	useEffect(()=>{
-		fetchData(`http://localhost:9000/`).then(([s,d])=>{
+		fetchData(`http://13.250.98.9/api/api/auction/631f2bf3462175116ce365b4`).then(([s,d])=>{
 			setStatus(s);
 			setData(d);
 		})
@@ -185,12 +185,12 @@ const Auction = (props) =>{
 					{showRanking ?
 						<Gallery/>:
 						<></>}
-					<p id={showRanking ? 
+					<div id={showRanking ?
 						"description-with-gallery" : 
 						"description" }>
 					<h2 id="detail-heading">Description</h2>
 						{data.productDetail.description}
-					</p>
+					</div>
 				</div>
 			</div>
 		)
