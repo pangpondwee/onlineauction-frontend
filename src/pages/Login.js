@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import React from "react";
 import {
@@ -13,24 +14,38 @@ import {
 } from "mdb-react-ui-kit";
 import "../css/Login.css";
 
-function al(){
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
-  fetch("http://13.250.98.9/api/api/user/signin",{
-    method: 'POST',
-    mode: 'cors',
-    credentials: 'include',
-    headers: {
-      'Content-Type' : "application/json"
-    },
-    body: JSON.stringify({
-      email: email.value,
-      password: password.value
-    })
-  })
-}
-
 function Login() {
+  let navigate = useNavigate();
+  const onSubmit = () => {
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    fetch("http://13.250.98.9/api/api/user/signin", {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value
+      })
+    }).then(res => {
+      return res.json();
+    }).then(res_data=>{
+      if(res_data.status == "success"){
+        const data = res_data.data.user;
+        localStorage.setItem("displayName",data.displayName)
+        localStorage.setItem("isLoggedIn",true)
+        navigate("/")
+      }
+      else{
+        throw new Error(res_data.message);
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
   return (
     <MDBContainer fluid className="p-4">
       <MDBRow>
@@ -71,7 +86,7 @@ function Login() {
                 <a href="!#">Forgot password?</a>
               </div>
 
-              <MDBBtn onClick={al} className="w-100 mb-4" size="md">
+              <MDBBtn onClick={onSubmit} className="w-100 mb-4" size="md">
                 LOGIN
               </MDBBtn>
 
