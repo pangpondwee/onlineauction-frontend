@@ -19,6 +19,7 @@ function al(){
   fetch("http://13.250.98.9/api/api/user/signin",{
     method: 'POST',
     mode: 'cors',
+    credentials: 'include',
     headers: {
       'Content-Type' : "application/json"
     },
