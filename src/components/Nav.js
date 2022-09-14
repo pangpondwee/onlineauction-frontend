@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import "../css/Nav.css";
 
-const Nav = () => {
-	const loggedIn = false; // testing
+const Nav = (props) => {
+	const displayName=localStorage.getItem("displayName");
+	const loggedIn = props.loggedIn;
+	const logOut = ()=>{
+		props.setloggedIn(false);
+	}
 	return (
 		<nav className="navbar d-flex sticky-top">{/* add sticky-top */}
 			{/* Nav Bar BEGIN*/}
@@ -15,13 +20,13 @@ const Nav = () => {
 			</form>
 			{loggedIn ? 
 				<div className="dropdown ms-auto p-2">
-					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Username</Link>
+					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">{displayName}</Link>
 					<div className="dropdown-menu dropdown-menu-end ms-auto p-2">
 						<Link to="/account/profile" className="dropdown-item">Profile</Link>
 						<Link to="/account/myorder" className="dropdown-item">Bid & Auction</Link>
 						<Link to="/place-auction" className="dropdown-item">Place Auction</Link>
 						<Link to="#" className="dropdown-item">FAQs</Link>
-						<Link to="#" className="dropdown-item">Log out</Link>
+						<Link to="#" onClick={logOut} className="dropdown-item">Log out</Link>
 					</div>
 				</div>
 				:

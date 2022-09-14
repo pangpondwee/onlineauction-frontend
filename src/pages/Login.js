@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import React from "react";
@@ -14,8 +14,9 @@ import {
 } from "mdb-react-ui-kit";
 import "../css/Login.css";
 
-function Login() {
+function Login(props) {
   let navigate = useNavigate();
+  const [loggedIn, setloggedIn] = useOutletContext();
   const onSubmit = () => {
     const email = document.getElementById("email");
     const password = document.getElementById("password");
@@ -36,8 +37,8 @@ function Login() {
       if(res_data.status == "success"){
         const data = res_data.data.user;
         localStorage.setItem("displayName",data.displayName)
-        localStorage.setItem("isLoggedIn",true)
-        navigate("/")
+        setloggedIn(true);
+        navigate("/");
       }
       else{
         throw new Error(res_data.message);
