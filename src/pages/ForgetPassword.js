@@ -1,58 +1,35 @@
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-import React from "react";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
-import "../css/ForgetPassword.css";
+import classes from "../css/SignUp.module.css";
+import Card from "../components/Card";
 
-function ForgetPassword() {
+import pic1 from "../pictures/loginpic.jpg";
+
+const ForgetPassword = () => {
   return (
-    <MDBContainer fluid className>
-      <MDBRow className="d-flex justify-content-center align-items-center h-100">
-        <MDBCol col="12">
-          <MDBCard
-            className="bg-white my-5 mx-auto"
-            style={{ borderRadius: "1rem", maxWidth: "500px" }}
-          >
-            <MDBCardBody className="p-5 w-100 d-flex flex-column ">
-              <p className="mb-4 text-center fw-bold">
-                Enter the Email Address associated with your account and we'll
-                send you a link to reset password.
-              </p>
-
-              <MDBInput
-                wrapperClass="mb-4"
-                // label="Email"
-                id="form1"
-                type="email"
-                placeholder="Email"
-              />
-
-              <MDBBtn className="w-25 mb-4 mx-auto" size="mb">
-                Continue
-              </MDBBtn>
-
-              <div>
-                <p className="mb-0 text-center">
-                  <a href="#!" class="text-bllue-50 fw-bold">
-                    Return to Login
-                  </a>
-                </p>
-              </div>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+    <Fragment>
+      <h1>Anything You Want, At A Super Satisfying Price!</h1>
+      <h2 className="text-primary">Create An Account Now!</h2>
+      <div className={classes.SignUp}>
+        <img className={classes.loginimg} src={pic1} />
+        <Card className={classes.input}>
+          <div className={classes.Form}>
+            <p>
+              Enter the Email Address associated with your account and we'll
+              send you a link to reset password.
+            </p>
+            <label htmlFor="email">Email</label>
+            <input id="email" type="text" placeholder="Email" />
+            <Link to={"#"}>Forgot Password?</Link>
+            <div>
+              <button className={classes.button}>Sign In</button>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </Fragment>
   );
-}
+};
 
 export default ForgetPassword;
