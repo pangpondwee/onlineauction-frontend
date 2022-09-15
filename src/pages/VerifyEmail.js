@@ -1,38 +1,19 @@
-import { Link } from "react-router-dom";
+import React, { Fragment } from "react";
 
-import React from "react";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBInput,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
-import "../css/VerifyEmail.css";
+import classes from "../css/VerifyEmail.module.css";
+import pic1 from "../pictures/blue_circle_check.png";
 
 function VerifyEmail() {
   return (
-    <MDBContainer fluid className>
-      <MDBRow className="d-flex justify-content-center align-items-center h-100">
-        <MDBCol col="12">
-          <MDBCard
-            className="bg-white my-5 mx-auto"
-            style={{ borderRadius: "1rem", maxWidth: "500px" }}
-          >
-            <MDBCardBody className="p-5 w-100 d-flex flex-column">
-              <h1 className="mb-4 text-center fw-bold text-primary">
-                Email is Verified!
-              </h1>
-              <p className="mb-4 text-center fw-bold">for kittipak.wi@ku.th</p>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+    <Fragment>
+      <img className={classes.pic1} src={pic1} />
+      <div className={classes.text}>
+        <h1>Your Email is now Verified!</h1>
+      </div>
+      <div className={classes.text2}>
+        <p>(for kittipak.wi@ku.th)</p>
+      </div>
+    </Fragment>
   );
 }
 
