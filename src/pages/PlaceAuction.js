@@ -1,36 +1,39 @@
 import bunny from '../pictures/bunny.jpeg'
 
 const AuctionDetail = () => {
+  const submitHandler = (event) => {
+    event.preventDefault()
+  }
   return (
     <div>
       <h1 className="header">Place Auction</h1>
-      <form className="payment-form">
-        <div className="formHeading1">ITEM INFORMATION</div>
+      <form className="payment-form" onSubmit={submitHandler}>
+        <div className="form-heading1">ITEM INFORMATION</div>
         <div className="subForm">
-          <div className="mb-3">
-            <label for="itemName" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="itemName" className="form-label">
               ITEM NAME
             </label>
             <input
               type="text"
               className="form-control"
-              id="inputItemName"
               placeholder="e.g. White fluffy bunny doll"
+              required
             ></input>
           </div>
-          <div className="mb-3">
-            <label for="itemDetail" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="itemDetail" className="form-label">
               ITEM DETAILS
             </label>
             <textarea
               type="text"
               className="form-control"
-              id="inputItemDetail"
+              rows="8"
               placeholder="e.g. White bunny with soft fur"
             ></textarea>
           </div>
-          <div className="mb-3">
-            <label for="itemCategory" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="itemCategory" className="form-label">
               ITEM CATEGORY
             </label>
             <select className="form-select form-control">
@@ -52,97 +55,90 @@ const AuctionDetail = () => {
               <option value="miscellaneous">Miscellaneous</option>
             </select>
           </div>
-          <div className="mb-3">
-            <label for="uploadPicture" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="uploadPicture" className="form-label">
               UPLOAD PICTURE
             </label>
-            <div className="mb-3">
+            <div className="center-pic">
               <img className="preview-picture" src={bunny} alt="bunny"></img>
             </div>
-            <input type="file" className="form-control" id="inputFile"></input>
+            <div className="form-input-field">
+              <input type="file" className="form-control" multiple></input>
+            </div>
           </div>
         </div>
         <div className="formHeading1">AUCTION DETAILS</div>
         <div className="subForm">
-          <div className="mb-3">
-            <label for="startingPrice" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="startingPrice" className="form-label">
               STARTING PRICE
             </label>
             <input
               type="number"
               className="form-control"
-              id="starting Price"
               placeholder="e.g. 500"
             ></input>
           </div>
-          <label for="auctioningType" className="mb-3">
-            AUCTIONING TYPE
-          </label>
-          <div className="mb-3">
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio1"
-                value="option1"
-              ></input>
-              <label className="form-check-label" for="inlineRadio1">
-                Closed Bid
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                value="option2"
-              ></input>
-              <label className="form-check-label" for="inlineRadio2">
-                Open Bid
-              </label>
+          <div className="form-input-field">
+            <label htmlFor="auctioningType">AUCTIONING TYPE</label>
+            <div className="form-input-field">
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  value="option1"
+                ></input>
+                <label className="form-check-label" for="inlineRadio1">
+                  Closed Bid
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  value="option2"
+                ></input>
+                <label className="form-check-label" for="inlineRadio2">
+                  Open Bid
+                </label>
+              </div>
             </div>
           </div>
-          <div className="mb-3">
-            <label for="endDate" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="endDate" className="form-label">
               END DATE
             </label>
-            <input
-              type="datetime-local"
-              className="form-control"
-              id="endDate"
-            ></input>
+            <input type="datetime-local" className="form-control"></input>
           </div>
-          <div className="mb-3">
-            <label for="minimumBidStep" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="minimumBidStep" className="form-label">
               MINIMUM BID STEP (OPTIONAL)
             </label>
             <input
               type="number"
               className="form-control"
-              id="minimumBidStep"
               placeholder="e.g. 500"
             ></input>
           </div>
-          <div className="mb-3">
-            <label for="expectedPrice" className="form-label">
+          <div className="form-input-field">
+            <label htmlFor="expectedPrice" className="form-label">
               EXPECTED PRICE (OPTIONAL)
             </label>
             <input
               type="number"
               className="form-control"
-              id="expectedPrice"
               placeholder="e.g. 500"
             ></input>
           </div>
         </div>
         <div className="form-footer">
-          <div className="mt-3 mb-3 attention">
+          <div className="attention">
             IMPORTANT NOTE: BIDDING FEES WILL BE CALCULATED AFTER THE BIDDING
             TIME ENDS
           </div>
-          <div className="mt-3 mb-3">
+          <div>
             By clicking Place Auction below, you agree to our Terms of Service
             and our Privacy Policy.
           </div>
@@ -150,7 +146,7 @@ const AuctionDetail = () => {
             <button type="submit" className="btn btn-primary first-button">
               Place Auction
             </button>
-            <button type="submit" className="btn btn-outline-primary">
+            <button type="button" className="btn btn-outline-primary">
               Cancel
             </button>
           </div>
