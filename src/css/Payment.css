@@ -1,26 +1,26 @@
 /* Form */
 form {
   color: var(--color-text);
-  margin: 1% 10% 1% 15%;
+  margin: 0 10% 0 15%;
 }
 
 .subForm {
-  margin: 1% 0 1% 10%;
+  margin: 2% 0 2% 10%;
 }
 
-.formHeading1 {
+.form-heading1 {
   font-size: 150%;
   font-weight: 600;
 }
 
-.formLabel {
+.form-label {
   font-size: 100%;
   font-weight: 400;
 }
 
 .header {
   color: var(--color-text);
-  padding: 1rem 0 0 2rem;
+  margin: 1% 0 1% 2%;
 }
 
 .form-control {
@@ -39,13 +39,23 @@ form {
   margin: 1% 0 1% 10%;
 }
 
+.form-footer div {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.form-input-field {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
 .first-button {
   margin-right: 20px;
 }
 
 /* Preview Picture */
 .preview-picture {
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
 }
 
@@ -185,5 +195,8 @@ form {
   }
   .billing-info {
     flex-direction: column;
+  }
+  form {
+    font-size: 90%;
   }
 }
