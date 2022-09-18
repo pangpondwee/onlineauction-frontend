@@ -1,9 +1,10 @@
 import bunny from '../pictures/bunny.jpeg'
 
+const submitHandler = (event) => {
+  event.preventDefault()
+}
+
 const AuctionDetail = () => {
-  const submitHandler = (event) => {
-    event.preventDefault()
-  }
   return (
     <div>
       <h1 className="header">Place Auction</h1>
