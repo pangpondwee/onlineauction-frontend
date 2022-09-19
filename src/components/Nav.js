@@ -7,6 +7,7 @@ const Nav = (props) => {
 	const loggedIn = props.loggedIn;
 	const logOut = ()=>{
 		props.setloggedIn(false);
+		window.location.href = "/signup";
 	}
 	return (
 		<nav className="navbar d-flex sticky-top">{/* add sticky-top */}
