@@ -65,18 +65,24 @@ const Ranking = (props)=>{
 }
 
 const Gallery = (props)=>{
+	const pictures=props.pictures;
 	return (
 		<div id="gallery">
 			<div id="main-picture-wrapper">
-			<img id="main-picture" src={example} className=""/>
+			<img id="main-picture" src={pictures[0]} className=""/>
 			</div>
-			<div id="picture-list">
+			{pictures.length > 1?
+				<div id="picture-list">
 				<button className="btn picture-button" id="button-left">&lt;</button>
-				<img className="list-picture" src={example} />
-				<img className="list-picture" src={example} />
-				<img className="list-picture" src={example} />
+				<img className="list-picture" src={pictures[1]} />
+				<img className="list-picture" src={pictures[2]} />
+				<img className="list-picture" src={pictures[3]} />
+				<img className="list-picture" src={pictures[4]} />
 				<button className="btn picture-button" id="button-right">&gt;</button>
-			</div>
+				</div>
+				:
+				<p>No pictures</p>
+			}
 		</div>
 	);
 }
@@ -167,7 +173,7 @@ const Auction = (props) =>{
 					{/* <Gallery /> */}
 					{showRanking ?
 						<Ranking />:
-						<Gallery/>}
+						<Gallery pictures={data.productDetail.productPicture}/>}
 					<Bidfield 
 					auctioneer={data.auctioneer}
 					currentPrice={data.currentPrice}
