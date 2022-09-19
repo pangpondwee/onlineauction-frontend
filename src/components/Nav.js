@@ -30,7 +30,7 @@ const Nav = (props) => {
 					</div>
 				</div>
 				:
-				<Link className="btn" to="/login">Login</Link>
+				<Link className="btn" to="/signup">Sign In/Sign Up</Link>
 			}
 			
 			{/* <div className="dropdown p-2">
