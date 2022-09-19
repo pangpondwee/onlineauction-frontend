@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { postData } from '../components/fetchData'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -51,25 +52,35 @@ const AuctionDetail = () => {
       minimumBidPrice: Number(enteredMinimumBidStep),
       expectedPrice: Number(enteredExpectedPrice),
       endDate: String(new Date(enteredEndDate).getTime()),
-      productPicture: uploadedFile,
+      productPicture: uploadedFile.map((f) => {
+        return f.getFileEncodeDataURL()
+      }),
     }
 
-    fetch('http://13.250.98.9/api/auction/upload', {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
-      body: JSON.stringify(auctionData),
-    })
-      .then((res) => {
-        return res.json()
-      })
-      .then((data) => {
-        console.log(data)
-      })
+    // fetch('http://13.250.98.9/api/auction/upload', {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   credentials: 'include',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(auctionData),
+    // })
+    //   .then((res) => {
+    //     return res.json()
+    //   })
+    //   .then((data) => {
+    //     console.log(data)
+    //   })
 
+    const res = postData(
+      'http://13.250.98.9/api/auction/upload',
+      JSON.stringify(auctionData)
+    ).then((res) => {
+      console.log(res)
+    })
+
+    console.log(res)
     console.log(JSON.stringify(auctionData))
     console.log(auctionData)
   }
@@ -111,8 +122,11 @@ const AuctionDetail = () => {
             <select
               className="form-select form-control"
               ref={itemCategoryInputRef}
+              defaultValue={'Select Category'}
             >
-              <option selected>Select Category</option>
+              <option value="Select Category" disabled>
+                Select Category
+              </option>
               <option value="Home Improvement">Home Improvement</option>
               <option value="Jewellery">Jewellery</option>
               <option value="Coins, Currentcy, Stamps">
@@ -142,6 +156,7 @@ const AuctionDetail = () => {
                 acceptedFileTypes={['image/png', 'image/jpeg']}
                 imageCropAspectRatio="1:1"
                 ref={uploadFileRef}
+                credits={false}
               />
             </div>
           </div>
@@ -166,10 +181,11 @@ const AuctionDetail = () => {
                 <input
                   className="form-check-input"
                   type="radio"
-                  name="inlineRadioOptions"
-                  value="option1"
+                  name="auctioningType"
+                  value="closed"
+                  defaultChecked
                 ></input>
-                <label className="form-check-label" for="inlineRadio1">
+                <label className="form-check-label" htmlFor="inlineRadio1">
                   Closed Bid
                 </label>
               </div>
@@ -177,10 +193,10 @@ const AuctionDetail = () => {
                 <input
                   className="form-check-input"
                   type="radio"
-                  name="inlineRadioOptions"
-                  value="option2"
+                  name="auctioningType"
+                  value="open"
                 ></input>
-                <label className="form-check-label" for="inlineRadio2">
+                <label className="form-check-label" htmlFor="inlineRadio2">
                   Open Bid
                 </label>
               </div>
