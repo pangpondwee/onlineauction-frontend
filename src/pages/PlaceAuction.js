@@ -1,10 +1,79 @@
-import bunny from '../pictures/bunny.jpeg'
+import { useRef } from 'react'
 
-const submitHandler = (event) => {
-  event.preventDefault()
-}
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond'
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+
+// Install plugin
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop'
+
+// Register the plugins
+registerPlugin(
+  FilePondPluginFileEncode,
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateType,
+  FilePondPluginImageCrop
+)
 
 const AuctionDetail = () => {
+  const itemNameInputRef = useRef()
+  const itemDetailsInputRef = useRef()
+  const itemCategoryInputRef = useRef()
+  const startingPriceInputRef = useRef()
+  const minimumBidStepInputRef = useRef()
+  const expectedPriceInputRef = useRef()
+  const endDateInputRef = useRef()
+  const uploadFileRef = useRef()
+
+  const submitHandler = (event) => {
+    event.preventDefault()
+    const enteredItemName = itemNameInputRef.current.value
+    const enteredItemDetails = itemDetailsInputRef.current.value
+    const enteredItemCategory = itemCategoryInputRef.current.value
+    const enteredStartingPrice = startingPriceInputRef.current.value
+    const enteredMinimumBidStep = minimumBidStepInputRef.current.value
+    const enteredExpectedPrice = expectedPriceInputRef.current.value
+    const enteredEndDate = endDateInputRef.current.value
+    const uploadedFile = uploadFileRef.current.getFiles()
+
+    const auctionData = {
+      productName: enteredItemName,
+      description: enteredItemDetails,
+      category: enteredItemCategory,
+      isOpenBid: false,
+      startingPrice: Number(enteredStartingPrice),
+      minimumBidPrice: Number(enteredMinimumBidStep),
+      expectedPrice: Number(enteredExpectedPrice),
+      endDate: String(new Date(enteredEndDate).getTime()),
+      productPicture: uploadedFile,
+    }
+
+    fetch('http://13.250.98.9/api/auction/upload', {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
+      body: JSON.stringify(auctionData),
+    })
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        console.log(data)
+      })
+
+    console.log(JSON.stringify(auctionData))
+    console.log(auctionData)
+  }
+
   return (
     <div>
       <h1 className="header">Place Auction</h1>
@@ -20,6 +89,7 @@ const AuctionDetail = () => {
               className="form-control"
               placeholder="e.g. White fluffy bunny doll"
               required
+              ref={itemNameInputRef}
             ></input>
           </div>
           <div className="form-input-field">
@@ -31,44 +101,52 @@ const AuctionDetail = () => {
               className="form-control"
               rows="8"
               placeholder="e.g. White bunny with soft fur"
+              ref={itemDetailsInputRef}
             ></textarea>
           </div>
           <div className="form-input-field">
             <label htmlFor="itemCategory" className="form-label">
               ITEM CATEGORY
             </label>
-            <select className="form-select form-control">
+            <select
+              className="form-select form-control"
+              ref={itemCategoryInputRef}
+            >
               <option selected>Select Category</option>
-              <option value="homeImprovement">Home Improvement</option>
-              <option value="jewellery">Jewellery</option>
-              <option value="coinsCurrencyStamps">
+              <option value="Home Improvement">Home Improvement</option>
+              <option value="Jewellery">Jewellery</option>
+              <option value="Coins, Currentcy, Stamps">
                 Coins, Currency, Stamps
               </option>
-              <option value="watches">Watches</option>
-              <option value="fashion">Fashion</option>
-              <option value="arts">Arts</option>
-              <option value="antiquesCollectablesAmulet">
+              <option value="Watches">Watches</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Arts">Arts</option>
+              <option value="Antiques & Collectables and Amulet">
                 Antiques & Collectables and Amulet
               </option>
-              <option value="electronics">Electronics</option>
-              <option value="carsAutomotive">Cars & Automotive</option>
-              <option value="handbags">Handbags</option>
-              <option value="miscellaneous">Miscellaneous</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Cars & Automotive">Cars & Automotive</option>
+              <option value="Handbags">Handbags</option>
+              <option value="Miscellaneous">Miscellaneous</option>
             </select>
           </div>
           <div className="form-input-field">
             <label htmlFor="uploadPicture" className="form-label">
               UPLOAD PICTURE
             </label>
-            <div className="center-pic">
-              <img className="preview-picture" src={bunny} alt="bunny"></img>
-            </div>
             <div className="form-input-field">
-              <input type="file" className="form-control" multiple></input>
+              <FilePond
+                allowMultiple={true}
+                maxFiles={10}
+                allowFileEncode={true}
+                acceptedFileTypes={['image/png', 'image/jpeg']}
+                imageCropAspectRatio="1:1"
+                ref={uploadFileRef}
+              />
             </div>
           </div>
         </div>
-        <div className="formHeading1">AUCTION DETAILS</div>
+        <div className="form-heading1">AUCTION DETAILS</div>
         <div className="subForm">
           <div className="form-input-field">
             <label htmlFor="startingPrice" className="form-label">
@@ -78,6 +156,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
+              ref={startingPriceInputRef}
             ></input>
           </div>
           <div className="form-input-field">
@@ -111,7 +190,11 @@ const AuctionDetail = () => {
             <label htmlFor="endDate" className="form-label">
               END DATE
             </label>
-            <input type="datetime-local" className="form-control"></input>
+            <input
+              type="datetime-local"
+              className="form-control"
+              ref={endDateInputRef}
+            ></input>
           </div>
           <div className="form-input-field">
             <label htmlFor="minimumBidStep" className="form-label">
@@ -121,6 +204,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
+              ref={minimumBidStepInputRef}
             ></input>
           </div>
           <div className="form-input-field">
@@ -131,6 +215,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
+              ref={expectedPriceInputRef}
             ></input>
           </div>
         </div>
