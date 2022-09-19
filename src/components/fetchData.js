@@ -29,7 +29,8 @@ export const postData = async (url,data)=>{
 		mode: 'cors',
 		credentials: 'include',
 		headers: {
-			'Content-Type': "application/json"
+			'Content-Type': "application/json",
+			'Authorization': 'Bearer '+localStorage.getItem("token")
 		},
 		body: data
 	})
