@@ -144,7 +144,9 @@ li.menu-dropdown {
     border-radius: 5px;
     color: var(--color-dark);
     background-color: white;
+    padding: 0 10px;
     margin: 20px 0 0 230px;
+    cursor: pointer;
 }
 
 /* MyOrderNav */
