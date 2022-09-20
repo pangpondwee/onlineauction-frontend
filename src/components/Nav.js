@@ -26,7 +26,7 @@ const Nav = (props) => {
 						<Link to="/account/profile" className="dropdown-item">Profile</Link>
 						<Link to="/account/myorder" className="dropdown-item">Bid & Auction</Link>
 						<Link to="/place-auction" className="dropdown-item">Place Auction</Link>
-						<Link to="#" className="dropdown-item">FAQs</Link>
+						<Link to="/faq" className="dropdown-item">FAQs</Link>
 						<Link to="#" onClick={logOut} className="dropdown-item">Log out</Link>
 					</div>
 				</div>
@@ -48,7 +48,7 @@ const Nav = (props) => {
 					<h5 className="offcanvas-title">Auction Online</h5>
 					<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 				</div>
-				<Link id="offcanvas-profile" className="nav-link p-3" to="#">Username</Link>
+				<Link id="offcanvas-profile" className="nav-link p-3" to="#">{displayName}</Link>
 				<div className="navbar-nav">
 					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
 					<div className="dropdown-menu nav-dropdown show" >
