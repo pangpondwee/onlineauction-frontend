@@ -31,6 +31,7 @@ const AuctionDetail = () => {
   const expectedPriceInputRef = useRef()
   const endDateInputRef = useRef()
   const uploadFileRef = useRef()
+  const openBidInputRef = useRef()
 
   const submitHandler = (event) => {
     event.preventDefault()
@@ -42,12 +43,13 @@ const AuctionDetail = () => {
     const enteredExpectedPrice = expectedPriceInputRef.current.value
     const enteredEndDate = endDateInputRef.current.value
     const uploadedFile = uploadFileRef.current.getFiles()
+    const checkedIsOpenBid = openBidInputRef.current.checked
 
     const auctionData = {
       productName: enteredItemName,
       description: enteredItemDetails,
       category: enteredItemCategory,
-      isOpenBid: false,
+      isOpenBid: checkedIsOpenBid,
       startingPrice: Number(enteredStartingPrice),
       minimumBidPrice: Number(enteredMinimumBidStep),
       expectedPrice: Number(enteredExpectedPrice),
@@ -82,7 +84,7 @@ const AuctionDetail = () => {
 
     console.log(res)
     console.log(JSON.stringify(auctionData))
-    console.log(auctionData)
+    console.log(auctionData.isOpenBid)
   }
 
   return (
@@ -195,6 +197,7 @@ const AuctionDetail = () => {
                   type="radio"
                   name="auctioningType"
                   value="open"
+                  ref={openBidInputRef}
                 ></input>
                 <label className="form-check-label" htmlFor="inlineRadio2">
                   Open Bid
