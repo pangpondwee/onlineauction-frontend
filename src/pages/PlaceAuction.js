@@ -92,7 +92,7 @@ const AuctionDetail = () => {
       <h1 className="header">Place Auction</h1>
       <form className="payment-form" onSubmit={submitHandler}>
         <div className="form-heading1">ITEM INFORMATION</div>
-        <div className="subForm">
+        <div className="sub-form">
           <div className="form-input-field">
             <label htmlFor="itemName" className="form-label">
               ITEM NAME
@@ -164,13 +164,13 @@ const AuctionDetail = () => {
           </div>
         </div>
         <div className="form-heading1">AUCTION DETAILS</div>
-        <div className="subForm">
+        <div className="sub-form">
           <div className="form-input-field">
             <label htmlFor="startingPrice" className="form-label">
               STARTING PRICE
             </label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               placeholder="e.g. 500"
               ref={startingPriceInputRef}
@@ -220,7 +220,7 @@ const AuctionDetail = () => {
               MINIMUM BID STEP (OPTIONAL)
             </label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               placeholder="e.g. 500"
               ref={minimumBidStepInputRef}
@@ -231,7 +231,7 @@ const AuctionDetail = () => {
               EXPECTED PRICE (OPTIONAL)
             </label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               placeholder="e.g. 500"
               ref={expectedPriceInputRef}
