@@ -1,0 +1,25 @@
+.pic1 {
+  height: 150px;
+  width: 150px;
+  /* border: 2px solid black; */
+  margin-top: 40px;
+  margin-right: 100px;
+  margin-left: 500px;
+  display: flex;
+}
+
+.text {
+  display: flex;
+  margin-left: 380px;
+  margin-right: 100px;
+  margin-bottom: 5px;
+  font: inherit;
+}
+
+.text2 {
+  display: flex;
+  margin-left: 500px;
+  margin-right: 100px;
+  margin-bottom: 5px;
+  font: inherit;
+}

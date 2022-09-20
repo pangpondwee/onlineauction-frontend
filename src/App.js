@@ -5,7 +5,6 @@ import "./App.css"
 import Layout from "./pages/Layout"
 import Home from "./pages/Home"
 import NoPage from "./pages/NoPage"
-import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import ForgetPassword from "./pages/ForgetPassword"
 import ResetPassword from "./pages/ResetPassword"
@@ -22,6 +21,7 @@ import AccountEdit from "./pages/AccountEdit"
 import MyOrder from "./pages/MyOrder"
 import MyReview from "./pages/MyReview"
 import MyFollowing from "./pages/MyFollowing"
+import Auction from "./pages/Auction"
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="login" element={<Login />} />
+			    <Route path="auction/:auctionId" element={<Auction />} />
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="verify-email" element={<VerifyEmail />} />
