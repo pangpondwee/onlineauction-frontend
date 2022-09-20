@@ -130,6 +130,7 @@ const AuctionDetail = () => {
               rows="8"
               placeholder="e.g. White bunny with soft fur"
               ref={itemDetailsInputRef}
+              required
             ></textarea>
           </div>
           <div className="form-input-field">
@@ -140,6 +141,7 @@ const AuctionDetail = () => {
               className="form-select form-control"
               ref={itemCategoryInputRef}
               defaultValue={'Select Category'}
+              required
             >
               <option value="Select Category" disabled>
                 Select Category
@@ -174,6 +176,7 @@ const AuctionDetail = () => {
                 imageCropAspectRatio="1:1"
                 ref={uploadFileRef}
                 credits={false}
+                required
               />
             </div>
           </div>
@@ -185,10 +188,12 @@ const AuctionDetail = () => {
               STARTING PRICE
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               placeholder="e.g. 500"
+              min={0}
               ref={startingPriceInputRef}
+              required
             ></input>
           </div>
           <div className="form-input-field">
@@ -228,6 +233,7 @@ const AuctionDetail = () => {
               type="datetime-local"
               className="form-control"
               ref={endDateInputRef}
+              required
             ></input>
           </div>
           <div className="form-input-field">
@@ -235,9 +241,10 @@ const AuctionDetail = () => {
               MINIMUM BID STEP (OPTIONAL)
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               placeholder="e.g. 500"
+              min={0}
               ref={minimumBidStepInputRef}
             ></input>
           </div>
@@ -246,9 +253,10 @@ const AuctionDetail = () => {
               EXPECTED PRICE (OPTIONAL)
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               placeholder="e.g. 500"
+              min={0}
               ref={expectedPriceInputRef}
             ></input>
           </div>
