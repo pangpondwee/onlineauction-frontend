@@ -45,19 +45,34 @@ const AuctionDetail = () => {
     const uploadedFile = uploadFileRef.current.getFiles()
     const checkedIsOpenBid = openBidInputRef.current.checked
 
-    const auctionData = {
+    let auctionData = {
       productName: enteredItemName,
       description: enteredItemDetails,
       category: enteredItemCategory,
       isOpenBid: checkedIsOpenBid,
       startingPrice: Number(enteredStartingPrice),
-      minimumBidPrice: Number(enteredMinimumBidStep),
-      expectedPrice: Number(enteredExpectedPrice),
       endDate: String(new Date(enteredEndDate).getTime()),
       productPicture: uploadedFile.map((f) => {
         return f.getFileEncodeDataURL()
       }),
     }
+
+    if (enteredMinimumBidStep.length > 0) {
+      auctionData.minimumBidPrice = Number(enteredMinimumBidStep)
+    }
+    if (enteredExpectedPrice.length > 0) {
+      auctionData.expectedPrice = Number(enteredExpectedPrice)
+    }
+    // console.log(
+    //   `enteredExpectedPrice ${typeof enteredExpectedPrice} length ${
+    //     enteredExpectedPrice.length
+    //   }`
+    // )
+    // console.log(
+    //   `enteredMinimumBidStep ${typeof enteredMinimumBidStep} length ${
+    //     enteredMinimumBidStep.length
+    //   }`
+    // )
 
     // fetch('http://13.250.98.9/api/auction/upload', {
     //   method: 'POST',
