@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
 import AuctionCardRow from "../components/AuctionCardRow";
 import "../css/Home.css";
@@ -6,6 +6,10 @@ import "../css/Search.css";
 import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
 const Search = () =>{
+	const { pageNumber } = useParams();
+	let page = pageNumber ? Number(pageNumber) : 1; // Get page number
+	if(page < 1) page = 1 // limit to 1
+	
 	const auctionData = [
 		{name:"first", price:"2000", picture:"https://images.unsplash.com/photo-1472457897821-70d3819a0e24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGx8ZW58MHx8MHx8&w=1000&q=80"},
 		{name:"second", price:"2000", picture:"https://www.skipprichard.com/wp-content/uploads/2015/12/bigstock-D-Small-People-Newtons-Crad-65362909.jpg"},
