@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "../css/Auction.css";
-import fetchData from '../components/fetchData';
+import {getData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
 
 
@@ -161,9 +161,9 @@ const Auction = (props) =>{
 	const showRanking=false; //show ranking and move gallery // testing
 	const lastBid=122; // testing
 	useEffect(()=>{
-		fetchData(`http://13.250.98.9/api/auction/${auctionId}`).then(([s,d])=>{
-			setStatus(s);
-			setData(d);
+		getData(`http://13.250.98.9/api/auction/${auctionId}`).then((res)=>{
+			setStatus(res.status);
+			setData(res);
 		})
 	},[]);
 	if(status === "success"){
