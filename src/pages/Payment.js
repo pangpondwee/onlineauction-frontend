@@ -23,68 +23,68 @@ const Payment = () => {
   const [itemName, setItemName] = useState('Item Name')
   const [auctioneerName, setAuctioneerName] = useState('Auctioneer Name')
   return (
-    <div class="page-with-summary">
-      <div class="form-section">
-        <h1 class="header">Payment</h1>
+    <div className="page-with-summary">
+      <div className="form-section">
+        <h1 className="header">Payment</h1>
         <form>
-          <div class="form-heading1">BILLING INFO</div>
-          <div class="sub-form">
-            <div class="form-input-field">
-              <label for="fullName" class="form-label">
+          <div className="form-heading1">BILLING INFO</div>
+          <div className="sub-form">
+            <div className="form-input-field">
+              <label htmlFor="fullName" className="form-label">
                 FULL NAME
               </label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="inputFullName"
                 placeholder="e.g. Peeranat Srisuthangkul"
               ></input>
             </div>
-            <div class="form-input-field">
-              <label for="telephone" class="form-label">
+            <div className="form-input-field">
+              <label htmlFor="telephone" className="form-label">
                 TELEPHONE
               </label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="inputTelephone"
                 placeholder="e.g. 0620000000"
               ></input>
             </div>
-            <div class="form-input-field">
-              <label for="billingAddress" class="form-label">
+            <div className="form-input-field">
+              <label htmlFor="billingAddress" className="form-label">
                 BILLING ADDRESS
               </label>
               <textarea
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="inputBillingAddress"
                 placeholder="50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
               ></textarea>
             </div>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value=""
                 id="useInformationFromProfile"
               ></input>
-              <label class="form-check-label" for="useInformationFromProfile">
+              <label className="form-check-label" htmlFor="useInformationFromProfile">
                 Use billing information from profile
               </label>
             </div>
           </div>
-          <div class="form-heading1">TRANSACTION INFO</div>
-          <div class="sub-form">
-            <div class="center-pic form-input-field">
+          <div className="form-heading1">TRANSACTION INFO</div>
+          <div className="sub-form">
+            <div className="center-pic form-input-field">
               <img
-                class="promptpayqrpic"
+                className="promptpayqrpic"
                 src={promptpayqr}
                 alt="promptpayqr"
               ></img>
             </div>
-            <div class="form-input-field">
-              <label for="uploadTransactionSlip" class="form-label">
+            <div className="form-input-field">
+              <label htmlFor="uploadTransactionSlip" className="form-label">
                 UPLOAD TRANSACTION SLIP
               </label>
               <FilePond
@@ -95,39 +95,39 @@ const Payment = () => {
                 credits={false}
               />
             </div>
-            <div class="form-input-field">
-              <label for="transactionDateTime" class="form-label">
+            <div className="form-input-field">
+              <label htmlFor="transactionDateTime" className="form-label">
                 TRANSACTION DATE AND TIME
               </label>
               <input
                 type="datetime-local"
-                class="form-control"
+                className="form-control"
                 id="transactionDateTime"
               ></input>
             </div>
-            <div class="form-input-field">
-              <label for="value" class="form-label">
+            <div className="form-input-field">
+              <label htmlFor="value" className="form-label">
                 VALUE
               </label>
               <input
                 type="number"
-                class="form-control"
+                className="form-control"
                 id="value"
                 placeholder="e.g. 500"
               ></input>
             </div>
             <div>
-              <button type="submit" class="btn btn-primary first-button">
+              <button type="submit" className="btn btn-primary first-button">
                 Proceed
               </button>
-              <button type="submit" class="btn btn-outline-primary">
+              <button type="submit" className="btn btn-outline-primary">
                 Cancel
               </button>
             </div>
           </div>
         </form>
       </div>
-      <div class="payment-summary-section">
+      <div className="payment-summary-section">
         <PaymentSummaryCard
           itemName={itemName}
           auctioneerName={auctioneerName}

@@ -205,9 +205,10 @@ const AuctionDetail = () => {
                   type="radio"
                   name="auctioningType"
                   value="closed"
+                  id="closed-radio"
                   defaultChecked
                 ></input>
-                <label className="form-check-label" htmlFor="inlineRadio1">
+                <label className="form-check-label" htmlFor="closed-radio">
                   Closed Bid
                 </label>
               </div>
@@ -217,9 +218,10 @@ const AuctionDetail = () => {
                   type="radio"
                   name="auctioningType"
                   value="open"
+                  id="open-radio"
                   ref={openBidInputRef}
                 ></input>
-                <label className="form-check-label" htmlFor="inlineRadio2">
+                <label className="form-check-label" htmlFor="open-radio">
                   Open Bid
                 </label>
               </div>
