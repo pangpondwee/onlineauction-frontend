@@ -8,7 +8,7 @@ const Payment = () => {
     <div class="page-with-summary">
       <div class="form-section">
         <h1 class="header">Payment</h1>
-        <form>
+        <form class="payment-form">
           <div class="form">
             <div class="formHeading1">BILLING INFO</div>
             <div class="subForm">
