@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "../css/Auction.css";
-import fetchData from '../components/fetchData';
+import {getData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
 
 
@@ -65,18 +65,24 @@ const Ranking = (props)=>{
 }
 
 const Gallery = (props)=>{
+	const pictures=props.pictures;
 	return (
 		<div id="gallery">
 			<div id="main-picture-wrapper">
-			<img id="main-picture" src={example} className=""/>
+			<img id="main-picture" src={pictures[0]} className=""/>
 			</div>
-			<div id="picture-list">
+			{pictures.length > 1?
+				<div id="picture-list">
 				<button className="btn picture-button" id="button-left">&lt;</button>
-				<img className="list-picture" src={example} />
-				<img className="list-picture" src={example} />
-				<img className="list-picture" src={example} />
+				<img className="list-picture" src={pictures[1]} />
+				<img className="list-picture" src={pictures[2]} />
+				<img className="list-picture" src={pictures[3]} />
+				<img className="list-picture" src={pictures[4]} />
 				<button className="btn picture-button" id="button-right">&gt;</button>
-			</div>
+				</div>
+				:
+				<p>No pictures</p>
+			}
 		</div>
 	);
 }
@@ -155,9 +161,9 @@ const Auction = (props) =>{
 	const showRanking=false; //show ranking and move gallery // testing
 	const lastBid=122; // testing
 	useEffect(()=>{
-		fetchData(`http://13.250.98.9/api/auction/${auctionId}`).then(([s,d])=>{
-			setStatus(s);
-			setData(d);
+		getData(`http://13.250.98.9/api/auction/${auctionId}`).then((res)=>{
+			setStatus(res.status);
+			setData(res);
 		})
 	},[]);
 	if(status === "success"){
@@ -167,7 +173,7 @@ const Auction = (props) =>{
 					{/* <Gallery /> */}
 					{showRanking ?
 						<Ranking />:
-						<Gallery/>}
+						<Gallery pictures={data.productDetail.productPicture}/>}
 					<Bidfield 
 					auctioneer={data.auctioneer}
 					currentPrice={data.currentPrice}

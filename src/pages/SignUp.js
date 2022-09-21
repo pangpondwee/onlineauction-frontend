@@ -30,6 +30,7 @@ const SignUp = () => {
       if(res_data.status == "success"){
         const data = res_data.data.user;
         localStorage.setItem("displayName",data.displayName)
+        localStorage.setItem("token",res_data.token)
         setloggedIn(true);
         navigate("/");
       }
