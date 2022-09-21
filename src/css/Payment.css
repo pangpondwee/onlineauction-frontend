@@ -1,5 +1,5 @@
 /* Form */
-form {
+#payment-form {
   color: var(--color-text);
   margin: 0 10% 0 15%;
 }
@@ -196,7 +196,7 @@ form {
   .billing-info {
     flex-direction: column;
   }
-  form {
+  #payment-form {
     font-size: 90%;
   }
 }
