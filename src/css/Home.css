@@ -50,6 +50,7 @@
   width: 7rem;
   border-radius: 15px;
   box-shadow: var(--box-shadow);
+  text-align: center;
 }
 
 .card-img-top{
