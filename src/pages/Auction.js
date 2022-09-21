@@ -159,11 +159,15 @@ const Auction = (props) =>{
 	const auctioneerName="Waku Waku"; // testing
 	const showHistory=true; // testing
 	const showRanking=false; //show ranking and move gallery // testing
-	const lastBid=122; // testing
 	useEffect(()=>{
 		getData(`http://13.250.98.9/api/auction/${auctionId}`).then((res)=>{
 			setStatus(res.status);
-			setData(res);
+			if(res.status == "success"){
+				setData(res.data);
+			}
+			else{
+				setData(res.message);
+			}
 		})
 	},[]);
 	if(status === "success"){
@@ -180,9 +184,9 @@ const Auction = (props) =>{
 					productName={data.productDetail.productName}
 					endDate={data.endDate}
 					bidStep={data.bidStep}
-					auctioneerName={auctioneerName}
-					isAuctioneer={isAuctioneer}
-					lastBid={lastBid}
+					auctioneerName={data.auctioneerID}
+					isAuctioneer={data.isAuctioneer}
+					lastBid={data.myLastBid}
 					showHistory={showHistory}
 					/>
 				</div>
@@ -201,18 +205,18 @@ const Auction = (props) =>{
 			</div>
 		)
 	}
-	else if(status === "fail"){
+	else if(status === "unknown"){
 		return (
 			<div>
-				<h1>Error</h1>
-				<p>{data.message}</p>
+				<p>Loading...</p>
 			</div>
 		)
 	}
 	else{
 		return (
 			<div>
-				<p>Loading...</p>
+				<h1>Error</h1>
+				<p>{data}</p>
 			</div>
 		)
 	}
