@@ -74,7 +74,7 @@ h2 {
   border-radius: 10px;
 }
 
-.button {
+.input[type="submit"] {
   display: flex;
   margin-left: 180px;
   margin-right: 50px;

@@ -7,6 +7,7 @@ const Nav = (props) => {
 	const loggedIn = props.loggedIn;
 	const logOut = ()=>{
 		props.setloggedIn(false);
+		window.location.href = "/signup";
 	}
 	return (
 		<nav className="navbar d-flex sticky-top">{/* add sticky-top */}
@@ -30,7 +31,7 @@ const Nav = (props) => {
 					</div>
 				</div>
 				:
-				<Link className="btn" to="/login">Login</Link>
+				<Link className="btn" to="/signup">Sign In/Sign Up</Link>
 			}
 			
 			{/* <div className="dropdown p-2">
