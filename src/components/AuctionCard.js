@@ -4,7 +4,7 @@ const AuctionCard = (props) =>{
 	return (		
 		<div className="card border-light mb-3">
 			<div className="cardBody">
-				<Link to="#" className="img-link">
+				<Link to={"/auction/"+props.id} className="img-link">
 					<img src={props.picture} className="card-img-top"></img>
 				</Link>
 				<div className="timeBox">{props.time}</div>

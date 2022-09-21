@@ -42,7 +42,8 @@ function App() {
           <Route path="billing-info" element={<BillingInfo />} />
           <Route path="view-auctioneer" element={<ViewAuctioneer />} />
           <Route path="faq" element={<FAQ />} />
-			    <Route path="search/" element={<Search />} />
+			    <Route path="search" element={<Search />} />
+			    <Route path="search/:pageNumber" element={<Search />} />
           <Route path="account" element={<AccountLayout/>}>
             <Route path="profile" element={<AccountPage/>}/>
             <Route path="edit" element={<AccountEdit/>}/>

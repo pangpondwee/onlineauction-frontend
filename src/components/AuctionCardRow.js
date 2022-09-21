@@ -29,9 +29,10 @@ const AuctionCardRow = (props) =>{
         auctionCard_element.push(
             <AuctionCard 
             key={i} 
-            name={props.data[i].productName} 
+            id={props.data[i].auctionID}
+            name={props.data[i].productName}
             price={price} 
-            picture={"#"}
+            picture={props.data[i].coverPicture}
             time={getDate(timeRemaining)}/>
         )
     }
