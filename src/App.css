@@ -40,21 +40,25 @@
  * Custom Colors
 */
 
-:root{
-	--color-primary: #C3D3E0;
-	--color-secondary: #A3BCD0;
-	--color-dark: #091235;
-	--radius: 20px;
+:root {
+  --color-primary: #c3d3e0;
+  --color-secondary: #a3bcd0;
+  --color-text: #2b4257;
+  --color-dark: #091235;
+  --color-attention: #f08c00;
+  --color-grey-box: #f8f9fa;
+  --radius: 20px;
   --box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0;
 }
 /* General */
-html, #root{
-	background-color: var(--color-primary);
+html,
+#root {
+  background-color: var(--color-primary);
 }
 
 /* Main */
 main {
 	background-color: white;
 	height: 100%;
-	border-radius: var(--radius)
+  border-radius: var(--radius)
 }

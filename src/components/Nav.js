@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import "../css/Nav.css";
 
-const Nav = () => {
+const Nav = (props) => {
+	const displayName=localStorage.getItem("displayName");
+	const loggedIn = props.loggedIn;
+	const logOut = ()=>{
+		props.setloggedIn(false);
+		window.location.href = "/signup";
+	}
 	return (
 		<nav className="navbar d-flex sticky-top">{/* add sticky-top */}
 			{/* Nav Bar BEGIN*/}
@@ -12,22 +19,27 @@ const Nav = () => {
 			<form>
 				<input id="nav-search" className="form-control me-2" type="search" placeholder="Search"/>
 			</form>
-			<div className="dropdown ms-auto p-2">
-				<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Username</Link>
-				<ul className="dropdown-menu dropdown-menu-end ms-auto p-2">
-					<li className="dropdown-item">Profile</li>
-					<li className="dropdown-item">Bid & Auction</li>
-					<li className="dropdown-item">Place Auction</li>
-					<li className="dropdown-item">FAQs</li>
-					<li className="dropdown-item">Log out</li>
-				</ul>
-			</div>
-			<div className="dropdown p-2">
+			{loggedIn ? 
+				<div className="dropdown ms-auto p-2">
+					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">{displayName}</Link>
+					<div className="dropdown-menu dropdown-menu-end ms-auto p-2">
+						<Link to="/account/profile" className="dropdown-item">Profile</Link>
+						<Link to="/account/myorder" className="dropdown-item">Bid & Auction</Link>
+						<Link to="/place-auction" className="dropdown-item">Place Auction</Link>
+						<Link to="/faq" className="dropdown-item">FAQs</Link>
+						<Link to="#" onClick={logOut} className="dropdown-item">Log out</Link>
+					</div>
+				</div>
+				:
+				<Link className="btn" to="/signup">Sign In/Sign Up</Link>
+			}
+			
+			{/* <div className="dropdown p-2">
 				<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Noti</Link>
 				<ul className="dropdown-menu ms-auto p-2" to="#">
 					<li className="dropdown-item"></li>
 				</ul>
-			</div>
+			</div> */}
 			{/* Nav Bar END*/}
 
 			{/* Offcanvas BEGIN*/}
@@ -36,7 +48,7 @@ const Nav = () => {
 					<h5 className="offcanvas-title">Auction Online</h5>
 					<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 				</div>
-				<Link id="offcanvas-profile" className="nav-link p-3" to="#">Username</Link>
+				<Link id="offcanvas-profile" className="nav-link p-3" to="#">{displayName}</Link>
 				<div className="navbar-nav">
 					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
 					<div className="dropdown-menu nav-dropdown show" >

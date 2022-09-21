@@ -1,0 +1,204 @@
+#content{
+    max-width: 1000px;
+    margin: auto;
+}
+#auction-main{
+    width: 100%;
+    display: inline-block;
+}
+#auction-detail{
+    display: flex;
+    width: 100%;
+    margin: auto 1rem;
+}
+
+/*** Gallery ***/
+
+#gallery{
+    float: left;
+    width: 55%;
+    height: 700px;
+}
+#main-picture-wrapper{
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+#picture-list{
+    height: 5em;
+}
+#main-picture{
+    /* height: 100%; */
+    width: 100%;
+    object-fit: contain;
+}
+.list-picture{
+    height: 5em;
+    width: 5em;
+    object-fit:cover;
+    margin: auto 5px;
+}
+#button-right{
+    margin: 0 auto;
+    float: right;
+}
+.picture-button, .picture-button:focus{
+    height: 100%;
+    background-color: var(--color-primary);
+    border: none;
+}
+.picture-button:hover{
+    background-color: var(--color-secondary);
+}
+.picture-button:active{
+    background-color: var(--color-dark);
+}
+
+/*** Bid Field ***/
+
+#bid-field{
+    display: inline;
+    justify-content: center;
+    float: right;
+    width: 45%;
+    height: 700px;
+    padding: 3rem;
+}
+#item-wrapper{
+    display: block;
+}
+#name-wrapper{
+    display: block;
+}
+/** Statistics **/
+#statistics{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+#statistics div{
+    width: 45%;
+    display: inline;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+.stat-name{
+    font-size: 18px;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+#highest-bid{
+    font-size: 2.5rem;
+    margin-top: 1em;
+}
+#time-remaining{
+    font-size: 2rem;
+}
+#select-wrapper, #or-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1em auto;
+}
+#select-wrapper{
+    margin-bottom: 0;
+    font-size: 18;
+}
+#or-wrapper p{
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+/** Price **/
+#bidding{
+    margin-bottom: 1em;
+}
+#bidding-is-auctioneer{
+    border: 2px solid #000;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    padding: 30% 20%;
+    margin-bottom: 1em;
+}
+#static-price{
+    display: flex;
+    justify-content: space-around;
+}
+#static-price .btn{
+    font-size: 1.5em;
+}
+.bid-button, .bid-button:focus{
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border: none;
+}
+.bid-button:hover{
+    background-color: var(--color-accent-reverse);
+    color: #ffffff;
+}
+.bid-button:active{
+    background-color: var(--color-dark);
+}
+#bid-group{
+    display: flex;
+    align-items: center;
+    padding: 0 1em;
+}
+#bid-price{
+    width: 80%;
+    outline: 2px solid var(--color-accent);
+    outline-offset: -3px;
+}
+#history-button{
+    float: right;
+    border-color: var(--color-dark);
+}
+#history-button:hover{
+    background-color: var(--color-accent-reverse);
+}
+#history-button:active{
+    background-color: var(--color-dark);
+    color: #ffffff;
+}
+
+/*** Auction Detail ***/
+#description{
+    float: right;
+    font-size: 1.2rem;
+    margin: 1em 1em 3em 1em;
+}
+#description-with-gallery{
+    width: 50%;
+    float: right;
+    font-size: 1.2rem;
+    margin: 1em 1em 3em 1em;
+
+}
+
+/*** Ranking ***/
+#ranking{
+    float: left;
+    width: 55%;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+#ranking-table{
+    width: 90%;
+    background-color: var(--color-primary);
+    border-radius: 14px;
+    text-align: center;
+    font-size: 25px;
+}
+#ranking tbody td:nth-child(2n+1){
+    border-right: 1px #fff solid;
+}
+#ranking tbody td:nth-child(2n){
+    border-left: 1px #fff solid;
+}
+#ranking thead{
+    border-bottom: 1px #fff solid;
+}
