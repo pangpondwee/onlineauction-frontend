@@ -1,9 +1,16 @@
 .card{
-	width: 18rem;
-  min-width: 10rem;
+	width: 9.5rem;
+  /* width: 18rem;
+  min-width: 10rem; */
   margin: auto 20px;
   box-shadow: var(--box-shadow);
   background-color: #F8F9FA;
+}
+
+.cardBody{
+  /* border: 2px solid red; */
+  margin-left: -10%;
+  margin-right: -10%;
 }
 
 .flexRow{
@@ -46,8 +53,9 @@
 }
 
 .card-img-top{
-  height: 15vw;
-  object-fit: cover; /* add object-fit: cover; to fit image for card*/
+  height: 15vw;  
+  object-fit: cover; /*add object-fit: cover; to fit image for card*/
+
 }
 
 .card-text{
@@ -72,4 +80,13 @@
 .filter{
   position: absolute;
   left: 85.1%;
+}
+
+.itemName-link{
+  text-decoration: none;
+  color: black;
+}
+
+.itemName-link:hover{
+  color: black;
 }

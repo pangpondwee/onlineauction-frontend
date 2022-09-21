@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
 import "../css/Home.css";
 import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
+import AuctionCardRow from "../components/AuctionCardRow";
 const Home = () =>{
+	const auctionData = [
+		{name:"first", price:"2000", picture:"https://images.unsplash.com/photo-1472457897821-70d3819a0e24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGx8ZW58MHx8MHx8&w=1000&q=80"},
+		{name:"second", price:"2000", picture:"https://www.skipprichard.com/wp-content/uploads/2015/12/bigstock-D-Small-People-Newtons-Crad-65362909.jpg"},
+		{name:"third", price:"2000", picture:"https://images.pexels.com/photos/1459495/pexels-photo-1459495.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"},
+		{name:"fourth", price:"2000", picture:arrow_left},
+		{name:"fifth", price:"2000", picture:arrow_right},
+		{name:"six", price:"2000", picture:arrow_left},
+		{name:"seven", price:"2000", picture:arrow_right},
+		{name:"eight", price:"2000", picture:arrow_left},
+		{name:"nine", price:"2000", picture:arrow_right},
+		{name:"ten", price:"2000", picture:arrow_left},
+		{name:"eleven", price:"2000", picture:arrow_right},
+		{name:"twelve", price:"2000", picture:arrow_left},
+		{name:"thirteen", price:"2000", picture:arrow_right},
+		{name:"fourteen", price:"2000", picture:arrow_left},
+		{name:"fifteen", price:"2000", picture:arrow_right},
+	]
+	// useEffect(()=>{
+
+	// },[]);
+
 	return (
 		<>
 		<p className="headHome">Welcome, Peeranat! Let’s see what you got...</p>		
@@ -24,6 +47,9 @@ const Home = () =>{
 			</Link>
 		</div>
 		<p className="detail">Recent Following List</p>
+
+		<AuctionCardRow data={auctionData}/>
+
 		<div className="flexRow">
 			{/* Add previous button */}
 			<Link to={"#"}>

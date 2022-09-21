@@ -1,9 +1,9 @@
 import {Link} from "react-router-dom";
 
-const AuctionCard = (props) =>{
+const AuctionCardForRow = (props) =>{
 	return (		
 		<div className="card border-light mb-3">
-			<div className="">
+			<div className="cardBody">
 				<Link to="#" className="img-link">
 					<img src={props.picture} className="card-img-top"></img>
 				</Link>
@@ -16,4 +16,4 @@ const AuctionCard = (props) =>{
 		</div>
 	)
 }
-export default AuctionCard;
+export default AuctionCardForRow;
