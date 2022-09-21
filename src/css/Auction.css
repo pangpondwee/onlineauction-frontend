@@ -129,12 +129,12 @@
     font-size: 1.5em;
 }
 .bid-button, .bid-button:focus{
-    background-color: var(--color-accent);
+    background-color: var(--color-blue);
     color: #ffffff;
     border: none;
 }
 .bid-button:hover{
-    background-color: var(--color-accent-reverse);
+    background-color: var(--color-blue-dark);
     color: #ffffff;
 }
 .bid-button:active{
@@ -147,15 +147,16 @@
 }
 #bid-price{
     width: 80%;
-    outline: 2px solid var(--color-accent);
-    outline-offset: -3px;
+    outline: 2px solid var(--color-blue);
+    border: none;
+    outline-offset: -2px;
 }
 #history-button{
     float: right;
     border-color: var(--color-dark);
 }
 #history-button:hover{
-    background-color: var(--color-accent-reverse);
+    background-color: var(--color-blue-dark);
 }
 #history-button:active{
     background-color: var(--color-dark);
