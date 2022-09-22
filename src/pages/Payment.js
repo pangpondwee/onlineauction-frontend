@@ -26,7 +26,7 @@ const Payment = () => {
     <div className="page-with-summary">
       <div className="form-section">
         <h1 className="header">Payment</h1>
-        <form>
+        <form className="payment-form">
           <div className="form-heading1">BILLING INFO</div>
           <div className="sub-form">
             <div className="form-input-field">
@@ -69,7 +69,10 @@ const Payment = () => {
                 value=""
                 id="useInformationFromProfile"
               ></input>
-              <label className="form-check-label" htmlFor="useInformationFromProfile">
+              <label
+                className="form-check-label"
+                htmlFor="useInformationFromProfile"
+              >
                 Use billing information from profile
               </label>
             </div>
