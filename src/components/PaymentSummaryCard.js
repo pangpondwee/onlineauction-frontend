@@ -1,16 +1,16 @@
 import nintendo_switch from '../pictures/nintendo-switch.jpeg'
-const PaymentSummaryCard = () => {
+const PaymentSummaryCard = (props) => {
   return (
-    <div class="grey-box payment-summary-card">
-      <div>Summary</div>
-      <div>Nintendo Switch</div>
-      <div class="center-pic">
+    <div className="grey-box payment-summary-card">
+      <h3>Summary</h3>
+      <div>{props.itemName}</div>
+      <div className="center-pic">
         <img src={nintendo_switch} alt="nintendo switch"></img>
       </div>
 
-      <div>Auctioneer: Kong Pakkapol</div>
+      <div>Auctioneer: {props.auctioneerName}</div>
       <hr></hr>
-      <div>Price: 2000 Baht</div>
+      <h3>Price: 2000 Baht</h3>
     </div>
   )
 }
