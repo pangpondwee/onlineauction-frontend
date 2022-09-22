@@ -1,7 +1,14 @@
 /* Form */
-#payment-form {
+.place-auction-form {
   color: var(--color-text);
   margin: 0 10% 0 15%;
+  width: 50%;
+}
+
+.payment-form {
+  color: var(--color-text);
+  margin: 0 10% 0 15%;
+  width: 80%;
 }
 
 .sub-form {
@@ -179,13 +186,16 @@
   height: auto;
 }
 
-@media only screen and (min-width: 800px) {
-  .payment-form {
-    max-width: 50%;
-  }
-}
-
+/* handle responsive */
 @media only screen and (max-width: 800px) {
+  .payment-form {
+    margin: 0 10% 0 10%;
+    width: 80%;
+  }
+  .place-auction-form {
+    margin: 0 10% 0 10%;
+    width: 80%;
+  }
   .payment-summary-section {
     display: none;
   }
