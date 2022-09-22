@@ -7,11 +7,11 @@
   background-color: #F8F9FA;
 }
 
-.cardBody{
-  /* border: 2px solid red; */
+/* .cardBody{
+  border: 2px solid red;
   margin-left: -10%;
   margin-right: -10%;
-}
+} */
 
 .flexRow{
   display: flex;
@@ -90,4 +90,8 @@
 
 .itemName-link:hover{
   color: black;
+}
+
+.row>* {
+  padding: 0px;
 }
