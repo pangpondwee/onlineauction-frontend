@@ -5,18 +5,21 @@
   margin: auto 20px;
   box-shadow: var(--box-shadow);
   background-color: #F8F9FA;
+  min-width: 15%;
+  /* height: 9.2rem; */
 }
 
-.cardBody{
-  /* border: 2px solid red; */
+/* .cardBody{
+  border: 2px solid red;
   margin-left: -10%;
   margin-right: -10%;
-}
+} */
 
 .flexRow{
   display: flex;
   box-sizing: border-box;
-  justify-content: space-around;  
+  /* justify-content: space-around; */
+  justify-content: left;
 }
 
 .headHome{
@@ -54,9 +57,11 @@
 }
 
 .card-img-top{
-  height: 15vw;  
+  /* height: 15vm; */
+  height: 150px;
   object-fit: cover; /*add object-fit: cover; to fit image for card*/
-
+  min-width: 15%;
+  min-height: 112.5px;
 }
 
 .card-text{
@@ -90,4 +95,8 @@
 
 .itemName-link:hover{
   color: black;
+}
+
+.row>* {
+  padding: 0px;
 }
