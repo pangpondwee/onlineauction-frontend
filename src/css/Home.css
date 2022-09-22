@@ -5,7 +5,8 @@
   margin: auto 20px;
   box-shadow: var(--box-shadow);
   background-color: #F8F9FA;
-  min-width: 9.5rem;
+  min-width: 15%;
+  /* height: 9.2rem; */
 }
 
 /* .cardBody{
@@ -56,9 +57,10 @@
 }
 
 .card-img-top{
-  height: 15vw;  
+  /* height: 15vm; */
+  height: 150px;
   object-fit: cover; /*add object-fit: cover; to fit image for card*/
-  min-width: 9rem;
+  min-width: 15%;
   min-height: 112.5px;
 }
 

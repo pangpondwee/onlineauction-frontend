@@ -24,7 +24,8 @@
 
 .sortFilter{
     position: absolute;
-    left: 77.1%;
+    /* left: 77.1%; */
+    right: 50px;
 }
 
 #select1{
@@ -34,8 +35,14 @@
 
 .searchRow{
     margin-left: 1%;
+    /* justify-content: space-around;
+    align-content: flex-start; */
 }
 
+.topSearch{
+    display: flex;
+    justify-content: space-between;
+}
 
 
 /* .carousel-item{

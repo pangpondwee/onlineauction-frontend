@@ -42,14 +42,18 @@ const Search = () =>{
 	return (
 		<>
 		<p className="headSearch">Nintendo Switch</p>
-		<p className="sortFilter">Sort by
-			<select id="select1">
-            	<option value="Newest">Newest</option>
-            	<option value="Time remaining">Time remaining</option>
-            	<option value="Highest Bid Price">Highest Bid Price</option>
-				<option value="Newest">Newest</option>
-        	</select>
-		</p>
+		<div className="topSearch">		
+			<p className="detailSearch">1000 items found for “Nintendo Switch”</p>
+			<p className="">Sort by
+				<select id="select1">
+            		<option value="Newest">Newest</option>
+            		<option value="Time remaining">Time remaining</option>
+            		<option value="Highest Bid Price">Highest Bid Price</option>
+					<option value="Newest">Newest</option>
+        		</select>
+			</p>
+		</div>
+
 		{/* <div className="filter ms-auto p-2">
 			<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Sort By</Link>
 			<ul className="dropdown-menu dropdown-menu-end ms-auto p-2">
@@ -59,7 +63,8 @@ const Search = () =>{
 				<li className="dropdown-item">Newest</li>
 			</ul>
 		</div> */}
-		<p className="detailSearch">1000 items found for “Nintendo Switch”</p>
+		
+		{/* <p className="detailSearch">1000 items found for “Nintendo Switch”</p> */}
 		{/* <div className="flexRow">
 			<AuctionCard name="first" price="2000$" time="18:30:22" picture="https://images.unsplash.com/photo-1472457897821-70d3819a0e24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGx8ZW58MHx8MHx8&w=1000&q=80"/>
 			<AuctionCard name="second" price="100$" time="time" picture="https://www.skipprichard.com/wp-content/uploads/2015/12/bigstock-D-Small-People-Newtons-Crad-65362909.jpg"/>
