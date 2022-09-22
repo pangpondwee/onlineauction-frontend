@@ -60,22 +60,22 @@ const Search = () =>{
 			</ul>
 		</div> */}
 		<p className="detailSearch">1000 items found for “Nintendo Switch”</p>
-		<div className="flexRow">
+		{/* <div className="flexRow">
 			<AuctionCard name="first" price="2000$" time="18:30:22" picture="https://images.unsplash.com/photo-1472457897821-70d3819a0e24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c21hbGx8ZW58MHx8MHx8&w=1000&q=80"/>
 			<AuctionCard name="second" price="100$" time="time" picture="https://www.skipprichard.com/wp-content/uploads/2015/12/bigstock-D-Small-People-Newtons-Crad-65362909.jpg"/>
 			<AuctionCard name="third" price="1000$" time="time" picture="https://images.pexels.com/photos/1459495/pexels-photo-1459495.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"/>
 			<AuctionCard name="Omnitrix" price="20$" time="08:53:05"picture="https://cdn.estore.nu/68744-thickbox_default/ben-10---deluxe-omnitrix-creator-set.jpg"/>
 			<AuctionCard name="e"/>
-		</div>
-		<h1>Test</h1>
+		</div>		
         <div className="flexRow">
 			{auctionCard_element.slice(0,5)}
+		</div> */}
+
+		<div className="row searchRow">
+			{auctionCard_element}
 		</div>
-		<div className="flexRow">
-			{auctionCard_element.slice(5,10)}
-		</div>
-		<h1>End Test</h1>
-		<div className="flexRow">
+		
+		{/* <div className="flexRow">
 			<AuctionCard name="first"/>
 			<AuctionCard name="second"/>
 			<AuctionCard name="c"/>
@@ -109,7 +109,7 @@ const Search = () =>{
 			<AuctionCard name="c"/>
 			<AuctionCard name="d"/>
 			<AuctionCard name="e"/>
-		</div>
+		</div> */}
         <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
                 <li className="page-item">

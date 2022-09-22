@@ -5,6 +5,7 @@
   margin: auto 20px;
   box-shadow: var(--box-shadow);
   background-color: #F8F9FA;
+  min-width: 9.5rem;
 }
 
 /* .cardBody{
@@ -16,7 +17,8 @@
 .flexRow{
   display: flex;
   box-sizing: border-box;
-  justify-content: space-around;  
+  /* justify-content: space-around; */
+  justify-content: left;
 }
 
 .headHome{
@@ -56,7 +58,8 @@
 .card-img-top{
   height: 15vw;  
   object-fit: cover; /*add object-fit: cover; to fit image for card*/
-
+  min-width: 9rem;
+  min-height: 112.5px;
 }
 
 .card-text{
