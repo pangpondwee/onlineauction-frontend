@@ -105,7 +105,7 @@ const AuctionDetail = () => {
   return (
     <div>
       <h1 className="header">Place Auction</h1>
-      <form className="payment-form" onSubmit={submitHandler}>
+      <form className="place-auction-form" onSubmit={submitHandler}>
         <div className="form-heading1">ITEM INFORMATION</div>
         <div className="sub-form">
           <div className="form-input-field">
