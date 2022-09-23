@@ -7,12 +7,58 @@ import "../css/Home.css";
 import "../css/Search.css";
 import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
+
+const PageNav = (props)=>{
+	const page = props.page;
+	const pageCount = props.pageCount
+	const hasPrev = page > 1? true : false; 
+	const hasNext = page < pageCount? true : false; 
+	// simple page list
+	const pageList = []
+	for(let i=1;i<pageCount+1;i++){
+		let c = "page-item";
+		if(i == page) c = c + " active" // active item
+		pageList.push(
+			<li key={i} className={c}>
+				<Link className="page-link" to="#">{i}</Link>
+			</li>
+		)
+	}
+	return (
+		<nav aria-label="Page navigation example">
+			<ul className="pagination justify-content-center">
+				{ // previous page
+				hasPrev ? <li className="page-item">
+					<Link className="page-link" to="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+						<span className="sr-only"></span>
+					</Link>
+				</li>
+				:
+				<></>}
+				{pageList}
+
+				{ // Next page
+				hasNext ? <li className="page-item">
+					<Link className="page-link" to="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						<span className="sr-only"></span>
+					</Link>
+				</li>
+				:
+				<></>}
+			</ul>
+		</nav>
+	)
+}
+
 const Search = () =>{
 	const { pageNumber } = useParams();
 	let page = pageNumber ? Number(pageNumber) : 1; // Get page number
 	if(page < 1) page = 1 // limit to 1
 	const [data,setData] = useState([])
 	const [status,setStatus] = useState("loading")
+	const [pageCount,setPageCount] = useState(1)
 	useEffect(()=>{
 		getData("http://13.250.98.9/api/auction/search?name=.")
 		.then((res)=>{
@@ -20,6 +66,7 @@ const Search = () =>{
 			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
 			setStatus(res.status)
 			setData(res.data)
+			setPageCount(res.data.pageCount)
 		})
 		.catch(e=>{
 			setData(e.message)
@@ -139,25 +186,7 @@ const Search = () =>{
 				<AuctionCard name="d"/>
 				<AuctionCard name="e"/>
 			</div> */}
-			<nav aria-label="Page navigation example">
-				<ul className="pagination justify-content-center">
-					<li className="page-item">
-						<Link className="page-link" to="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							<span className="sr-only"></span>
-						</Link>
-					</li>
-					<li className="page-item active"><Link className="page-link" to="#">1</Link></li>
-					<li className="page-item"><Link className="page-link" to="#">2</Link></li>
-					<li className="page-item"><Link className="page-link" to="#">3</Link></li>
-					<li className="page-item">
-						<Link className="page-link" to="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							<span className="sr-only"></span>
-						</Link>
-					</li>
-				</ul>
-			</nav>
+			<PageNav page={page} pageCount={pageCount}/>
 			</>
 		)
 	}
