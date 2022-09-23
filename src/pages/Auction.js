@@ -23,6 +23,23 @@ function getDate(timeRemaining){
 	}
 }
 
+const Timer = (props)=>{
+	const [time,setTime] = useState(props.timeRemaining)
+	const [fDate,setfDate] = useState("")
+	useEffect(()=>{
+		if(time < 24*60*60*1000){ // 1 day
+			setTimeout(() => {
+				setTime(time-1)
+			}, 1000);
+		}
+		setfDate(getDate(time))
+	},[time])
+	// const f_date = getDate(props.timeRemaining);
+	return (
+		<span id="time-remaining">{fDate}</span>
+	)
+}
+
 const Ranking = (props)=>{
 	// [{name:"K***a", price:200}]
 	const ranking = [
@@ -100,8 +117,19 @@ const Bidding = (props)=>{
 			</div>
 		)
 	}
+	if(props.isEnded){
+		return(
+			<div id="bidding-is-auctioneer">
+				<p>Bidding has ended</p>
+			</div>
+		)
+	}
 	return(
 		<form onSubmit={submitWrapper} id="bidding">
+			{props.isFiveMinutes ?
+			<p>You can only bid once. Think wisely</p>
+			:
+			<>
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="static-price">
 				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
@@ -109,6 +137,8 @@ const Bidding = (props)=>{
 				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
 			</div>
 			<div id="or-wrapper"><p>OR</p></div>
+			</>
+			}
 			<div id="bid-group" className="input-group">
 				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
 				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
@@ -119,7 +149,8 @@ const Bidding = (props)=>{
 
 const Bidfield = (props)=>{
 	const timeRemaining = props.data.endDate - Date.now()
-	const f_date = getDate(timeRemaining);
+	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
+	const isEnded = timeRemaining < 0 ? true : false;
 	return (
 		<div id="bid-field">
 			<div id="item-wrapper">
@@ -135,13 +166,17 @@ const Bidfield = (props)=>{
 				</div>
 				<div>
 					<p className="stat-name">Time Remaining</p>
-					<span id="time-remaining">{f_date}</span>
+					<Timer
+					timeRemaining={timeRemaining}
+					/>
 				</div>
 			</div>
 			<Bidding 
 			bidStep={props.data.bidStep}
 			isAuctioneer={props.data.isAuctioneer} 
 			submitBid={props.submitBid}
+			isFiveMinutes={isFiveMinutes}
+			isEnded={isEnded}
 			/>
 			
 			<div id="history-wrapper">
