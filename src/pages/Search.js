@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import { Link,useParams } from "react-router-dom";
+import { Link,useParams,useSearchParams } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
 import AuctionCardRow from "../components/AuctionCardRow";
 import getData from "../components/fetchData";
@@ -70,15 +70,23 @@ const PageNav = (props)=>{
 	)
 }
 
-const Search = () =>{
+const Search = (props) =>{
 	const { pageNumber } = useParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 	let page = pageNumber ? Number(pageNumber) : 1; // Get page number
 	if(page < 1) page = 1 // limit to 1
 	const [data,setData] = useState([])
 	const [status,setStatus] = useState("loading")
 	const [pageCount,setPageCount] = useState(1)
+
+	const name = searchParams.get("name");
+	let getString = "/auction/search?"
+	if(name){
+		getString = getString+"name="+name
+	}
+
 	useEffect(()=>{
-		getData("/auction/search?name=.")
+		getData(getString)
 		.then((res)=>{
 			if(!res.status) throw new Error("Could not get status")
 			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
@@ -90,7 +98,7 @@ const Search = () =>{
 			setData(e.message)
 			setStatus("error")
 		})
-	},[])
+	},[searchParams])
 
 	if(status == "success"){
 		// const auctionData = [

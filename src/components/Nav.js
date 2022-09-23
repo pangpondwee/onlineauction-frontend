@@ -1,13 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import "../css/Nav.css";
 
 const Nav = (props) => {
+	const navigate = useNavigate();
 	const displayName=localStorage.getItem("displayName");
 	const loggedIn = props.loggedIn;
 	const logOut = ()=>{
 		props.setloggedIn(false);
 		window.location.href = "/signup";
+	}
+	const searchSubmit = (e)=>{
+		const searchTerm = document.getElementById("nav-search").value;
+        navigate({
+			pathname:"/search",
+			search: "?name=" + encodeURIComponent(searchTerm)});
+		e.preventDefault()
 	}
 	return (
 		<nav className="navbar d-flex sticky-top">{/* add sticky-top */}
@@ -16,7 +24,7 @@ const Nav = (props) => {
 				<span className="navbar-toggler-icon"></span>
 			</button>
 			<Link className="navbar-brand me-auto p-2" to="/">Online Auction</Link>
-			<form>
+			<form onSubmit={searchSubmit}>
 				<input id="nav-search" className="form-control me-2" type="search" placeholder="Search"/>
 			</form>
 			{loggedIn ? 
