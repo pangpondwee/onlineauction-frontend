@@ -3,6 +3,8 @@ import {MyBidNav, MyAuctionNav} from "../components/MyOrderNav";
 import { useLocation } from "react-router-dom";
 
 const MyOrder = () =>{
+    const location = useLocation()
+
 	return (
         <>
             {(location.search === "?bid")? <MyBidNav/> : <MyAuctionNav/>}
