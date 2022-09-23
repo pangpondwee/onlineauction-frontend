@@ -90,8 +90,7 @@ const AuctionDetail = () => {
     //     console.log(data)
     //   })
 
-    const res = postData(
-      'http://13.250.98.9/api/auction/upload',
+    const res = postData('/api/auction/upload',
       JSON.stringify(auctionData)
     ).then((res) => {
       console.log(res)
