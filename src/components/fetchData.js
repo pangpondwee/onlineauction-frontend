@@ -1,4 +1,4 @@
-const SERVER = process.env.API_SERVER || "localhost:4000"
+const API_SERVER = process.env.API_SERVER || "localhost:4000"
 
 function set_header(){
 	let headers = {
@@ -13,7 +13,7 @@ function set_header(){
 
 export const getData = async (url)=>{
 	// TODO use auctionId
-	return fetch(SERVER+url,{
+	return fetch(API_SERVER+url,{
 		method: 'GET',
 		headers:set_header()
 	})
@@ -24,7 +24,7 @@ export const getData = async (url)=>{
 
 export const postData = async (url,data)=>{
 	// TODO use auctionId
-	return fetch(SERVER+url,{
+	return fetch(API_SERVER+url,{
 		method: 'POST',
 		mode: 'cors',
 		credentials: 'include',
