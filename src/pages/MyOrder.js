@@ -1,11 +1,11 @@
 import OrderObj from "../components/OrderObj";
-import MyAuctionNav from "../components/MyOrderNav";
-import MyBidNav from "../components/MyOrderNav";
+import {MyBidNav, MyAuctionNav} from "../components/MyOrderNav";
+import { useLocation } from "react-router-dom";
 
 const MyOrder = () =>{
 	return (
         <>
-            <MyBidNav/>
+            {(location.search === "?bid")? <MyBidNav/> : <MyAuctionNav/>}
             <div className="all-review">
                 {/* store each order */}
                 <OrderObj status="Currently Bid" status_class="currently_bid" text_alert="Your last bid: 1800$" by_who="(By Kong Pakkapol)"/>

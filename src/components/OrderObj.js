@@ -1,8 +1,6 @@
 import goods from "../pictures/nintendo.png"
 
 const OrderObj = (props) =>{
-    console.log(props.status)
-    console.log(props.status_class)
 	return (
 		<div className="Review-box Order-box">
 			<img src={goods} alt="Review_goods" className="mini-pic-goods"/>
@@ -10,7 +8,7 @@ const OrderObj = (props) =>{
                 <div className="d-flex">
                     <h4>Nintendo Switch</h4>
                     <pre>     </pre>
-                    <h6>{props.by_who}</h6>
+                    {props.by_who? <h6>{props.by_who}</h6> : <></>}
                 </div>
                 
                 <h6>Highest Bid : 2000 Baht</h6>

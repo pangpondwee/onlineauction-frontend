@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-const MyAuctionNav = () =>{
+export const MyAuctionNav = () =>{
 	return (
 		<nav className="My-Order-Nav">
 			<div className="Order-Menu current-tab">
@@ -25,7 +25,7 @@ const MyAuctionNav = () =>{
 	)
 }
 
-const MyBidNav = () =>{
+export const MyBidNav = () =>{
 	return (
 		<nav className="My-Order-Nav">
 			<div className="Order-Menu current-tab">
