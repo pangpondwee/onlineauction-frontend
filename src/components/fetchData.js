@@ -1,4 +1,4 @@
-const SERVER = "http://13.250.98.9/api"
+const SERVER = process.env.API_SERVER || "localhost:4000"
 
 function set_header(){
 	let headers = {
