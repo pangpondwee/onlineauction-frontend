@@ -54,22 +54,22 @@ const Home = () =>{
 			<p className="detail">Your Recent Bids</p>
 			<AuctionList
 			message="You don't have any recent bids"
-			url="http://localhost:4000/auction/auction-list?filter=recent_bidding"
+			url="http://13.250.98.9/api/auction/auction-list?filter=recent_bidding"
 			/>
 			<p className="detail">Recent Following List</p>
 			<AuctionList
 			message="You are not following any bids"
-			url="http://localhost:4000/auction/auction-list?filter=my_following_list"
+			url="http://13.250.98.9/api/auction/auction-list?filter=my_following_list"
 			/>
 			<p className="detail">Popular</p>
 			<AuctionList
 			message="There are no popular bids"
-			url="http://localhost:4000/auction/auction-list?filter=popular"
+			url="http://13.250.98.9/api/auction/auction-list?filter=popular"
 			/>
 			<p className="detail">Ending soon</p>
 			<AuctionList
 			message="There are no bids ending soon"
-			url="http://localhost:4000/auction/auction-list?filter=ending_soon"
+			url="http://13.250.98.9/api/auction/auction-list?filter=ending_soon"
 			/>
 		</>
 	)
