@@ -8,7 +8,7 @@ import PopupReview from "../components/PopupReview";
 const ViewAuctioneer = () => {
     return (
         <div>
-            <div className="btn-list">
+            <div style={{display:"flex"}}>
                 <PopupConfirm />
                 <PopupReview />
                 <AuctioneerReport />

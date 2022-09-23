@@ -1,0 +1,201 @@
+:root{
+	--color-primary: #C3D3E0;
+	--color-secondary: #A3BCD0;
+	--color-dark: #091235;
+	--radius: 20px;
+}
+
+/* Auctioneer Detail */
+.AucProImg {
+  height: 350px;
+  width: 350px;
+  /* border: 2px solid black; */
+  margin: auto;
+  margin-top: 30px;
+}
+  
+.AucPro {
+  /* display: grid; */
+  display: flex;
+  padding: 10px;
+}
+  
+.AucDetail {
+  width: 650px;
+  margin: auto;
+  margin-top: 50px;
+  margin-left: 15px;
+}
+  
+.AucDes {
+  /* width: 650px; */
+  /* border: 1px solid black; */
+  margin-bottom: 10px;
+}
+  
+.AucDes h1 {
+  color: #2B4257;
+}
+  
+.AucDes h6 {
+  color: var(--color-primary);
+  margin-top: 10px;
+}
+  
+.AucDes div {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+  
+.AucAllStat {
+  margin-top: 10px;
+  display: flex;
+  /* border: 1px solid black; */
+  /* padding: 10px; */
+}
+  
+.AucRating {
+  width: 200px;
+  /* border: 1px solid black; */
+  /* margin: auto; */
+  margin-left: 0px;
+  margin-top: 0px;
+}
+  
+.rating-star {
+  display: flex;
+}
+  
+.rating-star h6 {
+  margin-right: 40px;
+  margin-top: 3px;
+}
+  
+.rating-star img {
+  width: 25px;
+  height: 25px;
+}
+  
+.AucBadges {
+  width: 175px;
+  /* border: 1px solid black; */
+  /* margin: auto; */
+  margin-top: 0px;
+}
+  
+.badges {
+  display: flex;
+  /* justify-content: center; */
+}
+  
+.badges img {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+  
+.AucStat {
+  width: 250px;
+  /* border: 1px solid black; */
+  /* margin: auto; */
+  margin-right: 0px;
+  margin-top: 0px;
+}
+  
+.stat {
+  display: flex;
+}
+  
+.stat img {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+}
+  
+.stat h6 {
+  padding-top: 15px;
+}
+
+/* Auctioneer Review List */
+.btn-scroll {
+  height: 40px;
+  width: 40px;
+  margin-top: 140px;
+}
+  
+.review-card {
+  border: 1px solid black;
+  width: 300px;
+  height: 300px;
+  border-radius: 10%;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* padding: 15px; */
+}
+  
+.review-star-zone {
+  margin-bottom: 10px;
+}
+  
+.review-star-zone img {
+  height: 25px;
+  width: 25px;
+}
+
+.review {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  justify-content: space-between;
+}
+
+.review-list {
+  display: flex;
+  padding: 15px;
+  /* justify-content: space-between; */
+}
+
+.review-detail {
+  margin: 15px
+}
+  
+.review-text {
+  margin-top: 20px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+/* Auctioneer Auction List */
+.btn-scroll {
+  height: 40px;
+  width: 40px;
+  margin-top: 140px;
+}
+
+.auction-card {
+  border: 1px solid black;
+  width: 200px;
+  height: 250px;
+  border-radius: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+  
+.auc-pro-head {
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.auctions {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  justify-content: space-between;
+ }
+
+.auction-list {
+  display: flex;
+  padding: 15px;
+  /* justify-content: space-between; */
+}

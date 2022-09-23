@@ -2,6 +2,7 @@ import React from "react";
 import leftButton from "../pictures/leftButton.png";
 import rightButton from "../pictures/rightButton.png";
 import fullStar from "../pictures/fullStar.png";
+import '../css/AuctioneerProfile.css';
 
 const AucReview = () => {
     return (
