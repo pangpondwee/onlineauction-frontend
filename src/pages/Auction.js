@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "../css/Auction.css";
-import {getData} from '../components/fetchData';
+import {getData, postData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
 
 
@@ -89,6 +89,10 @@ const Gallery = (props)=>{
 
 const Bidding = (props)=>{
 	const bidStep = props.bidStep;
+	const submitWrapper = (e)=>{ //wrapper for written bid price
+		props.submitBid(document.getElementById("bid-price").value,true)
+		e.preventDefault()
+	}
 	if(props.isAuctioneer){
 		return(
 			<div id="bidding-is-auctioneer">
@@ -97,19 +101,19 @@ const Bidding = (props)=>{
 		)
 	}
 	return(
-		<div id="bidding">
+		<form onSubmit={submitWrapper} id="bidding">
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="static-price">
-				<button className='bid-button btn'>+${bidStep}</button>
-				<button className='bid-button btn'>+{bidStep*2}$</button>
-				<button className='bid-button btn'>+${bidStep*3}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
 			</div>
 			<div id="or-wrapper"><p>OR</p></div>
 			<div id="bid-group" className="input-group">
 				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
-				<button id="bid-price-button" type="button" className='bid-button btn'>Bid</button>
+				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
 			</div>
-		</div>
+		</form>
 	)
 }
 
@@ -141,7 +145,11 @@ const Bidfield = (props)=>{
 					<span id="time-remaining">{f_date}</span>
 				</div>
 			</div>
-			<Bidding bidStep={bidStep} isAuctioneer={isAuctioneer}/>
+			<Bidding 
+			bidStep={bidStep}
+			isAuctioneer={isAuctioneer} 
+			submitBid={props.submitBid}
+			/>
 			
 			<div id="history-wrapper">
 				{lastBid > 0 ? <span>Your Last bid: {lastBid}$</span> : <></>}
@@ -159,6 +167,32 @@ const Auction = (props) =>{
 	const auctioneerName="Waku Waku"; // testing
 	const showHistory=true; // testing
 	const showRanking=false; //show ranking and move gallery // testing
+	const submitBid = (price, isAbsolute)=>{
+		price = parseInt(price)
+		if(!isAbsolute){
+			price=price+data.currentPrice
+		}
+		if(isNaN(price)){
+			console.log("is Nan") //TODO handle
+		}
+		else{
+			postData(`/auction/${auctionId}/bid`,JSON.stringify(
+				{
+					biddingPrice : price
+				}
+			))
+			.then((res)=>{
+				if(!res.status) throw new Error("Could not get status")
+				if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
+				setData(prevData=>{
+					return { ...prevData, currentPrice: price }
+				})
+			})
+			.catch(e=>{
+				console.log(e.message)//TODO handle
+			})
+		}
+	}
 	useEffect(()=>{
 		getData(`/auction/${auctionId}`).then((res)=>{
 			setStatus(res.status);
@@ -188,6 +222,7 @@ const Auction = (props) =>{
 					isAuctioneer={data.isAuctioneer}
 					lastBid={data.myLastBid}
 					showHistory={showHistory}
+					submitBid={submitBid}
 					/>
 				</div>
 				<hr/>
