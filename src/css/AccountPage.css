@@ -58,6 +58,7 @@ li.menu-dropdown {
     border-radius: 5%;
     margin-bottom: 10px;
     text-align: center;
+    cursor: pointer;
 }
 
 .profile-pic {
@@ -120,6 +121,7 @@ li.menu-dropdown {
 .editing {
     background-color: var(--color-primary);
     color: var(--color-secondary);
+    cursor: default;
 }
 
 .cancel {
