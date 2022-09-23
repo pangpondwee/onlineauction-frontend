@@ -32,9 +32,11 @@
   /* border: 1px solid black; */
   margin-bottom: 10px;
 }
-  
+
 .AucDes h1 {
   color: #2B4257;
+  /* border: 1px solid black; */
+  margin-left: 0px;
 }
   
 .AucDes h6 {
