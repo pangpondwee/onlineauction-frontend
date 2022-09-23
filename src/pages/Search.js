@@ -78,15 +78,15 @@ const Search = (props) =>{
 	const [data,setData] = useState([])
 	const [status,setStatus] = useState("loading")
 	const [pageCount,setPageCount] = useState(1)
-
 	const name = searchParams.get("name");
-	let getString = "/auction/search?"
-	if(name){
-		getString = getString+"name="+name
+	const selectSort = (e) =>{
+		const s = document.getElementById("select1").value
+		searchParams.set("sort",s)
+		setSearchParams(searchParams)
 	}
 
 	useEffect(()=>{
-		getData(getString)
+		getData("/auction/search?"+searchParams.toString())
 		.then((res)=>{
 			if(!res.status) throw new Error("Could not get status")
 			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
@@ -99,6 +99,7 @@ const Search = (props) =>{
 			setStatus("error")
 		})
 	},[searchParams])
+
 
 	if(status == "success"){
 		// const auctionData = [
@@ -150,11 +151,11 @@ const Search = (props) =>{
 			<div className="topSearch">		
 				<p className="detailSearch">{auctionCard_element.length} items found for "{name}"</p>
 				<p className="">Sort by
-					<select id="select1">
-						<option value="Newest">Newest</option>
-						<option value="Time remaining">Time remaining</option>
-						<option value="Highest Bid Price">Highest Bid Price</option>
-						<option value="Newest">Newest</option>
+					<select id="select1" onChange={selectSort} >
+						<option value="newest">Newest</option>
+						<option value="time_remaining">Time remaining</option>
+						<option value="highest_bid">Highest Bid Price</option>
+						<option value="lowest_bid">Lowest Bid Price</option>
 					</select>
 				</p>
 			</div>

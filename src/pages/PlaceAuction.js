@@ -90,7 +90,7 @@ const AuctionDetail = () => {
     //     console.log(data)
     //   })
 
-    const res = postData('/api/auction/upload',
+    const res = postData('/auction/upload',
       JSON.stringify(auctionData)
     ).then((res) => {
       console.log(res)
