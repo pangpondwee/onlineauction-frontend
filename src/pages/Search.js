@@ -60,7 +60,7 @@ const Search = () =>{
 	const [status,setStatus] = useState("loading")
 	const [pageCount,setPageCount] = useState(1)
 	useEffect(()=>{
-		getData("http://13.250.98.9/api/auction/search?name=.")
+		getData("/auction/search?name=.")
 		.then((res)=>{
 			if(!res.status) throw new Error("Could not get status")
 			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
