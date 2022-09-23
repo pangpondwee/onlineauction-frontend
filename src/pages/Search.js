@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import { Link,useParams } from "react-router-dom";
+import { Link,useParams,useSearchParams } from "react-router-dom";
 import AuctionCard from "../components/AuctionCard";
 import AuctionCardRow from "../components/AuctionCardRow";
 import getData from "../components/fetchData";
@@ -70,15 +70,23 @@ const PageNav = (props)=>{
 	)
 }
 
-const Search = () =>{
+const Search = (props) =>{
 	const { pageNumber } = useParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 	let page = pageNumber ? Number(pageNumber) : 1; // Get page number
 	if(page < 1) page = 1 // limit to 1
 	const [data,setData] = useState([])
 	const [status,setStatus] = useState("loading")
 	const [pageCount,setPageCount] = useState(1)
+	const name = searchParams.get("name");
+	const selectSort = (e) =>{
+		const s = document.getElementById("select1").value
+		searchParams.set("sort",s)
+		setSearchParams(searchParams)
+	}
+
 	useEffect(()=>{
-		getData("/auction/search?name=.")
+		getData("/auction/search?"+searchParams.toString())
 		.then((res)=>{
 			if(!res.status) throw new Error("Could not get status")
 			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
@@ -90,7 +98,8 @@ const Search = () =>{
 			setData(e.message)
 			setStatus("error")
 		})
-	},[])
+	},[searchParams])
+
 
 	if(status == "success"){
 		// const auctionData = [
@@ -138,15 +147,15 @@ const Search = () =>{
 		}
 		return (
 			<>
-			<p className="headSearch">Nintendo Switch</p>
+			<p className="headSearch">{name}</p>
 			<div className="topSearch">		
-				<p className="detailSearch">1000 items found for “Nintendo Switch”</p>
+				<p className="detailSearch">{auctionCard_element.length} items found for "{name}"</p>
 				<p className="">Sort by
-					<select id="select1">
-						<option value="Newest">Newest</option>
-						<option value="Time remaining">Time remaining</option>
-						<option value="Highest Bid Price">Highest Bid Price</option>
-						<option value="Newest">Newest</option>
+					<select id="select1" onChange={selectSort} >
+						<option value="newest">Newest</option>
+						<option value="time_remaining">Time remaining</option>
+						<option value="highest_bid">Highest Bid Price</option>
+						<option value="lowest_bid">Lowest Bid Price</option>
 					</select>
 				</p>
 			</div>
