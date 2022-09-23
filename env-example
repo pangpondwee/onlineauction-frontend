@@ -1,1 +1,1 @@
-API_SERVER="http://18.139.223.203/api"
+REACT_APP_API_SERVER="http://18.139.223.203/api"
