@@ -8,6 +8,24 @@ import "../css/Search.css";
 import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
 
+function getDate(timeRemaining){
+	// TODO make date lighter
+	const d = new Date(Number(timeRemaining));
+	const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
+	const d_hour = d.getHours();
+	const d_minute = d.getMinutes();
+	const d_seconds = d.getSeconds();
+	if(timeRemaining <= 0){
+		return "Ended";
+	}
+	if(d_days > 2){
+		return `${d_days} day(s)`;
+	}
+	else{
+		return `${d_hour}hr ${d_minute}m ${d_seconds}s`;
+	}
+}
+
 const PageNav = (props)=>{
 	const page = props.page;
 	const pageCount = props.pageCount
@@ -106,8 +124,16 @@ const Search = () =>{
 		// 		)
 		// 	}
 		for(let i=0;i<auctionData.length;i++){
+			const timeRemaining = Number(auctionData[i].endDate) - Date.now()
+			const price = auctionData[i].currentPrice ? auctionData[i].currentPrice : "Unknown";
 			auctionCard_element.push(
-				<AuctionCard key={i} name={auctionData[i].productName} picture={auctionData[i].picture}/>
+				<AuctionCard 
+				key={i} 
+				id={auctionData[i].auctionID}
+				name={auctionData[i].productName}
+				price={price} 
+				picture={auctionData[i].coverPicture}
+				time={getDate(timeRemaining)}/>
 			)
 		}
 		return (
