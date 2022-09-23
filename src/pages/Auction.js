@@ -157,7 +157,7 @@ const Bidfield = (props)=>{
 				<div id="name-wrapper">
 					<h1>{props.data.productDetail.productName}</h1>
 				</div>
-				<p>by {props.data.auctioneerName}</p>
+				<p>by {props.data.auctioneerID}</p>
 			</div>
 			<div id="statistics">
 				<div>
