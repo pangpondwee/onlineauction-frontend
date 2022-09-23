@@ -1,11 +1,60 @@
 import blank_profile from "../pictures/blank_profile.png";
 import { Link } from "react-router-dom";
-import { Profiler, useState } from "react";
+import { useState } from "react";
+import {getData, postData} from '../components/fetchData';
 
-const AccountEdit = () =>{
+const AccountEdit = (props) =>{
     const [prepic, setPrepic] = useState(blank_profile)
 
     const previewImage = (event)=>{ setPrepic(URL.createObjectURL(event.target.files[0])) }
+
+    const [data,setData] = useState({
+        displayName: "Peeranut Srisuthangkul",
+        email: "peeranut.sri@ku.th",
+        phoneNumber: "06200000000",
+        address: "4412 Matlock Rd #200 Arlington Texas United States 76018",
+        description: "Exercitation sint fugiat et esse ut do quis laboris anim nisi proident ullamco. Sit eu mollit cillum et consequat eu consectetur ad reprehenderit exercitation sunt duis nisi est. Pariatur exercitation commodo non tempor. Fugiat minim velit veniam reprehenderit nulla veniam voluptate adipisicing ullamco culpa incididunt. Sunt irure commodo et ut do aute duis."});
+    const [status,setStatus]=useState("unknown");
+
+    const sendChange = (new_data) =>{
+        // patchData(`'{{auction}}/api/user/edit'`,JSON.stringify(new_data))
+        // .then((res)=>{
+        //     if(!res.status) throw new Error("Could not get status")
+        //     if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
+        // })
+        // .catch(e=>{
+        //     console.log(e.message)
+        // })
+        console.log(new_data)
+    }
+
+    const summitChange = (e) =>{
+        const personal_info = ["Name", "Email", "PhoneNumber", "Address", "Description"]
+        const _changed = {}
+        personal_info.forEach((_info)=>{
+            const tmp = document.getElementById(_info).value
+            if (tmp != ""){
+                console.log(tmp)
+                _changed[_info] = tmp
+            }
+        })
+        sendChange(_changed)
+		e.preventDefault()
+    }
+
+    // useEffect(()=>{
+	// 	getData(`/api/user/myprofile`).then((res)=>{ 
+	// 		setStatus(res.status);
+	// 		if(res.status == "success"){
+	// 			setData(res.data);
+	// 		}
+	// 		else{
+	// 			setData(res.message);
+	// 		}
+	// 	})
+	// },[]);
+
+    const _changed = []
 
 	return (
         <div className="profile-page d-flex justify-content-between">
@@ -20,30 +69,30 @@ const AccountEdit = () =>{
                     <div>
                         <div>
                             <label><h5>Name</h5></label><br/>
-                            <input type="text" for="Name" className="input-editing" placeholder="Peeranut Srisuthangkul"/>
+                            <input type="text" id="Name" className="input-editing" placeholder={data.displayName}/>
                         </div>
                         <div>
                             <label><h5>Email</h5></label><br/>
-                            <input type="text" for="Email" className="input-editing" placeholder="peeranut.sri@ku.th"/>
+                            <input type="text" id="Email" className="input-editing" placeholder={data.email}/>
                         </div>
                         <div>
                             <label><h5>Phone Number</h5></label><br/>
-                            <input type="text" for="Phone Number" className="input-editing" placeholder="06200000000"/>
+                            <input type="text" id="PhoneNumber" className="input-editing" placeholder={data.phoneNumber}/>
                         </div>
                         <div>
                             <label><h5>Address</h5></label><br/>
-                            <textarea type="text" for="Address" className="input-editing" placeholder="4412 Matlock Rd #200 Arlington Texas United States 76018"/>
+                            <textarea type="text" id="Address" className="input-editing" placeholder={data.address}/>
                         </div>
                         <div>
                             <label><h5>Description</h5></label><br/>
-                            <textarea type="text" for="Description" className="input-editing" rows="5" placeholder="Exercitation sint fugiat et esse ut do quis laboris anim nisi proident ullamco. Sit eu mollit cillum et consequat eu consectetur ad reprehenderit exercitation sunt duis nisi est. Pariatur exercitation commodo non tempor. Fugiat minim velit veniam reprehenderit nulla veniam voluptate adipisicing ullamco culpa incididunt. Sunt irure commodo et ut do aute duis."/>
+                            <textarea type="text" id="Description" className="input-editing" rows="5" placeholder={data.description}/>
                         </div>
                     </div>
                 </div>
             </div>
             <div>
                 <div className="edit-profile editing">Edit Profile</div>
-                <div className="edit-profile">Save Changes</div>
+                <div className="edit-profile" onClick={summitChange}>Save Changes</div>
                 <div className="edit-profile cancel">
                     <Link to="/account/profile" className="link-button text-body">Cancel</Link>
                 </div>
