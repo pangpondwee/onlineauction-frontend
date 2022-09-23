@@ -9,7 +9,7 @@ import "../css/ViewAuctioneer.css"
 const ViewAuctioneer = () => {
     return (
         <div>
-            <div className="btn-list">
+            <div style={{display:"flex"}}>
                 <PopupConfirm />
                 <PopupReview />
                 <AuctioneerReport />

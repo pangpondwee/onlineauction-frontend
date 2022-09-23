@@ -6,6 +6,7 @@ import badge1 from "../pictures/badge1.png";
 import badge2 from "../pictures/badge2.png";
 import badge3 from "../pictures/badge3.png";
 import stat from "../pictures/stat.png";
+import '../css/AuctioneerProfile.css';
 
 const AuctioneerProfile = () => {
     return (

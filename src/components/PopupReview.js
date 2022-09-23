@@ -1,5 +1,6 @@
 import React from "react";
 import review from "../pictures/review.png";
+import '../css/PopupConRev.css';
 
 const PopupReview = () => {
     return (
