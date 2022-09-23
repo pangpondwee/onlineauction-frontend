@@ -1,10 +1,11 @@
-import React, { Fragment,useRef } from "react";
+import React, { Fragment, useRef } from "react";
 
 import classes from "../css/SignUp.module.css";
 import Card from "../components/Card";
 
 import pic1 from "../pictures/loginpic.jpg";
 import { Link,useOutletContext,useNavigate } from "react-router-dom";
+import { postData } from "../components/fetchData";
 
 const SignUp = () => {
   let navigate = useNavigate();
@@ -13,31 +14,24 @@ const SignUp = () => {
   const password = useRef();
   const confirmPassword = useRef();
   const onSignInSubmit = (e) => {
-    fetch("http://13.250.98.9/api/user/signin", {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      headers: {
-        'Content-Type': "application/json"
-      },
-      body: JSON.stringify({
+    postData(
+      "/user/signin",
+      JSON.stringify({
         email: email.current.value.trim(),
         password: password.current.value.trim()
-      })
-    }).then(res => {
-      return res.json();
-    }).then(res_data=>{
-      if(res_data.status == "success"){
-        const data = res_data.data.user;
-        localStorage.setItem("displayName",data.displayName)
-        localStorage.setItem("token",res_data.token)
+      }))
+    .then((res) => {
+      if (res.status == "success") {
+        const data = res.data.user;
+        localStorage.setItem("displayName", data.displayName);
+        localStorage.setItem("token", res.token);
         setloggedIn(true);
         navigate("/");
+      } else {
+        throw new Error(res.message);
       }
-      else{
-        throw new Error(res_data.message);
-      }
-    }).catch((error)=>{
+    })
+    .catch((error)=>{
       console.log(error)
     })
     e.preventDefault()

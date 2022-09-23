@@ -6,83 +6,73 @@ import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
 import AuctionCardRow from "../components/AuctionCardRow";
 import getData from "../components/fetchData";
-async function getList(url,setFunction){
-	const res = await getData(url);
-	if(res.status == "fail"){
-		throw Error(res.message)
+
+const AuctionList = (props)=>{
+	const [data,setData] = useState([])
+	const [status,setStatus] = useState("loading")
+	useEffect(()=>{
+		getData(props.url,setData)
+		.then((res)=>{
+			if(!res.status) throw new Error("Could not get status")
+			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
+			setStatus(res.status)
+			setData(res.data)
+		})
+		.catch(e=>{
+			setData(e.message)
+			setStatus("error")
+		})
+	},[])
+	if(status == "success"){
+		if(data.length > 0){
+			return <AuctionCardRow data={data}/>
+		}
+		else{
+			return <p>{props.message}</p>
+		}
+	}
+	else if(status == "loading"){
+		return(
+			<p>Loading...</p>
+		)
 	}
 	else{
-		console.log("x")
-		console.log(res.data)
-		setFunction(res.data)
+		return (
+			<>
+				<p>Error: {data}</p>
+			</>
+		)
 	}
 }
 
 const Home = () =>{
-	const [popular,setPopular] = useState([]);
-	const [recent,setRecent] = useState([]);
-	const [ending,setEnding] = useState([]);
-	const [following,setFollowing] = useState([]);
-	const [status,setStatus] = useState("loading");
-	const [message,setMessage] = useState("");
 	const displayName = localStorage.getItem("displayName");
 	// const isLoggedIn 
-	useEffect(()=>{
-		// Popular
-		getList('http://13.250.98.9/api/auction/auction-list?filter=popular',setPopular)
-		.catch(e=>{
-			setStatus("error")
-			setMessage(e.message)
-		})
-		// Recent bidding
-		getList('http://13.250.98.9/api/auction/auction-list?filter=recent_bidding',setRecent)
-		.catch(e=>{
-			setStatus("error")
-			setMessage(e.message)
-		})
-		// Ending Soon
-		getData('http://13.250.98.9/api/auction/auction-list?filter=ending_soon',setEnding)
-		.catch(e=>{
-			setStatus("error")
-			setMessage(e.message)
-		})
-		// My following list
-		getData('http://13.250.98.9/api/auction/auction-list?filter=my_following_list',setFollowing)
-		.catch(e=>{
-			setStatus("error")
-			setMessage(e.message)
-		})
-		setStatus("success")
-	},[])
-	if(status == "success"){
-		return (
-			<>
+	return (
+		<>
 			<p className="headHome">Welcome, Peeranat! Let’s see what you got...</p>		
 			<p className="detail">Your Recent Bids</p>
-			{recent.length > 0 ? <AuctionCardRow data={recent}/> : <p>You have no recent bids</p> }
+			<AuctionList
+			message="You don't have any recent bids"
+			url="/auction/auction-list?filter=recent_bidding"
+			/>
 			<p className="detail">Recent Following List</p>
-			{following.length > 0 ? <AuctionCardRow data={following}/> : <p>You are not following any bids</p> }
+			<AuctionList
+			message="You are not following any bids"
+			url="/auction/auction-list?filter=my_following_list"
+			/>
 			<p className="detail">Popular</p>
-			{popular.length > 0 ? <AuctionCardRow data={popular}/> : <p>There are no popular bids</p> }
+			<AuctionList
+			message="There are no popular bids"
+			url="/auction/auction-list?filter=popular"
+			/>
 			<p className="detail">Ending soon</p>
-			{ending.length > 0 ? <AuctionCardRow data={ending}/> : <p>There are no bids ending soon</p> }
-			</>
-		)
-	}
-	else if(status == "error"){
-		return (
-			<div>
-				<h1>Error</h1>
-				<p>{message}</p>
-			</div>
-		)
-	}
-	else{
-		return (
-			<div>
-				<p>Loading...</p>
-			</div>
-		)
-	}
+			<AuctionList
+			message="There are no bids ending soon"
+			url="/auction/auction-list?filter=ending_soon"
+			/>
+		</>
+	)
+
 }
 export default Home;

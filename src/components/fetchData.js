@@ -1,3 +1,5 @@
+const SERVER = "http://13.250.98.9/api"
+
 function set_header(){
 	let headers = {
 		'Content-Type': "application/json",
@@ -11,7 +13,7 @@ function set_header(){
 
 export const getData = async (url)=>{
 	// TODO use auctionId
-	return fetch(url,{
+	return fetch(SERVER+url,{
 		method: 'GET',
 		headers:set_header()
 	})
@@ -22,7 +24,7 @@ export const getData = async (url)=>{
 
 export const postData = async (url,data)=>{
 	// TODO use auctionId
-	return fetch(url,{
+	return fetch(SERVER+url,{
 		method: 'POST',
 		mode: 'cors',
 		credentials: 'include',

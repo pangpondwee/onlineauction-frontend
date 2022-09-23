@@ -160,7 +160,7 @@ const Auction = (props) =>{
 	const showHistory=true; // testing
 	const showRanking=false; //show ranking and move gallery // testing
 	useEffect(()=>{
-		getData(`http://13.250.98.9/api/auction/${auctionId}`).then((res)=>{
+		getData(`/auction/${auctionId}`).then((res)=>{
 			setStatus(res.status);
 			if(res.status == "success"){
 				setData(res.data);
