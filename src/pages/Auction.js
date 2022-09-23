@@ -118,27 +118,20 @@ const Bidding = (props)=>{
 }
 
 const Bidfield = (props)=>{
-	const timeRemaining = props.endDate - Date.now()
+	const timeRemaining = props.data.endDate - Date.now()
 	const f_date = getDate(timeRemaining);
-	const productName = props.productName;
-	const bidStep = props.bidStep;
-	const currentPrice=props.currentPrice;
-	const auctioneerName = props.auctioneerName;
-	const isAuctioneer = props.isAuctioneer;
-	const showHistory = props.showHistory;
-	const lastBid = props.lastBid;
 	return (
 		<div id="bid-field">
 			<div id="item-wrapper">
 				<div id="name-wrapper">
-					<h1>{productName}</h1>
+					<h1>{props.data.productDetail.productName}</h1>
 				</div>
-				<p>by {auctioneerName}</p>
+				<p>by {props.data.auctioneerName}</p>
 			</div>
 			<div id="statistics">
 				<div>
 					<p className="stat-name">Hightest Bid</p>
-					<span id="highest-bid">${currentPrice}</span>
+					<span id="highest-bid">${props.data.currentPrice}</span>
 				</div>
 				<div>
 					<p className="stat-name">Time Remaining</p>
@@ -146,14 +139,14 @@ const Bidfield = (props)=>{
 				</div>
 			</div>
 			<Bidding 
-			bidStep={bidStep}
-			isAuctioneer={isAuctioneer} 
+			bidStep={props.data.bidStep}
+			isAuctioneer={props.data.isAuctioneer} 
 			submitBid={props.submitBid}
 			/>
 			
 			<div id="history-wrapper">
-				{lastBid > 0 ? <span>Your Last bid: {lastBid}$</span> : <></>}
-				{showHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
+				{props.data.lastBid > 0 ? <span>Your Last bid: {props.data.lastBid}$</span> : <></>}
+				{props.showHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
 			</div>
 		</div>
 	)
@@ -163,8 +156,6 @@ const Auction = (props) =>{
 	const { auctionId } = useParams();
 	const [data,setData] = useState({});
 	const [status,setStatus]=useState("unknown");
-	const isAuctioneer=true; // Testing
-	const auctioneerName="Waku Waku"; // testing
 	const showHistory=true; // testing
 	const showRanking=false; //show ranking and move gallery // testing
 	const submitBid = (price, isAbsolute)=>{
@@ -213,14 +204,7 @@ const Auction = (props) =>{
 						<Ranking />:
 						<Gallery pictures={data.productDetail.productPicture}/>}
 					<Bidfield 
-					auctioneer={data.auctioneer}
-					currentPrice={data.currentPrice}
-					productName={data.productDetail.productName}
-					endDate={data.endDate}
-					bidStep={data.bidStep}
-					auctioneerName={data.auctioneerID}
-					isAuctioneer={data.isAuctioneer}
-					lastBid={data.myLastBid}
+					data={data}
 					showHistory={showHistory}
 					submitBid={submitBid}
 					/>
