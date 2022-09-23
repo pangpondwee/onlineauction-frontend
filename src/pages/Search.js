@@ -146,9 +146,9 @@ const Search = (props) =>{
 		}
 		return (
 			<>
-			<p className="headSearch">Nintendo Switch</p>
+			<p className="headSearch">{name}</p>
 			<div className="topSearch">		
-				<p className="detailSearch">1000 items found for “Nintendo Switch”</p>
+				<p className="detailSearch">{auctionCard_element.length} items found for "{name}"</p>
 				<p className="">Sort by
 					<select id="select1">
 						<option value="Newest">Newest</option>
