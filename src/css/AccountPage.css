@@ -63,10 +63,10 @@ li.menu-dropdown {
 .profile-pic {
     width: 25vw;
     height: 45vh;
-    /* max-width: 350px;
+    max-width: 350px;
     max-height: 350px;
     min-width: 200px;
-    min-height: 200px; */
+    min-height: 200px;
     /* border-color: black;
   border-style: solid; */
 }
