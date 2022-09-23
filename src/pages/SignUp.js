@@ -6,30 +6,85 @@ import Card from "../components/Card";
 import pic1 from "../pictures/loginpic.jpg";
 import { Link,useOutletContext,useNavigate } from "react-router-dom";
 import { postData } from "../components/fetchData";
+const TabSignUp = (props)=>{
+  return (
+    <div
+      className="tab-pane fade show active"
+      id="SignUp-tab-pane"
+      role="tabpanel"
+      aria-labelledby="SignUp-tab"
+      tabIndex={"0"}
+    >
+      <form className={classes.Form}>
+        <label htmlFor="displayname">Display Name</label>
+        <input
+          id="displayname"
+          type="displayname"
+          placeholder="Display Name"
+        />
+        <label htmlFor="email">Email</label>
+        <input id="email" type="text" placeholder="Email" ref={props.email}/>
+        <label htmlFor="password">Password</label>
+        <input id="password" type="text" placeholder="Password" ref={props.password}/>
+        <label htmlFor="confirmpassword" ref={props.confirmPassword}>Confirm Password</label>
+        <input
+          id="confirmpassword"
+          type="text"
+          placeholder="Confirm Password"
+        />
+        <div>
+          <input type="submit" className={classes.button} value="Sign Up"/>
+        </div>
+      </form>
+    </div>
+  )
+}
 
+const TabSignIn = (props)=>{
+  return (
+    <div
+      className="tab-pane fade"
+      id="SignIn-tab-pane"
+      role="tabpanel"
+      aria-labelledby="SignIn-tab"
+      tabIndex={"1"}
+    >
+      <form className={classes.Form} action="" onSubmit={props.submit}>
+        <label htmlFor="email">Email</label>
+        <input id="email" type="text" placeholder="Email" ref={props.email}/>
+        <label htmlFor="password">Password</label>
+        <input id="password" type="password" placeholder="Password" ref={props.password}/>
+        <Link to={"#"}>Forgot Password?</Link>
+        <div>
+          <input type="submit" className={classes.button} value="Sign In"/>
+        </div>
+      </form>
+    </div>
+  )
+}
 const SignUp = () => {
   let navigate = useNavigate();
   const [loggedIn, setloggedIn] = useOutletContext();
-  const email = useRef();
-  const password = useRef();
-  const confirmPassword = useRef();
+  const signinEmail = useRef();
+  const signinPassword = useRef();
+  const signupEmail = useRef();
+  const signupPassword = useRef();
+  const signupConfirm = useRef();
   const onSignInSubmit = (e) => {
     postData(
       "/user/signin",
       JSON.stringify({
-        email: email.current.value.trim(),
-        password: password.current.value.trim()
+        email: signinEmail.current.value.trim(),
+        password: signinPassword.current.value.trim()
       }))
     .then((res) => {
-      if (res.status == "success") {
-        const data = res.data.user;
-        localStorage.setItem("displayName", data.displayName);
-        localStorage.setItem("token", res.token);
-        setloggedIn(true);
-        navigate("/");
-      } else {
-        throw new Error(res.message);
-      }
+			if(!res.status) throw new Error("Could not get status")
+			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
+      const data = res.data.user;
+      localStorage.setItem("displayName", data.displayName);
+      localStorage.setItem("token", res.token);
+      setloggedIn(true);
+      navigate("/");
     })
     .catch((error)=>{
       console.log(error)
@@ -75,53 +130,16 @@ const SignUp = () => {
             </li>
           </ul>
           <div className="tab-content" id="myTabContent">
-            <div
-              className="tab-pane fade show active"
-              id="SignUp-tab-pane"
-              role="tabpanel"
-              aria-labelledby="SignUp-tab"
-              tabIndex={"0"}
-            >
-              <form className={classes.Form}>
-                <label htmlFor="displayname">Display Name</label>
-                <input
-                  id="displayname"
-                  type="displayname"
-                  placeholder="Display Name"
-                />
-                <label htmlFor="email">Email</label>
-                <input id="email" type="text" placeholder="Email" ref={email}/>
-                <label htmlFor="password">Password</label>
-                <input id="password" type="text" placeholder="Password" ref={password}/>
-                <label htmlFor="confirmpassword" ref={confirmPassword}>Confirm Password</label>
-                <input
-                  id="confirmpassword"
-                  type="text"
-                  placeholder="Confirm Password"
-                />
-                <div>
-                  <input type="submit" className={classes.button} value="Sign Up"/>
-                </div>
-              </form>
-            </div>
-            <div
-              className="tab-pane fade"
-              id="SignIn-tab-pane"
-              role="tabpanel"
-              aria-labelledby="SignIn-tab"
-              tabIndex={"1"}
-            >
-              <form className={classes.Form} action="" onSubmit={onSignInSubmit}>
-                <label htmlFor="email">Email</label>
-                <input id="email" type="text" placeholder="Email" ref={email}/>
-                <label htmlFor="password">Password</label>
-                <input id="password" type="password" placeholder="Password" ref={password}/>
-                <Link to={"#"}>Forgot Password?</Link>
-                <div>
-                  <input type="submit" className={classes.button} value="Sign In"/>
-                </div>
-              </form>
-            </div>
+            <TabSignIn
+              email={signinEmail}
+              password={signinPassword}
+              submit={onSignInSubmit}
+            />
+            <TabSignUp
+              email={signupEmail}
+              password={signupPassword}
+              confirmPassword={signupConfirm}
+            />
           </div>
         </Card>
       </div>
