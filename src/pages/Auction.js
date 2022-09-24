@@ -210,8 +210,6 @@ const Auction = (props) =>{
 				}
 			))
 			.then((res)=>{
-				if(!res.status) throw new Error("Could not get status")
-				if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
 				setData(prevData=>{
 					return { ...prevData, currentPrice: price }
 				})
@@ -225,9 +223,7 @@ const Auction = (props) =>{
 	useEffect(()=>{
 		getData(`/auction/${auctionId}`)
 		.then((res)=>{
-			if(!res.status) throw new Error("Could not get status")
 			setStatus(res.status);
-			if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
 			setData(res.data);
 			setLastBid(res.data.myLastBid)
 			return res.data.auctioneerID
@@ -237,11 +233,10 @@ const Auction = (props) =>{
 		})
 		.then((res)=>{
 			// TODO fix with api
-			if(!res.result) throw new Error("Could not get status")
-			if(res.result == "fail" || res.result == "error") throw new Error(res.message)
 			setAuctioneer(res.user.displayName)
 		})
 		.catch((e)=>{
+			setStatus("error");
 			setData(e.message)
 		})
 	},[]);
