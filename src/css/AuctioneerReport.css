@@ -1,0 +1,34 @@
+:root{
+	--color-primary: #C3D3E0;
+	--color-secondary: #A3BCD0;
+	--color-dark: #091235;
+	--radius: 20px;
+}
+
+.Report {
+  position: absolute;
+  right: 50px;
+  border-radius: 20%;
+}
+
+.modal-report-header-text {
+  margin-left: 10px;
+}
+  
+.modal-body-report {
+  margin: 20px 0px 20px 25px;
+}
+  
+.modal-body-report div {
+  margin: 10px 0px 10px 12px;
+}
+  
+.report-box {
+  border: 3px solid var(--color-primary);
+  border-radius: 10px;
+  width: 400px;
+  height: 200px;
+  margin-left: 25px;
+  margin-top: 10px;
+  padding: 10px;
+}
