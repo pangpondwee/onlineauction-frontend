@@ -35,7 +35,7 @@ function App() {
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="place-auction" element={<PlaceAuction />} />
-          <Route path="payment" element={<Payment />} />
+          <Route path="payment/:auctionId" element={<Payment />} />
           <Route path="shipping" element={<Shipping />} />
           <Route path="billing-info" element={<BillingInfo />} />
           <Route path="auctioneer/:auctioneerID" element={<ViewAuctioneer />} />
