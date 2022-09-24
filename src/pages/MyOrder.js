@@ -9,7 +9,7 @@ function text_alert(status){
     else if(status==="bidder-to-pay") return "Waiting for your payment"
     else if(status==="bidder-to-pay-wait-admin") return "Waiting for admin to confirm your payment"
     else if(status==="to-delivered") return "Waiting for auctioneer to ship your item"
-    else if(status==="To Confirm") return "An item is on its way to you. You can check a tracking number here.If you’re satisfy with your item, click accept."
+    else if(status==="bidder-to-confirm") return "An item is on its way to you. You can check a tracking number here.If you’re satisfy with your item, click accept."
     else if(status==="on-auction") return "Time left: 13 hr 13 m 13 s"
     else if(status==="auctioneer-to-pay") return "Waiting for payment from Pongsatorn (Bidder)"
     else if(status==="to-shipped") return "Waiting for your payment"
@@ -71,24 +71,28 @@ const MyOrder = () =>{
 	// 	})
 	// },[]);
 
-   const _data = [{}, {}]
+   const _data = [{_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"}, 
+                {_name: "Nintendo Switch", _status: "bidder-to-pay", by_who:"Kong Pakkapol"},
+                {_name: "Nintendo Switch", _status: "bidder-to-pay-wait-admin", by_who:"Kong Pakkapol"},
+                {_name: "Nintendo Switch", _status: "to-delivered", by_who:"Kong Pakkapol"},
+                {_name: "Nintendo Switch", _status: "bidder-to-confirm", by_who:"Kong Pakkapol"},
+                {_name: "Nintendo Switch", _status: "completed", by_who:"Kong Pakkapol"},
+                {_name: "Nintendo Switch", _status: "on-auction"},
+                {_name: "Nintendo Switch", _status: "auctioneer-to-pay"},
+                {_name: "Nintendo Switch", _status: "to-shipped"},
+                {_name: "Nintendo Switch", _status: "auctioneer-to-confirm"},
+                {_name: "Nintendo Switch", _status: "completed"}]
+
+    const display = []
+    _data.forEach(element => {
+        display.push(<OrderObj name={element._name} status_class={element._status} text_alert={text_alert(element._status)} by_who={element.by_who}/>)
+    });
 
 	return (
         <>
             {(location.search.split("?")[1] === "list=bid")? <MyBidNav/> : <MyAuctionNav/>}
             <div className="all-review">
-                {/* store each order */}
-                <OrderObj status="Currently Bid" status_class="currently_bid" text_alert={text_alert("currently_bid")} by_who="(By Kong Pakkapol)"/>
-                <OrderObj status="To Pay" status_class="bidder-to-pay" text_alert={text_alert("bidder-to-pay")} by_who="(By Kong Pakkapol)"/>
-                <OrderObj status="To Pay" status_class="bidder-to-pay-wait-admin" text_alert={text_alert("bidder-to-pay-wait-admin")} by_who="(By Kong Pakkapol)"/>
-                <OrderObj status="To Delivered" status_class="to-delivered" text_alert={text_alert("to-delivered")} by_who="(By Kong Pakkapol)"/>
-                <OrderObj status="To Confirm" status_class="bidder-to-confirm" text_alert={text_alert("bidder-to-confirm")} by_who="(By Kong Pakkapol)" />
-                <OrderObj status="Completed" status_class="completed" by_who="(By Kong Pakkapol)"/>
-                <OrderObj status="On Auction" status_class="on-auction" text_alert={text_alert("on-auction")}/>
-                <OrderObj status="To Pay" status_class="auctioneer-to-pay" text_alert={text_alert("auctioneer-to-pay")}/>
-                <OrderObj status="To Shipped" status_class="to-shipped" text_alert={text_alert("currently_bid")}/>
-                <OrderObj status="To Confirm" status_class="auctioneer-to-confirm" text_alert={text_alert("to-shipped")}/>
-                <OrderObj status="Completed" status_class="completed"/>
+                {display}
             </div>
         </>
 	)
