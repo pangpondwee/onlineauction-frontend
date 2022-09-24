@@ -180,7 +180,7 @@ const Bidfield = (props)=>{
 			/>
 			
 			<div id="history-wrapper">
-				{props.data.lastBid > 0 ? <span>Your Last bid: {props.data.lastBid}$</span> : <></>}
+				{props.lastBid > 0 ? <span>Your Last bid: {props.lastBid}$</span> : <></>}
 				{props.showHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
 			</div>
 		</div>
@@ -193,6 +193,7 @@ const Auction = (props) =>{
 	const [status,setStatus]=useState("unknown");
 	const showHistory=true; // testing
 	const showRanking=false; //show ranking and move gallery // testing
+	const [lastBid,setLastBid] = useState(0)
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -213,6 +214,7 @@ const Auction = (props) =>{
 				setData(prevData=>{
 					return { ...prevData, currentPrice: price }
 				})
+				setLastBid(price)
 			})
 			.catch(e=>{
 				console.log(e.message)//TODO handle
@@ -224,6 +226,7 @@ const Auction = (props) =>{
 			setStatus(res.status);
 			if(res.status == "success"){
 				setData(res.data);
+				setLastBid(res.data.myLastBid)
 			}
 			else{
 				setData(res.message);
@@ -242,6 +245,7 @@ const Auction = (props) =>{
 					data={data}
 					showHistory={showHistory}
 					submitBid={submitBid}
+					lastBid={lastBid}
 					/>
 				</div>
 				<hr/>
