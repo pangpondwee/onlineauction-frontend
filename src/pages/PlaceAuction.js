@@ -36,8 +36,6 @@ const AuctionDetail = () => {
   const [modalShow, setModalShow] = useState(false)
 
   const submitHandler = (event) => {
-    setModalShow(false)
-    event.preventDefault()
     const enteredItemName = itemNameInputRef.current.value
     const enteredItemDetails = itemDetailsInputRef.current.value
     const enteredItemCategory = itemCategoryInputRef.current.value
@@ -81,7 +79,13 @@ const AuctionDetail = () => {
   return (
     <div>
       <h1 className="header">Place Auction</h1>
-      <form className="place-auction-form" onSubmit={() => setModalShow(true)}>
+      <form
+        className="place-auction-form"
+        onSubmit={(event) => {
+          setModalShow(true)
+          event.preventDefault()
+        }}
+      >
         <div className="form-heading1">ITEM INFORMATION</div>
         <div className="sub-form">
           <div className="form-input-field">
@@ -274,7 +278,10 @@ const AuctionDetail = () => {
           <button
             type="button"
             className="btn btn-primary first-button"
-            onClick={submitHandler}
+            onClick={() => {
+              submitHandler()
+              setModalShow(false)
+            }}
           >
             Confirm?
           </button>
