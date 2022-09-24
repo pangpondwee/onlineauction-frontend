@@ -1,4 +1,5 @@
 import React from "react";
+import '../css/AuctioneerProfile.css';
 
 const Auctions = () => {
     return (
