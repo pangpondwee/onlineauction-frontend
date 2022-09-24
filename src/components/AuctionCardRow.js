@@ -3,23 +3,6 @@ import AuctionCard from "../components/AuctionCard";
 import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
 // import AuctionCardForRow from "./AuctionCardForRow";
-function getDate(timeRemaining){
-	// TODO make date lighter
-	const d = new Date(Number(timeRemaining));
-	const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
-	const d_hour = d.getHours();
-	const d_minute = d.getMinutes();
-	const d_seconds = d.getSeconds();
-	if(timeRemaining <= 0){
-		return "Ended";
-	}
-	if(d_days > 2){
-		return `${d_days} day(s)`;
-	}
-	else{
-		return `${d_hour}hr ${d_minute}m ${d_seconds}s`;
-	}
-}
 
 const AuctionCardRow = (props) =>{
     let auctionCard_element = []
@@ -33,7 +16,7 @@ const AuctionCardRow = (props) =>{
             name={props.data[i].productName}
             price={price} 
             picture={props.data[i].coverPicture}
-            time={getDate(timeRemaining)}/>
+            time={timeRemaining}/>
         )
     }
 	return (
