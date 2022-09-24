@@ -2,6 +2,7 @@ import OrderObj from "../components/OrderObj";
 import {MyBidNav, MyAuctionNav} from "../components/MyOrderNav";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import {getData, postData} from '../components/fetchData';
 
 function text_alert(status){
     if(status==="currently_bid") return "Your last bid: 1800$"
@@ -20,20 +21,57 @@ const MyOrder = () =>{
 
     const location = useLocation()
 
-    const [data,setData] = useState({});
+    const [data_mybid_active,setData_myBid_active] = useState({});
+    const [data_mybid_wait,setData_myBid_wait] = useState({});
+    const [data_myauction_active,setData_myAuction_active] = useState({});
+    const [data_myAuction_wait,setData_myAuction_wait] = useState({});
+
     const [status,setStatus]=useState("unknown");
 
     // useEffect(()=>{
-	// 	getData(`/api/user/myorder?list='`).then((res)=>{
+    //     //data_mybid_active
+	// 	getData(`/api/user/myorder?filter=mybid`).then((res)=>{
 	// 		setStatus(res.status);
 	// 		if(res.status == "success"){
-	// 			setData(res.data);
+	// 			setData_myBid_active(res.data);
 	// 		}
 	// 		else{
-	// 			setData(res.message);
+	// 			setData_myBid_active(res.message);
+	// 		}
+	// 	})
+    //     //data_mybid_wait
+    //     getData(`/api/user/myorder?list=mybid`).then((res)=>{
+	// 		setStatus(res.status);
+	// 		if(res.status == "success"){
+	// 			setData_myBid_wait(res.data);
+	// 		}
+	// 		else{
+	// 			setData_myBid_wait(res.message);
+	// 		}
+	// 	})
+    //     //data_myauction_active
+    //     getData(`/api/user/myorder?filter=myauction`).then((res)=>{
+	// 		setStatus(res.status);
+	// 		if(res.status == "success"){
+	// 			setData_myAuction_active(res.data);
+	// 		}
+	// 		else{
+	// 			setData_myAuction_active(res.message);
+	// 		}
+	// 	})
+    //     //data_myAuction_wait
+    //     getData(`/api/user/myorder?list=myauction`).then((res)=>{
+	// 		setStatus(res.status);
+	// 		if(res.status == "success"){
+	// 			setData_myAuction_wait(res.data);
+	// 		}
+	// 		else{
+	// 			setData_myAuction_wait(res.message);
 	// 		}
 	// 	})
 	// },[]);
+
+   const _data = [{}, {}]
 
 	return (
         <>
