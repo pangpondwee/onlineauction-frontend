@@ -22,6 +22,7 @@ import MyOrder from "./pages/MyOrder"
 import MyReview from "./pages/MyReview"
 import MyFollowing from "./pages/MyFollowing"
 import Auction from "./pages/Auction"
+import Search from "./pages/Search";
 
 
 function App() {
@@ -39,8 +40,10 @@ function App() {
           <Route path="payment" element={<Payment />} />
           <Route path="shipping" element={<Shipping />} />
           <Route path="billing-info" element={<BillingInfo />} />
-          <Route path="view-auctioneer" element={<ViewAuctioneer />} />
+          <Route path="auctioneer/:auctioneerID" element={<ViewAuctioneer />} />
           <Route path="faq" element={<FAQ />} />
+			    <Route path="search" element={<Search />} />
+			    <Route path="search/:pageNumber" element={<Search />} />
           <Route path="account" element={<AccountLayout/>}>
             <Route path="profile" element={<AccountPage/>}/>
             <Route path="edit" element={<AccountEdit/>}/>

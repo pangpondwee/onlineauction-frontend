@@ -1,41 +1,48 @@
-export const fetchData = async (url)=>{
+const API_SERVER = process.env.REACT_APP_API_SERVER || "localhost:4000"
+
+function set_header(){
+	let headers = {
+		'Content-Type': "application/json",
+	}
+	const token = localStorage.getItem("token");
+	if (token){
+		headers["Authorization"] = 'Bearer '+token
+	}
+	return headers
+}
+
+export const getData = async (url)=>{
 	// TODO use auctionId
-	return fetch(url)
+	return fetch(API_SERVER+url,{
+		method: 'GET',
+		headers:set_header()
+	})
+	.then((result)=>{
+		return result.json();
+	})
 	.then((res)=>{
-		// if(!res.ok){
-		// 	throw new Error(res.status); // Error 400 500
-		// }
-		// else{
-			return res.json();
-		// }
-	})
-	.then(res_data=>{
-		if(res_data.status == "success"){
-			return ["success",res_data.data];
-		}
-		else{
-			throw new Error(res_data.message);
-		}
-	})
-	.catch(error=>{
-		return ["fail",{message : error.message}]
+		if(!res.status) throw new Error("Could not get status")
+		if(res.status == "success") return res
+		throw new Error(res.message)
 	})
 }
 
 export const postData = async (url,data)=>{
 	// TODO use auctionId
-	return fetch(url,{
+	return fetch(API_SERVER+url,{
 		method: 'POST',
 		mode: 'cors',
 		credentials: 'include',
-		headers: {
-			'Content-Type': "application/json",
-			'Authorization': 'Bearer '+localStorage.getItem("token")
-		},
+		headers: set_header(),
 		body: data
 	})
 	.then((res)=>{
 		return res.json();
 	})
+	.then((res)=>{
+		if(!res.status) throw new Error("Could not get status")
+		if(res.status == "success") return res
+		throw new Error(res.message)
+	})
 }
-export default fetchData;
+export default getData;

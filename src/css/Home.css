@@ -1,14 +1,25 @@
 .card{
-	width: 18rem;
+	width: 9.5rem;
+  /* width: 18rem;
+  min-width: 10rem; */
   margin: auto 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: var(--box-shadow);
   background-color: #F8F9FA;
+  /* min-width: 15%; */
+  /* height: 9.2rem; */
 }
 
-.test{
+/* .cardBody{
+  border: 2px solid red;
+  margin-left: -10%;
+  margin-right: -10%;
+} */
+
+.flexRow{
   display: flex;
   box-sizing: border-box;
-  justify-content: space-around;  
+  /* justify-content: space-around; */
+  justify-content: left;
 }
 
 .headHome{
@@ -41,12 +52,16 @@
   background-color: white;
   width: 7rem;
   border-radius: 15px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: var(--box-shadow);
+  text-align: center;
 }
 
 .card-img-top{
-  height: 15vw;
-  object-fit: cover; /* add object-fit: cover; to fit image for card*/
+  /* height: 15vm; */
+  height: 150px;
+  object-fit: cover; /*add object-fit: cover; to fit image for card*/
+  /* min-width: 15%; */
+  min-height: 112.5px;
 }
 
 .card-text{
@@ -71,4 +86,17 @@
 .filter{
   position: absolute;
   left: 85.1%;
+}
+
+.itemName-link{
+  text-decoration: none;
+  color: black;
+}
+
+.itemName-link:hover{
+  color: black;
+}
+
+.row>* {
+  padding: 0px;
 }
