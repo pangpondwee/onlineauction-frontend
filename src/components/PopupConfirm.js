@@ -1,5 +1,6 @@
 import React from "react";
 import confirm from "../pictures/confirm.png";
+import '../css/PopupConRev.css'
 
 const PopupConfirm = () => {
     return (
