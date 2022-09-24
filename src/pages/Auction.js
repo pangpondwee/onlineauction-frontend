@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
@@ -151,13 +151,14 @@ const Bidfield = (props)=>{
 	const timeRemaining = props.data.endDate - Date.now()
 	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 	const isEnded = timeRemaining < 0 ? true : false;
+	const auctioneerLink = "/auctioneer/"+props.data.auctioneerID;
 	return (
 		<div id="bid-field">
 			<div id="item-wrapper">
 				<div id="name-wrapper">
 					<h1>{props.data.productDetail.productName}</h1>
 				</div>
-				<p>by {props.auctioneer}</p>
+				<p>by <Link to={auctioneerLink}>{props.auctioneer}</Link></p>
 			</div>
 			<div id="statistics">
 				<div>
