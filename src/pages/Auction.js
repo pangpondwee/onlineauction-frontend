@@ -229,12 +229,13 @@ const Auction = (props) =>{
 			return res.data.auctioneerID
 		})
 		.then((auctioneerID)=>{ // get auctioneer
-			return getData(`/user/profile/${auctioneerID}`)
+			// return getData(`/user/profile/${auctioneerID}`)
+			setAuctioneer(auctioneerID)
 		})
-		.then((res)=>{
-			// TODO fix with api
-			setAuctioneer(res.user.displayName)
-		})
+		// .then((res)=>{
+		// 	// TODO fix with api
+		// 	setAuctioneer(res.user.displayName)
+		// })
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
