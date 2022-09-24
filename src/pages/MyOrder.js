@@ -37,7 +37,7 @@ const MyOrder = () =>{
 
 	return (
         <>
-            {(location.search.split("?")[1] === "bid")? <MyBidNav/> : <MyAuctionNav/>}
+            {(location.search.split("?")[1] === "list=bid")? <MyBidNav/> : <MyAuctionNav/>}
             <div className="all-review">
                 {/* store each order */}
                 <OrderObj status="Currently Bid" status_class="currently_bid" text_alert={text_alert("currently_bid")} by_who="(By Kong Pakkapol)"/>

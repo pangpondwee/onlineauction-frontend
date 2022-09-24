@@ -85,7 +85,7 @@ const AccountEdit = (props) =>{
                         </div>
                         <div>
                             <label><h5>Description</h5></label><br/>
-                            <textarea type="text" id="Description" className="input-editing" rows="5" placeholder={data.description}/>
+                            <textarea type="text" id="Description" className="input-editing" rows="7" placeholder={data.description}/>
                         </div>
                     </div>
                 </div>
