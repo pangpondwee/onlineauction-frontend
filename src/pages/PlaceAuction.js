@@ -63,38 +63,12 @@ const AuctionDetail = () => {
     if (enteredExpectedPrice.length > 0) {
       auctionData.expectedPrice = Number(enteredExpectedPrice)
     }
-    // console.log(
-    //   `enteredExpectedPrice ${typeof enteredExpectedPrice} length ${
-    //     enteredExpectedPrice.length
-    //   }`
-    // )
-    // console.log(
-    //   `enteredMinimumBidStep ${typeof enteredMinimumBidStep} length ${
-    //     enteredMinimumBidStep.length
-    //   }`
-    // )
 
-    // fetch('http://13.250.98.9/api/auction/upload', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   credentials: 'include',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(auctionData),
-    // })
-    //   .then((res) => {
-    //     return res.json()
-    //   })
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-
-    const res = postData('/auction/upload',
-      JSON.stringify(auctionData)
-    ).then((res) => {
-      console.log(res)
-    })
+    const res = postData('/auction/upload', JSON.stringify(auctionData)).then(
+      (res) => {
+        console.log(res)
+      }
+    )
 
     console.log(res)
     console.log(JSON.stringify(auctionData))
