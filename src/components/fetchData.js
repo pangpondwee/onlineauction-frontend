@@ -17,8 +17,13 @@ export const getData = async (url)=>{
 		method: 'GET',
 		headers:set_header()
 	})
+	.then((result)=>{
+		return result.json();
+	})
 	.then((res)=>{
-		return res.json();
+		if(!res.status) throw new Error("Could not get status")
+		if(res.status == "success") return res
+		throw new Error(res.message)
 	})
 }
 
@@ -33,6 +38,11 @@ export const postData = async (url,data)=>{
 	})
 	.then((res)=>{
 		return res.json();
+	})
+	.then((res)=>{
+		if(!res.status) throw new Error("Could not get status")
+		if(res.status == "success") return res
+		throw new Error(res.message)
 	})
 }
 export default getData;
