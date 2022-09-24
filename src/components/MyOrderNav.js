@@ -10,23 +10,23 @@ export const MyAuctionNav = () =>{
 
 	return (
 		<nav className="My-Order-Nav">
-			<div className={`Order-Menu ${c_tab("all")}`}>
-                <Link to="/account/myorder?auction?all" className="menu-link">All</Link>
+			<div className={`Order-Menu ${c_tab("type=all")}`}>
+                <Link to="/account/myorder?list=auction?type=all" className="menu-link">All</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("current")}`}>
-                <Link to="/account/myorder?auction?current" className="menu-link">Currently On Auction</Link>
+			<div className={`Order-Menu ${c_tab("type=current")}`}>
+                <Link to="/account/myorder?list=auction?type=current" className="menu-link">Currently On Auction</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("pay")}`}>
-                <Link to="/account/myorder?auction?pay" className="menu-link">To Pay</Link>
+			<div className={`Order-Menu ${c_tab("type=pay")}`}>
+                <Link to="/account/myorder?list=auction?type=pay" className="menu-link">To Pay</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("shipped")}`}>
-                <Link to="/account/myorder?auction?shipped" className="menu-link">To Shipped</Link>
+			<div className={`Order-Menu ${c_tab("type=shipped")}`}>
+                <Link to="/account/myorder?list=auction?type=shipped" className="menu-link">To Shipped</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("confirm")}`}>
-                <Link to="/account/myorder?auction?confirm" className="menu-link">To Confirm</Link>
+			<div className={`Order-Menu ${c_tab("type=confirm")}`}>
+                <Link to="/account/myorder?list=auction?type=confirm" className="menu-link">To Confirm</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("complete")}`}>
-                <Link to="/account/myorder?auction?complete" className="menu-link">Completed</Link>
+			<div className={`Order-Menu ${c_tab("type=complete")}`}>
+                <Link to="/account/myorder?list=auction?type=complete" className="menu-link">Completed</Link>
 			</div>
 		</nav>
 	)
@@ -41,23 +41,23 @@ export const MyBidNav = () =>{
 
 	return (
 		<nav className="My-Order-Nav">
-			<div className={`Order-Menu ${c_tab("all")}`}>
-				<Link to="/account/myorder?bid?all" className="menu-link">All</Link>
+			<div className={`Order-Menu ${c_tab("type=all")}`}>
+				<Link to="/account/myorder?list=bid?type=all" className="menu-link">All</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("current")}`}>
-				<Link to="/account/myorder?bid?current" className="menu-link">Currently Bidding</Link>
+			<div className={`Order-Menu ${c_tab("type=current")}`}>
+				<Link to="/account/myorder?list=bid?type=current" className="menu-link">Currently Bidding</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("pay")}`}>
-				<Link to="/account/myorder?bid?pay" className="menu-link">To Pay</Link>
+			<div className={`Order-Menu ${c_tab("type=pay")}`}>
+				<Link to="/account/myorder?list=bid?type=pay" className="menu-link">To Pay</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("delivered")}`}>
-				<Link to="/account/myorder?bid?delivered" className="menu-link">To Delivered</Link>
+			<div className={`Order-Menu ${c_tab("type=delivered")}`}>
+				<Link to="/account/myorder?list=bid?type=delivered" className="menu-link">To Delivered</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("confirm")}`}>
-				<Link to="/account/myorder?bid?confirm" className="menu-link">To Confirm</Link>
+			<div className={`Order-Menu ${c_tab("type=confirm")}`}>
+				<Link to="/account/myorder?list=bid?type=confirm" className="menu-link">To Confirm</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("complete")}`}>
-				<Link to="/account/myorder?bid?complete" className="menu-link">Completed</Link>
+			<div className={`Order-Menu ${c_tab("type=complete")}`}>
+				<Link to="/account/myorder?list=bid?type=complete" className="menu-link">Completed</Link>
 			</div>
 		</nav>
 	)

@@ -20,11 +20,11 @@ const AccountNav = () =>{
 			<div className="menu">
 				<h5>My Order</h5>
 				<ul className="no-bullets">
-					<li className={`menu-dropdown ${c_tab("myorder", "bid")}`}>
-						<Link to="/account/myorder?bid?all" className="menu-link">My Bid</Link>
+					<li className={`menu-dropdown ${c_tab("myorder", "list=bid")}`}>
+						<Link to="/account/myorder?list=bid?type=all" className="menu-link">My Bid</Link>
 					</li>
-					<li className={`menu-dropdown ${c_tab("myorder", "auction")}`}>
-						<Link to="/account/myorder?auction?all" className="menu-link">My Auction</Link>
+					<li className={`menu-dropdown ${c_tab("myorder", "list=auction")}`}>
+						<Link to="/account/myorder?list=auction?type=all" className="menu-link">My Auction</Link>
 					</li>
 				</ul>
 			</div>
