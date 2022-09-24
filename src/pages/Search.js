@@ -80,15 +80,13 @@ const Search = () =>{
 	useEffect(()=>{
 		getData("/auction/search?name=.")
 		.then((res)=>{
-			if(!res.status) throw new Error("Could not get status")
-			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
 			setStatus(res.status)
 			setData(res.data)
 			setPageCount(res.data.pageCount)
 		})
 		.catch(e=>{
-			setData(e.message)
 			setStatus("error")
+			setData(e.message)
 		})
 	},[])
 
