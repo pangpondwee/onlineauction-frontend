@@ -1,7 +1,7 @@
 import blank_profile from "../pictures/blank_profile.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {getData, postData} from '../components/fetchData';
+import {getData, patchData} from '../components/fetchData';
 
 const AccountEdit = (props) =>{
     const [prepic, setPrepic] = useState(blank_profile)

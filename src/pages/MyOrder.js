@@ -2,7 +2,7 @@ import OrderObj from "../components/OrderObj";
 import {MyBidNav, MyAuctionNav} from "../components/MyOrderNav";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {getData, postData} from '../components/fetchData';
+import {getData} from '../components/fetchData';
 
 function text_alert(status){
     if(status==="currently_bid") return "Your last bid: 1800$"
@@ -18,15 +18,37 @@ function text_alert(status){
 }
 
 const MyOrder = () =>{
-
     const location = useLocation()
+    const [tmp, list, type] = location.search.split("?")
 
-    const [data_mybid_active,setData_myBid_active] = useState({});
-    const [data_mybid_wait,setData_myBid_wait] = useState({});
-    const [data_myauction_active,setData_myAuction_active] = useState({});
-    const [data_myAuction_wait,setData_myAuction_wait] = useState({});
+    const [data_mybid_active,setData_myBid_active] = useState([{_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"},
+                                                    {_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"},
+                                                    {_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"}]);
+    const [data_mybid_wait,setData_myBid_wait] = useState([{_name: "Nintendo Switch", _status: "bidder-to-pay", by_who:"Kong Pakkapol"},
+                                                    {_name: "Nintendo Switch", _status: "bidder-to-pay-wait-admin", by_who:"Kong Pakkapol"},
+                                                    {_name: "Nintendo Switch", _status: "to-delivered", by_who:"Kong Pakkapol"},
+                                                    {_name: "Nintendo Switch", _status: "bidder-to-confirm", by_who:"Kong Pakkapol"},
+                                                    {_name: "Nintendo Switch", _status: "completed", by_who:"Kong Pakkapol"}]);
+    const [data_myauction_active,setData_myAuction_active] = useState([{_name: "Nintendo Switch", _status: "on-auction"},
+                                                    {_name: "Nintendo Switch", _status: "on-auction"},
+                                                    {_name: "Nintendo Switch", _status: "on-auction"}]);
+    const [data_myauction_wait,setData_myAuction_wait] = useState([{_name: "Nintendo Switch", _status: "auctioneer-to-pay"},
+                                                    {_name: "Nintendo Switch", _status: "to-shipped"},
+                                                    {_name: "Nintendo Switch", _status: "auctioneer-to-confirm"},
+                                                    {_name: "Nintendo Switch", _status: "completed"}]);
 
     const [status,setStatus]=useState("unknown");
+
+    const status_to_link = {
+        "bidder-to-pay" : "pay",
+        "bidder-to-pay-wait-admin" : "pay",
+        "auctioneer-to-pay" : "pay",
+        "to-shipped" : "shipped",
+        "bidder-to-confirm" : "confirm",
+        "auctioneer-to-confirm" : "confirm",
+        "completed" : "complete",
+        "to-delivered" : "delivered",
+    }
 
     // useEffect(()=>{
     //     //data_mybid_active
@@ -71,17 +93,12 @@ const MyOrder = () =>{
 	// 	})
 	// },[]);
 
-   const _data = [{_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"}, 
-                {_name: "Nintendo Switch", _status: "bidder-to-pay", by_who:"Kong Pakkapol"},
-                {_name: "Nintendo Switch", _status: "bidder-to-pay-wait-admin", by_who:"Kong Pakkapol"},
-                {_name: "Nintendo Switch", _status: "to-delivered", by_who:"Kong Pakkapol"},
-                {_name: "Nintendo Switch", _status: "bidder-to-confirm", by_who:"Kong Pakkapol"},
-                {_name: "Nintendo Switch", _status: "completed", by_who:"Kong Pakkapol"},
-                {_name: "Nintendo Switch", _status: "on-auction"},
-                {_name: "Nintendo Switch", _status: "auctioneer-to-pay"},
-                {_name: "Nintendo Switch", _status: "to-shipped"},
-                {_name: "Nintendo Switch", _status: "auctioneer-to-confirm"},
-                {_name: "Nintendo Switch", _status: "completed"}]
+    let _data = []
+    
+    if(type==="type=all") _data = list==="list=bid"? [...data_mybid_active, ...data_mybid_wait] : [...data_myauction_active, ...data_myauction_wait];
+    else if(type==="type=current") _data = list==="list=bid"? data_mybid_active : data_myauction_active;
+    else if(list==="list=bid") _data = data_mybid_wait.filter(d=>(status_to_link[d._status]===type.slice(5)))
+    else if(list==="list=auction") _data = data_myauction_wait.filter(d=>(status_to_link[d._status]===type.slice(5)))
 
     const display = []
     _data.forEach(element => {
@@ -90,7 +107,7 @@ const MyOrder = () =>{
 
 	return (
         <>
-            {(location.search.split("?")[1] === "list=bid")? <MyBidNav/> : <MyAuctionNav/>}
+            {(list === "list=bid")? <MyBidNav/> : <MyAuctionNav/>}
             <div className="all-review">
                 {display}
             </div>
