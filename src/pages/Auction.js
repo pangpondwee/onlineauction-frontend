@@ -157,7 +157,7 @@ const Bidfield = (props)=>{
 				<div id="name-wrapper">
 					<h1>{props.data.productDetail.productName}</h1>
 				</div>
-				<p>by {props.data.auctioneerID}</p>
+				<p>by {props.auctioneer}</p>
 			</div>
 			<div id="statistics">
 				<div>
@@ -194,6 +194,7 @@ const Auction = (props) =>{
 	const showHistory=true; // testing
 	const showRanking=false; //show ranking and move gallery // testing
 	const [lastBid,setLastBid] = useState(0)
+	const [auctioneer,setAuctioneer] = useState("")
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -222,15 +223,26 @@ const Auction = (props) =>{
 		}
 	}
 	useEffect(()=>{
-		getData(`/auction/${auctionId}`).then((res)=>{
+		getData(`/auction/${auctionId}`)
+		.then((res)=>{
+			if(!res.status) throw new Error("Could not get status")
 			setStatus(res.status);
-			if(res.status == "success"){
-				setData(res.data);
-				setLastBid(res.data.myLastBid)
-			}
-			else{
-				setData(res.message);
-			}
+			if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
+			setData(res.data);
+			setLastBid(res.data.myLastBid)
+			return res.data.auctioneerID
+		})
+		.then((auctioneerID)=>{ // get auctioneer
+			return getData(`/user/profile/${auctioneerID}`)
+		})
+		.then((res)=>{
+			// TODO fix with api
+			if(!res.result) throw new Error("Could not get status")
+			if(res.result == "fail" || res.result == "error") throw new Error(res.message)
+			setAuctioneer(res.user.displayName)
+		})
+		.catch((e)=>{
+			setData(e.message)
 		})
 	},[]);
 	if(status === "success"){
@@ -243,6 +255,7 @@ const Auction = (props) =>{
 						<Gallery pictures={data.productDetail.productPicture}/>}
 					<Bidfield 
 					data={data}
+					auctioneer={auctioneer}
 					showHistory={showHistory}
 					submitBid={submitBid}
 					lastBid={lastBid}
