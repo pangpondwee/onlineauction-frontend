@@ -2,7 +2,8 @@ import promptpayqr from '../pictures/PromptpayQR.png'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import '../css/Payment.css'
 import { FilePond, registerPlugin } from 'react-filepond'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { postData, getData } from '../components/fetchData'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -22,6 +23,38 @@ registerPlugin(
 const Payment = () => {
   const [itemName, setItemName] = useState('Item Name')
   const [auctioneerName, setAuctioneerName] = useState('Auctioneer Name')
+  const [fullName, setFullName] = useState()
+  const [telephone, setTelephone] = useState()
+  const [billingAddress, setBillingAddress] = useState()
+  const [encodedTransactionSlip, setEncodedTransactionSlip] = useState([])
+  const [transactionDateTime, setTransactionDateTime] = useState()
+  const [value, setValue] = useState()
+
+  useEffect(() => {
+    const res = getData('http://13.250.98.9/api/payment/23484udsfuf3r9ur989fu')
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((e) => console.log(e))
+  }, [])
+
+  const usePhoneNumberFromProfileHandler = () => {
+    const res = getData('http://13.250.98.9/api/user/myprofile')
+      .then((res) => {
+        console.log(res.data.phoneNumber)
+      })
+      .catch((e) => console.log(e))
+    setTelephone(res.data.phoneNumber)
+  }
+  const useBillingAddressFromProfileHandler = () => {
+    const res = getData('http://13.250.98.9/api/user/myprofile')
+      .then((res) => {
+        console.log(res.data.address)
+      })
+      .catch((e) => console.log(e))
+    setBillingAddress(res.data.address)
+  }
+
   return (
     <div className="page-with-summary">
       <div className="form-section">
@@ -36,7 +69,8 @@ const Payment = () => {
               <input
                 type="text"
                 className="form-control"
-                id="inputFullName"
+                value={fullName}
+                onChange={setFullName}
                 placeholder="e.g. Peeranat Srisuthangkul"
               ></input>
             </div>
@@ -47,9 +81,13 @@ const Payment = () => {
               <input
                 type="text"
                 className="form-control"
-                id="inputTelephone"
+                value={telephone}
+                onChange={setTelephone}
                 placeholder="e.g. 0620000000"
               ></input>
+              <div onClick={usePhoneNumberFromProfileHandler}>
+                Use telephone number from profile
+              </div>
             </div>
             <div className="form-input-field">
               <label htmlFor="billingAddress" className="form-label">
@@ -58,23 +96,9 @@ const Payment = () => {
               <textarea
                 type="text"
                 className="form-control"
-                id="inputBillingAddress"
+                value={billingAddress}
                 placeholder="50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
               ></textarea>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="useInformationFromProfile"
-              ></input>
-              <label
-                className="form-check-label"
-                htmlFor="useInformationFromProfile"
-              >
-                Use billing information from profile
-              </label>
             </div>
           </div>
           <div className="form-heading1">TRANSACTION INFO</div>
@@ -94,7 +118,6 @@ const Payment = () => {
                 allowMultiple={false}
                 allowFileEncode={true}
                 acceptedFileTypes={['image/png', 'image/jpeg']}
-                // ref={uploadFileRef}
                 credits={false}
               />
             </div>
@@ -105,7 +128,7 @@ const Payment = () => {
               <input
                 type="datetime-local"
                 className="form-control"
-                id="transactionDateTime"
+                value={transactionDateTime}
               ></input>
             </div>
             <div className="form-input-field">
@@ -115,7 +138,7 @@ const Payment = () => {
               <input
                 type="number"
                 className="form-control"
-                id="value"
+                value={value}
                 placeholder="e.g. 500"
               ></input>
             </div>
