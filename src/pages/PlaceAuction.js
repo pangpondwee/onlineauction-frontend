@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { postData } from '../components/fetchData'
-import Modal from 'react-bootstrap/Modal'
+import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -96,8 +96,8 @@ const AuctionDetail = () => {
               type="text"
               className="form-control"
               placeholder="e.g. White fluffy bunny doll"
-              required
               ref={itemNameInputRef}
+              required
             ></input>
           </div>
           <div className="form-input-field">
@@ -262,40 +262,11 @@ const AuctionDetail = () => {
           </div>
         </div>
       </form>
-      <Modal
-        show={modalShow}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header>
-          <Modal.Title id="contained-modal-title-vcenter">Confirm?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>You can't edit your info after confirmation</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <button
-            type="button"
-            className="btn btn-primary first-button"
-            onClick={() => {
-              submitHandler()
-              setModalShow(false)
-            }}
-          >
-            Confirm?
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary first-button"
-            onClick={() => {
-              setModalShow(false)
-            }}
-          >
-            Cancel
-          </button>
-        </Modal.Footer>
-      </Modal>
+      <PopupConfirmSubmit
+        modalShow={modalShow}
+        submitHandler={submitHandler}
+        setModalShow={setModalShow}
+      />
     </div>
   )
 }
