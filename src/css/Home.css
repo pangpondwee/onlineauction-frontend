@@ -56,6 +56,11 @@
   text-align: center;
 }
 
+.timeBox-red{
+  background-color: #FF3131;
+  color: white;
+}
+
 .card-img-top{
   /* height: 15vm; */
   height: 150px;
