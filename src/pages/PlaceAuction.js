@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { postData } from '../components/fetchData'
+import Modal from 'react-bootstrap/Modal'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -32,8 +33,10 @@ const AuctionDetail = () => {
   const endDateInputRef = useRef()
   const uploadFileRef = useRef()
   const openBidInputRef = useRef()
+  const [modalShow, setModalShow] = useState(false)
 
   const submitHandler = (event) => {
+    setModalShow(false)
     event.preventDefault()
     const enteredItemName = itemNameInputRef.current.value
     const enteredItemDetails = itemDetailsInputRef.current.value
@@ -78,7 +81,7 @@ const AuctionDetail = () => {
   return (
     <div>
       <h1 className="header">Place Auction</h1>
-      <form className="place-auction-form" onSubmit={submitHandler}>
+      <form className="place-auction-form" onSubmit={() => setModalShow(true)}>
         <div className="form-heading1">ITEM INFORMATION</div>
         <div className="sub-form">
           <div className="form-input-field">
@@ -255,6 +258,37 @@ const AuctionDetail = () => {
           </div>
         </div>
       </form>
+      <Modal
+        show={modalShow}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header>
+          <Modal.Title id="contained-modal-title-vcenter">Confirm?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>You can't edit your info after confirmation</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <button
+            type="button"
+            className="btn btn-primary first-button"
+            onClick={submitHandler}
+          >
+            Confirm?
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary first-button"
+            onClick={() => {
+              setModalShow(false)
+            }}
+          >
+            Cancel
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
