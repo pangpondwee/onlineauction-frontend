@@ -5,12 +5,12 @@ const PaymentSummaryCard = (props) => {
       <h3>Summary</h3>
       <div>{props.itemName}</div>
       <div className="center-pic">
-        <img src={nintendo_switch} alt="nintendo switch"></img>
+        <img src={props.productPicture} alt="item pic"></img>
       </div>
 
       <div>Auctioneer: {props.auctioneerName}</div>
       <hr></hr>
-      <h3>Price: 2000 Baht</h3>
+      <h3>Price: {props.price} Baht</h3>
     </div>
   )
 }

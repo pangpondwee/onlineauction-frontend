@@ -1,29 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import logo from "./logo.svg"
-import "./App.css"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import logo from './logo.svg'
+import './App.css'
 // Pages
-import Layout from "./pages/Layout"
-import Home from "./pages/Home"
-import NoPage from "./pages/NoPage"
-import SignUp from "./pages/SignUp"
-import ForgetPassword from "./pages/ForgetPassword"
-import ResetPassword from "./pages/ResetPassword"
-import VerifyEmail from "./pages/VerifyEmail"
+import Layout from './pages/Layout'
+import Home from './pages/Home'
+import NoPage from './pages/NoPage'
+import SignUp from './pages/SignUp'
+import ForgetPassword from './pages/ForgetPassword'
+import ResetPassword from './pages/ResetPassword'
+import VerifyEmail from './pages/VerifyEmail'
 import PlaceAuction from './pages/PlaceAuction'
 import Payment from './pages/Payment'
 import Shipping from './pages/Shipping'
 import BillingInfo from './pages/BillingInfo'
-import ViewAuctioneer from "./pages/ViewAuctioneer"
-import FAQ from "./pages/FAQ"
-import AccountLayout from "./pages/AccountLayout"
-import AccountPage from "./pages/AccountPage"
-import AccountEdit from "./pages/AccountEdit"
-import MyOrder from "./pages/MyOrder"
-import MyReview from "./pages/MyReview"
-import MyFollowing from "./pages/MyFollowing"
-import Auction from "./pages/Auction"
-import Search from "./pages/Search";
-
+import ViewAuctioneer from './pages/ViewAuctioneer'
+import FAQ from './pages/FAQ'
+import AccountLayout from './pages/AccountLayout'
+import AccountPage from './pages/AccountPage'
+import AccountEdit from './pages/AccountEdit'
+import MyOrder from './pages/MyOrder'
+import MyReview from './pages/MyReview'
+import MyFollowing from './pages/MyFollowing'
+import Auction from './pages/Auction'
+import Search from './pages/Search'
 
 function App() {
   return (
@@ -32,7 +31,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="signup" element={<SignUp />} />
-			    <Route path="auction/:auctionId" element={<Auction />} />
+          <Route path="auction/:auctionId" element={<Auction />} />
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="place-auction" element={<PlaceAuction />} />
@@ -55,7 +54,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
 export default App
