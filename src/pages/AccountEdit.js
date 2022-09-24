@@ -73,11 +73,11 @@ const AccountEdit = (props) =>{
                         </div>
                         <div>
                             <label><h5>Email</h5></label><br/>
-                            <input type="text" id="Email" className="input-editing" placeholder={data.email}/>
+                            <input type="email" id="Email" className="input-editing" placeholder={data.email}/>
                         </div>
                         <div>
                             <label><h5>Phone Number</h5></label><br/>
-                            <input type="text" id="PhoneNumber" className="input-editing" placeholder={data.phoneNumber}/>
+                            <input type="number" id="PhoneNumber" className="input-editing" placeholder={data.phoneNumber}/>
                         </div>
                         <div>
                             <label><h5>Address</h5></label><br/>

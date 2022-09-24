@@ -14,7 +14,7 @@ const AccountNav = () =>{
 	return (
 		<div className="lefthand-nav">
 			{/* class "current-tab" 'll highlight depends on current page */}
-			<div className={`menu ${c_tab("profile", " ")}`}>
+			<div className={`menu ${c_tab("profile", " ")} ${c_tab("edit", " ")}`}>
 				<Link to="/account/profile" className="menu-link">My Profile</Link>
 			</div>
 			<div className="menu">
