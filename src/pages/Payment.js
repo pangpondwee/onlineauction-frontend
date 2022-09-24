@@ -1,4 +1,4 @@
-import promptpayqr from '../pictures/PromptpayQR.png'
+//import promptpayqr from '../pictures/PromptpayQR.png'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import '../css/Payment.css'
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -30,8 +30,8 @@ const PromptpayQR = (props) => {
 }
 
 const Payment = () => {
-  // const { auctionId } = useParams()
-  const auctionId = '632c09fb1e43a833d78ad748'
+  const { auctionId } = useParams()
+  // const auctionId = '632c09fb1e43a833d78ad748'
 
   const [itemName, setItemName] = useState()
   const [auctioneerName, setAuctioneerName] = useState()
@@ -76,13 +76,20 @@ const Payment = () => {
   const submitHandler = () => {
     const uploadedFile = uploadFileRef.current.getFiles()
     let billingInfo = {
-      bidderNamre: fullName,
+      bidderName: fullName,
       phoneNumber: telephone,
-
-      productPicture: uploadedFile.map((f) => {
+      billerAddress: billingAddress,
+      transferDate: transactionDateTime,
+      value: value,
+      slipPicture: uploadedFile.map((f) => {
         return f.getFileEncodeDataURL()
       }),
     }
+    postData(`/payment/${auctionId}`, JSON.stringify(billingInfo)).then(
+      (res) => {
+        console.log(res)
+      }
+    )
   }
 
   return (
@@ -121,10 +128,11 @@ const Payment = () => {
                 value={telephone}
                 onChange={(event) => setTelephone(event.target.value)}
                 placeholder="e.g. 0620000000"
+                required
               ></input>
               <button
                 type="button"
-                className="btn btn-outline-primary"
+                className="no-outline-btn"
                 onClick={usePhoneNumberFromProfileHandler}
               >
                 Use telephone number from profile
@@ -140,10 +148,11 @@ const Payment = () => {
                 value={billingAddress}
                 onChange={(event) => setBillingAddress(event.target.value)}
                 placeholder="50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
+                required
               ></textarea>
               <button
                 type="button"
-                className="btn btn-outline-primary"
+                className="no-outline-btn"
                 onClick={useBillingAddressFromProfileHandler}
               >
                 Use billing address from profile
@@ -176,6 +185,7 @@ const Payment = () => {
                 className="form-control"
                 value={transactionDateTime}
                 onChange={(event) => setTransactionDateTime(event.target.value)}
+                required
               ></input>
             </div>
             <div className="form-input-field">
@@ -188,6 +198,7 @@ const Payment = () => {
                 value={value}
                 onChange={(event) => setValue(event.target.value)}
                 placeholder="e.g. 500"
+                required
               ></input>
             </div>
             <div>
