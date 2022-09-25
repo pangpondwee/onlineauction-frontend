@@ -24,7 +24,14 @@ function getDate(timeRemaining){
 }
 
 const BidHistoryPopup = (props)=>{
-	const history=props.history
+	const history=props.history.sort((a,b)=>{
+		if(a.biddingDate<b.biddingDate){
+			return 1
+		}
+		else{
+			return 0
+		}
+	})
 	let history_elements = []
 	for(let i=0;i<history.length;i++){
 		const ms = Number(history[i].biddingDate)
