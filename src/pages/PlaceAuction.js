@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { postData } from '../components/fetchData'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
+import { useNavigate } from 'react-router-dom'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -34,6 +35,7 @@ const AuctionDetail = () => {
   const uploadFileRef = useRef()
   const openBidInputRef = useRef()
   const [modalShow, setModalShow] = useState(false)
+  const navigate = useNavigate()
 
   const submitHandler = (event) => {
     const enteredItemName = itemNameInputRef.current.value
@@ -65,15 +67,11 @@ const AuctionDetail = () => {
       auctionData.expectedPrice = Number(enteredExpectedPrice)
     }
 
-    const res = postData('/auction/upload', JSON.stringify(auctionData)).then(
-      (res) => {
-        console.log(res)
-      }
-    )
-
-    console.log(res)
-    console.log(JSON.stringify(auctionData))
-    console.log(auctionData.isOpenBid)
+    postData('/auction/upload', JSON.stringify(auctionData)).then((res) => {
+      console.log(res)
+      console.log(JSON.stringify(auctionData))
+      navigate('/')
+    })
   }
 
   return (
