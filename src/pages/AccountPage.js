@@ -7,10 +7,12 @@ import badge2 from "../pictures/badge2.png";
 import badge3 from "../pictures/badge3.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {getData} from '../components/fetchData';
 import "../css/AccountPage.css";
 
 const AccountPage = () =>{
+    const userId = useParams()
     const [data,setData] = useState({
         displayName: "Peeranut Srisuthangkul",
         email: "peeranut.sri@ku.th",
@@ -34,7 +36,7 @@ const AccountPage = () =>{
 	// 		}
 	// 	})
 
-    //     getData(`/api/user/profile/:userID`).then((res)=>{ 
+    //     getData(`/api/user/profile/${userId}).then((res)=>{ 
 	// 		setStatus(res.status);
 	// 		if(res.status == "success"){
 	// 			setOther_data(res.data);

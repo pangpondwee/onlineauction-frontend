@@ -3,6 +3,16 @@ import star from "../pictures/star.png";
 import goods from "../pictures/nintendo.png"
 
 const ReviewObj = () =>{
+    const allstar = []
+
+    // let tmp = other_data.rating
+    // while(tmp>=1){
+    //     allstar.push(<img src={star} className="star" alt="star"/>)
+    //     tmp-=1
+    // }
+    // if(tmp===0.5) allstar.push(<img src={half_star} className="star" alt="star"/>)
+    // while(allstar.length<5) allstar.push(<img src={blank_star} className="star" alt="star"/>)
+
 	return (
 		<div className="Review-box">
 			<img src={goods} alt="Review_goods" className="mini-pic-goods"/>

@@ -185,6 +185,7 @@ li.menu-dropdown {
     overflow: hidden;
     padding: 20px 25px 30px 25px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .mini-pic-goods {

@@ -1,13 +1,13 @@
 import goods from "../pictures/nintendo.png"
 import followHeart from "../pictures/heart-blue.png";
 
-const FollowObj = () =>{
+const FollowObj = (props) =>{
 	return (
 		<div className="Review-box">
 			<img src={goods} alt="Review_goods" className="mini-pic-goods"/>
             <span>
-                <h4>Nintendo Switch</h4>
-                <h6>Highest Bid : 2000 Baht</h6>
+                <h4>{props.name}</h4>
+                <h6>Highest Bid : {props.lastBid} Baht</h6>
             </span>
             <div className="d-flex justify-content-end">
                 <button className="Follow-button">

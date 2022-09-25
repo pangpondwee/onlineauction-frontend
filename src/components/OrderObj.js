@@ -1,6 +1,13 @@
+import { Link, useNavigate } from "react-router-dom";
 import goods from "../pictures/nintendo.png"
 
 const OrderObj = (props) =>{
+    const navigate = useNavigate()
+
+    const navigateTo = ()=>{
+        navigate(`/auction/${props.auctionId}`)
+    }
+
     const status_text = {
         "currently_bid": "Currently Bid",
         "bidder-to-pay": "To Pay",
@@ -15,7 +22,7 @@ const OrderObj = (props) =>{
     }
 
 	return (
-		<div className="Review-box Order-box">
+		<div className="Review-box Order-box" onClick={navigateTo}>
 			<img src={goods} alt="Review_goods" className="mini-pic-goods"/>
             <span>
                 <div className="d-flex">
@@ -31,8 +38,7 @@ const OrderObj = (props) =>{
                 <div className= {`Follow-button ${props.status_class}`}>
                     <h6>{status_text[props.status_class]}</h6>
                 </div>
-            </div>
-            
+            </div> 
 		</div>
 	)
 }
