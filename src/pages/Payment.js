@@ -78,7 +78,7 @@ const Payment = () => {
     let billingInfo = {
       bidderName: fullName,
       phoneNumber: telephone,
-      billerAddress: billingAddress,
+      bidderAddress: billingAddress,
       transferDate: String(new Date(transactionDateTime).getTime()),
       value: Number(value),
       slipPicture: uploadedFile.map((f) => {
