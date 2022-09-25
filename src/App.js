@@ -37,7 +37,7 @@ function App() {
           <Route path="verify-email" element={<VerifyEmail />} />
           <Route path="place-auction" element={<PlaceAuction />} />
           <Route path="payment/:auctionId" element={<Payment />} />
-          <Route path="shipping" element={<Shipping />} />
+          <Route path="shipping/:auctionId" element={<Shipping />} />
           <Route path="billing-info" element={<BillingInfo />} />
           <Route path="auctioneer/:auctioneerID" element={<ViewAuctioneer />} />
           <Route path="faq" element={<FAQ />} />
