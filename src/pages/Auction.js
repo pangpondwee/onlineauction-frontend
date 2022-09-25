@@ -27,10 +27,15 @@ const BidHistoryPopup = (props)=>{
 	const history=props.history
 	let history_elements = []
 	for(let i=0;i<history.length;i++){
+		const ms = Number(history[i].biddingDate)
+		const d = new Date(ms)
+		const d_hour = d.getHours();
+		const d_minute = d.getMinutes();
+		const d_seconds = d.getSeconds();
 		history_elements.push(
 		<tr key={i}>
-			<td>{history[i].biddingDate}</td>
-			<td>{history[i].biddingDate}</td>
+			<td>{d.toLocaleDateString("en-US")}</td>
+			<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
 			<td>{history[i].bidderName}</td>
 			<td>{history[i].biddingPrice}</td>
 		</tr>
