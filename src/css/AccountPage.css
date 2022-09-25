@@ -58,11 +58,16 @@ li.menu-dropdown {
     border-radius: 5%;
     margin-bottom: 10px;
     text-align: center;
+    cursor: pointer;
 }
 
 .profile-pic {
-    width: 350px;
-    height: 350px;
+    width: 25vw;
+    height: 45vh;
+    max-width: 350px;
+    max-height: 350px;
+    min-width: 200px;
+    min-height: 200px;
     /* border-color: black;
   border-style: solid; */
 }
@@ -99,7 +104,7 @@ li.menu-dropdown {
 .badge-pic {
     width: 50px;
     height: 50px;
-    margin: 0 10px;
+    margin: 5px 10px;
 }
 
 .star {
@@ -116,6 +121,7 @@ li.menu-dropdown {
 .editing {
     background-color: var(--color-primary);
     color: var(--color-secondary);
+    cursor: default;
 }
 
 .cancel {
@@ -144,7 +150,9 @@ li.menu-dropdown {
     border-radius: 5px;
     color: var(--color-dark);
     background-color: white;
+    padding: 0 10px;
     margin: 20px 0 0 230px;
+    cursor: pointer;
 }
 
 /* MyOrderNav */
