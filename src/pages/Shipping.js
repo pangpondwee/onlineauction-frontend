@@ -23,10 +23,10 @@ registerPlugin(
 
 const Shipping = () => {
   const [modalShow, setModalShow] = useState(false)
-  const [itemName, setItemName] = useState()
-  const [auctioneerName, setAuctioneerName] = useState()
-  const [price, setPrice] = useState()
-  const [productPicture, setProductPicture] = useState()
+  const [itemName, setItemName] = useState('')
+  const [auctioneerName, setAuctioneerName] = useState('')
+  const [price, setPrice] = useState('')
+  const [productPicture, setProductPicture] = useState('')
   const submitHandler = () => {}
 
   useEffect(() => {
