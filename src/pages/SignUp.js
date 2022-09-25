@@ -15,25 +15,29 @@ const TabSignUp = (props)=>{
       aria-labelledby="SignUp-tab"
       tabIndex={"0"}
     >
-      <form className={classes.Form}>
+      <form className={classes.Form} onSubmit={props.submit}>
         <label htmlFor="displayname">Display Name</label>
         <input
           id="displayname"
           type="displayname"
           placeholder="Display Name"
+          ref={props.displayName}
+          required
         />
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" placeholder="Email" ref={props.email}/>
+        <input id="email" type="text" placeholder="Email" ref={props.email} required/>
         <label htmlFor="password">Password</label>
-        <input id="password" type="text" placeholder="Password" ref={props.password}/>
-        <label htmlFor="confirmpassword" ref={props.confirmPassword}>Confirm Password</label>
+        <input id="password" type="password" placeholder="Password" ref={props.password} required/>
+        <label htmlFor="confirmpassword">Confirm Password</label>
         <input
           id="confirmpassword"
-          type="text"
+          type="password"
           placeholder="Confirm Password"
+          ref={props.confirmPassword}
+          required
         />
         <div>
-          <input type="submit" className={classes.button} value="Sign Up"/>
+          <input type="submit" className={classes.button} value="Sign Up" required/>
         </div>
       </form>
     </div>
@@ -70,6 +74,43 @@ const SignUp = () => {
   const signupEmail = useRef();
   const signupPassword = useRef();
   const signupConfirm = useRef();
+  const displayName = useRef();
+  const onSignUpSubmit = (e) =>{
+    e.preventDefault()
+    const password = signupPassword.current.value.trim()
+    const confirm = signupConfirm.current.value.trim()
+    const email = signupEmail.current.value.trim()
+    const name = displayName.current.value.trim()
+    if(password != confirm){
+      // password not match
+      console.log("Passwords do not match")
+      return
+    }
+    if(!email.match(/.+@.+/)){
+      console.log("Invalid email")
+      return
+    }
+    postData(
+      "/user/signup",
+      JSON.stringify({
+        email: email,
+        password: password,
+        displayName: name
+      }))
+    .then((res) => {
+      if(!res.status) throw new Error("Could not get status")
+      if(res.status == "fail" || res.status == "error") throw new Error(res.message)
+      // const data = res.data.user;
+      console.log("Signed up")
+      // localStorage.setItem("displayName", data.displayName);
+      // localStorage.setItem("token", res.token);
+      // setloggedIn(true);
+      // navigate("/");
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
   const onSignInSubmit = (e) => {
     postData(
       "/user/signin",
@@ -138,7 +179,9 @@ const SignUp = () => {
             <TabSignUp
               email={signupEmail}
               password={signupPassword}
+              displayName={displayName}
               confirmPassword={signupConfirm}
+              submit={onSignUpSubmit}
             />
           </div>
         </Card>
