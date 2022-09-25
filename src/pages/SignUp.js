@@ -100,12 +100,7 @@ const SignUp = () => {
     .then((res) => {
       if(!res.status) throw new Error("Could not get status")
       if(res.status == "fail" || res.status == "error") throw new Error(res.message)
-      // const data = res.data.user;
       console.log("Signed up")
-      // localStorage.setItem("displayName", data.displayName);
-      // localStorage.setItem("token", res.token);
-      // setloggedIn(true);
-      // navigate("/");
     })
     .catch((error)=>{
       console.log(error)
