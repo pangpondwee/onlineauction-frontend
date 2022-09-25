@@ -48,7 +48,7 @@ const Home = () =>{
 	// const isLoggedIn 
 	return (
 		<>
-			<p className="headHome">Welcome, Peeranat! Let’s see what you got...</p>		
+			<p className="headHome">Welcome, {displayName}! Let’s see what you got...</p>		
 			<p className="detail">Your Recent Bids</p>
 			<AuctionList
 			message="You don't have any recent bids"
