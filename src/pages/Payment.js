@@ -33,15 +33,15 @@ const Payment = () => {
   const { auctionId } = useParams()
   // const auctionId = '632c09fb1e43a833d78ad748'
 
-  const [itemName, setItemName] = useState()
-  const [auctioneerName, setAuctioneerName] = useState()
-  const [price, setPrice] = useState()
-  const [productPicture, setProductPicture] = useState()
-  const [fullName, setFullName] = useState()
-  const [telephone, setTelephone] = useState()
-  const [billingAddress, setBillingAddress] = useState()
-  const [transactionDateTime, setTransactionDateTime] = useState()
-  const [value, setValue] = useState()
+  const [itemName, setItemName] = useState('')
+  const [auctioneerName, setAuctioneerName] = useState('')
+  const [price, setPrice] = useState('')
+  const [productPicture, setProductPicture] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [telephone, setTelephone] = useState('')
+  const [billingAddress, setBillingAddress] = useState('')
+  const [transactionDateTime, setTransactionDateTime] = useState('')
+  const [value, setValue] = useState('')
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
 
@@ -79,12 +79,13 @@ const Payment = () => {
       bidderName: fullName,
       phoneNumber: telephone,
       billerAddress: billingAddress,
-      transferDate: transactionDateTime,
-      value: value,
+      transferDate: String(new Date(transactionDateTime).getTime()),
+      value: Number(value),
       slipPicture: uploadedFile.map((f) => {
         return f.getFileEncodeDataURL()
       }),
     }
+    console.log(billingInfo)
     postData(`/payment/${auctionId}`, JSON.stringify(billingInfo)).then(
       (res) => {
         console.log(res)
@@ -162,7 +163,7 @@ const Payment = () => {
           <div className="form-heading1">TRANSACTION INFO</div>
           <div className="sub-form">
             <div className="center-pic form-input-field">
-              <PromptpayQR ppID={'0909754062'} amount={2000} />
+              <PromptpayQR ppID={'0909754062'} amount={price} />
             </div>
             <div className="form-input-field">
               <label htmlFor="uploadTransactionSlip" className="form-label">
