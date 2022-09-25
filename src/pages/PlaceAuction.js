@@ -60,6 +60,8 @@ const AuctionDetail = () => {
       }),
     }
 
+    console.log(JSON.stringify(auctionData))
+
     if (enteredMinimumBidStep.length > 0) {
       auctionData.minimumBidPrice = Number(enteredMinimumBidStep)
     }
@@ -70,7 +72,7 @@ const AuctionDetail = () => {
     postData('/auction/upload', JSON.stringify(auctionData)).then((res) => {
       console.log(res)
       console.log(JSON.stringify(auctionData))
-      navigate('/')
+      navigate(`/auction/${res.data.auctionID}`)
     })
   }
 
