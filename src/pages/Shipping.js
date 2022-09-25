@@ -3,8 +3,9 @@ import AddressBox from '../components/AddressBox'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import { FilePond, registerPlugin } from 'react-filepond'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { postData, getData } from '../components/fetchData'
+import { useParams } from 'react-router-dom'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -22,15 +23,21 @@ registerPlugin(
 )
 
 const Shipping = () => {
+  const { auctionId } = useParams()
+
   const [modalShow, setModalShow] = useState(false)
   const [itemName, setItemName] = useState('')
   const [auctioneerName, setAuctioneerName] = useState('')
   const [price, setPrice] = useState('')
   const [productPicture, setProductPicture] = useState('')
+  const [name, setName] = useState('')
+  const [address, setAddress] = useState('')
+  const [phone, setPhone] = useState('')
+  const uploadFileRef = useRef()
   const submitHandler = () => {}
 
   useEffect(() => {
-    getData(`/`)
+    getData(`/payment/${auctionId}`)
       .then((res) => {
         console.log(res)
         setItemName(res.data.productName)
@@ -54,7 +61,7 @@ const Shipping = () => {
           <div className="form">
             <div className="form-heading1">SHIPPING ADDRESS</div>
             <div className="sub-form">
-              <AddressBox></AddressBox>
+              <AddressBox name={name} address={address} phone={phone} />
             </div>
             <div className="form-heading1">PAYMENT INFO</div>
             <div className="sub-form">
@@ -109,7 +116,7 @@ const Shipping = () => {
               </div>
 
               <div className="form-input-field">
-                <label for="accountName" className="form-label">
+                <label htmlFor="accountName" className="form-label">
                   ACCOUNT NAME
                 </label>
                 <input
@@ -135,7 +142,7 @@ const Shipping = () => {
               </div>
 
               <div className="form-input-field">
-                <label for="shippingCompany" className="form-label">
+                <label htmlFor="shippingCompany" className="form-label">
                   SHIPPING COMPANY
                 </label>
                 <select
@@ -153,13 +160,13 @@ const Shipping = () => {
               </div>
 
               <div className="form-input-field">
-                <label for="uploadPackagePicture" className="form-label">
+                <label htmlFor="uploadPackagePicture" className="form-label">
                   UPLOAD PACKAGE PICTURE
                 </label>
                 <FilePond
                   allowFileEncode={true}
                   acceptedFileTypes={['image/png', 'image/jpeg']}
-                  // ref={uploadFileRef}
+                  ref={uploadFileRef}
                   credits={false}
                   required
                 />
