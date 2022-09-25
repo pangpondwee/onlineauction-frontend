@@ -1,9 +1,15 @@
 import blank_profile from "../pictures/blank_profile.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {getData, patchData} from '../components/fetchData';
 
 const AccountEdit = (props) =>{
+    const navigate = useNavigate()
+
+    const navigateTo = ()=>{
+        navigate(`/account/profile`)
+    }
+
     const [prepic, setPrepic] = useState(blank_profile)
 
     const previewImage = (event)=>{ setPrepic(URL.createObjectURL(event.target.files[0])) }
@@ -17,7 +23,7 @@ const AccountEdit = (props) =>{
     const [status,setStatus]=useState("unknown");
 
     const sendChange = (new_data) =>{
-        // patchData(`'{{auction}}/api/user/edit'`,JSON.stringify(new_data))
+        // patchData(`'/api/user/edit'`,JSON.stringify(new_data))
         // .then((res)=>{
         //     if(!res.status) throw new Error("Could not get status")
         //     if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
@@ -26,6 +32,7 @@ const AccountEdit = (props) =>{
         //     console.log(e.message)
         // })
         console.log(new_data)
+        navigateTo()
     }
 
     const summitChange = (e) =>{
