@@ -130,10 +130,12 @@ const SignUp = () => {
 
   return (
     <Fragment>
-      <h1>Anything You Want, At A Super Satisfying Price!</h1>
-      <h2 className="text-primary">Create An Account Now!</h2>
       <div className={classes.SignUp}>
-        <img className={classes.loginimg} src={pic1} />
+        <div>
+          <h1>Anything You Want, At A Super Satisfying Price!</h1>
+          <h2 className="text-primary">Create An Account Now!</h2>
+          <img className={classes.loginimg} src={pic1} />
+        </div>
         <Card className={classes.input}>
           <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
