@@ -3,6 +3,7 @@ import AuctionCard from "../components/AuctionCard";
 import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
 // import AuctionCardForRow from "./AuctionCardForRow";
+import { getDate } from "./util";
 
 const AuctionCardRow = (props) =>{
     let auctionCard_element = []
