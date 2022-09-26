@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { postData, getData } from '../components/fetchData'
 import { generatePayload } from '../components/promptpay'
 import { QRCodeSVG } from 'qrcode.react'
+import { useNavigate } from 'react-router-dom'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 
 // Import FilePond styles
@@ -44,6 +45,7 @@ const Payment = () => {
   const [value, setValue] = useState('')
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getData(`/payment/${auctionId}`)
@@ -88,7 +90,9 @@ const Payment = () => {
     console.log(billingInfo)
     postData(`/payment/${auctionId}`, JSON.stringify(billingInfo)).then(
       (res) => {
+        console.log(billingInfo)
         console.log(res)
+        navigate('/account/myorder')
       }
     )
   }
