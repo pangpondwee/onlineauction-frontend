@@ -1,5 +1,6 @@
 .card{
-	width: 9.5rem;
+	/* width: 9.5rem; */
+  width: 11.4rem;
   /* width: 18rem;
   min-width: 10rem; */
   margin: auto 20px;
@@ -40,9 +41,19 @@
 }
 
 .itemName{
-  font-size: medium;
+  /* font-size: medium; */
+  height: 55px;
+  font-size: large;
   font-weight: normal;
   margin-top: 10px;
+  margin-bottom: 10px;
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .timeBox{
@@ -63,7 +74,7 @@
 
 .card-img-top{
   /* height: 15vm; */
-  height: 150px;
+  height: 200px;
   object-fit: cover; /*add object-fit: cover; to fit image for card*/
   /* min-width: 15%; */
   min-height: 112.5px;
