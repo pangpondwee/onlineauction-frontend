@@ -1,4 +1,5 @@
 //import promptpayqr from '../pictures/PromptpayQR.png'
+import promptpayheader from '../pictures/promptpay-header.png'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import '../css/Payment.css'
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -166,7 +167,12 @@ const Payment = () => {
           </div>
           <div className="form-heading1">TRANSACTION INFO</div>
           <div className="sub-form">
-            <div className="center-pic form-input-field">
+            <div className="form-input-field promptpay">
+              <img
+                className="promptpay-header"
+                src={promptpayheader}
+                alt="promptpay"
+              />
               <PromptpayQR ppID={'0909754062'} amount={price} />
             </div>
             <div className="form-input-field">
