@@ -69,7 +69,7 @@ const AccountPage = () =>{
                 {/* need to add pic */}
                 <img className="profile-pic" alt="ProfilePic" src={blank_profile}/>
                 <div>
-                    <h5>Name</h5>
+                    <h5>Display Name</h5>
                     <div className="account-info"><h5>{data.displayName}</h5></div>
                     <h5>Email</h5>
                     <div className="account-info"><h5>{data.email}</h5></div>
@@ -95,11 +95,6 @@ const AccountPage = () =>{
                     </div>
                     <div className="d-flex">
                         <h6>Average Rating:</h6>
-                        {/* <img src={star} className="star" alt="star"/>
-                        <img src={star} className="star" alt="star"/>
-                        <img src={star} className="star" alt="star"/>
-                        <img src={star} className="star" alt="star"/>
-                        <img src={blank_star} className="star" alt="star"/> */}
                         {allstar}
                     </div>
                     <h6>Items submitted: {other_data.totalAuctioned}</h6>

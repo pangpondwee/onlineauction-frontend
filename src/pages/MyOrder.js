@@ -12,7 +12,7 @@ function text_alert(status){
     else if(status==="bid-waitingForConfirm") return "An item is on its way to you. You can check a tracking number here.If you’re satisfy with your item, click accept."
     else if(status==="auction-on") return "Time left: 13 hr 13 m 13 s"
     else if(status===("auction-waitingForPayment" || "auction-waitingConfirmSlip")) return "Waiting for payment from Pongsatorn (Bidder)"
-    else if(status==="auction-waitingForShipping") return "Waiting for your payment"
+    else if(status==="auction-waitingForShipping") return "Waiting for your shipping"
     else if(status===("auction-waitingForConfirm" || "auction-waitingForConfirm")) return "Waiting for bidder to confirm"
     else return
 }
