@@ -2,7 +2,7 @@ export function getDate(timeRemaining){
 	// TODO make date lighter
 	const d = new Date(timeRemaining);
 	const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
-	const d_hour = d.getUTCHours()-7;
+	const d_hour = d.getUTCHours();
 	const d_minute = d.getUTCMinutes();
 	const d_seconds = d.getUTCSeconds();
 	if(timeRemaining <= 0){
