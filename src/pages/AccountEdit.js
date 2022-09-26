@@ -6,10 +6,6 @@ import {getData, patchData} from '../components/fetchData';
 const AccountEdit = (props) =>{
     const navigate = useNavigate()
 
-    const navigateTo = ()=>{
-        navigate(`/account/profile`)
-    }
-
     const [prepic, setPrepic] = useState(blank_profile)
 
     const previewImage = (event)=>{ setPrepic(URL.createObjectURL(event.target.files[0])) }
@@ -27,12 +23,12 @@ const AccountEdit = (props) =>{
         // .then((res)=>{
         //     if(!res.status) throw new Error("Could not get status")
         //     if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
+        //     navigate(`/account/profile`)
         // })
         // .catch(e=>{
         //     console.log(e.message)
         // })
         console.log(new_data)
-        navigateTo()
     }
 
     const summitChange = (e) =>{

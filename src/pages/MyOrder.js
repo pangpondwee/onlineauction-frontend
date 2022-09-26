@@ -19,7 +19,7 @@ function text_alert(status){
 
 const MyOrder = () =>{
     const location = useLocation()
-    const [tmp, list, type] = location.search.split("?")
+    const [list, type] = location.search.slice(1).split("&")
 
     const [data_mybid_active,setData_myBid_active] = useState([{_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"},
                                                     {_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"},
