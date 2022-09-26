@@ -46,6 +46,17 @@ const Shipping = () => {
         setProductPicture(res.data.productPicture)
       })
       .catch((e) => console.log(e))
+    // getData(`/shipping/${auctionId}`)
+    //   .then((res) => {
+    //     console.log(res)
+    //     setName(res.data.name)
+    //     setAddress(res.data.address)
+    //     setPhone(res.data.phone)
+    //   })
+    // .catch((e) => console.log(e))
+    setName('Someone')
+    setAddress('Some Address')
+    setPhone('0620000000')
   }, [])
   return (
     <div className="page-with-summary">
