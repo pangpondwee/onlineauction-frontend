@@ -45,4 +45,23 @@ export const postData = async (url,data)=>{
 		throw new Error(res.message)
 	})
 }
+
+export const patchData = async (url,data)=>{
+	// TODO use auctionId
+	return fetch(API_SERVER+url,{
+		method: 'PATCH',
+		mode: 'cors',
+		credentials: 'include',
+		headers: set_header(),
+		body: data
+	})
+	.then((res)=>{
+		return res.json();
+	})
+	.then((res)=>{
+		if(!res.status) throw new Error("Could not get status")
+		if(res.status == "success") return res
+		throw new Error(res.message)
+	})
+}
 export default getData;

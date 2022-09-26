@@ -34,7 +34,6 @@ function App() {
           <Route path="auction/:auctionId" element={<Auction />} />
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="verify-email" element={<VerifyEmail />} />
           <Route path="place-auction" element={<PlaceAuction />} />
           <Route path="payment/:auctionId" element={<Payment />} />
           <Route path="shipping/:auctionId" element={<Shipping />} />
@@ -43,6 +42,7 @@ function App() {
           <Route path="faq" element={<FAQ />} />
           <Route path="search" element={<Search />} />
           <Route path="search/:pageNumber" element={<Search />} />
+          <Route path="account/verify/:userId" element={<VerifyEmail />} />
           <Route path="account" element={<AccountLayout />}>
             <Route path="profile" element={<AccountPage />} />
             <Route path="edit" element={<AccountEdit />} />
