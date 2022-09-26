@@ -171,7 +171,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
-              min={0}
+              min={1}
               ref={startingPriceInputRef}
               required
             ></input>
@@ -226,7 +226,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
-              min={0}
+              min={1}
               ref={minimumBidStepInputRef}
             ></input>
           </div>
@@ -238,7 +238,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
-              min={0}
+              min={1}
               ref={expectedPriceInputRef}
             ></input>
           </div>
