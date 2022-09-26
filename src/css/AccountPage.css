@@ -230,19 +230,19 @@ li.menu-dropdown {
 
 /* fontcolor&bordercolor in myorder */
 
-.currently-bid .bidder-to-pay-wait-admin .to-delivered .on-auction .auctioneer-to-pay .auctioneer-to-confirm {
+.bid-currently .bid-waitingConfirmSlip .bid-waitingForShipping .auction-on .auction-waitingForPayment .auction-waitingForConfirm {
     color: #228BE6;
     border-color: #228BE6;
 }
 
-.bidder-to-pay,
-.bidder-to-confirm,
-.to-shipped {
+.bid-waitingForPayment,
+.bid-waitingForConfirm,
+.bid-waitingForShipping {
     color: #FA5252;
     border-color: #FA5252;
 }
 
-.completed {
+.bid-completed, .auction-completed {
     color: #2F9E44;
     border-color: #2F9E44;
 }

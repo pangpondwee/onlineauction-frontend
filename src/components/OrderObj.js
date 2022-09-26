@@ -9,16 +9,17 @@ const OrderObj = (props) =>{
     }
 
     const status_text = {
-        "currently_bid": "Currently Bid",
-        "bidder-to-pay": "To Pay",
-        "bidder-to-pay-wait-admin": "To Pay",
-        "to-delivered": "To Delivered",
-        "bidder-to-confirm": "To Confirm",
-        "on-auction": "On Auction",
-        "auctioneer-to-pay": "To Pay",
-        "to-shipped": "To Shipped",
-        "auctioneer-to-confirm": "To Confirm",
-        "completed": "Completed",
+        "bid-currently": "Currently Bid",
+        "bid-waitingForPayment": "To Pay",
+        "bid-waitingConfirmSlip": "To Pay",
+        "bid-waitingForShipping": "To Delivered",
+        "bid-waitingForConfirm": "To Confirm",
+        "bid-completed": "Completed",
+        "auction-on": "On Auction",
+        "auction-waitingForPayment": "To Pay",
+        "auction-waitingForShipping": "To Shipped",
+        "auction-waitingForConfirm": "To Confirm",
+        "auction-completed": "Completed",
     }
 
 	return (
