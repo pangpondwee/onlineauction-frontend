@@ -210,3 +210,11 @@
     font-size: 90%;
   }
 }
+
+/* Payment Page*/
+.no-outline-btn {
+  border: none;
+  background-color: transparent;
+  margin: 1% 0 1% 0;
+  color: var(--color-text);
+}

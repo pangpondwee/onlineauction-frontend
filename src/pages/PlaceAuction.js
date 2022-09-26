@@ -1,5 +1,7 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { postData } from '../components/fetchData'
+import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
+import { useNavigate } from 'react-router-dom'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -32,9 +34,10 @@ const AuctionDetail = () => {
   const endDateInputRef = useRef()
   const uploadFileRef = useRef()
   const openBidInputRef = useRef()
+  const [modalShow, setModalShow] = useState(false)
+  const navigate = useNavigate()
 
   const submitHandler = (event) => {
-    event.preventDefault()
     const enteredItemName = itemNameInputRef.current.value
     const enteredItemDetails = itemDetailsInputRef.current.value
     const enteredItemCategory = itemCategoryInputRef.current.value
@@ -57,54 +60,32 @@ const AuctionDetail = () => {
       }),
     }
 
+    console.log(JSON.stringify(auctionData))
+
     if (enteredMinimumBidStep.length > 0) {
       auctionData.minimumBidPrice = Number(enteredMinimumBidStep)
     }
     if (enteredExpectedPrice.length > 0) {
       auctionData.expectedPrice = Number(enteredExpectedPrice)
     }
-    // console.log(
-    //   `enteredExpectedPrice ${typeof enteredExpectedPrice} length ${
-    //     enteredExpectedPrice.length
-    //   }`
-    // )
-    // console.log(
-    //   `enteredMinimumBidStep ${typeof enteredMinimumBidStep} length ${
-    //     enteredMinimumBidStep.length
-    //   }`
-    // )
 
-    // fetch('http://13.250.98.9/api/auction/upload', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   credentials: 'include',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(auctionData),
-    // })
-    //   .then((res) => {
-    //     return res.json()
-    //   })
-    //   .then((data) => {
-    //     console.log(data)
-    //   })
-
-    const res = postData('/auction/upload',
-      JSON.stringify(auctionData)
-    ).then((res) => {
+    postData('/auction/upload', JSON.stringify(auctionData)).then((res) => {
       console.log(res)
+      console.log(JSON.stringify(auctionData))
+      navigate(`/auction/${res.data.auctionID}`)
     })
-
-    console.log(res)
-    console.log(JSON.stringify(auctionData))
-    console.log(auctionData.isOpenBid)
   }
 
   return (
     <div>
       <h1 className="header">Place Auction</h1>
-      <form className="place-auction-form" onSubmit={submitHandler}>
+      <form
+        className="place-auction-form"
+        onSubmit={(event) => {
+          setModalShow(true)
+          event.preventDefault()
+        }}
+      >
         <div className="form-heading1">ITEM INFORMATION</div>
         <div className="sub-form">
           <div className="form-input-field">
@@ -115,8 +96,8 @@ const AuctionDetail = () => {
               type="text"
               className="form-control"
               placeholder="e.g. White fluffy bunny doll"
-              required
               ref={itemNameInputRef}
+              required
             ></input>
           </div>
           <div className="form-input-field">
@@ -281,6 +262,11 @@ const AuctionDetail = () => {
           </div>
         </div>
       </form>
+      <PopupConfirmSubmit
+        modalShow={modalShow}
+        submitHandler={submitHandler}
+        setModalShow={setModalShow}
+      />
     </div>
   )
 }

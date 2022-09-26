@@ -1,9 +1,9 @@
-const AddressBox = () => {
+const AddressBox = (props) => {
   return (
-    <div class="grey-box">
-      <div>Pakkapol Kong</div>
-      <div>50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand</div>
-      <div>069-696-9696</div>
+    <div className="grey-box">
+      <div>{props.name}</div>
+      <div>{props.address}</div>
+      <div>Tel. {props.phone}</div>
     </div>
   )
 }

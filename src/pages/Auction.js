@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
@@ -21,6 +21,67 @@ function getDate(timeRemaining){
 	else{
 		return `${d_hour}hr ${d_minute}m ${d_seconds}s`;
 	}
+}
+
+const BidHistoryPopup = (props)=>{
+	const history=props.history.sort((a,b)=>{
+		if(a.biddingDate<b.biddingDate){
+			return 1
+		}
+		else{
+			return 0
+		}
+	})
+	let history_elements = []
+	for(let i=0;i<history.length;i++){
+		const ms = Number(history[i].biddingDate)
+		const d = new Date(ms)
+		const d_hour = d.getHours();
+		const d_minute = d.getMinutes();
+		const d_seconds = d.getSeconds();
+		history_elements.push(
+		<tr key={i}>
+			<td>{d.toLocaleDateString("en-US")}</td>
+			<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
+			<td>{history[i].bidderName}</td>
+			<td>{history[i].biddingPrice}</td>
+		</tr>
+		);
+	}
+	let historyError = false;
+	let errorMessage = "Something went wrong";
+	if(props.error){
+		historyError = true;
+		errorMessage = props.error
+	}
+	else if(history.length < 1){
+		historyError = true;
+		errorMessage = "No bid history found"
+	}
+	return (
+		<div className="modal fade" id="historyModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+			<div id="history-modal" className="modal-dialog modal-dialog-centered">
+				<div className="modal-content">
+					{history_elements.length > 0 ? 
+					<table id="history-table">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Name</th>
+								<th>Bid Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							{history_elements}
+						</tbody>
+					</table>
+					:
+					<div id="history-error">{errorMessage}</div>}
+				</div>
+			</div>
+		</div>
+	)
 }
 
 const Timer = (props)=>{
@@ -151,13 +212,14 @@ const Bidfield = (props)=>{
 	const timeRemaining = props.data.endDate - Date.now()
 	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 	const isEnded = timeRemaining < 0 ? true : false;
+	const auctioneerLink = "/auctioneer/"+props.data.auctioneerID;
 	return (
 		<div id="bid-field">
 			<div id="item-wrapper">
 				<div id="name-wrapper">
 					<h1>{props.data.productDetail.productName}</h1>
 				</div>
-				<p>by {props.auctioneer}</p>
+				<p>by <Link to={auctioneerLink}>{props.auctioneer}</Link></p>
 			</div>
 			<div id="statistics">
 				<div>
@@ -181,7 +243,15 @@ const Bidfield = (props)=>{
 			
 			<div id="history-wrapper">
 				{props.lastBid > 0 ? <span>Your Last bid: {props.lastBid}$</span> : <></>}
-				{props.showHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
+				
+				{props.showHistory ? 
+				<button 
+				id="history-button" 
+				onClick={props.getHistory} 
+				className='btn' 
+				data-bs-toggle="modal"
+				data-bs-target="#historyModal"
+				>Bid History</button> : <></>}
 			</div>
 		</div>
 	)
@@ -195,6 +265,8 @@ const Auction = (props) =>{
 	const showRanking=false; //show ranking and move gallery // testing
 	const [lastBid,setLastBid] = useState(0)
 	const [auctioneer,setAuctioneer] = useState("")
+	const [history,setHistory] = useState([])
+	const [historyError,setHistoryError] = useState([])
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -219,6 +291,16 @@ const Auction = (props) =>{
 				console.log(e.message)//TODO handle
 			})
 		}
+	}
+	const getHistory = ()=>{
+		getData(`/auction/${auctionId}/bid-history`)
+		.then((res)=>{
+			// console.log(res)
+			setHistory(res.bidHistory)
+		})
+		.catch(e=>{
+			setHistoryError(e.message)
+		})
 	}
 	useEffect(()=>{
 		getData(`/auction/${auctionId}`)
@@ -253,6 +335,7 @@ const Auction = (props) =>{
 					data={data}
 					auctioneer={auctioneer}
 					showHistory={showHistory}
+					getHistory={getHistory}
 					submitBid={submitBid}
 					lastBid={lastBid}
 					/>
@@ -269,6 +352,10 @@ const Auction = (props) =>{
 						{data.productDetail.description}
 					</div>
 				</div>
+				<BidHistoryPopup
+				history={history}
+				error={historyError}
+				/>
 			</div>
 		)
 	}

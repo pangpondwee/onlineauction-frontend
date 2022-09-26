@@ -203,3 +203,38 @@
 #ranking thead{
     border-bottom: 1px #fff solid;
 }
+
+/*** History ***/
+#history-modal{
+    max-width: 700px;
+}
+#history-table{
+    /* width: 90%; */
+    /* background-color: var(--color-primary); */
+    /* border-radius: 14px; */
+    text-align: center;
+    font-size: 25px;
+}
+#history-table thead{
+    background-color: var(--color-primary);
+}
+#history-table thead tr th{
+    padding: 1em 0.5em;
+}
+#history-table tbody td{
+    padding: 0.5em 0.2em;
+}
+#history-table tbody td:nth-child(2n+1){
+    border-right: 1px #fff solid;
+}
+#history-table tbody td:nth-child(2n){
+    border-left: 1px #fff solid;
+}
+#history-table thead{
+    border-bottom: 1px #fff solid;
+}
+#history-error{
+    text-align: center;
+    font-size: 25px;
+    padding: 4em 0.5em;
+}
