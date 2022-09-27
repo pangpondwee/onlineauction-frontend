@@ -33,6 +33,8 @@
 .detail{
   font-size: 24px;
   font-weight: bold;
+  margin-left: 2em;
+  margin-top: 2em;
 }
 
 .itemName{
@@ -42,7 +44,7 @@
   font-weight: normal;
   margin-top: 10px;
   margin-bottom: 0px;
-  padding: 10px 10px 10px 20px;
+  padding: 10px 10px 4px 20px;
   /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; */
@@ -114,4 +116,8 @@
 
 .row>* {
   padding: 0px;
+}
+
+.scrolling-wrapper {
+  margin-left: 2em;
 }
