@@ -1,4 +1,4 @@
-function prepend(num){
+export function prepend(num){
 	return ('0'+num).slice(-2)
 }
 export function getDate(timeRemaining){

@@ -3,7 +3,7 @@ import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
-import {getDate} from "../components/util";
+import {getDate,prepend} from "../components/util";
 
 
 const BidHistoryPopup = (props)=>{
@@ -12,16 +12,16 @@ const BidHistoryPopup = (props)=>{
 			return 1
 		}
 		else{
-			return 0
+			return -1
 		}
 	})
 	let history_elements = []
 	for(let i=0;i<history.length;i++){
 		const ms = Number(history[i].biddingDate)
 		const d = new Date(ms)
-		const d_hour = d.getHours();
-		const d_minute = d.getMinutes();
-		const d_seconds = d.getSeconds();
+		const d_hour = prepend(d.getHours());
+		const d_minute = prepend(d.getMinutes());
+		const d_seconds = prepend(d.getSeconds());
 		history_elements.push(
 		<tr key={i}>
 			<td>{d.toLocaleDateString("en-US")}</td>
