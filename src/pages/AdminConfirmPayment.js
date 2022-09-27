@@ -1,5 +1,7 @@
 import styles from "../css/AdminConfirmPayment.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { useState,useEffect } from "react";
+import getData from "../components/fetchData";
 
 const data = [
   {
@@ -25,32 +27,59 @@ const data = [
 ];
 
 const AdminConfirmPayment = () => {
-  return (
-    <>
-      <h1>Confirm Payment</h1>
-      <div className={styles.App3}>
-        <table className={styles.table}>
-          <tr>
-            <th className={styles.th}>Auctioneer</th>
-            <th className={styles.th}>Winner</th>
-            <th className={styles.th}>Price</th>
-            <th className={styles.th}></th>
-          </tr>
-          {data.map((val, key) => {
-            return (
-              <tr key={key} className={styles.tr}>
-                <td className={styles.td}>{val.Auctioneer}</td>
-                <td className={styles.td}>{val.Winner}</td>
-                <td className={styles.td}>{val.Price}</td>
-                <td className={styles.td}>
-                  <Link to="#">detail</Link>
-                </td>
-              </tr>
-            );
-          })}
-        </table>
+  const [data,setData] = useState([]);
+  const [status,setStatus] = useState("loading")
+  useEffect(()=>{
+    getData("/admin/reports")
+    .then(res=>{
+      console.log(res)
+    })
+    .catch(e=>{
+      setStatus("error");
+      setData(e.message)
+    })
+  },[])
+  if(status == "success"){
+    return (
+      <>
+        <h1>Confirm Payment</h1>
+        <div className={styles.App3}>
+          <table className={styles.table}>
+            <tr>
+              <th className={styles.th}>Auctioneer</th>
+              <th className={styles.th}>Winner</th>
+              <th className={styles.th}>Price</th>
+              <th className={styles.th}></th>
+            </tr>
+            {data.map((val, key) => {
+              return (
+                <tr key={key} className={styles.tr}>
+                  <td className={styles.td}>{val.Auctioneer}</td>
+                  <td className={styles.td}>{val.Winner}</td>
+                  <td className={styles.td}>{val.Price}</td>
+                  <td className={styles.td}>
+                    <Link to="#">detail</Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </table>
+        </div>
+      </>
+    );
+  }
+  else if(status == "loading"){
+    return (
+      <p>Loading...</p>
+    )
+  }
+  else{
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{data}</p>
       </div>
-    </>
-  );
+    )
+  }
 };
 export default AdminConfirmPayment;

@@ -30,12 +30,15 @@ const AdminConfirmDelivery = () => {
       <h1>Confirm Delivery</h1>
       <div className={styles.App4}>
         <table className={styles.table}>
-          <tr>
-            <th className={styles.th}>Auctioneer</th>
-            <th className={styles.th}>Winner</th>
-            <th className={styles.th}>Price</th>
-            <th className={styles.th}></th>
-          </tr>
+          <thead>
+            <tr>
+              <th className={styles.th}>Auctioneer</th>
+              <th className={styles.th}>Winner</th>
+              <th className={styles.th}>Price</th>
+              <th className={styles.th}></th>
+            </tr>
+          </thead>
+          <tbody>
           {data.map((val, key) => {
             return (
               <tr key={key} className={styles.tr}>
@@ -48,6 +51,7 @@ const AdminConfirmDelivery = () => {
               </tr>
             );
           })}
+          </tbody>
         </table>
       </div>
     </>
