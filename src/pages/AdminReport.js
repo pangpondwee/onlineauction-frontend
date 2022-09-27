@@ -68,7 +68,7 @@ const AdminReport = () => {
             {data.map((val, key) => {
               return (
                 <tr key={key}>
-                  <td className={styles.td}>{val.ReporterEmail}</td>
+                  <td className={styles.td}>{val.reporterMail}</td>
                   <td className={styles.td}>{val.reportedMail}</td>
                   <td className={styles.td}>{val.reportedDate}</td>
                   <td className={styles.td}>{val.description}</td>
