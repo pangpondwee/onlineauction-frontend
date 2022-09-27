@@ -61,6 +61,11 @@ const Search = (props) =>{
 	const [status,setStatus] = useState("loading")
 	const [pageCount,setPageCount] = useState(1)
 	const name = searchParams.get("name");
+	if(! searchParams.get("sort")){ // if no sort set to newest
+		if(document.getElementById("select1")){
+			document.getElementById("select1").value = "newest";
+		}
+	}
 	const selectSort = (e) =>{
 		const s = document.getElementById("select1").value
 		searchParams.set("sort",s)
