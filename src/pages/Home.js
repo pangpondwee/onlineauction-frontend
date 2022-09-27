@@ -22,22 +22,17 @@ const AuctionList = (props)=>{
 		})
 	},[])
 	if(status == "success"){
-		if(data.length > 0){
-			return <AuctionCardRow data={data}/>
-		}
-		else{
-			return <p>{props.message}</p>
-		}
+		return <AuctionCardRow data={data}/>
 	}
 	else if(status == "loading"){
 		return(
-			<p>Loading...</p>
+			<p style={{marginLeft: "3em"}}>Loading...</p>
 		)
 	}
 	else{
 		return (
 			<>
-				<p>Error: {data}</p>
+				<p style={{marginLeft: "3em"}}>Error: {data}</p>
 			</>
 		)
 	}
