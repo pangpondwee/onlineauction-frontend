@@ -16,7 +16,7 @@ const AuctionCard = (props) =>{
 				<Link to="#" className="itemName-link">
 					<p className="itemName">{props.name}</p>
 				</Link>
-				<p className="card-text">{props.price}</p>			
+				<p className="card-text">{props.price}฿</p>			
 			</div>			
 		</div>
 	)
