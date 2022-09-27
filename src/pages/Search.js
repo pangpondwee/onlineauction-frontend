@@ -7,6 +7,7 @@ import "../css/Home.css";
 import "../css/Search.css";
 import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
+import { getDate } from "../components/util";
 
 const PageNav = (props)=>{
 	const page = props.page;

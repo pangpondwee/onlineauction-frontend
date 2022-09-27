@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 
 import classes from "../css/SignUp.module.css";
 import Card from "../components/Card";
@@ -6,6 +6,19 @@ import Card from "../components/Card";
 import pic1 from "../pictures/loginpic.jpg";
 import { Link,useOutletContext,useNavigate } from "react-router-dom";
 import { postData } from "../components/fetchData";
+
+const PopupError = (props)=>{
+	let alertClass = "alertBox alert alert-danger"
+	if(props.error){
+		alertClass = "alertBox show alert alert-danger"
+	}
+	return (
+	<div className={alertClass} role="alert">
+		{props.error}
+	</div>
+	)
+}
+
 const TabSignUp = (props)=>{
   return (
     <div
@@ -69,6 +82,7 @@ const TabSignIn = (props)=>{
 const SignUp = () => {
   let navigate = useNavigate();
   const [loggedIn, setloggedIn] = useOutletContext();
+  const [error,setError] = useState("")
   const signinEmail = useRef();
   const signinPassword = useRef();
   const signupEmail = useRef();
@@ -84,10 +98,13 @@ const SignUp = () => {
     if(password != confirm){
       // password not match
       console.log("Passwords do not match")
+      setError("Passwords do not match")
+      // setError("Invalid pass")
       return
     }
     if(!email.match(/.+@.+/)){
       console.log("Invalid email")
+      // setError("Invalid email")
       return
     }
     postData(
@@ -183,6 +200,8 @@ const SignUp = () => {
           </div>
         </Card>
       </div>
+      <PopupError
+      error={error}/>
     </Fragment>
   );
 };
