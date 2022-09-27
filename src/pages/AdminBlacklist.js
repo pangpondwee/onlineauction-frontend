@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { getData } from "../components/fetchData"
 
@@ -20,10 +20,11 @@ const data = [
 ];
 
 const AdminBlacklist = () => {
+  const [data,setData] = useState([])
   useEffect(()=>{
     getData("/admin/blacklist")
     .then(res=>{
-      console.log(res)
+      setData(res.blacklistedUsers)
     })
   },[])
   return (
