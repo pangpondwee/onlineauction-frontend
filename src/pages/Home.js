@@ -45,20 +45,26 @@ const AuctionList = (props)=>{
 
 const Home = () =>{
 	const displayName = localStorage.getItem("displayName");
-	// const isLoggedIn 
+	const isLoggedIn = localStorage.getItem("isLoggedIn")
 	return (
 		<>
-			<p className="headHome">Welcome, {displayName}! Let’s see what you got...</p>		
-			<p className="detail">Your Recent Bids</p>
-			<AuctionList
-			message="You don't have any recent bids"
-			url="/auction/auction-list?filter=recent_bidding"
-			/>
-			<p className="detail">Recent Following List</p>
-			<AuctionList
-			message="You are not following any bids"
-			url="/auction/auction-list?filter=my_following_list"
-			/>
+			{isLoggedIn?
+			<>
+				<p className="headHome">Welcome, {displayName}! Let’s see what you got...</p>		
+				<p className="detail">Your Recent Bids</p>
+				<AuctionList
+				message="You don't have any recent bids"
+				url="/auction/auction-list?filter=recent_bidding"
+				/>
+				<p className="detail">Recent Following List</p>
+				<AuctionList
+				message="You are not following any bids"
+				url="/auction/auction-list?filter=my_following_list"
+				/>
+			</>
+			:
+			<></>
+			}
 			<p className="detail">Popular</p>
 			<AuctionList
 			message="There are no popular bids"
