@@ -83,7 +83,7 @@ li.menu-dropdown {
     margin: 10px;
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .account-info {
