@@ -43,7 +43,9 @@ const AccountEdit = (props) =>{
                 _changed[_info] = tmp
             }
         })
-        sendChange(_changed)
+        const imgtest = document.getElementById('Profile').src
+        console.log(imgtest)
+        // sendChange(_changed)
 		e.preventDefault()
     }
 
@@ -60,6 +62,10 @@ const AccountEdit = (props) =>{
 	},[]);
 
     // console.log(data)
+    useEffect(()=>{
+		setPrepic(data.profilePicture)
+	},[data]);
+    
 
     const _changed = []
 
@@ -69,7 +75,7 @@ const AccountEdit = (props) =>{
                 <h1>My Profile</h1>
                 <div className="main-editing-page">
                     <div>
-                        <img className="profile-pic" alt="ProfilePic" id="Profile" src={data.profilePicture}/>
+                        <img className="profile-pic" alt="ProfilePic" id="Profile" src={prepic}/>
                         <label for="input_pic" className="choose-image">Choose Image</label>
                         <input id="input_pic" type="file" className="choose-image" name="yourPic" accept="image/*" onChange={previewImage} hidden/>
                     </div>

@@ -8,8 +8,9 @@ import goods from "../pictures/nintendo.png"
 const OrderObj = (props) =>{
     const navigate = useNavigate()
 
-    const navigateTo = ()=>{
-        navigate(`/auction/${props.auctionId}`)
+    const navigateTo = (current)=>{
+        console.log(current)
+        current? navigate(`/auction/${props.auctionId}`) : console.log("not bidding")
     }
 
     const status_text = {
@@ -42,7 +43,8 @@ const OrderObj = (props) =>{
             </span>
             <div className="d-flex justify-content-end">
                 <div className= {`Follow-button ${props.status_class}`} 
-                data-bs-toggle="modal" data-bs-target={props.status_class==="bid-waitingForConfirm"? "#confirmModal":""}>
+                data-bs-toggle= {props.status_class==="bid-waitingForConfirm"? "modal":""} data-bs-target={props.status_class==="bid-waitingForConfirm"? "#confirmModal":""}
+                onClick={navigateTo(props.currently)}>
                     <h6>{status_text[props.status_class]}</h6>
                 </div>
             </div> 
