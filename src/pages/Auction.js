@@ -3,34 +3,29 @@ import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
+import {getDate,prepend} from "../components/util";
 
-
-function getDate(timeRemaining){
-	// TODO make date lighter
-	const d = new Date(timeRemaining);
-	const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
-	const d_hour = d.getHours();
-	const d_minute = d.getMinutes();
-	const d_seconds = d.getSeconds();
-	if(timeRemaining <= 0){
-		return "Ended";
-	}
-	if(d_days > 2){
-		return `${d_days} day(s)`;
-	}
-	else{
-		return `${d_hour}hr ${d_minute}m ${d_seconds}s`;
-	}
-}
 
 const BidHistoryPopup = (props)=>{
-	const history=props.history
+	const history=props.history.sort((a,b)=>{
+		if(a.biddingDate<b.biddingDate){
+			return 1
+		}
+		else{
+			return -1
+		}
+	})
 	let history_elements = []
 	for(let i=0;i<history.length;i++){
+		const ms = Number(history[i].biddingDate)
+		const d = new Date(ms)
+		const d_hour = prepend(d.getHours());
+		const d_minute = prepend(d.getMinutes());
+		const d_seconds = prepend(d.getSeconds());
 		history_elements.push(
 		<tr key={i}>
-			<td>{history[i].biddingDate}</td>
-			<td>{history[i].biddingDate}</td>
+			<td>{d.toLocaleDateString("en-US")}</td>
+			<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
 			<td>{history[i].bidderName}</td>
 			<td>{history[i].biddingPrice}</td>
 		</tr>
@@ -299,13 +294,13 @@ const Auction = (props) =>{
 			return res.data.auctioneerID
 		})
 		.then((auctioneerID)=>{ // get auctioneer
-			// return getData(`/user/profile/${auctioneerID}`)
 			setAuctioneer(auctioneerID)
+			return getData(`/user/profile/${auctioneerID}`)
 		})
-		// .then((res)=>{
-		// 	// TODO fix with api
-		// 	setAuctioneer(res.user.displayName)
-		// })
+		.then((res)=>{
+			// TODO fix with api
+			setAuctioneer(res.data.displayName)
+		})
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
