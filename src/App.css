@@ -65,12 +65,15 @@ main {
   border-radius: var(--radius)
 }
 
+.alertBox-container{
+  display: flex;
+  justify-content: center;
+}
+
 .alertBox {
   visibility: hidden;
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  margin-left: -300px;
   max-width: 600px;
 }
 .alertBox.show{

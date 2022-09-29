@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import classes from "../css/SignUp.module.css";
 import Card from "../components/Card";
@@ -6,18 +6,7 @@ import Card from "../components/Card";
 import pic1 from "../pictures/loginpic.jpg";
 import { Link,useOutletContext,useNavigate } from "react-router-dom";
 import { postData } from "../components/fetchData";
-
-const PopupError = (props)=>{
-	let alertClass = "alertBox alert alert-danger"
-	if(props.error){
-		alertClass = "alertBox show alert alert-danger"
-	}
-	return (
-	<div className={alertClass} role="alert">
-		{props.error}
-	</div>
-	)
-}
+import PopupError from "../components/PopupError";
 
 const TabSignUp = (props)=>{
   return (
@@ -97,14 +86,11 @@ const SignUp = () => {
     const name = displayName.current.value.trim()
     if(password != confirm){
       // password not match
-      console.log("Passwords do not match")
-      setError("Passwords do not match")
-      // setError("Invalid pass")
+      setError("Error: Passwords do not match")
       return
     }
     if(!email.match(/.+@.+/)){
-      console.log("Invalid email")
-      // setError("Invalid email")
+      setError("Error: Invalid Email")
       return
     }
     postData(
@@ -120,7 +106,7 @@ const SignUp = () => {
       console.log("Signed up")
     })
     .catch((error)=>{
-      console.log(error)
+      setError(error.message)
     })
   }
   const onSignInSubmit = (e) => {
@@ -141,13 +127,17 @@ const SignUp = () => {
       navigate("/");
     })
     .catch((error)=>{
-      console.log(error)
+      setError(error.message)
     })
     e.preventDefault()
   }
 
   return (
     <Fragment>
+      <PopupError
+      error={error}
+      setError={setError}
+      />
       <div className={classes.SignUp}>
         <div>
           <h1>Anything You Want, At A Super Satisfying Price!</h1>
@@ -201,8 +191,6 @@ const SignUp = () => {
           </div>
         </Card>
       </div>
-      <PopupError
-      error={error}/>
     </Fragment>
   );
 };
