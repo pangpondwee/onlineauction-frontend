@@ -1,96 +1,155 @@
 import AddressBox from '../components/AddressBox'
-import Package from '../pictures/package.jpeg'
+// import Package from '../pictures/package.jpeg'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
+import { FilePond, registerPlugin } from 'react-filepond'
+import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
+import { useState, useEffect, useRef } from 'react'
+import { postData, getData } from '../components/fetchData'
+import { useParams } from 'react-router-dom'
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+
+// Install plugin
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+
+registerPlugin(
+  FilePondPluginFileEncode,
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateType
+)
 
 const Shipping = () => {
+  const { auctionId } = useParams()
+
+  const [modalShow, setModalShow] = useState(false)
+  const [itemName, setItemName] = useState('')
+  const [auctioneerName, setAuctioneerName] = useState('')
+  const [price, setPrice] = useState('')
+  const [productPicture, setProductPicture] = useState('')
+  const [name, setName] = useState('')
+  const [address, setAddress] = useState('')
+  const [phone, setPhone] = useState('')
+  const uploadFileRef = useRef()
+  const submitHandler = () => {}
+
+  useEffect(() => {
+    getData(`/payment/${auctionId}`)
+      .then((res) => {
+        console.log(res)
+        setItemName(res.data.productName)
+        setAuctioneerName(res.data.auctioneerName)
+        setPrice(res.data.winningPrice)
+        setProductPicture(res.data.productPicture)
+      })
+      .catch((e) => console.log(e))
+  }, [])
   return (
-    <div class="page-with-summary">
-      <div class="form-section">
-        <h1 class="header">Shipping</h1>
-        <form>
-          <div class="form">
-            <div class="formHeading1">SHIPPING ADDRESS</div>
-            <div class="subForm">
-              <AddressBox></AddressBox>
+    <div className="page-with-summary">
+      <div className="form-section">
+        <h1 className="header">Shipping</h1>
+        <form
+          className="payment-form"
+          onSubmit={(event) => {
+            modalShow(true)
+            event.preventDefault()
+          }}
+        >
+          <div className="form">
+            <div className="form-heading1">SHIPPING ADDRESS</div>
+            <div className="sub-form">
+              <AddressBox name={name} address={address} phone={phone} />
             </div>
-            <div class="formHeading1">PAYMENT INFO</div>
-            <div class="subForm">
-              <div class="mb-3">
-                <label for="bankAccount" class="form-label">
+            <div className="form-heading1">PAYMENT INFO</div>
+            <div className="sub-form">
+              <div className="form-input-field">
+                <label htmlFor="bankAccount" className="form-label">
                   BANK ACCOUNT
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="inputBankAccount"
+                  className="form-control"
                   placeholder="e.g. 0718785888"
+                  required
                 ></input>
               </div>
 
-              <div class="mb-3">
-                <label for="bankName" class="form-label">
+              <div className="form-input-field">
+                <label htmlFor="bankName" className="form-label">
                   BANK
                 </label>
-                <select class="form-select form-control">
-                  <option selected>Select a Bank</option>
-                  <option value="ktb">Krung Thai Bank (ธนาคารกรุงไทย)</option>
-                  <option value="kbank">Kasikornbank (ธนาคารกสิกรไทย)</option>
-                  <option value="scb">
+                <select
+                  className="form-select form-control"
+                  defaultValue={'Select a Bank'}
+                  required
+                >
+                  <option value="Select a Bank" disabled>
+                    Select a Bank
+                  </option>
+                  <option value="KTB">Krung Thai Bank (ธนาคารกรุงไทย)</option>
+                  <option value="KBANK">Kasikornbank (ธนาคารกสิกรไทย)</option>
+                  <option value="SCB">
                     Siam Commercial Bank (ธนาคารไทยพาณิชย์)
                   </option>
-                  <option value="bbl">Bangkok Bank (ธนาคารกรุงเทพ)</option>
-                  <option value="ttb">
+                  <option value="BBL">Bangkok Bank (ธนาคารกรุงเทพ)</option>
+                  <option value="TTB">
                     TMBThanachat Bank (ธนาคารทหารไทยธนชาต)
                   </option>
-                  <option value="ิbay">Bank of Ayudhya (ธนาคารกรุงศรี)</option>
-                  <option value="gsb">
+                  <option value="ิBAY">Bank of Ayudhya (ธนาคารกรุงศรี)</option>
+                  <option value="GSB">
                     Government Savings Bank (ธนาคารออมสิน)
                   </option>
-                  <option value="cimb">
+                  <option value="CIMBT">
                     CIMB Thai Bank (ธนาคารซีไอเอ็มบีไทย)
                   </option>
-                  <option value="uob">
+                  <option value="UOB">
                     United Overseas Bank (Thai) (ธนาคารยูโอบี)
                   </option>
-                  <option value="tisco">Tisco Bank (ธนาคารทิสโก้ จำกัด)</option>
-                  <option value="kkp">
+                  <option value="TISCO">Tisco Bank (ธนาคารทิสโก้ จำกัด)</option>
+                  <option value="KKP">
                     Kiatnakin Phatra Bank (ธนาคารเกียรตินาคินภัทร)
                   </option>
                 </select>
               </div>
 
-              <div class="mb-3">
-                <label for="accountName" class="form-label">
+              <div className="form-input-field">
+                <label htmlFor="accountName" className="form-label">
                   ACCOUNT NAME
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="inputAccountName"
+                  className="form-control"
                   placeholder="e.g. Peeranat Srisuthangkul"
+                  required
                 ></input>
               </div>
             </div>
-            <div class="formHeading1">SHIPPING INFO</div>
-            <div class="subForm">
-              <div class="mb-3">
-                <label for="trackingNumber" class="form-label">
+            <div className="form-heading1">SHIPPING INFO</div>
+            <div className="sub-form">
+              <div className="form-input-field">
+                <label htmlFor="trackingNumber" className="form-label">
                   TRACKING NUMBER
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="inputTrackingNumber"
+                  className="form-control"
                   placeholder="e.g. ABCDEF123456"
+                  required
                 ></input>
               </div>
 
-              <div class="mb-3">
-                <label for="shippingCompany" class="form-label">
+              <div className="form-input-field">
+                <label htmlFor="shippingCompany" className="form-label">
                   SHIPPING COMPANY
                 </label>
-                <select class="form-select form-control">
-                  <option selected>Select a Shipping Company</option>
+                <select
+                  className="form-select form-control"
+                  defaultValue={'Select a Shipping Company'}
+                >
+                  <option disabled>Select a Shipping Company</option>
                   <option value="thpost">Thailand Post</option>
                   <option value="kerry">Kerry Express</option>
                   <option value="scg">SCG Express</option>
@@ -100,28 +159,23 @@ const Shipping = () => {
                 </select>
               </div>
 
-              <div class="mb-3">
-                <label for="uploadPackagePicture" class="form-label">
+              <div className="form-input-field">
+                <label htmlFor="uploadPackagePicture" className="form-label">
                   UPLOAD PACKAGE PICTURE
                 </label>
-                <div class="mb-3 center-pic">
-                  <img
-                    class="preview-picture"
-                    src={Package}
-                    alt="package"
-                  ></img>
-                </div>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="inputPackagePicture"
-                ></input>
+                <FilePond
+                  allowFileEncode={true}
+                  acceptedFileTypes={['image/png', 'image/jpeg']}
+                  ref={uploadFileRef}
+                  credits={false}
+                  required
+                />
               </div>
               <div>
-                <button type="submit" class="btn btn-primary first-button">
+                <button type="submit" className="btn btn-primary first-button">
                   Proceed
                 </button>
-                <button type="submit" class="btn btn-outline-primary">
+                <button type="submit" className="btn btn-outline-primary">
                   Cancel
                 </button>
               </div>
@@ -129,9 +183,19 @@ const Shipping = () => {
           </div>
         </form>
       </div>
-      <div class="payment-summary-section">
-        <PaymentSummaryCard></PaymentSummaryCard>
+      <div className="payment-summary-section">
+        <PaymentSummaryCard
+          itemName={itemName}
+          auctioneerName={auctioneerName}
+          price={price}
+          productPicture={productPicture}
+        ></PaymentSummaryCard>
       </div>
+      <PopupConfirmSubmit
+        modalShow={modalShow}
+        submitHandler={submitHandler}
+        setModalShow={setModalShow}
+      />
     </div>
   )
 }

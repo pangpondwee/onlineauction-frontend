@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import classes from "../css/SignUp.module.css";
 import Card from "../components/Card";
@@ -6,6 +6,8 @@ import Card from "../components/Card";
 import pic1 from "../pictures/loginpic.jpg";
 import { Link,useOutletContext,useNavigate } from "react-router-dom";
 import { postData } from "../components/fetchData";
+import PopupError from "../components/PopupError";
+
 const TabSignUp = (props)=>{
   return (
     <div
@@ -69,6 +71,7 @@ const TabSignIn = (props)=>{
 const SignUp = () => {
   let navigate = useNavigate();
   const [loggedIn, setloggedIn] = useOutletContext();
+  const [error,setError] = useState("")
   const signinEmail = useRef();
   const signinPassword = useRef();
   const signupEmail = useRef();
@@ -83,11 +86,11 @@ const SignUp = () => {
     const name = displayName.current.value.trim()
     if(password != confirm){
       // password not match
-      console.log("Passwords do not match")
+      setError("Error: Passwords do not match")
       return
     }
     if(!email.match(/.+@.+/)){
-      console.log("Invalid email")
+      setError("Error: Invalid Email")
       return
     }
     postData(
@@ -103,7 +106,7 @@ const SignUp = () => {
       console.log("Signed up")
     })
     .catch((error)=>{
-      console.log(error)
+      setError(error.message)
     })
   }
   const onSignInSubmit = (e) => {
@@ -119,21 +122,28 @@ const SignUp = () => {
       const data = res.data.user;
       localStorage.setItem("displayName", data.displayName);
       localStorage.setItem("token", res.token);
+      localStorage.setItem("userStatus", data.userStatus);
       setloggedIn(true);
       navigate("/");
     })
     .catch((error)=>{
-      console.log(error)
+      setError(error.message)
     })
     e.preventDefault()
   }
 
   return (
     <Fragment>
-      <h1>Anything You Want, At A Super Satisfying Price!</h1>
-      <h2 className="text-primary">Create An Account Now!</h2>
+      <PopupError
+      error={error}
+      setError={setError}
+      />
       <div className={classes.SignUp}>
-        <img className={classes.loginimg} src={pic1} />
+        <div>
+          <h1>Anything You Want, At A Super Satisfying Price!</h1>
+          <h2 className="text-primary">Create An Account Now!</h2>
+          <img className={classes.loginimg} src={pic1} />
+        </div>
         <Card className={classes.input}>
           <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">

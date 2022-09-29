@@ -1,5 +1,7 @@
 .card{
-	width: 9.5rem;
+	/* width: 9.5rem; */
+  width: 12.4rem;
+  border-radius: 20px;
   /* width: 18rem;
   min-width: 10rem; */
   margin: auto 20px;
@@ -31,18 +33,25 @@
 .detail{
   font-size: 24px;
   font-weight: bold;
-}
-
-.pictureBox{
-  border: 1px solid black;
-  border-radius: 5px 5px 0px 0px;
-  height: 193.08px;
+  margin-left: 2em;
+  margin-top: 2em;
 }
 
 .itemName{
+  /* font-size: medium; */
+  /* height: 55px; */
   font-size: medium;
   font-weight: normal;
   margin-top: 10px;
+  margin-bottom: 0px;
+  padding: 10px 10px 4px 20px;
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
 }
 
 .timeBox{
@@ -52,27 +61,35 @@
   background-color: white;
   width: 7rem;
   border-radius: 15px;
-  box-shadow: var(--box-shadow);
+  box-shadow: rgba(0, 0, 0, 0.30) 0px 4px 4px 0;
   text-align: center;
+}
+
+.timeBox-red{
+  background-color: #FF3131;
+  color: white;
 }
 
 .card-img-top{
   /* height: 15vm; */
-  height: 150px;
+  border-radius: 16px 16px 0 0;
+  height: 200px;
   object-fit: cover; /*add object-fit: cover; to fit image for card*/
   /* min-width: 15%; */
   min-height: 112.5px;
 }
 
 .card-text{
-  font-size: x-large;
+  font-size:1.7em;
   font-weight: bold;
   margin-top: -18px;
   margin-bottom: -10px;
+  padding: 10px 10px 10px 20px;
 }
 
 .itemTime{
   border: 1px solid black;
+  border-radius: 15px;
   border-radius: 15px;
   margin-bottom: -5px;
 }
@@ -99,4 +116,8 @@
 
 .row>* {
   padding: 0px;
+}
+
+.scrolling-wrapper {
+  margin-left: 2em;
 }
