@@ -12,20 +12,9 @@ import {getData} from '../components/fetchData';
 import "../css/AccountPage.css";
 
 const AccountPage = () =>{
-    
-    // const [data,setData] = useState({
-    //     displayName: "Peeranut Srisuthangkul",
-    //     email: "peeranut.sri@ku.th",
-    //     phoneNumber: "06200000000",
-    //     address: "4412 Matlock Rd #200 Arlington Texas United States 76018",
-    //     description: "Exercitation sint fugiat et esse ut do quis laboris anim nisi proident ullamco. Sit eu mollit cillum et consequat eu consectetur ad reprehenderit exercitation sunt duis nisi est. Pariatur exercitation commodo non tempor. Fugiat minim velit veniam reprehenderit nulla veniam voluptate adipisicing ullamco culpa incididunt. Sunt irure commodo et ut do aute duis."});
     const [data,setData] = useState({})
     const [other_data, setOther_data] = useState({})
     const [status,setStatus]=useState("unknown");
-    // const [other_data, setOther_data] = useState({"badge": [badge1, badge2, badge3],
-    //                                             "rating": 3.5,
-    //                                             "totalAuctioned" : 12,
-    //                                             "successAuctioed" : 5})
 
     useEffect(()=>{
 		getData(`/user/myprofile`).then((res)=>{ 
@@ -52,8 +41,8 @@ const AccountPage = () =>{
 		})
     }, [userId])
 
-    console.log(data)
-    console.log(other_data)
+    // console.log(data)
+    // console.log(other_data)
 
     const allstar = []
 
@@ -74,7 +63,6 @@ const AccountPage = () =>{
                 </div>
             </div>
             <div className="main-info-profile">
-                {/* need to add pic */}
                 <img className="profile-pic" alt="ProfilePic" src={data.profilePicture}/>
                 <div>
                     <h5>Display Name</h5>

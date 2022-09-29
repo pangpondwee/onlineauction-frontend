@@ -10,7 +10,7 @@ const OrderObj = (props) =>{
 
     const navigateTo = (current)=>{
         console.log(current)
-        current? navigate(`/auction/${props.auctionId}`) : console.log("not bidding")
+        if(current) navigate(`/auction/${props.auctionId}`)
     }
 
     const status_text = {

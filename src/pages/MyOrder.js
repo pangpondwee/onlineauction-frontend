@@ -63,15 +63,15 @@ const MyOrder = () =>{
 		// 	}
 		// })
         //data_mybid_wait
-        // getData(`/user/myorder?list=mybid`).then((res)=>{
-		// 	setStatus(res.status);
-		// 	if(res.status == "success"){
-		// 		setData_myBid_wait(res.data);
-		// 	}
-		// 	else{
-		// 		setData_myBid_wait(res.message);
-		// 	}
-		// })
+        getData(`/user/myorder?list=mybid`).then((res)=>{
+			setStatus(res.status);
+			if(res.status == "success"){
+				setData_myBid_wait(res.data);
+			}
+			else{
+				setData_myBid_wait(res.message);
+			}
+		})
         // //data_myauction_active
         // getData(`/user/myorder?filter=myauction`).then((res)=>{
 		// 	setStatus(res.status);
@@ -94,7 +94,10 @@ const MyOrder = () =>{
 		// })
 	},[]);
 
-    // console.log(data_myauction_active)
+    console.log(data_mybid_active)
+    console.log(data_mybid_wait)
+    console.log(data_myauction_active)
+    console.log(data_myauction_wait)
 
     let _data = []
     
