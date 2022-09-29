@@ -1,4 +1,3 @@
-//import promptpayqr from '../pictures/PromptpayQR.png'
 import promptpayheader from '../pictures/promptpay-header.png'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import '../css/Payment.css'
