@@ -145,14 +145,9 @@ li.menu-dropdown {
 }
 
 .choose-image {
-    text-align: center;
-    border: 3px var(--color-primary) solid;
-    border-radius: 5px;
-    color: var(--color-dark);
-    background-color: white;
-    padding: 0 10px;
-    margin: 20px 0 0 230px;
-    cursor: pointer;
+    width: 25vw;
+    max-width: 350px;
+    min-width: 200px;
 }
 
 /* MyOrderNav */

@@ -1,14 +1,34 @@
 import blank_profile from "../pictures/blank_profile.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {getData, patchData} from '../components/fetchData';
 
-const AccountEdit = (props) =>{
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond'
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+
+// Install plugin
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop'
+
+// Register the plugins
+registerPlugin(
+  FilePondPluginFileEncode,
+  FilePondPluginImagePreview,
+  FilePondPluginFileValidateType,
+  FilePondPluginImageCrop
+)
+
+const AccountEdit = () =>{
     const navigate = useNavigate()
+    const uploadFileRef = useRef()
 
-    const [prepic, setPrepic] = useState(blank_profile)
-
-    const previewImage = (event)=>{ setPrepic(URL.createObjectURL(event.target.files[0])) }
+    // const previewImage = (event)=>{ setPrepic(URL.createObjectURL(event.target.files[0])) }
 
     // const [data,setData] = useState({
     //     displayName: "Peeranut Srisuthangkul",
@@ -25,16 +45,18 @@ const AccountEdit = (props) =>{
             if(!res.status) throw new Error("Could not get status")
             if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
             console.log(res.status)
-            //navigate(`/account/profile`)
+            navigate(`/account/profile`)
         })
         .catch(e=>{
             console.log(e.message)
         })
-        console.log(new_data)
+        // console.log(new_data)
     }
 
     const summitChange = (e) =>{
+        e.preventDefault()
         const personal_info = ["displayName", "email", "phoneNumber", "address", "accountDescription"]
+        
         const _changed = {}
         personal_info.forEach((_info)=>{
             const tmp = document.getElementById(_info).value
@@ -43,10 +65,10 @@ const AccountEdit = (props) =>{
                 _changed[_info] = tmp
             }
         })
-        const imgtest = document.getElementById('Profile').src
-        console.log(imgtest)
-        // sendChange(_changed)
-		e.preventDefault()
+        
+        const profileData = uploadFileRef.current.getFile()
+        if(profileData!=null) _changed["profilePicture"] = profileData.getFileEncodeDataURL()
+        sendChange(_changed)
     }
 
     useEffect(()=>{
@@ -61,13 +83,7 @@ const AccountEdit = (props) =>{
 		})
 	},[]);
 
-    // console.log(data)
-    useEffect(()=>{
-		setPrepic(data.profilePicture)
-	},[data]);
-    
-
-    const _changed = []
+    console.log(data)
 
 	return (
         <div className="profile-page d-flex justify-content-between">
@@ -75,13 +91,20 @@ const AccountEdit = (props) =>{
                 <h1>My Profile</h1>
                 <div className="main-editing-page">
                     <div>
-                        <img className="profile-pic" alt="ProfilePic" id="Profile" src={prepic}/>
-                        <label for="input_pic" className="choose-image">Choose Image</label>
-                        <input id="input_pic" type="file" className="choose-image" name="yourPic" accept="image/*" onChange={previewImage} hidden/>
+                        <img className="profile-pic" alt="ProfilePic" id="Profile" src={data.profilePicture}/>
+                        <FilePond
+                            className="choose-image"
+                            allowMultiple={false}
+                            maxFiles={1}
+                            allowFileEncode={true}
+                            acceptedFileTypes={['image/png', 'image/jpeg']}
+                            imageCropAspectRatio="1:1"
+                            ref={uploadFileRef}
+                            credits={false}/>
                     </div>
                     <div>
                         <div>
-                            <label><h5>Name</h5></label><br/>
+                            <label><h5>Display Name</h5></label><br/>
                             <input type="text" id="displayName" className="input-editing" placeholder={data.displayName}/>
                         </div>
                         <div>
@@ -98,7 +121,7 @@ const AccountEdit = (props) =>{
                         </div>
                         <div>
                             <label><h5>Description</h5></label><br/>
-                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.description}/>
+                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription}/>
                         </div>
                     </div>
                 </div>

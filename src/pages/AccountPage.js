@@ -20,11 +20,12 @@ const AccountPage = () =>{
     //     address: "4412 Matlock Rd #200 Arlington Texas United States 76018",
     //     description: "Exercitation sint fugiat et esse ut do quis laboris anim nisi proident ullamco. Sit eu mollit cillum et consequat eu consectetur ad reprehenderit exercitation sunt duis nisi est. Pariatur exercitation commodo non tempor. Fugiat minim velit veniam reprehenderit nulla veniam voluptate adipisicing ullamco culpa incididunt. Sunt irure commodo et ut do aute duis."});
     const [data,setData] = useState({})
+    const [other_data, setOther_data] = useState({})
     const [status,setStatus]=useState("unknown");
-    const [other_data, setOther_data] = useState({"badge": [badge1, badge2, badge3],
-                                                "rating": 3.5,
-                                                "totalAuctioned" : 12,
-                                                "successAuctioed" : 5})
+    // const [other_data, setOther_data] = useState({"badge": [badge1, badge2, badge3],
+    //                                             "rating": 3.5,
+    //                                             "totalAuctioned" : 12,
+    //                                             "successAuctioed" : 5})
 
     useEffect(()=>{
 		getData(`/user/myprofile`).then((res)=>{ 
