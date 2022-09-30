@@ -34,15 +34,23 @@ const Payment = () => {
   const { auctionId } = useParams()
   // const auctionId = '632c09fb1e43a833d78ad748'
 
-  const [itemName, setItemName] = useState('')
-  const [auctioneerName, setAuctioneerName] = useState('')
-  const [price, setPrice] = useState('')
-  const [productPicture, setProductPicture] = useState('')
-  const [fullName, setFullName] = useState('')
-  const [telephone, setTelephone] = useState('')
-  const [billingAddress, setBillingAddress] = useState('')
-  const [transactionDateTime, setTransactionDateTime] = useState('')
-  const [value, setValue] = useState('')
+  const [paymentDetails, setPaymentDetails] = useState({
+    bidderName: '',
+    phoneNumber: '',
+    bidderAddress: '',
+    transferDate: '',
+    value: '',
+    slipPicture: [],
+  })
+  const [itemDetails, setItemDetails] = useState({
+    productName: '',
+    auctioneerName: '',
+    winningPrice: '',
+    productPicture: '',
+  })
+  const [checked, setChecked] = useState(false)
+  const [inputDisabled, setInputDisabled] = useState(false)
+
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
   const navigate = useNavigate()
@@ -51,43 +59,45 @@ const Payment = () => {
     getData(`/payment/${auctionId}`)
       .then((res) => {
         console.log(res)
-        setItemName(res.data.productName)
-        setAuctioneerName(res.data.auctioneerName)
-        setPrice(res.data.winningPrice)
-        setProductPicture(res.data.productPicture)
+        setItemDetails(res.data)
       })
       .catch((e) => console.log(e))
   }, [])
 
-  const usePhoneNumberFromProfileHandler = () => {
-    getData('/user/myprofile')
-      .then((res) => {
-        console.log(res.data.phoneNumber)
-        setTelephone(res.data.phoneNumber)
+  const getInformationFromProfileHandler = (checked) => {
+    if (checked === true) {
+      getData('/user/myprofile')
+        .then((res) => {
+          console.log(res)
+          setPaymentDetails({
+            ...paymentDetails,
+            bidderName: res.data.displayName,
+            phoneNumber: res.data.phoneNumber,
+            bidderAddress: res.data.address,
+          })
+        })
+        .catch((e) => console.log(e))
+    } else {
+      setPaymentDetails({
+        ...paymentDetails,
+        bidderName: '',
+        phoneNumber: '',
+        bidderAddress: '',
       })
-      .catch((e) => console.log(e))
+    }
   }
-  const useBillingAddressFromProfileHandler = () => {
-    getData('/user/myprofile')
-      .then((res) => {
-        console.log(res.data.address)
-        setBillingAddress(res.data.address)
-      })
-      .catch((e) => console.log(e))
-  }
+
   const submitHandler = () => {
     const uploadedFile = uploadFileRef.current.getFiles()
+
     let billingInfo = {
-      bidderName: fullName,
-      phoneNumber: telephone,
-      bidderAddress: billingAddress,
-      transferDate: String(new Date(transactionDateTime).getTime()),
-      value: Number(value),
+      ...paymentDetails,
+      transferDate: String(new Date(paymentDetails.transferDate).getTime()),
+      value: Number(paymentDetails.value),
       slipPicture: uploadedFile.map((f) => {
         return f.getFileEncodeDataURL()
       }),
     }
-    console.log(billingInfo)
     postData(`/payment/${auctionId}`, JSON.stringify(billingInfo)).then(
       (res) => {
         console.log(billingInfo)
@@ -108,18 +118,24 @@ const Payment = () => {
             event.preventDefault()
           }}
         >
-          <div className="form-heading1">BILLING INFO</div>
+          <div className="form-heading1">SHIPPING INFO</div>
           <div className="sub-form">
             <div className="form-input-field">
               <label htmlFor="fullName" className="form-label">
-                FULL NAME
+                RECIPIENT NAME
               </label>
               <input
                 type="text"
                 className="form-control"
-                value={fullName}
-                onChange={(event) => setFullName(event.target.value)}
+                value={paymentDetails.bidderName}
+                onChange={(e) =>
+                  setPaymentDetails({
+                    ...paymentDetails,
+                    bidderName: e.target.value,
+                  })
+                }
                 placeholder="e.g. Peeranat Srisuthangkul"
+                disabled={inputDisabled}
                 required
               ></input>
             </div>
@@ -130,38 +146,52 @@ const Payment = () => {
               <input
                 type="text"
                 className="form-control"
-                value={telephone}
-                onChange={(event) => setTelephone(event.target.value)}
+                value={paymentDetails.phoneNumber}
+                onChange={(e) =>
+                  setPaymentDetails({
+                    ...paymentDetails,
+                    phoneNumber: e.target.value,
+                  })
+                }
                 placeholder="e.g. 0620000000"
+                disabled={inputDisabled}
                 required
               ></input>
-              <button
-                type="button"
-                className="no-outline-btn"
-                onClick={usePhoneNumberFromProfileHandler}
-              >
-                Use telephone number from profile
-              </button>
             </div>
             <div className="form-input-field">
               <label htmlFor="billingAddress" className="form-label">
-                BILLING ADDRESS
+                SHIPPING ADDRESS
               </label>
               <textarea
                 type="text"
                 className="form-control"
-                value={billingAddress}
-                onChange={(event) => setBillingAddress(event.target.value)}
+                value={paymentDetails.bidderAddress}
+                onChange={(e) =>
+                  setPaymentDetails({
+                    ...paymentDetails,
+                    bidderAddress: e.target.value,
+                  })
+                }
                 placeholder="50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
+                disabled={inputDisabled}
                 required
               ></textarea>
-              <button
-                type="button"
-                className="no-outline-btn"
-                onClick={useBillingAddressFromProfileHandler}
-              >
-                Use billing address from profile
-              </button>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                checked={checked}
+                onChange={(e) => {
+                  setChecked(!checked)
+                  setInputDisabled(!checked)
+                  getInformationFromProfileHandler(!checked)
+                  console.log(e.target.checked)
+                }}
+              />
+              <label className="form-check-label">
+                Use information from profile
+              </label>
             </div>
           </div>
           <div className="form-heading1">TRANSACTION INFO</div>
@@ -172,7 +202,10 @@ const Payment = () => {
                 src={promptpayheader}
                 alt="promptpay"
               />
-              <PromptpayQR ppID={'0909754062'} amount={price} />
+              <PromptpayQR
+                ppID={'0909754062'}
+                amount={itemDetails.winningPrice}
+              />
             </div>
             <div className="form-input-field">
               <label htmlFor="uploadTransactionSlip" className="form-label">
@@ -193,8 +226,12 @@ const Payment = () => {
               <input
                 type="datetime-local"
                 className="form-control"
-                value={transactionDateTime}
-                onChange={(event) => setTransactionDateTime(event.target.value)}
+                onChange={(e) =>
+                  setPaymentDetails({
+                    ...paymentDetails,
+                    transferDate: e.target.value,
+                  })
+                }
                 required
               ></input>
             </div>
@@ -205,15 +242,19 @@ const Payment = () => {
               <input
                 type="number"
                 className="form-control"
-                value={value}
-                onChange={(event) => setValue(event.target.value)}
+                onChange={(e) =>
+                  setPaymentDetails({
+                    ...paymentDetails,
+                    value: e.target.value,
+                  })
+                }
                 placeholder="e.g. 500"
                 required
               ></input>
             </div>
             <div>
               <button type="submit" className="btn btn-primary first-button">
-                Submit
+                Proceed
               </button>
               <button type="button" className="btn btn-outline-primary">
                 Cancel
@@ -224,10 +265,10 @@ const Payment = () => {
       </div>
       <div className="payment-summary-section">
         <PaymentSummaryCard
-          itemName={itemName}
-          auctioneerName={auctioneerName}
-          price={price}
-          productPicture={productPicture}
+          itemName={itemDetails.productName}
+          auctioneerName={itemDetails.auctioneerName}
+          price={itemDetails.winningPrice}
+          productPicture={itemDetails.productPicture}
         ></PaymentSummaryCard>
       </div>
       <PopupConfirmSubmit
