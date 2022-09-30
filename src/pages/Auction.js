@@ -291,15 +291,8 @@ const Auction = (props) =>{
 			setStatus(res.status);
 			setData(res.data);
 			setLastBid(res.data.myLastBid)
+			setAuctioneer(res.data.auctioneerName)
 			return res.data.auctioneerID
-		})
-		.then((auctioneerID)=>{ // get auctioneer
-			setAuctioneer(auctioneerID)
-			return getData(`/user/profile/${auctioneerID}`)
-		})
-		.then((res)=>{
-			// TODO fix with api
-			setAuctioneer(res.data.displayName)
 		})
 		.catch((e)=>{
 			setStatus("error");
