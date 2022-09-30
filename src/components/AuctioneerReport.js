@@ -15,10 +15,10 @@ const AuctioneerReport = () => {
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 className="modal-report-header-text" class="modal-title" id="reportModalLabel">Report Pakkapol Kong</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
                         <div class="modal-body-report">
-                            <h6>Please specify the reason (up to 3 choices)</h6>
+                            <h6>Please specify the reason</h6>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                                 <label class="form-check-label" for="flexCheckDefault">

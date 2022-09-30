@@ -1,4 +1,5 @@
 //import promptpayqr from '../pictures/PromptpayQR.png'
+import promptpayheader from '../pictures/promptpay-header.png'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import '../css/Payment.css'
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -7,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { postData, getData } from '../components/fetchData'
 import { generatePayload } from '../components/promptpay'
 import { QRCodeSVG } from 'qrcode.react'
+import { useNavigate } from 'react-router-dom'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 
 // Import FilePond styles
@@ -44,6 +46,7 @@ const Payment = () => {
   const [value, setValue] = useState('')
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getData(`/payment/${auctionId}`)
@@ -88,7 +91,9 @@ const Payment = () => {
     console.log(billingInfo)
     postData(`/payment/${auctionId}`, JSON.stringify(billingInfo)).then(
       (res) => {
+        console.log(billingInfo)
         console.log(res)
+        navigate('/account/myorder')
       }
     )
   }
@@ -162,7 +167,12 @@ const Payment = () => {
           </div>
           <div className="form-heading1">TRANSACTION INFO</div>
           <div className="sub-form">
-            <div className="center-pic form-input-field">
+            <div className="form-input-field promptpay">
+              <img
+                className="promptpay-header"
+                src={promptpayheader}
+                alt="promptpay"
+              />
               <PromptpayQR ppID={'0909754062'} amount={price} />
             </div>
             <div className="form-input-field">

@@ -44,6 +44,7 @@ function App() {
           <Route path="shipping/:auctionId" element={<Shipping />} />
           <Route path="billing-info" element={<BillingInfo />} />
           <Route path="auctioneer/:auctioneerID" element={<ViewAuctioneer />} />
+          {/* <Route path="view-auctioneers" element={<ViewAuctioneer />} /> */}
           <Route path="faq" element={<FAQ />} />
           <Route path="search" element={<Search />} />
           <Route path="search/:pageNumber" element={<Search />} />
