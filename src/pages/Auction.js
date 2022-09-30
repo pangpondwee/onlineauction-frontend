@@ -305,6 +305,14 @@ const Auction = (props) =>{
 			setStatus("error");
 			setData(e.message)
 		})
+		setInterval(()=>{
+			getData(`/auction/${auctionId}/refresh`)
+			.then((res)=>{
+				setData(prev=>{
+					return {...prev, currentPrice: res.data.currentPrice}
+				})
+			})
+		},10000)
 	},[]);
 	if(status === "success"){
 		return (
