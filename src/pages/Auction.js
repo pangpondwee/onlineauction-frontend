@@ -169,6 +169,11 @@ const Bidding = (props)=>{
 		)
 	}
 	if(props.isFiveMinutes){
+		if(props.myLastBid < 1){
+			return (
+				<p>You cannot bid this auction</p>
+			)
+		}
 		return(
 			<form onSubmit={submitWrapper} id="bidding">
 				{props.isAlreadyBid5Minute ?
@@ -235,6 +240,7 @@ const Bidfield = (props)=>{
 			submitBid={props.submitBid}
 			isFiveMinutes={isFiveMinutes}
 			isAlreadyBid5Minute={props.isAlreadyBid5Minute}
+			myLastBid={props.data.myLastBid}
 			isEnded={isEnded}
 			/>
 			
@@ -285,11 +291,11 @@ const Auction = (props) =>{
 				})
 				setLastBid(price)
 
-				// const timeRemaining = data.endDate - Date.now()
-				// const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
-				// if(isFiveMinutes){
-				// 	setIsAlreadyBid5Minute(true)
-				// }
+				const timeRemaining = data.endDate - Date.now()
+				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
+				if(isFiveMinutes){
+					setIsAlreadyBid5Minute(true)
+				}
 			})
 			.catch(e=>{
 				console.log(e.message)//TODO handle
@@ -343,6 +349,7 @@ const Auction = (props) =>{
 					showHistory={showHistory}
 					getHistory={getHistory}
 					submitBid={submitBid}
+					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					lastBid={lastBid}
 					/>
 				</div>
