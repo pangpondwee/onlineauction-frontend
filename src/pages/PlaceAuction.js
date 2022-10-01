@@ -74,7 +74,7 @@ const AuctionDetail = () => {
 
   return (
     <div>
-      <h1 className="header">Place Auction</h1>
+      <div className="header">Place Auction</div>
       <form
         className="place-auction-form"
         onSubmit={(event) => {
