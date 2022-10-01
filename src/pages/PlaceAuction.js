@@ -131,10 +131,10 @@ const AuctionDetail = () => {
                   category: e.target.value,
                 })
               }}
-              defaultValue={'Select Category'}
+              defaultValue={''}
               required
             >
-              <option value="Select Category" disabled>
+              <option value="" disabled>
                 Select Category
               </option>
               <option value="Home Improvement">Home Improvement</option>
