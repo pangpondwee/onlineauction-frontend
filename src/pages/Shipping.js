@@ -5,7 +5,7 @@ import { FilePond, registerPlugin } from 'react-filepond'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 import { useState, useEffect, useRef } from 'react'
 import { postData, getData } from '../components/fetchData'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -25,39 +25,76 @@ registerPlugin(
 const Shipping = () => {
   const { auctionId } = useParams()
 
-  const [modalShow, setModalShow] = useState(false)
-  const [itemName, setItemName] = useState('')
-  const [auctioneerName, setAuctioneerName] = useState('')
-  const [price, setPrice] = useState('')
-  const [productPicture, setProductPicture] = useState('')
-  const [name, setName] = useState('')
-  const [address, setAddress] = useState('')
-  const [phone, setPhone] = useState('')
+  const [shippingDetails, setShippingDetails] = useState({
+    bankAccountNO: '',
+    bankName: '',
+    bankAccountName: '',
+    trackingNumber: '',
+    shippingCompany: '',
+    packagePicture: '',
+  })
+
+  const [itemDetails, setItemDetails] = useState({
+    productName: '',
+    auctioneerName: '',
+    winningPrice: '',
+    productPicture: '',
+  })
+
+  const [shippingAddress, setShippingAddress] = useState({
+    name: '',
+    address: '',
+    phone: '',
+  })
+
   const uploadFileRef = useRef()
-  const submitHandler = () => {}
+  const [modalShow, setModalShow] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getData(`/payment/${auctionId}`)
       .then((res) => {
         console.log(res)
-        setItemName(res.data.productName)
-        setAuctioneerName(res.data.auctioneerName)
-        setPrice(res.data.winningPrice)
-        setProductPicture(res.data.productPicture)
+        setItemDetails(res.data)
       })
       .catch((e) => console.log(e))
-    // getData(`/shipping/${auctionId}`)
-    //   .then((res) => {
-    //     console.log(res)
-    //     setName(res.data.name)
-    //     setAddress(res.data.address)
-    //     setPhone(res.data.phone)
-    //   })
-    // .catch((e) => console.log(e))
-    setName('Someone')
-    setAddress('Some Address')
-    setPhone('0620000000')
+    getData(`/billingInfo/${auctionId}`)
+      .then((res) => {
+        console.log(res)
+        setShippingAddress({
+          ...shippingAddress,
+          name: res.data.bidderName,
+          address: res.data.bidderAddress,
+          phone: res.data.bidderPhoneNumber,
+        })
+      })
+      .catch((e) => console.log(e))
+    setShippingAddress({
+      name: 'Someone',
+      address: 'Some Address',
+      phone: '0620000000',
+    })
   }, [])
+
+  const submitHandler = () => {
+    const uploadedFile = uploadFileRef.current.getFiles()
+
+    let shippingInfo = {
+      ...shippingDetails,
+      packagePicture: uploadedFile.map((f) => {
+        return f.getFileEncodeDataURL()
+      })[0],
+    }
+    postData(
+      `/shipping/${auctionId}/shipping`,
+      JSON.stringify(shippingInfo)
+    ).then((res) => {
+      console.log(shippingInfo)
+      console.log(res)
+      navigate('/account/myorder?list=bid?type=all')
+    })
+  }
+
   return (
     <div className="page-with-summary">
       <div className="form-section">
@@ -65,14 +102,18 @@ const Shipping = () => {
         <form
           className="payment-form"
           onSubmit={(event) => {
-            modalShow(true)
+            setModalShow(true)
             event.preventDefault()
           }}
         >
           <div className="form">
             <div className="form-heading1">SHIPPING ADDRESS</div>
             <div className="sub-form">
-              <AddressBox name={name} address={address} phone={phone} />
+              <AddressBox
+                name={shippingAddress.name}
+                address={shippingAddress.address}
+                phone={shippingAddress.phone}
+              />
             </div>
             <div className="form-heading1">PAYMENT INFO</div>
             <div className="sub-form">
@@ -84,6 +125,12 @@ const Shipping = () => {
                   type="text"
                   className="form-control"
                   placeholder="e.g. 0718785888"
+                  onChange={(e) =>
+                    setShippingDetails({
+                      ...shippingDetails,
+                      bankAccountNO: e.target.value,
+                    })
+                  }
                   required
                 ></input>
               </div>
@@ -95,6 +142,12 @@ const Shipping = () => {
                 <select
                   className="form-select form-control"
                   defaultValue={'Select a Bank'}
+                  onChange={(e) =>
+                    setShippingDetails({
+                      ...shippingDetails,
+                      bankName: e.target.value,
+                    })
+                  }
                   required
                 >
                   <option value="Select a Bank" disabled>
@@ -123,6 +176,31 @@ const Shipping = () => {
                   <option value="KKP">
                     Kiatnakin Phatra Bank (ธนาคารเกียรตินาคินภัทร)
                   </option>
+                  <option value="ICB">
+                    Industrial and Commercial Bank of China Limited
+                    (ธนาคารพาณิชย์อุตสาหกรรมแห่งประเทศจีน)
+                  </option>
+                  <option value="LH">
+                    Land & Houses Bank (ธนาคารแลนด์ แอนด์ เฮ้าส์)
+                  </option>
+                  <option value="SCT">
+                    Standard Chartered Bank (ธนาคารสแตนดาร์ดชาร์เตอร์ด)
+                  </option>
+                  <option value="CITI">Citibank (ธนาคารซิตี้แบงก์)</option>
+                  <option value="GHB">
+                    Government Housing Bank (ธนาคารอาคารสงเคราะห์)
+                  </option>
+                  <option value="BAAC">
+                    Bank for Agriculture and Agricultural Cooperatives
+                    (ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร)
+                  </option>
+                  <option value="IBT">
+                    Islamic Bank of Thailand (ธนาคารอิสลามแห่งประเทศไทย)
+                  </option>
+                  <option value="TCRB">
+                    The Thai Credit Retail Bank (ธนาคารไทยเครดิต เพื่อรายย่อย)
+                  </option>
+                  <option value="HSBC">HSBC BANK (เอชเอสบีซี โฮลดิ้งส์)</option>
                 </select>
               </div>
 
@@ -134,6 +212,12 @@ const Shipping = () => {
                   type="text"
                   className="form-control"
                   placeholder="e.g. Peeranat Srisuthangkul"
+                  onChange={(e) =>
+                    setShippingDetails({
+                      ...shippingDetails,
+                      bankAccountName: e.target.value,
+                    })
+                  }
                   required
                 ></input>
               </div>
@@ -148,6 +232,12 @@ const Shipping = () => {
                   type="text"
                   className="form-control"
                   placeholder="e.g. ABCDEF123456"
+                  onChange={(e) =>
+                    setShippingDetails({
+                      ...shippingDetails,
+                      trackingNumber: e.target.value,
+                    })
+                  }
                   required
                 ></input>
               </div>
@@ -159,14 +249,29 @@ const Shipping = () => {
                 <select
                   className="form-select form-control"
                   defaultValue={'Select a Shipping Company'}
+                  onChange={(e) =>
+                    setShippingDetails({
+                      ...shippingDetails,
+                      shippingCompany: e.target.value,
+                    })
+                  }
                 >
                   <option disabled>Select a Shipping Company</option>
-                  <option value="thpost">Thailand Post</option>
-                  <option value="kerry">Kerry Express</option>
-                  <option value="scg">SCG Express</option>
-                  <option value="dhl">DHL Express</option>
-                  <option value="flash">Flash Express</option>
-                  <option value="ิother">Other</option>
+                  <option value="KEX">Kerry Express</option>
+                  <option value="GRAB">Grab</option>
+                  <option value="LLMV">Lalamove</option>
+                  <option value="NIM">Nim Express</option>
+                  <option value="LINE">Line Man</option>
+                  <option value="TNT">TNT Express</option>
+                  <option value="DHL">DHL Express</option>
+                  <option value="SCG">SCG Express</option>
+                  <option value="FLASH">Flash Express</option>
+                  <option value="SKT">Skootar</option>
+                  <option value="J&T">J&T Express</option>
+                  <option value="BEST">Best Express</option>
+                  <option value="IEL">Inter Express Logistics</option>
+                  <option value="NINJA">Ninja Van</option>
+                  <option value="OTHER">Other</option>
                 </select>
               </div>
 
@@ -196,10 +301,10 @@ const Shipping = () => {
       </div>
       <div className="payment-summary-section">
         <PaymentSummaryCard
-          itemName={itemName}
-          auctioneerName={auctioneerName}
-          price={price}
-          productPicture={productPicture}
+          itemName={itemDetails.productName}
+          auctioneerName={itemDetails.auctioneerName}
+          price={itemDetails.winningPrice}
+          productPicture={itemDetails.productPicture}
         ></PaymentSummaryCard>
       </div>
       <PopupConfirmSubmit
