@@ -18,11 +18,10 @@ const ReviewObj = (props) =>{
 			<img src={goods} alt="Review_goods" className="mini-pic-goods"/>
             <span>
                 <h4>{props.name}</h4>
-                <h6>Bidder : A</h6><br></br>
+                <h6>Bidder : {props.bidder}</h6><br></br>
                 {allstar}
             </span>
             <p>{props.reviewing}</p>
-            
 		</div>
 	)
 }
