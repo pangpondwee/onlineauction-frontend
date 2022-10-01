@@ -7,37 +7,49 @@ import confirm from "../pictures/confirm.png";
 import '../css/PopupConRev.css'
 
 const PopupConfirm = (props) => { // TODO use component popup confirm
+  if(!props.data.transferDataTime){
     return (
-        <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <div className="modal-confirm-header-text">
-                            <div className="modal-confirm-head-st modal-title" id="confirmModalLabel">Confirm Payment</div>
-                        </div>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body-confirm">
-                        <h6>Name</h6>
-                        <p>{props.data.receiverName ? props.data.receiverName : "-"}</p>
-                        <h6>Telephone</h6>
-                        <p>{props.data.telephoneNO ? props.data.telephoneNO : "-"}</p>
-                        <h6>Address</h6>
-                        <p>{"???"}</p>
-                        <h6>Transfer date and time</h6>
-                        <p>{props.data.transferDataTime ? props.data.transferDataTime : "-"}</p>
-                        <h6>Transaction Slip</h6>
-                        <img src={props.data.transactionSlip} className="tracking-img"/>
-                    </div>
-                    <div className="modal-footer-confirm">
-                        <button type="button" className="btn btn-primary" onClick={()=>props.confirm(props.auction)}>Confirm</button>
-                        {/* <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Deny</button> */}
-                        <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                  <p style={{paddingBottom: "686.4px"}}>Loading...</p>
+              </div>
+          </div>
+      </div>
     )
+  }
+  const time = new Date(Number(props.data.transferDataTime))
+  return (
+      <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                  <div className="modal-header">
+                      <div className="modal-confirm-header-text">
+                          <div className="modal-confirm-head-st modal-title" id="confirmModalLabel">Confirm Payment</div>
+                      </div>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body-confirm">
+                      <h6>Name</h6>
+                      <p>{props.data.receiverName ? props.data.receiverName : "-"}</p>
+                      <h6>Telephone</h6>
+                      <p>{props.data.telephoneNO ? props.data.telephoneNO : "-"}</p>
+                      <h6>Address</h6>
+                      <p>{props.data.address ? "No address" : props.data.address}</p>
+                      <h6>Transfer date and time</h6>
+                      <p>{String(time)}</p>
+                      <h6>Transaction Slip</h6>
+                      <img src={props.data.transactionSlip} className="tracking-img"/>
+                  </div>
+                  <div className="modal-footer-confirm">
+                      <button type="button" className="btn btn-primary" onClick={()=>props.confirm(props.auction)}>Confirm</button>
+                      {/* <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Deny</button> */}
+                      <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  )
 }
 
 const AdminConfirmPayment = () => {
