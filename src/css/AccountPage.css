@@ -237,7 +237,7 @@ li.menu-dropdown {
     border-color: #FA5252;
 }
 
-.bid-completed, .auction-completed {
+.bid-finished, .auction-finished {
     color: #2F9E44;
     border-color: #2F9E44;
 }

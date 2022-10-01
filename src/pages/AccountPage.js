@@ -30,6 +30,7 @@ const AccountPage = () =>{
 
     let userId = data._id;
     useEffect(()=>{
+        console.log(userId)
         getData(`/user/profile/${userId}`).then((res)=>{ 
 			setStatus(res.status);
 			if(res.status == "success"){
@@ -83,7 +84,8 @@ const AccountPage = () =>{
                     </h6>
                 </div>
                 <div className="about-you">
-                    <h5>My Badges & Statistics</h5>
+                    {/* <h5>My Badges & Statistics</h5> */}
+                    <h5>My Statistics</h5>
                     <div>
                         {/* <img src={other_data.badge[0]} className="badge-pic" alt="BadgePic"/>
                         <img src={other_data.badge[1]} className="badge-pic" alt="BadgePic"/>
