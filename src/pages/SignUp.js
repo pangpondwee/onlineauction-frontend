@@ -142,6 +142,7 @@ const SignUp = () => {
       localStorage.setItem("displayName", data.displayName);
       localStorage.setItem("token", res.token);
       localStorage.setItem("userStatus", data.userStatus);
+      localStorage.setItem("isLoggedIn", true);
       setloggedIn(true);
       navigate("/");
     })
