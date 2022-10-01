@@ -3,11 +3,10 @@ import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import '../css/Payment.css'
 import { FilePond, registerPlugin } from 'react-filepond'
 import { useState, useEffect, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { postData, getData } from '../components/fetchData'
 import { generatePayload } from '../components/promptpay'
 import { QRCodeSVG } from 'qrcode.react'
-import { useNavigate } from 'react-router-dom'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 
 // Import FilePond styles
@@ -40,7 +39,7 @@ const Payment = () => {
     bidderAddress: '',
     transferDate: '',
     value: '',
-    slipPicture: [],
+    slipPicture: '',
   })
   const [itemDetails, setItemDetails] = useState({
     productName: '',
@@ -96,13 +95,14 @@ const Payment = () => {
       value: Number(paymentDetails.value),
       slipPicture: uploadedFile.map((f) => {
         return f.getFileEncodeDataURL()
-      }),
+      })[0],
     }
+    // console.log(billingInfo)
     postData(`/payment/${auctionId}`, JSON.stringify(billingInfo)).then(
       (res) => {
         console.log(billingInfo)
         console.log(res)
-        navigate('/account/myorder')
+        navigate('/account/myorder?list=bid?type=all')
       }
     )
   }
@@ -186,7 +186,6 @@ const Payment = () => {
                   setChecked(!checked)
                   setInputDisabled(!checked)
                   getInformationFromProfileHandler(!checked)
-                  console.log(e.target.checked)
                 }}
               />
               <label className="form-check-label">
