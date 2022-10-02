@@ -141,7 +141,7 @@ const Shipping = () => {
                 </label>
                 <select
                   className="form-select form-control"
-                  defaultValue={'Select a Bank'}
+                  defaultValue={''}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
@@ -150,7 +150,7 @@ const Shipping = () => {
                   }
                   required
                 >
-                  <option value="Select a Bank" disabled>
+                  <option value="" disabled>
                     Select a Bank
                   </option>
                   <option value="KTB">Krung Thai Bank (ธนาคารกรุงไทย)</option>
@@ -248,15 +248,18 @@ const Shipping = () => {
                 </label>
                 <select
                   className="form-select form-control"
-                  defaultValue={'Select a Shipping Company'}
+                  defaultValue={''}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
                       shippingCompany: e.target.value,
                     })
                   }
+                  required
                 >
-                  <option disabled>Select a Shipping Company</option>
+                  <option value="" disabled>
+                    Select a Shipping Company
+                  </option>
                   <option value="KEX">Kerry Express</option>
                   <option value="GRAB">Grab</option>
                   <option value="LLMV">Lalamove</option>
