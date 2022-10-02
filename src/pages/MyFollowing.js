@@ -3,22 +3,26 @@ import { useState, useEffect } from "react";
 import getData from "../components/fetchData";
 
 const MyFollowing = () =>{
-    const [data, setData]=useState([{productName: "Nintendo Switch", lastBid : 2000}])
+    const [data, setData]=useState([])
     const [status,setStatus]=useState("unknown");
-    // useEffect(()=>{
-	// 	getData(`/api/user/myorder?filter=mybid`).then((res)=>{
-	// 		setStatus(res.status);
-	// 		if(res.status == "success"){
-	// 			setData(res.data);
-	// 		}
-	// 		else{
-	// 			setData(res.message);
-	// 		}
-	// 	})
-	// },[]);
+    
+    useEffect(()=>{
+		getData(`/user/myfollowing`).then((res)=>{
+			setStatus(res.status);
+			if(res.status === "success"){
+				setData(res.data);
+			}
+			else{
+				setData(res.message);
+			}
+		})
+	},[]);
+
+    console.log(data)
+    
     const display = []
     data.forEach(element => {
-        display.push(<FollowObj name={element.productName} lastBid={element.lastBid}/>)
+        display.push(<FollowObj data={element}/>)
     });
 
 	return (

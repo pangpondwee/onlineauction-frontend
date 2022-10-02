@@ -105,7 +105,7 @@ const AccountEdit = () =>{
                     <div>
                         <div>
                             <label><h5>Display Name</h5></label><br/>
-                            <input type="text" id="displayName" className="input-editing" placeholder={data.displayName}/>
+                            <input type="text" id="displayName" className="input-editing" placeholder={data.displayName} maxlength="15"/>
                         </div>
                         <div>
                             <label><h5>Email</h5></label><br/>
@@ -117,11 +117,11 @@ const AccountEdit = () =>{
                         </div>
                         <div>
                             <label><h5>Address</h5></label><br/>
-                            <textarea type="text" id="address" className="input-editing" placeholder={data.address}/>
+                            <textarea type="text" id="address" className="input-editing" placeholder={data.address} maxlength="250"/>
                         </div>
                         <div>
                             <label><h5>Description</h5></label><br/>
-                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription}/>
+                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription} maxlength="500"/>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import blank_star from "../pictures/star_blank.png";
 import half_star from "../pictures/star_half.png";
 import star from "../pictures/star.png";
-import goods from "../pictures/nintendo.png";
 
 const ReviewObj = (props) =>{
     const allstar = []
@@ -14,8 +13,7 @@ const ReviewObj = (props) =>{
     while(allstar.length<5) allstar.push(<img src={blank_star} className="star" alt="star"/>)
 
 	return (
-		<div className="Review-box">
-			<img src={goods} alt="Review_goods" className="mini-pic-goods"/>
+		<div className="Review-boxV2">
             <span>
                 <h4>{props.name}</h4>
                 <h6>Bidder : {props.bidder}</h6><br></br>
