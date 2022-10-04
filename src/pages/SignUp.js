@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import classes from "../css/SignUp.module.css";
 import Card from "../components/Card";
@@ -6,43 +6,198 @@ import Card from "../components/Card";
 import pic1 from "../pictures/loginpic.jpg";
 import { Link,useOutletContext,useNavigate } from "react-router-dom";
 import { postData } from "../components/fetchData";
+import eye from "../pictures/eye.svg";
+import eye_blind from "../pictures/eye_blind.svg";
+import PopupError from "../components/PopupError";
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
+const TabSignUp = (props)=>{
+  const [eye_icon,setEye_icon] = useState(eye)
+  const togglePassword = ()=>{
+    const password = document.getElementById("signup-password")
+    if(password.type == "password"){
+      password.type = "text"
+      setEye_icon(eye_blind)
+    }
+    else{
+      password.type = "password"
+      setEye_icon(eye)
+    }
+  }
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      <ul style={{paddingLeft: "1em", textAlign: "start", marginBottom: "0"}} >
+        <li>At least 10 characters</li>
+        <li>At least 1 lower case character</li>
+        <li>At least 1 upper case character</li>
+        <li>At least 1 special character</li>
+      </ul>
+    </Tooltip>
+  );
+  return (
+    <div
+      className="tab-pane fade show active"
+      id="SignUp-tab-pane"
+      role="tabpanel"
+      aria-labelledby="SignUp-tab"
+      tabIndex={"0"}
+    >
+      <form className={classes.Form} onSubmit={props.submit}>
+        <label htmlFor="displayname">Display Name</label>
+        <input
+          id="displayname"
+          type="displayname"
+          placeholder="Display Name"
+          ref={props.displayName}
+          required
+        />
+        <label htmlFor="email">Email</label>
+        <input id="email" type="text" placeholder="Email" ref={props.email} required/>
+        <label htmlFor="signup-password">Password 
+          <OverlayTrigger
+            placement="right"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip}
+          >
+          <span style={{color: "#999999"}}> (Requrements?)</span>
+        </OverlayTrigger>
+        </label>
+        <div className="input-group">
+				  <input id="signup-password" type="password" placeholder="Password" className='form-control' ref={props.password}></input>
+				  <img src={eye_icon} className="btn" style={{width: "40px",padding: 0, margin: "1em auto"}} onClick ={togglePassword} />
+			  </div>
+        <label htmlFor="confirmpassword">Confirm Password</label>
+        <input
+          id="confirmpassword"
+          type="password"
+          placeholder="Confirm Password"
+          ref={props.confirmPassword}
+          required
+        />
+        <div>
+          <input type="submit" className={classes.button} value="Sign Up" required/>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+const TabSignIn = (props)=>{
+  const [eye_icon,setEye_icon] = useState(eye)
+  const togglePassword = ()=>{
+    const password = document.getElementById("password")
+    if(password.type == "password"){
+      password.type = "text"
+      setEye_icon(eye_blind)
+    }
+    else{
+      password.type = "password"
+      setEye_icon(eye)
+    }
+  }
+  return (
+    <div
+      className="tab-pane fade"
+      id="SignIn-tab-pane"
+      role="tabpanel"
+      aria-labelledby="SignIn-tab"
+      tabIndex={"1"}
+    >
+      <form className={classes.Form} action="" onSubmit={props.submit}>
+        <label htmlFor="email">Email</label>
+        <input id="email" type="text" placeholder="Email" ref={props.email}/>
+        <label htmlFor="password">Password</label>
+        <div className="input-group">
+				  <input id="password" type="password" placeholder="Password" className='form-control' ref={props.password}></input>
+				  <img src={eye_icon} className="btn" style={{width: "40px",padding: 0, margin: "1em auto"}} onClick ={togglePassword} />
+			  </div>
+        <Link to={"#"}>Forgot Password?</Link>
+        
+        <div>
+          <input type="submit" className={classes.button} value="Sign In"/>
+        </div>
+      </form>
+    </div>
+  )
+}
 const SignUp = () => {
   let navigate = useNavigate();
   const [loggedIn, setloggedIn] = useOutletContext();
-  const email = useRef();
-  const password = useRef();
-  const confirmPassword = useRef();
+  const [error,setError] = useState("")
+  const signinEmail = useRef();
+  const signinPassword = useRef();
+  const signupEmail = useRef();
+  const signupPassword = useRef();
+  const signupConfirm = useRef();
+  const displayName = useRef();
+  const onSignUpSubmit = (e) =>{
+    e.preventDefault()
+    const password = signupPassword.current.value.trim()
+    const confirm = signupConfirm.current.value.trim()
+    const email = signupEmail.current.value.trim()
+    const name = displayName.current.value.trim()
+    if(password != confirm){
+      // password not match
+      setError("Error: Passwords do not match")
+      return
+    }
+    if(!email.match(/.+@.+/)){
+      setError("Error: Invalid Email")
+      return
+    }
+    postData(
+      "/user/signup",
+      JSON.stringify({
+        email: email,
+        password: password,
+        displayName: name
+      }))
+    .then((res) => {
+      if(!res.status) throw new Error("Could not get status")
+      if(res.status == "fail" || res.status == "error") throw new Error(res.message)
+      console.log("Signed up")
+    })
+    .catch((error)=>{
+      setError(error.message)
+    })
+  }
   const onSignInSubmit = (e) => {
     postData(
       "/user/signin",
       JSON.stringify({
-        email: email.current.value.trim(),
-        password: password.current.value.trim()
+        email: signinEmail.current.value.trim(),
+        password: signinPassword.current.value.trim()
       }))
     .then((res) => {
-      if (res.status == "success") {
-        const data = res.data.user;
-        localStorage.setItem("displayName", data.displayName);
-        localStorage.setItem("token", res.token);
-        setloggedIn(true);
-        navigate("/");
-      } else {
-        throw new Error(res.message);
-      }
+			if(!res.status) throw new Error("Could not get status")
+			if(res.status == "fail" || res.status == "error") throw new Error(res.message)
+      const data = res.data.user;
+      localStorage.setItem("displayName", data.displayName);
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("userStatus", data.userStatus);
+      localStorage.setItem("isLoggedIn", true);
+      setloggedIn(true);
+      navigate("/");
     })
     .catch((error)=>{
-      console.log(error)
+      setError(error.message)
     })
     e.preventDefault()
   }
 
   return (
     <Fragment>
-      <h1>Anything You Want, At A Super Satisfying Price!</h1>
-      <h2 className="text-primary">Create An Account Now!</h2>
+      <PopupError
+      error={error}
+      setError={setError}
+      />
       <div className={classes.SignUp}>
-        <img className={classes.loginimg} src={pic1} />
+        <div>
+          <h1>Anything You Want, At A Super Satisfying Price!</h1>
+          <h2 className="text-primary">Create An Account Now!</h2>
+          <img className={classes.loginimg} src={pic1} />
+        </div>
         <Card className={classes.input}>
           <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
@@ -75,53 +230,18 @@ const SignUp = () => {
             </li>
           </ul>
           <div className="tab-content" id="myTabContent">
-            <div
-              className="tab-pane fade show active"
-              id="SignUp-tab-pane"
-              role="tabpanel"
-              aria-labelledby="SignUp-tab"
-              tabIndex={"0"}
-            >
-              <form className={classes.Form}>
-                <label htmlFor="displayname">Display Name</label>
-                <input
-                  id="displayname"
-                  type="displayname"
-                  placeholder="Display Name"
-                />
-                <label htmlFor="email">Email</label>
-                <input id="email" type="text" placeholder="Email" ref={email}/>
-                <label htmlFor="password">Password</label>
-                <input id="password" type="text" placeholder="Password" ref={password}/>
-                <label htmlFor="confirmpassword" ref={confirmPassword}>Confirm Password</label>
-                <input
-                  id="confirmpassword"
-                  type="text"
-                  placeholder="Confirm Password"
-                />
-                <div>
-                  <input type="submit" className={classes.button} value="Sign Up"/>
-                </div>
-              </form>
-            </div>
-            <div
-              className="tab-pane fade"
-              id="SignIn-tab-pane"
-              role="tabpanel"
-              aria-labelledby="SignIn-tab"
-              tabIndex={"1"}
-            >
-              <form className={classes.Form} action="" onSubmit={onSignInSubmit}>
-                <label htmlFor="email">Email</label>
-                <input id="email" type="text" placeholder="Email" ref={email}/>
-                <label htmlFor="password">Password</label>
-                <input id="password" type="password" placeholder="Password" ref={password}/>
-                <Link to={"#"}>Forgot Password?</Link>
-                <div>
-                  <input type="submit" className={classes.button} value="Sign In"/>
-                </div>
-              </form>
-            </div>
+            <TabSignIn
+              email={signinEmail}
+              password={signinPassword}
+              submit={onSignInSubmit}
+            />
+            <TabSignUp
+              email={signupEmail}
+              password={signupPassword}
+              displayName={displayName}
+              confirmPassword={signupConfirm}
+              submit={onSignUpSubmit}
+            />
           </div>
         </Card>
       </div>

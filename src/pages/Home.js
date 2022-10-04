@@ -22,22 +22,17 @@ const AuctionList = (props)=>{
 		})
 	},[])
 	if(status == "success"){
-		if(data.length > 0){
-			return <AuctionCardRow data={data}/>
-		}
-		else{
-			return <p>{props.message}</p>
-		}
+		return <AuctionCardRow data={data}/>
 	}
 	else if(status == "loading"){
 		return(
-			<p>Loading...</p>
+			<p style={{marginLeft: "3em"}}>Loading...</p>
 		)
 	}
 	else{
 		return (
 			<>
-				<p>Error: {data}</p>
+				<p style={{marginLeft: "3em"}}>Error: {data}</p>
 			</>
 		)
 	}
@@ -45,20 +40,26 @@ const AuctionList = (props)=>{
 
 const Home = () =>{
 	const displayName = localStorage.getItem("displayName");
-	// const isLoggedIn 
+	const isLoggedIn = localStorage.getItem("isLoggedIn")
 	return (
 		<>
-			<p className="headHome">Welcome, Peeranat! Let’s see what you got...</p>		
-			<p className="detail">Your Recent Bids</p>
-			<AuctionList
-			message="You don't have any recent bids"
-			url="/auction/auction-list?filter=recent_bidding"
-			/>
-			<p className="detail">Recent Following List</p>
-			<AuctionList
-			message="You are not following any bids"
-			url="/auction/auction-list?filter=my_following_list"
-			/>
+			{isLoggedIn?
+			<>
+				<p className="headHome">Welcome, {displayName}! Let’s see what you got...</p>		
+				<p className="detail">Your Recent Bids</p>
+				<AuctionList
+				message="You don't have any recent bids"
+				url="/auction/auction-list?filter=recent_bidding"
+				/>
+				<p className="detail">Recent Following List</p>
+				<AuctionList
+				message="You are not following any bids"
+				url="/auction/auction-list?filter=my_following_list"
+				/>
+			</>
+			:
+			<></>
+			}
 			<p className="detail">Popular</p>
 			<AuctionList
 			message="There are no popular bids"

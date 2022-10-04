@@ -3,6 +3,9 @@ import review from "../pictures/review.png";
 import '../css/PopupConRev.css';
 
 const PopupReview = () => {
+    // const itemName = props.itemName
+    // const auctioneer = props.auctioneer
+
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
@@ -20,11 +23,13 @@ const PopupReview = () => {
                                 <div class="modal-title" id="reviewModalLabel">What did you think of your recent bidding item?</div>
                                 <h6 class="modal-title" id="reviewModalLabel">Your feedback is valuable to us and everyone</h6>
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
                         <div class="modal-body-review">
                             <h6>Review Item : Nintendo Switch</h6>
+                            {/* <h6>Review Item : {itemName}</h6> */}
                             <h6>Auctioneer Name : Kong Pakkapol</h6>
+                            {/* <h6>Auctioneer Name : {auctioneer}</h6> */}
                             <h6>Rating : </h6>
                             <h6>Review : </h6>
                             <textarea className="review-box" type="text" placeholder="Write a review here..."></textarea>
