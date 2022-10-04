@@ -235,6 +235,16 @@ li.menu-dropdown {
     overflow: hidden;
 }
 
+.no-data-page {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    color: rgb(202, 201, 201);
+    font-size: 30px;
+    font-style: italic;
+    font-style: bold;
+}
+
 /* fontcolor&bordercolor in myorder */
 
 .bid-currently .bid-waitingConfirmSlip .bid-waitingForShipping .auction-on .auction-waitingForPayment .auction-waitingForConfirm {

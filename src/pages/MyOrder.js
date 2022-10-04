@@ -58,8 +58,8 @@ const MyOrder = () =>{
 		})
 	},[]);
 
-    console.log(data_mybid)
-    console.log(data_myauction)
+    // console.log(data_mybid)
+    // console.log(data_myauction)
 
     let _data = []
     
@@ -81,7 +81,7 @@ const MyOrder = () =>{
         <>
             {(list === "list=bid")? <MyBidNav/> : <MyAuctionNav/>}
             <div className="all-review">
-                {display}
+                {display.length===0? <div className="no-data-page">No Data</div> : {display}}
             </div>
         </>
 	)
