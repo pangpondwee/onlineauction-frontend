@@ -168,27 +168,45 @@ const Bidding = (props)=>{
 			</div>
 		)
 	}
-	return(
-		<form onSubmit={submitWrapper} id="bidding">
-			{props.isFiveMinutes ?
-			<p>You can only bid once. Think wisely</p>
-			:
-			<>
-			<div id="select-wrapper"><p>Select your bid price</p></div>
-			<div id="static-price">
-				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
-			</div>
-			<div id="or-wrapper"><p>OR</p></div>
-			</>
-			}
-			<div id="bid-group" className="input-group">
-				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
-				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
-			</div>
-		</form>
-	)
+	if(props.isFiveMinutes){
+		if(props.myLastBid < 1){
+			return (
+				<p>You cannot bid this auction</p>
+			)
+		}
+		return(
+			<form onSubmit={submitWrapper} id="bidding">
+				{props.isAlreadyBid5Minute ?
+				<>You have already bid</>
+				:
+				<>
+					<p>You can only bid once. Think wisely</p>
+					<div id="bid-group" className="input-group">
+						<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
+						<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
+					</div>
+				</>
+				}
+			</form>
+		)
+	}
+	else{
+		return(
+			<form onSubmit={submitWrapper} id="bidding">
+				<div id="select-wrapper"><p>Select your bid price</p></div>
+				<div id="static-price">
+					<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
+					<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
+					<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
+				</div>
+				<div id="or-wrapper"><p>OR</p></div>
+				<div id="bid-group" className="input-group">
+					<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
+					<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
+				</div>
+			</form>
+		)
+	}
 }
 
 const Bidfield = (props)=>{
@@ -221,6 +239,8 @@ const Bidfield = (props)=>{
 			isAuctioneer={props.data.isAuctioneer} 
 			submitBid={props.submitBid}
 			isFiveMinutes={isFiveMinutes}
+			isAlreadyBid5Minute={props.isAlreadyBid5Minute}
+			myLastBid={props.data.myLastBid}
 			isEnded={isEnded}
 			/>
 			
@@ -250,6 +270,7 @@ const Auction = (props) =>{
 	const [auctioneer,setAuctioneer] = useState("")
 	const [history,setHistory] = useState([])
 	const [historyError,setHistoryError] = useState([])
+	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -269,6 +290,12 @@ const Auction = (props) =>{
 					return { ...prevData, currentPrice: price }
 				})
 				setLastBid(price)
+
+				const timeRemaining = data.endDate - Date.now()
+				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
+				if(isFiveMinutes){
+					setIsAlreadyBid5Minute(true)
+				}
 			})
 			.catch(e=>{
 				console.log(e.message)//TODO handle
@@ -291,20 +318,22 @@ const Auction = (props) =>{
 			setStatus(res.status);
 			setData(res.data);
 			setLastBid(res.data.myLastBid)
+			setAuctioneer(res.data.auctioneerName)
+			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
 			return res.data.auctioneerID
-		})
-		.then((auctioneerID)=>{ // get auctioneer
-			setAuctioneer(auctioneerID)
-			return getData(`/user/profile/${auctioneerID}`)
-		})
-		.then((res)=>{
-			// TODO fix with api
-			setAuctioneer(res.data.displayName)
 		})
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
 		})
+		setInterval(()=>{
+			getData(`/auction/${auctionId}/refresh`)
+			.then((res)=>{
+				setData(prev=>{
+					return {...prev, currentPrice: res.data.currentPrice}
+				})
+			})
+		},10000)
 	},[]);
 	if(status === "success"){
 		return (
@@ -320,6 +349,7 @@ const Auction = (props) =>{
 					showHistory={showHistory}
 					getHistory={getHistory}
 					submitBid={submitBid}
+					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					lastBid={lastBid}
 					/>
 				</div>

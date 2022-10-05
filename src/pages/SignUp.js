@@ -6,6 +6,8 @@ import Card from "../components/Card";
 import pic1 from "../pictures/loginpic.jpg";
 import { Link,useOutletContext,useNavigate } from "react-router-dom";
 import { postData } from "../components/fetchData";
+import eye from "../pictures/eye.svg";
+import eye_blind from "../pictures/eye_blind.svg";
 import PopupError from "../components/PopupError";
 
 const TabSignUp = (props)=>{
@@ -47,6 +49,19 @@ const TabSignUp = (props)=>{
 }
 
 const TabSignIn = (props)=>{
+  const [eye_icon,setEye_icon] = useState(eye)
+  const togglePassword = (e)=>{
+    const password = document.getElementById("password")
+    if(password.type == "password"){
+      password.type = "text"
+      setEye_icon(eye_blind)
+    }
+    else{
+      password.type = "password"
+      setEye_icon(eye)
+    }
+    e.preventDefault()
+  }
   return (
     <div
       className="tab-pane fade"
@@ -59,8 +74,12 @@ const TabSignIn = (props)=>{
         <label htmlFor="email">Email</label>
         <input id="email" type="text" placeholder="Email" ref={props.email}/>
         <label htmlFor="password">Password</label>
-        <input id="password" type="password" placeholder="Password" ref={props.password}/>
+        <div className="input-group">
+				  <input id="password" type="password" placeholder="Password" className='form-control' ref={props.password}></input>
+				  <input type="image" className="btn" style={{width: "40px",padding: 0}} src={eye_icon} onClick={togglePassword}></input>
+			  </div>
         <Link to={"#"}>Forgot Password?</Link>
+        
         <div>
           <input type="submit" className={classes.button} value="Sign In"/>
         </div>
@@ -123,6 +142,7 @@ const SignUp = () => {
       localStorage.setItem("displayName", data.displayName);
       localStorage.setItem("token", res.token);
       localStorage.setItem("userStatus", data.userStatus);
+      localStorage.setItem("isLoggedIn", true);
       setloggedIn(true);
       navigate("/");
     })

@@ -218,3 +218,14 @@
   margin: 1% 0 1% 0;
   color: var(--color-text);
 }
+
+.promptpay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.promptpay-header {
+  width: 140px;
+  height: auto;
+}

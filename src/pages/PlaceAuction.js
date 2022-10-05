@@ -63,7 +63,7 @@ const AuctionDetail = () => {
     console.log(JSON.stringify(auctionData))
 
     if (enteredMinimumBidStep.length > 0) {
-      auctionData.minimumBidPrice = Number(enteredMinimumBidStep)
+      auctionData.bidStep = Number(enteredMinimumBidStep)
     }
     if (enteredExpectedPrice.length > 0) {
       auctionData.expectedPrice = Number(enteredExpectedPrice)
@@ -128,7 +128,7 @@ const AuctionDetail = () => {
               </option>
               <option value="Home Improvement">Home Improvement</option>
               <option value="Jewellery">Jewellery</option>
-              <option value="Coins, Currentcy, Stamps">
+              <option value="Coins, Currency, Stamps">
                 Coins, Currency, Stamps
               </option>
               <option value="Watches">Watches</option>
@@ -171,7 +171,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
-              min={0}
+              min={1}
               ref={startingPriceInputRef}
               required
             ></input>
@@ -226,7 +226,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
-              min={0}
+              min={1}
               ref={minimumBidStepInputRef}
             ></input>
           </div>
@@ -238,7 +238,7 @@ const AuctionDetail = () => {
               type="number"
               className="form-control"
               placeholder="e.g. 500"
-              min={0}
+              min={1}
               ref={expectedPriceInputRef}
             ></input>
           </div>
