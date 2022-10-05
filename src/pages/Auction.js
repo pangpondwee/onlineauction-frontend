@@ -110,7 +110,7 @@ const Gallery = (props)=>{
 const AuctionTop = (props)=>{
 	const history = getHistory(props.data);
 	let history_elements = []
-	for(let i=0;i<history.length && i<8;i++){
+	for(let i=0;i<history.length && i<5;i++){
 		const timesince = Date.now()-Number(history[i].biddingDate);
 		const timeformat = getDateSince(timesince);
 		history_elements.push(
@@ -126,13 +126,25 @@ const AuctionTop = (props)=>{
 	
 	let historyError = false;
 	let errorMessage = "Something went wrong";
-	if(props.error){
+	if(!props.isLoggedIn){
+		historyError = true
+		errorMessage = "Please sign in to view bid history"
+	}
+	else if(props.error){
 		historyError = true;
 		errorMessage = props.error
 	}
 	else if(history.length < 1){
 		historyError = true;
 		errorMessage = "No bid history found"
+	}
+	if(historyError == true){
+		return(
+			<div id="auction-top">
+				<h2>Top Bidders</h2>
+				<div id="history-error">{errorMessage}</div>
+			</div>
+		)
 	}
 	return (
 		<div id="auction-top">
@@ -200,16 +212,20 @@ const AuctionDetail = (props)=>{
               	</button>
             	</li>
 				<li className="nav-item" role="presentation">
-				<button
-					className="nav-link"
-					id="bid-tab"
-					data-bs-toggle="tab"
-					data-bs-target="#auction-bid-pane"
-					type="button"
-					role="tab"
-				>
-					Bid
-				</button>
+				{props.isLoggedIn ?
+					<button
+						className="nav-link"
+						id="bid-tab"
+						data-bs-toggle="tab"
+						data-bs-target="#auction-bid-pane"
+						type="button"
+						role="tab"
+					>
+						Bid
+					</button>
+					:
+					<></>
+				}
 				</li>
           		</ul>
 		  	<div className="tab-content" id="auction-content">
@@ -319,9 +335,10 @@ const Auction = (props) =>{
 	const [lastBid,setLastBid] = useState(0)
 	const [auctioneer,setAuctioneer] = useState("")
 	const [history,setHistory] = useState([])
-	const [historyError,setHistoryError] = useState([])
+	const [historyError,setHistoryError] = useState("")
 	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
 	const [error,setError] = useState("")
+	const isLoggedIn = localStorage.getItem("isLoggedIn")
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -380,15 +397,17 @@ const Auction = (props) =>{
 			setStatus("error");
 			setData(e.message)
 		})
-		setInterval(()=>{
-			getData(`/auction/${auctionId}/refresh`)
-			.then((res)=>{
-				setData(prev=>{
-					return {...prev, currentPrice: res.data.currentPrice}
+		if(isLoggedIn){
+			setInterval(()=>{
+				getData(`/auction/${auctionId}/refresh`)
+				.then((res)=>{
+					setData(prev=>{
+						return {...prev, currentPrice: res.data.currentPrice}
+					})
 				})
-			})
-			getHistory() // other times
-		},10000)
+				getHistory() // other times
+			},10000)
+		}
 	},[]);
 	if(status === "success"){
 		return (
@@ -396,6 +415,7 @@ const Auction = (props) =>{
 				<AuctionTop
 				data={history}
 				error={historyError}
+				isLoggedIn={isLoggedIn}
 				/>
 				<div id="auction-main">
 					<Gallery
@@ -405,6 +425,7 @@ const Auction = (props) =>{
 					data={data}
 					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					submitBid={submitBid}
+					isLoggedIn={isLoggedIn}
 					/>
 				</div>
 				<PopupError
