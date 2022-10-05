@@ -67,7 +67,7 @@ const AuctionDetail = () => {
     postData('/auction/upload', JSON.stringify(auctionData)).then((res) => {
       console.log(res)
       console.log(JSON.stringify(auctionData))
-      navigate(`/auction/${res.data.auctionID}`)
+      navigate(`/`)
     })
     console.log(auctionData)
   }
