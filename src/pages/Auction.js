@@ -136,6 +136,10 @@ const AuctionTop = (props)=>{
 	}
 	return (
 		<div id="auction-top">
+			<HistoryModal
+			history={history}
+			error={historyError}
+			/>
 			<h2>Top Bidders</h2>
 			<ol id="topbidder-list">
 				{history_elements}
@@ -149,10 +153,6 @@ const AuctionTop = (props)=>{
 				data-bs-target="#historyModal"
 				>Bid History</button>
 			</div>
-			<HistoryModal
-			history={history}
-			error={historyError}
-			/>
 		</div>
 	)
 }

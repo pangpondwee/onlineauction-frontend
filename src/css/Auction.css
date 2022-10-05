@@ -95,7 +95,9 @@
     display: inline;
     width: 30vw;
 }
-
+#auction-desc-pane{
+    overflow: scroll;
+}
 #auction-content{
     display: flex;
     padding: 10px;
