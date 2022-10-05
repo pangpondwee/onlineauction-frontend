@@ -3,7 +3,7 @@ import confirm from "../pictures/confirm.png";
 import '../css/PopupConRev.css'
 import { Link } from 'react-router-dom'
 import getData, { postData } from "./fetchData";
-import PopupReview from "./PopupReview";
+import Rating from '@mui/material/Rating';
 
 import review from "../pictures/review.png";
 
@@ -11,7 +11,9 @@ const PopupConfirm = () => {
     // const auctionID = props.auctionID
     // const [data, setData] = useState({})
     // const [status, setStatus] = useState("unk")
-    // const [name, setName] = useState('')
+    // const [name, setName] = useState("")
+    const [rating, setRating] = useState("")
+    // const [reviewtext, setReview] = useState("")
 
     // useEffect(() => {
     //     getData(`/billingInfo/${auctionID}`).then((res) => {
@@ -54,8 +56,8 @@ const PopupConfirm = () => {
     //     e.preventDefault()
     //     postData(`/review/${auctionID}`, JSON.stringify(
     //         {
-    //             "rating":"rating-num",
-    //             "comment":"comment-text"
+    //             "rating":"rating",
+    //             "comment":"reviewtext"
     //         }
     //     ))
     //     .then((res) => {
@@ -104,7 +106,7 @@ const PopupConfirm = () => {
                         </div>
                         <div class="modal-footer-confirm">
                             {/* btn-confirm ต้องมี func สำหรับแก้ไข status ของสินค้าเป็น completed */}
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" /*onChange={onConfirm}*/>
                                 Confirm
                             </button>
                             
@@ -132,12 +134,23 @@ const PopupConfirm = () => {
                             {/* <h6>Iten Name : {data.productName}</h6> */}
                             <h6>Auctioneer Name : Kong Pakkapol</h6>
                             {/* <h6>Auctioneer Name : {name}</h6> */}
-                            <h6>Rating : </h6>
+                            <h6>
+                                Rating : 
+                                {/* have to install mui first to use this rating code */}
+                                <Rating 
+                                    name="half-rating"
+                                    className="star-rating"
+                                    dafaultValue={0}
+                                    precision={0.5}
+                                    value={rating}
+                                    onChange={(e) => setRating(e.target.value)}
+                                />
+                            </h6>
                             <h6>Review : </h6>
-                            <textarea className="review-box" type="text" placeholder="Write a review here..."></textarea>
+                            <textarea className="review-box" type="text" placeholder="Write a review here..." /*value={reviewtext} onChange={e => setReview(e.target.value)}*/ ></textarea>
                         </div>
                         <div class="modal-footer-review">
-                            <button type="button" class="btn btn-primary">Confirm</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" /*onChange={onReview}*/>Confirm</button>
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Skip</button>
                         </div>
                     </div>
