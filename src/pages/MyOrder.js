@@ -4,105 +4,77 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {getData} from '../components/fetchData';
 
-function text_alert(status){
-    if(status==="currently_bid") return "Your last bid: 1800$"
-    else if(status==="bidder-to-pay") return "Waiting for your payment"
-    else if(status==="bidder-to-pay-wait-admin") return "Waiting for admin to confirm your payment"
-    else if(status==="to-delivered") return "Waiting for auctioneer to ship your item"
-    else if(status==="bidder-to-confirm") return "An item is on its way to you. You can check a tracking number here.If you’re satisfy with your item, click accept."
-    else if(status==="on-auction") return "Time left: 13 hr 13 m 13 s"
-    else if(status==="auctioneer-to-pay") return "Waiting for payment from Pongsatorn (Bidder)"
-    else if(status==="to-shipped") return "Waiting for your payment"
-    else if(status==="auctioneer-to-confirm") return "Waiting for bidder to confirm"
-    else return
-}
-
 const MyOrder = () =>{
     const location = useLocation()
-    const [tmp, list, type] = location.search.split("?")
+    const [list, type] = location.search.slice(1).split("&")
 
-    const [data_mybid_active,setData_myBid_active] = useState([{_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"},
-                                                    {_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"},
-                                                    {_name: "Nintendo Switch", _status: "currently_bid", by_who:"Kong Pakkapol"}]);
-    const [data_mybid_wait,setData_myBid_wait] = useState([{_name: "Nintendo Switch", _status: "bidder-to-pay", by_who:"Kong Pakkapol"},
-                                                    {_name: "Nintendo Switch", _status: "bidder-to-pay-wait-admin", by_who:"Kong Pakkapol"},
-                                                    {_name: "Nintendo Switch", _status: "to-delivered", by_who:"Kong Pakkapol"},
-                                                    {_name: "Nintendo Switch", _status: "bidder-to-confirm", by_who:"Kong Pakkapol"},
-                                                    {_name: "Nintendo Switch", _status: "completed", by_who:"Kong Pakkapol"}]);
-    const [data_myauction_active,setData_myAuction_active] = useState([{_name: "Nintendo Switch", _status: "on-auction"},
-                                                    {_name: "Nintendo Switch", _status: "on-auction"},
-                                                    {_name: "Nintendo Switch", _status: "on-auction"}]);
-    const [data_myauction_wait,setData_myAuction_wait] = useState([{_name: "Nintendo Switch", _status: "auctioneer-to-pay"},
-                                                    {_name: "Nintendo Switch", _status: "to-shipped"},
-                                                    {_name: "Nintendo Switch", _status: "auctioneer-to-confirm"},
-                                                    {_name: "Nintendo Switch", _status: "completed"}]);
+    // const [data_mybid,setData_myBid] = useState([{productName: "Nintendo Switch", billingStatus: "currently", by_who:"Kong Pakkapol"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForPayment", by_who:"Kong Pakkapol"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingConfirmSlip", by_who:"Kong Pakkapol"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForShipping", by_who:"Kong Pakkapol"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForConfirm", by_who:"Kong Pakkapol"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "completed", by_who:"Kong Pakkapol"}]);
+    // const [data_myauction,setData_myAuction] = useState([{productName: "Nintendo Switch", billingStatus: "on"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForPayment"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForShipping"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForConfirm"},
+    //                                                 {productName: "Nintendo Switch", billingStatus: "completed"}]);
+
+    const [data_mybid, setData_myBid] = useState([])
+    const [data_myauction, setData_myAuction] = useState([])
 
     const [status,setStatus]=useState("unknown");
 
     const status_to_link = {
-        "bidder-to-pay" : "pay",
-        "bidder-to-pay-wait-admin" : "pay",
-        "auctioneer-to-pay" : "pay",
-        "to-shipped" : "shipped",
-        "bidder-to-confirm" : "confirm",
-        "auctioneer-to-confirm" : "confirm",
-        "completed" : "complete",
-        "to-delivered" : "delivered",
+        "bid-waitingForPayment" : "pay",
+        "bid-waitingConfirmSlip" : "pay",
+        "auction-waitingForPayment" : "pay",
+        "auction-waitingForShipping" : "shipped",
+        "bid-waitingForConfirm" : "confirm",
+        "auction-waitingForConfirm" : "confirm",
+        "bid-waitingForShipping" : "delivered",
     }
 
-    // useEffect(()=>{
-    //     //data_mybid_active
-	// 	getData(`/api/user/myorder?filter=mybid`).then((res)=>{
-	// 		setStatus(res.status);
-	// 		if(res.status == "success"){
-	// 			setData_myBid_active(res.data);
-	// 		}
-	// 		else{
-	// 			setData_myBid_active(res.message);
-	// 		}
-	// 	})
-    //     //data_mybid_wait
-    //     getData(`/api/user/myorder?list=mybid`).then((res)=>{
-	// 		setStatus(res.status);
-	// 		if(res.status == "success"){
-	// 			setData_myBid_wait(res.data);
-	// 		}
-	// 		else{
-	// 			setData_myBid_wait(res.message);
-	// 		}
-	// 	})
-    //     //data_myauction_active
-    //     getData(`/api/user/myorder?filter=myauction`).then((res)=>{
-	// 		setStatus(res.status);
-	// 		if(res.status == "success"){
-	// 			setData_myAuction_active(res.data);
-	// 		}
-	// 		else{
-	// 			setData_myAuction_active(res.message);
-	// 		}
-	// 	})
-    //     //data_myAuction_wait
-    //     getData(`/api/user/myorder?list=myauction`).then((res)=>{
-	// 		setStatus(res.status);
-	// 		if(res.status == "success"){
-	// 			setData_myAuction_wait(res.data);
-	// 		}
-	// 		else{
-	// 			setData_myAuction_wait(res.message);
-	// 		}
-	// 	})
-	// },[]);
+    useEffect(()=>{
+        //data_mybid
+        getData(`/user/myorder?list=mybid`).then((res)=>{
+			setStatus(res.status);
+			if(res.status === "success"){
+				setData_myBid(res.data);
+			}
+			else{
+				setData_myBid(res.message);
+			}
+		})
+        //data_myAuction
+        getData(`/user/myorder?list=myauction`).then((res)=>{
+			setStatus(res.status);
+			if(res.status === "success"){
+				setData_myAuction(res.data);
+			}
+			else{
+				setData_myAuction(res.message);
+			}
+		})
+	},[]);
+
+    console.log(data_mybid)
+    console.log(data_myauction)
 
     let _data = []
     
-    if(type==="type=all") _data = list==="list=bid"? [...data_mybid_active, ...data_mybid_wait] : [...data_myauction_active, ...data_myauction_wait];
-    else if(type==="type=current") _data = list==="list=bid"? data_mybid_active : data_myauction_active;
-    else if(list==="list=bid") _data = data_mybid_wait.filter(d=>(status_to_link[d._status]===type.slice(5)))
-    else if(list==="list=auction") _data = data_myauction_wait.filter(d=>(status_to_link[d._status]===type.slice(5)))
+    if(type==="type=all") _data = list==="list=bid"? data_mybid : data_myauction;
+    else if(type==="type=current") _data = (list==="list=bid"? data_mybid : data_myauction).filter(d=>(d.auctionStatus==="bidding"))
+    else if(type==="type=complete") _data = (list==="list=bid"? data_mybid : data_myauction).filter(d=>(d.auctionStatus==="finished"))
+    else if(list==="list=bid") _data = data_mybid.filter(d=>(status_to_link["bid-"+d.billingStatus]===type.slice(5)))
+    else if(list==="list=auction") _data = data_myauction.filter(d=>(status_to_link["auction-"+d.billingStatus]===type.slice(5)))
 
+    
     const display = []
     _data.forEach(element => {
-        display.push(<OrderObj name={element._name} status_class={element._status} text_alert={text_alert(element._status)} by_who={element.by_who}/>)
+        let status_of_auction = list.slice(5)+'-'+element.billingStatus
+        // console.log(status_of_auction)
+        display.push(<OrderObj data={element} type={list.slice(5)}/>) //bid or auction
     });
 
 	return (

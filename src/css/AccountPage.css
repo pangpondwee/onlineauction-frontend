@@ -83,7 +83,7 @@ li.menu-dropdown {
     margin: 10px;
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .account-info {
@@ -145,14 +145,9 @@ li.menu-dropdown {
 }
 
 .choose-image {
-    text-align: center;
-    border: 3px var(--color-primary) solid;
-    border-radius: 5px;
-    color: var(--color-dark);
-    background-color: white;
-    padding: 0 10px;
-    margin: 20px 0 0 230px;
-    cursor: pointer;
+    width: 25vw;
+    max-width: 350px;
+    min-width: 200px;
 }
 
 /* MyOrderNav */
@@ -192,6 +187,18 @@ li.menu-dropdown {
     height: 120px;
 }
 
+.Review-boxV2 {
+    border: 2px var(--color-primary) solid;
+    border-radius: 10px;
+    display: grid;
+    height: fit-content;
+    max-height: 180px;
+    grid-template-columns: 250px auto;
+    overflow: hidden;
+    padding: 20px 25px 30px 25px;
+    margin-bottom: 20px;
+}
+
 /* AccountPage(Following) */
 
 .Follow-button {
@@ -204,6 +211,7 @@ li.menu-dropdown {
     padding: 5px 20px;
     color: #228BE6;
     justify-content: center;
+    cursor: pointer;
 }
 
 .followHeart {
@@ -229,19 +237,19 @@ li.menu-dropdown {
 
 /* fontcolor&bordercolor in myorder */
 
-.currently-bid .bidder-to-pay-wait-admin .to-delivered .on-auction .auctioneer-to-pay .auctioneer-to-confirm {
+.bid-currently .bid-waitingConfirmSlip .bid-waitingForShipping .auction-on .auction-waitingForPayment .auction-waitingForConfirm {
     color: #228BE6;
     border-color: #228BE6;
 }
 
-.bidder-to-pay,
-.bidder-to-confirm,
-.to-shipped {
+.bid-waitingForPayment,
+.bid-waitingForConfirm,
+.auction-waitingForShipping {
     color: #FA5252;
     border-color: #FA5252;
 }
 
-.completed {
+.bid-finished, .auction-finished {
     color: #2F9E44;
     border-color: #2F9E44;
 }
