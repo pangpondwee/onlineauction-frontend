@@ -1,4 +1,4 @@
-.card{
+.auctionCard{
 	/* width: 9.5rem; */
   width: 12.4rem;
   border-radius: 20px;
@@ -118,6 +118,6 @@
   padding: 0px;
 }
 
-.scrolling-wrapper {
+.auctionCardRow .scrolling-wrapper {
   margin-left: 2em;
 }
