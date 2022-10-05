@@ -5,7 +5,6 @@
     display: inline-block;
 }
 #auction-main{
-    width: 65vw;
     margin: 25px 25px 25px 0;
     height: 700px;
     justify-content: space-around;
@@ -95,7 +94,7 @@
 #auction-content{
     display: flex;
     padding: 10px;
-    height: 50%;
+    height: 30%;
 }
 
 #bidding{
@@ -157,4 +156,50 @@
 }
 #info-bottom .info-data{
     font-size: 2em;
+}
+#history-button{
+    border: #858585 solid 1px;
+}
+#history-button:hover{
+    background-color: #858585;
+}
+#history-wrapper{
+    width: 100%;
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+/*** History ***/
+#history-modal{
+    max-width: 700px;
+}
+#history-table{
+    /* width: 90%; */
+    /* background-color: var(--color-primary); */
+    /* border-radius: 14px; */
+    text-align: center;
+    font-size: 25px;
+}
+#history-table thead{
+    background-color: var(--color-primary);
+}
+#history-table thead tr th{
+    padding: 1em 0.5em;
+}
+#history-table tbody td{
+    padding: 0.5em 0.2em;
+}
+#history-table tbody td:nth-child(2n+1){
+    border-right: 1px #fff solid;
+}
+#history-table tbody td:nth-child(2n){
+    border-left: 1px #fff solid;
+}
+#history-table thead{
+    border-bottom: 1px #fff solid;
+}
+#history-error{
+    text-align: center;
+    font-size: 25px;
+    padding: 4em 0.5em;
 }

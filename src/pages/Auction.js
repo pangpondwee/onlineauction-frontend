@@ -2,7 +2,60 @@ import { useEffect, useState } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
-import {getDateSince,getDate} from "../components/util";
+import {getDateSince,getDate,prepend} from "../components/util";
+
+function getHistory(data){
+	const history=data.sort((a,b)=>{
+		if(a.biddingDate<b.biddingDate){
+			return 1
+		}
+		else{
+			return -1
+		}
+	})
+	return history
+}
+
+const HistoryModal = (props)=>{
+	const history=props.history
+	let history_elements = []
+	for(let i=0;i<history.length;i++){
+		const ms = Number(history[i].biddingDate)
+		const d = new Date(ms)
+		const d_hour = prepend(d.getHours());
+		const d_minute = prepend(d.getMinutes());
+		const d_seconds = prepend(d.getSeconds());
+		history_elements.push(
+		<tr key={i}>
+			<td>{d.toLocaleDateString("en-US")}</td>
+			<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
+			<td>{history[i].bidderName}</td>
+			<td>{history[i].biddingPrice}</td>
+		</tr>
+		);
+	}
+	return (
+		<div className="modal fade" id="historyModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+			<div id="history-modal" className="modal-dialog modal-dialog-centered">
+				<div className="modal-content">
+					<table id="history-table">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Name</th>
+								<th>Bid Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							{history_elements}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	)
+}
 
 const Timer = (props)=>{
 	const [time,setTime] = useState(props.timeRemaining)
@@ -11,6 +64,8 @@ const Timer = (props)=>{
 		if(time < 24*60*60*1000){ // 1 day
 			setTimeout(() => {
 				setTime(time-1)
+				console.log("time")
+				setfDate(getDate(time))
 			}, 1000);
 		}
 		setfDate(getDate(time))
@@ -45,16 +100,9 @@ const Gallery = (props)=>{
 }
 
 const AuctionTop = (props)=>{
-	const history=props.data.sort((a,b)=>{
-		if(a.biddingDate<b.biddingDate){
-			return 1
-		}
-		else{
-			return -1
-		}
-	})
+	const history = getHistory(props.data);
 	let history_elements = []
-	for(let i=0;i<history.length && i<9;i++){
+	for(let i=0;i<history.length && i<8;i++){
 		const timesince = Date.now()-Number(history[i].biddingDate);
 		const timeformat = getDateSince(timesince);
 		history_elements.push(
@@ -67,6 +115,7 @@ const AuctionTop = (props)=>{
 		</li>
 		);
 	}
+	
 	let historyError = false;
 	let errorMessage = "Something went wrong";
 	if(props.error){
@@ -83,6 +132,19 @@ const AuctionTop = (props)=>{
 			<ol id="topbidder-list">
 				{history_elements}
 			</ol>
+			<div id="history-wrapper">
+			<button 
+				id="history-button" 
+				onClick={props.getHistory} 
+				className='btn' 
+				data-bs-toggle="modal"
+				data-bs-target="#historyModal"
+				>Bid History</button>
+			</div>
+			<HistoryModal
+			history={history}
+			error={historyError}
+			/>
 		</div>
 	)
 }
@@ -325,6 +387,7 @@ const Auction = (props) =>{
 			<div id="content">
 				<AuctionTop
 				data={history}
+				error={historyError}
 				/>
 				<div id="auction-main">
 					<Gallery
