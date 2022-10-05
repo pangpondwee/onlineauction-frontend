@@ -1,0 +1,26 @@
+.App3 {
+  padding: 1rem;
+  width: auto;
+  height: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: white;
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: 30px;
+}
+
+.table {
+  width: 900px;
+  height: auto;
+}
+
+.th {
+  text-align: center;
+  border-bottom: 3px solid black;
+}
+
+.td {
+  text-align: center;
+  border-bottom: 1px solid black;
+}

@@ -3,24 +3,68 @@ import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import example from "../pictures/bunny.jpeg";
+import {getDate,prepend} from "../components/util";
 
 
-function getDate(timeRemaining){
-	// TODO make date lighter
-	const d = new Date(timeRemaining);
-	const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
-	const d_hour = d.getHours();
-	const d_minute = d.getMinutes();
-	const d_seconds = d.getSeconds();
-	if(timeRemaining <= 0){
-		return "Ended";
+const BidHistoryPopup = (props)=>{
+	const history=props.history.sort((a,b)=>{
+		if(a.biddingDate<b.biddingDate){
+			return 1
+		}
+		else{
+			return -1
+		}
+	})
+	let history_elements = []
+	for(let i=0;i<history.length;i++){
+		const ms = Number(history[i].biddingDate)
+		const d = new Date(ms)
+		const d_hour = prepend(d.getHours());
+		const d_minute = prepend(d.getMinutes());
+		const d_seconds = prepend(d.getSeconds());
+		history_elements.push(
+		<tr key={i}>
+			<td>{d.toLocaleDateString("en-US")}</td>
+			<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
+			<td>{history[i].bidderName}</td>
+			<td>{history[i].biddingPrice}</td>
+		</tr>
+		);
 	}
-	if(d_days > 2){
-		return `${d_days} day(s)`;
+	let historyError = false;
+	let errorMessage = "Something went wrong";
+	if(props.error){
+		historyError = true;
+		errorMessage = props.error
 	}
-	else{
-		return `${d_hour}hr ${d_minute}m ${d_seconds}s`;
+	else if(history.length < 1){
+		historyError = true;
+		errorMessage = "No bid history found"
 	}
+	return (
+		<div className="modal fade" id="historyModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+			<div id="history-modal" className="modal-dialog modal-dialog-centered">
+				<div className="modal-content">
+					{history_elements.length > 0 ? 
+					<table id="history-table">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Name</th>
+								<th>Bid Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							{history_elements}
+						</tbody>
+					</table>
+					:
+					<div id="history-error">{errorMessage}</div>}
+				</div>
+			</div>
+		</div>
+	)
 }
 
 const Timer = (props)=>{
@@ -124,27 +168,45 @@ const Bidding = (props)=>{
 			</div>
 		)
 	}
-	return(
-		<form onSubmit={submitWrapper} id="bidding">
-			{props.isFiveMinutes ?
-			<p>You can only bid once. Think wisely</p>
-			:
-			<>
-			<div id="select-wrapper"><p>Select your bid price</p></div>
-			<div id="static-price">
-				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
-			</div>
-			<div id="or-wrapper"><p>OR</p></div>
-			</>
-			}
-			<div id="bid-group" className="input-group">
-				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
-				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
-			</div>
-		</form>
-	)
+	if(props.isFiveMinutes){
+		if(props.myLastBid < 1){
+			return (
+				<p>You cannot bid this auction</p>
+			)
+		}
+		return(
+			<form onSubmit={submitWrapper} id="bidding">
+				{props.isAlreadyBid5Minute ?
+				<>You have already bid</>
+				:
+				<>
+					<p>You can only bid once. Think wisely</p>
+					<div id="bid-group" className="input-group">
+						<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
+						<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
+					</div>
+				</>
+				}
+			</form>
+		)
+	}
+	else{
+		return(
+			<form onSubmit={submitWrapper} id="bidding">
+				<div id="select-wrapper"><p>Select your bid price</p></div>
+				<div id="static-price">
+					<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
+					<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
+					<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
+				</div>
+				<div id="or-wrapper"><p>OR</p></div>
+				<div id="bid-group" className="input-group">
+					<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
+					<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
+				</div>
+			</form>
+		)
+	}
 }
 
 const Bidfield = (props)=>{
@@ -177,12 +239,22 @@ const Bidfield = (props)=>{
 			isAuctioneer={props.data.isAuctioneer} 
 			submitBid={props.submitBid}
 			isFiveMinutes={isFiveMinutes}
+			isAlreadyBid5Minute={props.isAlreadyBid5Minute}
+			myLastBid={props.data.myLastBid}
 			isEnded={isEnded}
 			/>
 			
 			<div id="history-wrapper">
 				{props.lastBid > 0 ? <span>Your Last bid: {props.lastBid}$</span> : <></>}
-				{props.showHistory ? <button id="history-button" className='btn'>Bid History</button> : <></>}
+				
+				{props.showHistory ? 
+				<button 
+				id="history-button" 
+				onClick={props.getHistory} 
+				className='btn' 
+				data-bs-toggle="modal"
+				data-bs-target="#historyModal"
+				>Bid History</button> : <></>}
 			</div>
 		</div>
 	)
@@ -196,6 +268,9 @@ const Auction = (props) =>{
 	const showRanking=false; //show ranking and move gallery // testing
 	const [lastBid,setLastBid] = useState(0)
 	const [auctioneer,setAuctioneer] = useState("")
+	const [history,setHistory] = useState([])
+	const [historyError,setHistoryError] = useState([])
+	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -215,11 +290,27 @@ const Auction = (props) =>{
 					return { ...prevData, currentPrice: price }
 				})
 				setLastBid(price)
+
+				const timeRemaining = data.endDate - Date.now()
+				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
+				if(isFiveMinutes){
+					setIsAlreadyBid5Minute(true)
+				}
 			})
 			.catch(e=>{
 				console.log(e.message)//TODO handle
 			})
 		}
+	}
+	const getHistory = ()=>{
+		getData(`/auction/${auctionId}/bid-history`)
+		.then((res)=>{
+			// console.log(res)
+			setHistory(res.bidHistory)
+		})
+		.catch(e=>{
+			setHistoryError(e.message)
+		})
 	}
 	useEffect(()=>{
 		getData(`/auction/${auctionId}`)
@@ -227,20 +318,22 @@ const Auction = (props) =>{
 			setStatus(res.status);
 			setData(res.data);
 			setLastBid(res.data.myLastBid)
+			setAuctioneer(res.data.auctioneerName)
+			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
 			return res.data.auctioneerID
 		})
-		.then((auctioneerID)=>{ // get auctioneer
-			// return getData(`/user/profile/${auctioneerID}`)
-			setAuctioneer(auctioneerID)
-		})
-		// .then((res)=>{
-		// 	// TODO fix with api
-		// 	setAuctioneer(res.user.displayName)
-		// })
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
 		})
+		setInterval(()=>{
+			getData(`/auction/${auctionId}/refresh`)
+			.then((res)=>{
+				setData(prev=>{
+					return {...prev, currentPrice: res.data.currentPrice}
+				})
+			})
+		},10000)
 	},[]);
 	if(status === "success"){
 		return (
@@ -254,7 +347,9 @@ const Auction = (props) =>{
 					data={data}
 					auctioneer={auctioneer}
 					showHistory={showHistory}
+					getHistory={getHistory}
 					submitBid={submitBid}
+					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					lastBid={lastBid}
 					/>
 				</div>
@@ -270,6 +365,10 @@ const Auction = (props) =>{
 						{data.productDetail.description}
 					</div>
 				</div>
+				<BidHistoryPopup
+				history={history}
+				error={historyError}
+				/>
 			</div>
 		)
 	}
