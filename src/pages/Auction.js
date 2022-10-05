@@ -3,6 +3,7 @@ import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import {getDateSince,getDate,prepend} from "../components/util";
+import PopupError from '../components/PopupError';
 
 function getHistory(data){
 	const history=data.sort((a,b)=>{
@@ -64,7 +65,6 @@ const Timer = (props)=>{
 		if(time < 24*60*60*1000){ // 1 day
 			setTimeout(() => {
 				setTime(time-1)
-				console.log("time")
 				setfDate(getDate(time))
 			}, 1000);
 		}
@@ -78,19 +78,27 @@ const Timer = (props)=>{
 
 const Gallery = (props)=>{
 	const pictures=props.pictures;
+	const picture_elements = []
+	const [main, setMain] = useState("")
+	useEffect(()=>{
+		setMain(pictures[0])
+	},[])
+	const setImage = (pic)=>{
+		setMain(pic)
+	}
+	for(let i=1;i<pictures.length;i++){
+		picture_elements.push(
+			<img className="list-picture" src={pictures[i]} key={i} onClick={()=>setImage(pictures[i])}/>
+		)
+	}
 	return (
 		<div id="gallery">
 			<div id="main-picture-wrapper">
-			<img id="main-picture" src={pictures[0]} className=""/>
+			<img id="main-picture" src={main} className=""/>
 			</div>
 			{pictures.length > 1?
-				<div id="picture-list">
-				<button className="btn picture-button" id="button-left">&lt;</button>
-				<img className="list-picture" src={pictures[1]} />
-				<img className="list-picture" src={pictures[2]} />
-				<img className="list-picture" src={pictures[3]} />
-				<img className="list-picture" src={pictures[4]} />
-				<button className="btn picture-button" id="button-right">&gt;</button>
+				<div id="picture-list" className='scrolling-wrapper row flex-row flex-nowrap'>
+					{picture_elements}
 				</div>
 				:
 				<p>No pictures</p>
@@ -313,13 +321,14 @@ const Auction = (props) =>{
 	const [history,setHistory] = useState([])
 	const [historyError,setHistoryError] = useState([])
 	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
+	const [error,setError] = useState("")
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
 			price=price+data.currentPrice
 		}
 		if(isNaN(price)){
-			console.log("is Nan") //TODO handle
+			setError("Price is not a number")
 		}
 		else{
 			postData(`/auction/${auctionId}/bid`,JSON.stringify(
@@ -341,14 +350,13 @@ const Auction = (props) =>{
 				getHistory() // after bid
 			})
 			.catch(e=>{
-				console.log(e.message)//TODO handle
+				setError(e.message)
 			})
 		}
 	}
 	const getHistory = ()=>{
 		getData(`/auction/${auctionId}/bid-history`)
 		.then((res)=>{
-			// console.log(res)
 			setHistory(res.bidHistory)
 		})
 		.catch(e=>{
@@ -399,6 +407,10 @@ const Auction = (props) =>{
 					submitBid={submitBid}
 					/>
 				</div>
+				<PopupError
+				error={error}
+				setError={setError}
+				/>
 			</div>
 		)
 	}

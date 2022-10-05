@@ -58,6 +58,8 @@
 }
 #picture-list{
     height: 5em;
+    overflow: scroll;
+    overflow-x: scroll;
 }
 #main-picture{
     /* height: 100%; */
@@ -69,6 +71,9 @@
     width: 5em;
     object-fit:cover;
     margin: auto 5px;
+}
+.list-picture:hover{
+    border: var(--color-blue-dark) solid 5px;
 }
 #button-right{
     margin: 0 auto;
