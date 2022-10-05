@@ -2,70 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
-import example from "../pictures/bunny.jpeg";
-import {getDate,prepend} from "../components/util";
-
-
-const BidHistoryPopup = (props)=>{
-	const history=props.history.sort((a,b)=>{
-		if(a.biddingDate<b.biddingDate){
-			return 1
-		}
-		else{
-			return -1
-		}
-	})
-	let history_elements = []
-	for(let i=0;i<history.length;i++){
-		const ms = Number(history[i].biddingDate)
-		const d = new Date(ms)
-		const d_hour = prepend(d.getHours());
-		const d_minute = prepend(d.getMinutes());
-		const d_seconds = prepend(d.getSeconds());
-		history_elements.push(
-		<tr key={i}>
-			<td>{d.toLocaleDateString("en-US")}</td>
-			<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
-			<td>{history[i].bidderName}</td>
-			<td>{history[i].biddingPrice}</td>
-		</tr>
-		);
-	}
-	let historyError = false;
-	let errorMessage = "Something went wrong";
-	if(props.error){
-		historyError = true;
-		errorMessage = props.error
-	}
-	else if(history.length < 1){
-		historyError = true;
-		errorMessage = "No bid history found"
-	}
-	return (
-		<div className="modal fade" id="historyModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-			<div id="history-modal" className="modal-dialog modal-dialog-centered">
-				<div className="modal-content">
-					{history_elements.length > 0 ? 
-					<table id="history-table">
-						<thead>
-							<tr>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Name</th>
-								<th>Bid Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{history_elements}
-						</tbody>
-					</table>
-					:
-					<div id="history-error">{errorMessage}</div>}
-				</div>
-			</div>
-		</div>
-	)
-}
+import {getDateSince,getDate} from "../components/util";
 
 const Timer = (props)=>{
 	const [time,setTime] = useState(props.timeRemaining)
@@ -80,48 +17,7 @@ const Timer = (props)=>{
 	},[time])
 	// const f_date = getDate(props.timeRemaining);
 	return (
-		<span id="time-remaining">{fDate}</span>
-	)
-}
-
-const Ranking = (props)=>{
-	// [{name:"K***a", price:200}]
-	const ranking = [
-		{name:"K***a", price:5000},
-		{name:"F***a", price:4000},
-		{name:"K***a", price:5000},
-		{name:"F***a", price:4000},
-		{name:"K***a", price:5000},
-		{name:"F***a", price:4000},
-		{name:"K***a", price:5000},
-		{name:"F***a", price:4000},
-		{name:"K***a", price:5000},
-		{name:"F***a", price:4000},
-		{name:"K***a", price:5000},
-		{name:"F***a", price:4000},
-	]
-	let rank_elements = []
-	for(let i=0;i<6;i++){
-		rank_elements.push(
-		<tr key={i}>
-			<td>{ranking[i] ? `${i+1}. ${ranking[i].name} $${ranking[i].price}` : "-"}</td>
-			<td>{ranking[i+6] ? `${i+7}. ${ranking[i+6].name} $${ranking[i+6].price}` : "-"}</td>
-		</tr>
-		);
-	}
-	return (
-		<div id="ranking">
-			<table id="ranking-table">
-				<thead>
-					<tr>
-						<th colSpan="2">Realtime Ranking</th>
-					</tr>
-				</thead>
-				<tbody>
-					{rank_elements}
-				</tbody>
-			</table>
-		</div>
+		<p id="time-remaining" className='info-data'>{fDate}</p>
 	)
 }
 
@@ -146,6 +42,143 @@ const Gallery = (props)=>{
 			}
 		</div>
 	);
+}
+
+const AuctionTop = (props)=>{
+	const history=props.data.sort((a,b)=>{
+		if(a.biddingDate<b.biddingDate){
+			return 1
+		}
+		else{
+			return -1
+		}
+	})
+	let history_elements = []
+	for(let i=0;i<history.length && i<9;i++){
+		const timesince = Date.now()-Number(history[i].biddingDate);
+		const timeformat = getDateSince(timesince);
+		history_elements.push(
+		<li className='topbidder-element' key={i}>
+			<div className='bidding-front'>
+				<span className='bidding-name'>{history[i].bidderName}</span>
+				<span className='bidding-date'>{timeformat}</span>
+			</div>
+			<span className='bidding-price'>{history[i].biddingPrice} Baht</span>
+		</li>
+		);
+	}
+	let historyError = false;
+	let errorMessage = "Something went wrong";
+	if(props.error){
+		historyError = true;
+		errorMessage = props.error
+	}
+	else if(history.length < 1){
+		historyError = true;
+		errorMessage = "No bid history found"
+	}
+	return (
+		<div id="auction-top">
+			<h2>Top Bidders</h2>
+			<ol id="topbidder-list">
+				{history_elements}
+			</ol>
+		</div>
+	)
+}
+
+const AuctionInfo = (props)=>{
+	const auctioneerLink = "/auctioneer/"+props.data.auctioneerID;
+	return (
+		<div id="auction-info">
+			<div id="info-top">
+				<p>Auctioneer</p>
+				<p>Category</p>
+				<Link className="info-data" to={auctioneerLink}>{props.data.auctioneerName}</Link>
+				<p className="info-data" >{props.data.productDetail.category}</p>
+			</div>
+			<div id="info-bottom" className="card border-light mb-3">
+				<p>Highest Bid</p>
+				<p>Time Remaining</p>
+				<p className="info-data" >{props.data.currentPrice}</p>
+				<Timer
+					timeRemaining={props.timeRemaining}
+				/>
+			</div>
+		</div>
+	)
+}
+
+const AuctionDetail = (props)=>{
+	const timeRemaining = props.data.endDate - Date.now()
+	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
+	const isEnded = timeRemaining < 0 ? true : false;
+	return(
+		<div id="auction-detail">
+			<h1>{props.data.productDetail.productName}</h1>
+				<ul className="nav nav-tabs" id="auction-nav" role="tablist">
+            	<li className="nav-item" role="presentation">
+            	<button
+                className="nav-link active"
+                id="desc-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#auction-desc-pane"
+                type="button"
+                role="tab"
+              	>
+                Description
+              	</button>
+            	</li>
+				<li className="nav-item" role="presentation">
+				<button
+					className="nav-link"
+					id="bid-tab"
+					data-bs-toggle="tab"
+					data-bs-target="#auction-bid-pane"
+					type="button"
+					role="tab"
+				>
+					Bid
+				</button>
+				</li>
+          		</ul>
+		  	<div className="tab-content" id="auction-content">
+				<div
+				className="tab-pane fade show active"
+				id="auction-desc-pane"
+				role="tabpanel"
+				tabIndex={"0"}
+				>
+					<AuctionDesc
+					description={props.data.productDetail.description}
+					/>
+				</div>
+				<div
+				className="tab-pane fade show"
+				id="auction-bid-pane"
+				role="tabpanel"
+				tabIndex={"1"}
+				>	
+					<Bidding
+					bidStep={props.data.bidStep}
+					submitBid={props.submitBid}
+					isEnded={isEnded}
+					isFiveMinutes={isFiveMinutes}
+					isAlreadyBid5Minute={props.isAlreadyBid5Minute}
+					/>
+				</div>
+          	</div>
+			<AuctionInfo
+			timeRemaining={timeRemaining}
+			data={props.data}
+			/>
+		</div>
+	)
+}
+const AuctionDesc = (props)=>{
+	return (
+		<p>{props.description}</p>
+	)
 }
 
 const Bidding = (props)=>{
@@ -190,73 +223,20 @@ const Bidding = (props)=>{
 			</form>
 		)
 	}
-	else{
-		return(
-			<form onSubmit={submitWrapper} id="bidding">
-				<div id="select-wrapper"><p>Select your bid price</p></div>
-				<div id="static-price">
-					<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
-					<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
-					<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
-				</div>
-				<div id="or-wrapper"><p>OR</p></div>
-				<div id="bid-group" className="input-group">
-					<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
-					<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
-				</div>
-			</form>
-		)
-	}
-}
-
-const Bidfield = (props)=>{
-	const timeRemaining = props.data.endDate - Date.now()
-	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
-	const isEnded = timeRemaining < 0 ? true : false;
-	const auctioneerLink = "/auctioneer/"+props.data.auctioneerID;
-	return (
-		<div id="bid-field">
-			<div id="item-wrapper">
-				<div id="name-wrapper">
-					<h1>{props.data.productDetail.productName}</h1>
-				</div>
-				<p>by <Link to={auctioneerLink}>{props.auctioneer}</Link></p>
+	return(
+		<form onSubmit={submitWrapper} id="bidding">
+			<div id="select-wrapper"><p>Select your bid price</p></div>
+			<div id="static-price">
+				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
 			</div>
-			<div id="statistics">
-				<div>
-					<p className="stat-name">Hightest Bid</p>
-					<span id="highest-bid">${props.data.currentPrice}</span>
-				</div>
-				<div>
-					<p className="stat-name">Time Remaining</p>
-					<Timer
-					timeRemaining={timeRemaining}
-					/>
-				</div>
+			<div id="or-wrapper"><p>OR</p></div>
+			<div id="bid-group" className="input-group">
+				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
+				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
 			</div>
-			<Bidding 
-			bidStep={props.data.bidStep}
-			isAuctioneer={props.data.isAuctioneer} 
-			submitBid={props.submitBid}
-			isFiveMinutes={isFiveMinutes}
-			isAlreadyBid5Minute={props.isAlreadyBid5Minute}
-			myLastBid={props.data.myLastBid}
-			isEnded={isEnded}
-			/>
-			
-			<div id="history-wrapper">
-				{props.lastBid > 0 ? <span>Your Last bid: {props.lastBid}$</span> : <></>}
-				
-				{props.showHistory ? 
-				<button 
-				id="history-button" 
-				onClick={props.getHistory} 
-				className='btn' 
-				data-bs-toggle="modal"
-				data-bs-target="#historyModal"
-				>Bid History</button> : <></>}
-			</div>
-		</div>
+		</form>
 	)
 }
 
@@ -296,6 +276,7 @@ const Auction = (props) =>{
 				if(isFiveMinutes){
 					setIsAlreadyBid5Minute(true)
 				}
+				getHistory() // after bid
 			})
 			.catch(e=>{
 				console.log(e.message)//TODO handle
@@ -322,6 +303,9 @@ const Auction = (props) =>{
 			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
 			return res.data.auctioneerID
 		})
+		.then(()=>{
+			getHistory() // first time
+		})
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
@@ -333,42 +317,25 @@ const Auction = (props) =>{
 					return {...prev, currentPrice: res.data.currentPrice}
 				})
 			})
+			getHistory() // other times
 		},10000)
 	},[]);
 	if(status === "success"){
 		return (
 			<div id="content">
+				<AuctionTop
+				data={history}
+				/>
 				<div id="auction-main">
-					{/* <Gallery /> */}
-					{showRanking ?
-						<Ranking />:
-						<Gallery pictures={data.productDetail.productPicture}/>}
-					<Bidfield 
+					<Gallery
+					pictures={data.productDetail.productPicture}
+					/>
+					<AuctionDetail
 					data={data}
-					auctioneer={auctioneer}
-					showHistory={showHistory}
-					getHistory={getHistory}
-					submitBid={submitBid}
 					isAlreadyBid5Minute={isAlreadyBid5Minute}
-					lastBid={lastBid}
+					submitBid={submitBid}
 					/>
 				</div>
-				<hr/>
-				<div id="auction-detail">
-					{showRanking ?
-						<Gallery/>:
-						<></>}
-					<div id={showRanking ?
-						"description-with-gallery" : 
-						"description" }>
-					<h2 id="detail-heading">Description</h2>
-						{data.productDetail.description}
-					</div>
-				</div>
-				<BidHistoryPopup
-				history={history}
-				error={historyError}
-				/>
 			</div>
 		)
 	}

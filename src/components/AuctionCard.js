@@ -7,7 +7,7 @@ const AuctionCard = (props) =>{
 		timeClass=timeClass+" timeBox-red" // red if time less than 1 day
 	}
 	return (		
-		<div className="card border-light mb-3">
+		<div className="card auctionCard border-light mb-3">
 			<div className="cardBody">
 				<Link to={"/auction/"+props.id} className="img-link">
 					<img src={props.picture} className="card-img-top"></img>
