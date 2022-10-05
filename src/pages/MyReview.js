@@ -33,7 +33,7 @@ const MyReview = () =>{
             <h1>My Review</h1>
             <div className="all-review">
                 {/* store each review */}
-                {display.length===0? <div className="no-data-page">No Data</div> : {display}}
+                {display.length===0? <div className="no-data-page">No Data</div> : display}
             </div>
         </>
 	)

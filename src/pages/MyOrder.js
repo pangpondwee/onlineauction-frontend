@@ -8,18 +8,6 @@ const MyOrder = () =>{
     const location = useLocation()
     const [list, type] = location.search.slice(1).split("&")
 
-    // const [data_mybid,setData_myBid] = useState([{productName: "Nintendo Switch", billingStatus: "currently", by_who:"Kong Pakkapol"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForPayment", by_who:"Kong Pakkapol"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingConfirmSlip", by_who:"Kong Pakkapol"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForShipping", by_who:"Kong Pakkapol"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForConfirm", by_who:"Kong Pakkapol"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "completed", by_who:"Kong Pakkapol"}]);
-    // const [data_myauction,setData_myAuction] = useState([{productName: "Nintendo Switch", billingStatus: "on"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForPayment"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForShipping"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "waitingForConfirm"},
-    //                                                 {productName: "Nintendo Switch", billingStatus: "completed"}]);
-
     const [data_mybid, setData_myBid] = useState([])
     const [data_myauction, setData_myAuction] = useState([])
 
@@ -58,8 +46,8 @@ const MyOrder = () =>{
 		})
 	},[]);
 
-    // console.log(data_mybid)
-    // console.log(data_myauction)
+    console.log(data_mybid)
+    console.log(data_myauction)
 
     let _data = []
     
@@ -72,8 +60,6 @@ const MyOrder = () =>{
     
     const display = []
     _data.forEach(element => {
-        let status_of_auction = list.slice(5)+'-'+element.billingStatus
-        // console.log(status_of_auction)
         display.push(<OrderObj data={element} type={list.slice(5)}/>) //bid or auction
     });
 
@@ -81,7 +67,7 @@ const MyOrder = () =>{
         <>
             {(list === "list=bid")? <MyBidNav/> : <MyAuctionNav/>}
             <div className="all-review">
-                {display.length===0? <div className="no-data-page">No Data</div> : {display}}
+                {display.length===0? <div className="no-data-page">No Data</div> : display}
             </div>
         </>
 	)

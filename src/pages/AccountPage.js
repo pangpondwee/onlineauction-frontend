@@ -30,7 +30,7 @@ const AccountPage = () =>{
 
     let userId = data._id;
     useEffect(()=>{
-        console.log(userId)
+        // console.log(userId)
         getData(`/user/profile/${userId}`).then((res)=>{ 
 			setStatus(res.status);
 			if(res.status == "success"){
