@@ -72,9 +72,11 @@ main {
 
 .alertBox {
   visibility: hidden;
+  font-size: 1.2em;
   position: fixed;
-  bottom: 20px;
-  max-width: 600px;
+  top: 70px;
+  z-index: 1024;
+  max-width: 1000px;
 }
 .alertBox.show{
   visibility: visible;
