@@ -86,7 +86,7 @@ const Gallery = (props)=>{
 	const setImage = (pic)=>{
 		setMain(pic)
 	}
-	for(let i=1;i<pictures.length;i++){
+	for(let i=0;i<pictures.length;i++){
 		picture_elements.push(
 			<img className="list-picture" src={pictures[i]} key={i} onClick={()=>setImage(pictures[i])}/>
 		)
