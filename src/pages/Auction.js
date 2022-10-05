@@ -59,20 +59,15 @@ const HistoryModal = (props)=>{
 }
 
 const Timer = (props)=>{
-	const [time,setTime] = useState(props.timeRemaining)
-	const [fDate,setfDate] = useState("")
+	const [time,setTime] = useState(props.timeRemaining);
 	useEffect(()=>{
-		if(time < 24*60*60*1000){ // 1 day
-			setTimeout(() => {
-				setTime(time-1)
-				setfDate(getDate(time))
-			}, 1000);
-		}
-		setfDate(getDate(time))
-	},[time])
-	// const f_date = getDate(props.timeRemaining);
+		const timer = setInterval(() => {
+			setTime(time-1000)
+		}, 1000);
+		return ()=>clearInterval(timer);
+	})
 	return (
-		<p id="time-remaining" className='info-data'>{fDate}</p>
+		<p id="time-remaining" className='info-data'>{getDate(time)}</p>
 	)
 }
 
@@ -375,6 +370,7 @@ const Auction = (props) =>{
 		getData(`/auction/${auctionId}/bid-history`)
 		.then((res)=>{
 			setHistory(res.bidHistory)
+			setHistoryError(false)
 		})
 		.catch(e=>{
 			setHistoryError(e.message)
@@ -397,17 +393,16 @@ const Auction = (props) =>{
 			setStatus("error");
 			setData(e.message)
 		})
-		if(isLoggedIn){
-			setInterval(()=>{
-				getData(`/auction/${auctionId}/refresh`)
-				.then((res)=>{
-					setData(prev=>{
-						return {...prev, currentPrice: res.data.currentPrice}
-					})
+		const timer = setInterval(()=>{
+			getData(`/auction/${auctionId}/refresh`)
+			.then((res)=>{
+				setData(prev=>{
+					return {...prev, currentPrice: res.data.currentPrice}
 				})
-				getHistory() // other times
-			},10000)
-		}
+			})
+			getHistory() // other times
+		},10000)
+		return ()=>clearInterval(timer)
 	},[]);
 	if(status === "success"){
 		return (
