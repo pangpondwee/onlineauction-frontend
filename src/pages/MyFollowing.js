@@ -30,7 +30,7 @@ const MyFollowing = () =>{
             <h1>My Following List</h1>
             <div className="all-review">
                 {/* store each review */}
-                {display}
+                {display.length===0? <div className="no-data-page">No Data</div> : display}
             </div>
         </>
 	)

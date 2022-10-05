@@ -178,13 +178,13 @@ li.menu-dropdown {
     max-height: 180px;
     grid-template-columns: 200px 250px auto;
     overflow: hidden;
-    padding: 20px 25px 30px 25px;
+    padding: 20px 25px 30px 35px;
     margin-bottom: 20px;
 }
 
 .mini-pic-goods {
-    width: 180px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
 }
 
 .Review-boxV2 {
@@ -233,6 +233,16 @@ li.menu-dropdown {
     height: fit-content;
     max-height: 200px;
     overflow: hidden;
+}
+
+.no-data-page {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    color: rgb(202, 201, 201);
+    font-size: 30px;
+    font-style: italic;
+    font-style: bold;
 }
 
 /* fontcolor&bordercolor in myorder */

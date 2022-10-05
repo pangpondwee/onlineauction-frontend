@@ -28,13 +28,32 @@ const OrderObj = (props) =>{
 
     let status_of_auction = props.type+'-'+(props.data.billingStatus? props.data.billingStatus : props.data.auctionStatus)
 
+    function getDate(timeRemaining){
+        // TODO make date lighter
+        // const d = new Date(timeRemaining);
+        // const d_days = Math.floor(timeRemaining/(24*60*60*1000)); // days remaining
+        // const d_hour = d.getHours();
+        // const d_minute = d.getMinutes();
+        // const d_seconds = d.getSeconds();
+        // if(timeRemaining <= 0){
+        //     return "Ended";
+        // }
+        // if(d_days > 2){
+        //     return `${d_days} day(s)`;
+        // }
+        // else{
+        //     return `${d_hour}hr ${d_minute}m ${d_seconds}s`;
+        // }
+        return "13 hr 13 m 13 s"
+    }
+
     function text_alert(){
         if(status_of_auction==="bid-bidding") return `Your last bid: ${props.data.userBidPrice}$`
         else if(status_of_auction==="bid-waitingForPayment") return "Waiting for your payment"
         else if(status_of_auction==="bid-waitingConfirmSlip") return "Waiting for admin to confirm your payment"
         else if(status_of_auction==="bid-waitingForShipping") return "Waiting for auctioneer to ship your item"
         else if(status_of_auction==="bid-waitingForConfirm") return "An item is on its way to you. You can check a tracking number here.If you’re satisfy with your item, click accept."
-        else if(status_of_auction==="auction-bidding") return "Time left: 13 hr 13 m 13 s"
+        else if(status_of_auction==="auction-bidding") return `Time left: ${getDate(props.data.endDate)}`
         else if(status_of_auction===("auction-waitingForPayment" || "auction-waitingConfirmSlip")) return "Waiting for payment from Bidder"
         else if(status_of_auction==="auction-waitingForShipping") return "Waiting for your shipping"
         else if(status_of_auction===("auction-waitingForConfirm" || "auction-waitingForConfirm")) return "Waiting for bidder to confirm"

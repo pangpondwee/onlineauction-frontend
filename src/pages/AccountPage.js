@@ -30,7 +30,7 @@ const AccountPage = () =>{
 
     let userId = data._id;
     useEffect(()=>{
-        console.log(userId)
+        // console.log(userId)
         getData(`/user/profile/${userId}`).then((res)=>{ 
 			setStatus(res.status);
 			if(res.status == "success"){
@@ -67,21 +67,19 @@ const AccountPage = () =>{
                 <img className="profile-pic" alt="ProfilePic" src={data.profilePicture}/>
                 <div>
                     <h5>Display Name</h5>
-                    <div className="account-info"><h5>{data.displayName}</h5></div>
+                    {data.displayName? <div className="account-info"><h5>{data.displayName}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                     <h5>Email</h5>
-                    <div className="account-info"><h5>{data.email}</h5></div>
+                    {data.email? <div className="account-info"><h5>{data.email}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                     <h5>Phone Number</h5>
-                    <div className="account-info"><h5>{data.phoneNumber}</h5></div>
+                    {data.phoneNumber? <div className="account-info"><h5>{data.phoneNumber}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                     <h5>Address</h5>
-                    <div className="account-info"><h5>{data.address}</h5></div>
+                    {data.address? <div className="account-info"><h5>{data.address}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                 </div>
             </div>
             <div className="sub-info-profile">
                 <div className="about-you">
                     <h5>Description</h5>
-                    <h6>
-                        {data.accountDescription}
-                    </h6>
+                    {data.accountDescription? <h6>{data.accountDescription}</h6> : <h6>No information</h6>}
                 </div>
                 <div className="about-you">
                     {/* <h5>My Badges & Statistics</h5> */}

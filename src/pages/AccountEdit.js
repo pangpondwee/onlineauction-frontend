@@ -121,7 +121,7 @@ const AccountEdit = () =>{
                         </div>
                         <div>
                             <label><h5>Description</h5></label><br/>
-                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription} maxlength="500"/>
+                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription} maxlength="0"/>
                         </div>
                     </div>
                 </div>
