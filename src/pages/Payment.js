@@ -17,11 +17,15 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
 
 registerPlugin(
   FilePondPluginFileEncode,
   FilePondPluginImagePreview,
-  FilePondPluginFileValidateType
+  FilePondPluginFileValidateType,
+  FilePondPluginImageTransform,
+  FilePondPluginImageResize
 )
 
 const PromptpayQR = (props) => {
@@ -212,7 +216,12 @@ const Payment = () => {
               </label>
               <FilePond
                 allowFileEncode={true}
+                imageTransformOutputQuality={50}
+                imageTransformOutputQualityMode="always"
                 acceptedFileTypes={['image/png', 'image/jpeg']}
+                imageResizeTargetWidth={1000}
+                imageResizeTargetHeight={1000}
+                imageResizeMode="contain"
                 ref={uploadFileRef}
                 credits={false}
                 required

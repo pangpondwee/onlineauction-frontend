@@ -14,14 +14,16 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
-import FilePondPluginImageCrop from 'filepond-plugin-image-crop'
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
 
 // Register the plugins
 registerPlugin(
   FilePondPluginFileEncode,
   FilePondPluginImagePreview,
   FilePondPluginFileValidateType,
-  FilePondPluginImageCrop
+  FilePondPluginImageTransform,
+  FilePondPluginImageResize
 )
 
 const AuctionDetail = () => {
@@ -164,7 +166,9 @@ const AuctionDetail = () => {
                 maxFiles={10}
                 allowFileEncode={true}
                 acceptedFileTypes={['image/png', 'image/jpeg']}
-                imageCropAspectRatio="1:1"
+                imageResizeTargetWidth={1000}
+                imageResizeTargetHeight={1000}
+                imageResizeMode="contain"
                 ref={uploadFileRef}
                 credits={false}
                 required

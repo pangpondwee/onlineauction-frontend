@@ -15,11 +15,15 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
 
 registerPlugin(
   FilePondPluginFileEncode,
   FilePondPluginImagePreview,
-  FilePondPluginFileValidateType
+  FilePondPluginFileValidateType,
+  FilePondPluginImageTransform,
+  FilePondPluginImageResize
 )
 
 const Shipping = () => {
@@ -261,7 +265,7 @@ const Shipping = () => {
                     Select a Shipping Company
                   </option>
                   <option value="KEX">Kerry Express</option>
-                  <option value="GRAB">Grab</option>
+                  <option value="GRAB">GRAB Express</option>
                   <option value="LLMV">Lalamove</option>
                   <option value="NIM">Nim Express</option>
                   <option value="LINE">Line Man</option>
@@ -274,7 +278,6 @@ const Shipping = () => {
                   <option value="BEST">Best Express</option>
                   <option value="IEL">Inter Express Logistics</option>
                   <option value="NINJA">Ninja Van</option>
-                  <option value="OTHER">Other</option>
                 </select>
               </div>
 
@@ -285,6 +288,9 @@ const Shipping = () => {
                 <FilePond
                   allowFileEncode={true}
                   acceptedFileTypes={['image/png', 'image/jpeg']}
+                  imageResizeTargetWidth={1000}
+                  imageResizeTargetHeight={1000}
+                  imageResizeMode="contain"
                   ref={uploadFileRef}
                   credits={false}
                   required
