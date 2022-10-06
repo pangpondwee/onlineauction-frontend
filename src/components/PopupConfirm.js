@@ -7,9 +7,9 @@ import Rating from '@mui/material/Rating';
 
 import review from "../pictures/review.png";
 
-const PopupConfirm = () => {
-    // const auctionID = props.auctionID
-    const auctionID = "633d37c44cb5c704804ea3b6"
+const PopupConfirm = (props) => {
+    const auctionID = props.auctionID
+    // const auctionID = "633d37c44cb5c704804ea3b6"
     const [data, setData] = useState({})
     // const [status, setStatus] = useState("unk")
     // const [name, setName] = useState("")
