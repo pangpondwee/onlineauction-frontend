@@ -113,11 +113,13 @@ const Shipping = () => {
           <div className="form">
             <div className="form-heading1">SHIPPING ADDRESS</div>
             <div className="sub-form">
-              <AddressBox
-                name={shippingAddress.name}
-                address={shippingAddress.address}
-                phone={shippingAddress.phone}
-              />
+              <div className="grey-box">
+                <AddressBox
+                  name={shippingAddress.name}
+                  address={shippingAddress.address}
+                  phone={shippingAddress.phone}
+                />
+              </div>
             </div>
             <div className="form-heading1">PAYMENT INFO</div>
             <div className="sub-form">
