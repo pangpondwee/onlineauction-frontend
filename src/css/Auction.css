@@ -95,6 +95,9 @@
     display: inline;
     width: 30vw;
 }
+#auction-bid-pane{
+    width: 100%;
+}
 #auction-desc-pane{
     overflow: scroll;
 }
@@ -107,13 +110,11 @@
 #bidding{
     margin-bottom: 1em;
 }
-#bidding-is-auctioneer{
-    border: 2px solid #000;
-    border-radius: 14px;
+#bidding-message{
     display: flex;
     justify-content: center;
-    padding: 30% 20%;
-    margin-bottom: 1em;
+    margin: 20px;
+    font-size: 20px;
 }
 #static-price{
     display: flex;

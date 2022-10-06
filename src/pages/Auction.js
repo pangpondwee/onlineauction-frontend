@@ -191,6 +191,7 @@ const AuctionDetail = (props)=>{
 	const timeRemaining = props.data.endDate - Date.now()
 	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 	const isEnded = timeRemaining < 0 ? true : false;
+	const canBid = !props.data.isAuctioneer && props.isLoggedIn;
 	return(
 		<div id="auction-detail">
 			<h1>{props.data.productDetail.productName}</h1>
@@ -208,7 +209,7 @@ const AuctionDetail = (props)=>{
               	</button>
             	</li>
 				<li className="nav-item" role="presentation">
-				{props.isLoggedIn ?
+				{canBid ?
 					<button
 						className="nav-link"
 						id="bid-tab"
@@ -269,16 +270,9 @@ const Bidding = (props)=>{
 		props.submitBid(document.getElementById("bid-price").value,true)
 		e.preventDefault()
 	}
-	if(props.isAuctioneer){
-		return(
-			<div id="bidding-is-auctioneer">
-				<p>You cannot bid on your own auction</p>
-			</div>
-		)
-	}
 	if(props.isEnded){
 		return(
-			<div id="bidding-is-auctioneer">
+			<div id="bidding-message">
 				<p>Bidding has ended</p>
 			</div>
 		)
@@ -286,7 +280,9 @@ const Bidding = (props)=>{
 	if(props.isFiveMinutes){
 		if(props.myLastBid < 1){
 			return (
-				<p>You cannot bid this auction</p>
+				<div id="bidding-is-auctioneer">
+					<p>You cannot bid this auction</p>
+				</div>
 			)
 		}
 		return(
