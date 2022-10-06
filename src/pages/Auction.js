@@ -322,10 +322,6 @@ const Auction = (props) =>{
 	const { auctionId } = useParams();
 	const [data,setData] = useState({});
 	const [status,setStatus]=useState("unknown");
-	const showHistory=true; // testing
-	const showRanking=false; //show ranking and move gallery // testing
-	const [lastBid,setLastBid] = useState(0)
-	const [auctioneer,setAuctioneer] = useState("")
 	const [history,setHistory] = useState([])
 	const [historyError,setHistoryError] = useState("")
 	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
@@ -349,7 +345,6 @@ const Auction = (props) =>{
 				setData(prevData=>{
 					return { ...prevData, currentPrice: price }
 				})
-				setLastBid(price)
 
 				const timeRemaining = data.endDate - Date.now()
 				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
@@ -378,8 +373,6 @@ const Auction = (props) =>{
 		.then((res)=>{
 			setStatus(res.status);
 			setData(res.data);
-			setLastBid(res.data.myLastBid)
-			setAuctioneer(res.data.auctioneerName)
 			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
 			return res.data.auctioneerID
 		})
