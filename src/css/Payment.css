@@ -26,6 +26,8 @@
 }
 
 .header {
+  font-size: 200%;
+  font-weight: 600;
   color: var(--color-text);
   margin: 1% 0 1% 2%;
 }
@@ -84,10 +86,33 @@
 }
 
 /* Billing Info Page */
+
 .billing-info-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 25px 100px 25px 100px;
+  display: grid;
+  grid-template-columns: 25px 1fr 1fr 25px;
+  grid-template-areas:
+    '. order order .'
+    'address address tracking tracking'
+    'summary summary tracking tracking';
+  column-gap: 2%;
+  row-gap: 2%;
+}
+
+.order-card {
+  grid-area: order;
+}
+
+.address-box {
+  grid-area: address;
+}
+
+.tracking-card {
+  grid-area: tracking;
+}
+
+.summary-card {
+  grid-area: summary;
 }
 
 /* Address Card */
@@ -96,17 +121,6 @@
   border-radius: var(--radius);
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   padding: 20px;
-}
-
-/* Billing Info Section */
-.billing-info {
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  justify-content: space-between;
-  width: 80%;
-  margin-top: 30px;
-  row-gap: 10px;
 }
 
 /* Item Card */
@@ -131,12 +145,6 @@
   margin-left: 30px;
 }
 
-.billing-info-subcard {
-  width: 48%;
-  height: auto;
-  row-gap: 10px;
-}
-
 .package-picture {
   border-radius: var(--radius);
   margin: 10px;
@@ -148,12 +156,6 @@
   display: flex;
   flex-direction: column;
   justify-items: center;
-}
-
-.vertical-align-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .page-with-summary {
@@ -178,12 +180,34 @@
   position: sticky;
   top: 150px;
   width: 300px;
-  height: 400px;
+  height: 420px;
 }
 
 .payment-summary-card img {
   width: 80%;
   height: auto;
+}
+
+.payment-summary-header {
+  font-size: 150%;
+  font-weight: 600;
+}
+
+.payment-summary-detail {
+  font-size: 110%;
+}
+
+.payment-summary-pic-container {
+  margin: 5% 0 5% 0;
+}
+
+.payment-summary-pic {
+  border-radius: var(--radius);
+}
+
+.payment-summary-price {
+  font-size: 125%;
+  font-weight: 600;
 }
 
 /* handle responsive */

@@ -1,13 +1,16 @@
-import Package from '../pictures/package.jpeg'
-const TrackingCard = () => {
+const TrackingCard = (props) => {
   return (
-    <div class="grey-box">
+    <div className="grey-box">
       <div>Shipping</div>
-      <div>Shipping company: Kerry Express</div>
-      <div>Tracking Number: LEXPU0121395915</div>
+      <div>Shipping company: {props.shippingCompany}</div>
+      <div>Tracking Number: {props.trackingNumber}</div>
       <div>Package Picture</div>
-      <div class="center-pic">
-        <img class="package-picture" src={Package} alt="package"></img>
+      <div className="center-pic">
+        <img
+          className="package-picture"
+          src={props.packagePicture}
+          alt="package"
+        ></img>
       </div>
     </div>
   )

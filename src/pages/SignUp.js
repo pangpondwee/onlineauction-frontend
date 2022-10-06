@@ -9,8 +9,32 @@ import { postData } from "../components/fetchData";
 import eye from "../pictures/eye.svg";
 import eye_blind from "../pictures/eye_blind.svg";
 import PopupError from "../components/PopupError";
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 const TabSignUp = (props)=>{
+  const [eye_icon,setEye_icon] = useState(eye)
+  const togglePassword = ()=>{
+    const password = document.getElementById("signup-password")
+    if(password.type == "password"){
+      password.type = "text"
+      setEye_icon(eye_blind)
+    }
+    else{
+      password.type = "password"
+      setEye_icon(eye)
+    }
+  }
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      <ul style={{paddingLeft: "1em", textAlign: "start", marginBottom: "0"}} >
+        <li>At least 10 characters</li>
+        <li>At least 1 lower case character</li>
+        <li>At least 1 upper case character</li>
+        <li>At least 1 special character</li>
+      </ul>
+    </Tooltip>
+  );
   return (
     <div
       className="tab-pane fade show active"
@@ -30,8 +54,19 @@ const TabSignUp = (props)=>{
         />
         <label htmlFor="email">Email</label>
         <input id="email" type="text" placeholder="Email" ref={props.email} required/>
-        <label htmlFor="password">Password</label>
-        <input id="password" type="password" placeholder="Password" ref={props.password} required/>
+        <label htmlFor="signup-password">Password 
+          <OverlayTrigger
+            placement="right"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip}
+          >
+          <span style={{color: "#999999"}}> (Requrements?)</span>
+        </OverlayTrigger>
+        </label>
+        <div className="input-group">
+				  <input id="signup-password" type="password" placeholder="Password" className='form-control' ref={props.password}></input>
+				  <img src={eye_icon} className="btn" style={{width: "40px",padding: 0, margin: "1em auto"}} onClick ={togglePassword} />
+			  </div>
         <label htmlFor="confirmpassword">Confirm Password</label>
         <input
           id="confirmpassword"
@@ -50,7 +85,7 @@ const TabSignUp = (props)=>{
 
 const TabSignIn = (props)=>{
   const [eye_icon,setEye_icon] = useState(eye)
-  const togglePassword = (e)=>{
+  const togglePassword = ()=>{
     const password = document.getElementById("password")
     if(password.type == "password"){
       password.type = "text"
@@ -60,7 +95,6 @@ const TabSignIn = (props)=>{
       password.type = "password"
       setEye_icon(eye)
     }
-    e.preventDefault()
   }
   return (
     <div
@@ -76,7 +110,7 @@ const TabSignIn = (props)=>{
         <label htmlFor="password">Password</label>
         <div className="input-group">
 				  <input id="password" type="password" placeholder="Password" className='form-control' ref={props.password}></input>
-				  <input type="image" className="btn" style={{width: "40px",padding: 0}} src={eye_icon} onClick={togglePassword}></input>
+				  <img src={eye_icon} className="btn" style={{width: "40px",padding: 0, margin: "1em auto"}} onClick ={togglePassword} />
 			  </div>
         <Link to={"#"}>Forgot Password?</Link>
         
