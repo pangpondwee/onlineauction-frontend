@@ -121,3 +121,41 @@
 .auctionCardRow .scrolling-wrapper {
   margin-left: 2em;
 }
+
+.scrolling-wrapper{
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+
+/* .scrolling-wrapper::-webkit-scrollbar{
+    display: none;
+} */
+
+/* width */
+.scrolling-wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.scrolling-wrapper::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey; 
+  border-radius: 100px;
+  background-color: white;
+}
+ 
+/* Handle */
+.scrolling-wrapper::-webkit-scrollbar-thumb {
+  background: rgb(200, 200, 200); 
+  border-radius: 100px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+}
+
+/* Handle on hover */
+.scrolling-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgb(175, 175, 175); 
+  border: 5px solid transparent;
+  background-clip: content-box;
+}
