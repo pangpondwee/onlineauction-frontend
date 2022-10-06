@@ -172,7 +172,14 @@ const AuctionInfo = (props)=>{
 			<div id="info-top">
 				<p>Auctioneer</p>
 				<p>Category</p>
-				<Link className="info-data" to={auctioneerLink}>{props.data.auctioneerName}</Link>
+				<p>
+					<Link className="info-data" to={auctioneerLink}>
+					{props.myid == props.data.auctioneerID ?
+					"You"
+					:
+					props.data.auctioneerName
+					}</Link>
+				</p>
 				<p className="info-data" >{props.data.productDetail.category}</p>
 			</div>
 			<div id="info-bottom" className="card border-light mb-3">
@@ -254,6 +261,7 @@ const AuctionDetail = (props)=>{
 			<AuctionInfo
 			timeRemaining={timeRemaining}
 			data={props.data}
+			myid={props.myid}
 			/>
 		</div>
 	)
@@ -327,6 +335,7 @@ const Auction = (props) =>{
 	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
 	const [error,setError] = useState("")
 	const isLoggedIn = localStorage.getItem("isLoggedIn")
+	const myid = localStorage.getItem("id")
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -411,6 +420,7 @@ const Auction = (props) =>{
 					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					submitBid={submitBid}
 					isLoggedIn={isLoggedIn}
+					myid={myid}
 					/>
 				</div>
 				<PopupError
