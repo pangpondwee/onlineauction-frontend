@@ -1,14 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import '../css/AuctioneerReport.css';
-import { postData } from "./fetchData";
+import { postData, getData} from "./fetchData";
 
 const AuctioneerReport = () => {
+    const { auctioneerID } = useParams()
+    // console.log(auctioneerID)
+    const [name, setName] = useState("")
+    const [status, setStatus] = useState("unk")
     const [reports, setReport] = useState({
         report: [],
         response: []
     })
     const [message, setMessage] = useState("")
+
+    useEffect(() => {
+        // console.log("Begin getData")
+        getData(`/user/profile/${auctioneerID}`).then((res) => {
+            setStatus(res.status);
+            // console.log(status)
+            if(res.status == "success"){
+                setName(res.data.displayName)
+                // console.log(data)
+            }
+            else{
+                setName(res.message);
+            }
+        })
+    },[]);
 
     const handleChange = (e) => {
         const { value, checked } = e.target
@@ -28,20 +47,20 @@ const AuctioneerReport = () => {
     }
 
     function handleReport (e) {
-        console.log(e.target.value)
-        // e.preventDefault()
-        // postData(`/report`, JSON.stringify(
-        //     {
-        //         "reportID": "ObjID",
-        //         "reportDescription": e.target.value
-        //     }
-        //     .then((res) => {
-        //         console.log(e.success)
-        //     })
-        //     .catch(e => {
-        //         console.log("error")
-        //     })
-        // ))
+        // console.log(e.target.value)
+        e.preventDefault()
+        postData(`/report`, JSON.stringify(
+            {
+                "reportID": auctioneerID,
+                "reportDescription": e.target.value
+            }
+        ))
+        .then((res) => {
+            console.log("Report successfully")
+        })
+        .catch(e => {
+            console.log("error")
+        })
     }
 
     return (
@@ -56,7 +75,8 @@ const AuctioneerReport = () => {
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 className="modal-report-header-text" class="modal-title" id="reportModalLabel">Report Pakkapol Kong</h5>
+                            {/* <h5 className="modal-report-header-text" class="modal-title" id="reportModalLabel">Report Pakkapol Kong</h5> */}
+                            <h5 className="modal-report-header-text" class="modal-title" id="reportModalLabel">Report {name}</h5>
                             {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
                         <div class="modal-body-report">

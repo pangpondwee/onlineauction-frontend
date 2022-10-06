@@ -131,15 +131,15 @@ const Review = () => {
 
 const AuctioneerProfile = () => {
     const { auctioneerID } = useParams();
-    console.log(auctioneerID)
+    // console.log(auctioneerID)
     const [data, setData] = useState({});
     const [status, setStatus] = useState("unk")
     
     useEffect(() => {
-        console.log("Begin getData")
+        // console.log("Begin getData")
         getData(`/user/profile/${auctioneerID}`).then((res) => {
             setStatus(res.status);
-            console.log(status)
+            // console.log(status)
             if(res.status == "success"){
                 setData(res.data)
                 // console.log(data)
@@ -150,7 +150,7 @@ const AuctioneerProfile = () => {
         })
     },[]);
 
-    console.log(data)
+    // console.log(data)
 
     // const data = {
     //     displayName: "Kong Pakkrapol",
