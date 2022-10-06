@@ -107,7 +107,7 @@ const Gallery = (props)=>{
 
 const AuctionTop = (props)=>{
 	const history = getHistory(props.data);
-	let history_elements = history.map((item,index)=>{
+	let history_elements = history.slice(0,5).map((item,index)=>{
 		const timesince = Date.now()-Number(item.biddingDate);
 		const timeformat = getDateSince(timesince);
 		return (

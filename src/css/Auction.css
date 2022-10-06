@@ -17,7 +17,6 @@
     margin: 25px 25px 25px 0;
     border-right: 1px var(--color-primary) solid;
     height: 700px;
-    overflow: scroll;
 }
 #auction-top h2{
     text-align: center;
@@ -25,6 +24,8 @@
 }
 #topbidder-list{
     margin-right: 30px;
+    overflow: scroll;
+    height: 500px;
 }
 .topbidder-element{
     font-size: 1.2em;
