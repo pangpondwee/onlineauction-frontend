@@ -370,7 +370,7 @@ const Auction = (props) =>{
 	const getHistory = ()=>{
 		getData(`/auction/${auctionId}/bid-history`)
 		.then((res)=>{
-			setHistory(res.bidHistory)
+			setHistory(res.data)
 			setHistoryError(false)
 		})
 		.catch(e=>{
