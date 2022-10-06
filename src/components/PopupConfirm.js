@@ -15,6 +15,22 @@ const PopupConfirm = () => {
     // const [name, setName] = useState("")
     const [rating, setRating] = useState("")
     const [reviewtext, setReview] = useState("")
+    const shippingDict = {
+        "KEX":"Kerry Express" ,
+        "GRAB ":"Grab" ,
+        "LLMV ":"Lalamove" ,
+        "NIM":"Nim Express" ,
+        "LINE":"Line Man" ,
+        "TNT":"TNT Express" ,
+        "DHL":"DHL Express" ,
+        "SCG":"SCG Express" ,
+        "FLASH":"Flash Express" ,
+        "SKT ":"Skootar" ,
+        "J&T" :"J&T Express",
+        "BEST ":"Best Express" ,
+        "IEL ":"Inter Express Logistics" ,
+        "NINJA ":"Ninja Van" 
+       }
 
     useEffect(() => {
         console.log("Begin getData billinginfo")
@@ -127,7 +143,7 @@ const PopupConfirm = () => {
                                 <div>
                                     <h6>Item Name : {data.productName}</h6>
                                     <h6>Auctioneer Name : {data.auctioneerName}</h6>
-                                    <h6>Shipping : {data.delivery.shippingCompany}</h6>
+                                    <h6>Shipping : {shippingDict[data.delivery.shippingCompany]}</h6>
                                     <h6>Tracking Number : {data.delivery.trackingNumber}</h6>
                                     <div className="tracking-img">
                                         <img src={data.delivery.packagePicture} alt="pic" />
