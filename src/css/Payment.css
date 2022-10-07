@@ -62,6 +62,18 @@
   margin-right: 20px;
 }
 
+/* Place Auction*/
+.place-auction-upload-description {
+  margin-top: 0;
+  font-size: 80%;
+  color: #868e96;
+}
+
+.auction-type-button {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /* Preview Picture */
 .preview-picture {
   max-width: 60%;
