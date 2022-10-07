@@ -165,6 +165,7 @@ const AuctionDetail = () => {
                 allowMultiple={true}
                 maxFiles={10}
                 allowFileEncode={true}
+                allowReorder={true}
                 acceptedFileTypes={['image/png', 'image/jpeg']}
                 imageResizeTargetWidth={1000}
                 imageResizeTargetHeight={1000}
@@ -173,6 +174,10 @@ const AuctionDetail = () => {
                 credits={false}
                 required
               />
+              <div className="place-auction-upload-description">
+                The first picture will be the main picture of this auction. You
+                can drag the pictures to reorder them.
+              </div>
             </div>
           </div>
         </div>
@@ -198,7 +203,7 @@ const AuctionDetail = () => {
           </div>
           <div className="form-input-field">
             <label htmlFor="auctioningType">AUCTIONING TYPE</label>
-            <div className="form-input-field">
+            <div className="form-input-field auction-type-button">
               <div className="form-check form-check-inline">
                 <input
                   className="form-check-input"
