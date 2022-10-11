@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import classes from "../css/VerifyEmail.module.css";
-import pic1 from "../pictures/blue_circle_check.png";
+import successIcon from "../pictures/blue_circle_check.png";
 import { postData } from "../components/fetchData";
 import { useEffect, useState } from "react";
 
@@ -22,9 +22,12 @@ function VerifyEmail() {
   if(status == "success"){
     return (
       <>
-        <img className={classes.pic1} src={pic1} />
-        <div className={classes.text}>
+        <div className={classes.successIconWrapper}>
+          <img className={classes.successIcon} src={successIcon} />
+        </div>
+        <div className={classes.desc}>
           <h1>Your Email is now Verified!</h1>
+          <p><Link to="/signup">&lt;- Back to Sign Up</Link></p>
         </div>
       </>
     );

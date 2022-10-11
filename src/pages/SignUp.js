@@ -44,11 +44,11 @@ const TabSignUp = (props)=>{
       tabIndex={"0"}
     >
       <form className={classes.Form} onSubmit={props.submit}>
-        <label htmlFor="displayname">Display Name</label>
+        <label htmlFor="displayname">Name</label>
         <input
           id="displayname"
           type="displayname"
-          placeholder="Display Name"
+          placeholder="Name"
           ref={props.displayName}
           required
         />
@@ -156,9 +156,9 @@ const SignUp = () => {
     .then((res) => {
       if(!res.status) throw new Error("Could not get status")
       if(res.status == "fail" || res.status == "error") throw new Error(res.message)
-      console.log("Signed up")
+      navigate("/signup-success")
     })
-    .catch((error)=>{
+    .catch((error)=>{Verify
       setError(error.message)
     })
   }
