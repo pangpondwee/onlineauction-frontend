@@ -19,22 +19,21 @@ function getHistory(data){
 
 const HistoryModal = (props)=>{
 	const history=props.history
-	let history_elements = []
-	for(let i=0;i<history.length;i++){
-		const ms = Number(history[i].biddingDate)
-		const d = new Date(ms)
+	let history_elements = props.history.map((item,index)=>{
+		const ms = Number(item.biddingDate)
+		const d = new Date(ms);
 		const d_hour = prepend(d.getHours());
 		const d_minute = prepend(d.getMinutes());
 		const d_seconds = prepend(d.getSeconds());
-		history_elements.push(
-		<tr key={i}>
-			<td>{d.toLocaleDateString("en-US")}</td>
-			<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
-			<td>{history[i].bidderName}</td>
-			<td>{history[i].biddingPrice}</td>
-		</tr>
-		);
-	}
+		return (
+			<tr key={index}>
+				<td>{d.toLocaleDateString("en-US")}</td>
+				<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
+				<td>{item.bidderName}</td>
+				<td>{item.biddingPrice}฿</td>
+			</tr>
+		)
+	})
 	return (
 		<div className="modal fade" id="historyModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
 			<div id="history-modal" className="modal-dialog modal-dialog-centered">
@@ -73,7 +72,6 @@ const Timer = (props)=>{
 
 const Gallery = (props)=>{
 	const pictures=props.pictures;
-	const picture_elements = []
 	const [main, setMain] = useState("")
 	useEffect(()=>{
 		setMain(pictures[0])
@@ -81,11 +79,16 @@ const Gallery = (props)=>{
 	const setImage = (pic)=>{
 		setMain(pic)
 	}
-	for(let i=0;i<pictures.length;i++){
-		picture_elements.push(
-			<img className="list-picture" src={pictures[i]} key={i} onClick={()=>setImage(pictures[i])}/>
+	const picture_elements = pictures.map((item,index)=>{
+		return (
+			<img 
+			className="list-picture" 
+			src={item} 
+			key={index} 
+			onClick={()=>setImage(item)}
+			/>
 		)
-	}
+	})
 	return (
 		<div id="gallery">
 			<div id="main-picture-wrapper">
@@ -104,21 +107,19 @@ const Gallery = (props)=>{
 
 const AuctionTop = (props)=>{
 	const history = getHistory(props.data);
-	let history_elements = []
-	for(let i=0;i<history.length && i<5;i++){
-		const timesince = Date.now()-Number(history[i].biddingDate);
+	let history_elements = history.slice(0,5).map((item,index)=>{
+		const timesince = Date.now()-Number(item.biddingDate);
 		const timeformat = getDateSince(timesince);
-		history_elements.push(
-		<li className='topbidder-element' key={i}>
-			<div className='bidding-front'>
-				<span className='bidding-name'>{history[i].bidderName}</span>
-				<span className='bidding-date'>{timeformat}</span>
-			</div>
-			<span className='bidding-price'>{history[i].biddingPrice} Baht</span>
-		</li>
-		);
-	}
-	
+		return (
+			<li className='topbidder-element' key={index}>
+				<div className='bidding-front'>
+					<span className='bidding-name'>{item.bidderName}</span>
+					<span className='bidding-date'>{timeformat}</span>
+				</div>
+				<span className='bidding-price'>{item.biddingPrice}฿</span>
+			</li>
+		)
+	})	
 	let historyError = false;
 	let errorMessage = "Something went wrong";
 	if(!props.isLoggedIn){
@@ -171,13 +172,20 @@ const AuctionInfo = (props)=>{
 			<div id="info-top">
 				<p>Auctioneer</p>
 				<p>Category</p>
-				<Link className="info-data" to={auctioneerLink}>{props.data.auctioneerName}</Link>
+				<p>
+					<Link className="info-data" to={auctioneerLink}>
+					{props.myid == props.data.auctioneerID ?
+					"You"
+					:
+					props.data.auctioneerName
+					}</Link>
+				</p>
 				<p className="info-data" >{props.data.productDetail.category}</p>
 			</div>
 			<div id="info-bottom" className="card border-light mb-3">
 				<p>Highest Bid</p>
 				<p>Time Remaining</p>
-				<p className="info-data" >{props.data.currentPrice}</p>
+				<p className="info-data" >{props.data.currentPrice}฿</p>
 				<Timer
 					timeRemaining={props.timeRemaining}
 				/>
@@ -190,6 +198,7 @@ const AuctionDetail = (props)=>{
 	const timeRemaining = props.data.endDate - Date.now()
 	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 	const isEnded = timeRemaining < 0 ? true : false;
+	const canBid = !props.data.isAuctioneer && props.isLoggedIn;
 	return(
 		<div id="auction-detail">
 			<h1>{props.data.productDetail.productName}</h1>
@@ -207,7 +216,7 @@ const AuctionDetail = (props)=>{
               	</button>
             	</li>
 				<li className="nav-item" role="presentation">
-				{props.isLoggedIn ?
+				{canBid ?
 					<button
 						className="nav-link"
 						id="bid-tab"
@@ -252,6 +261,7 @@ const AuctionDetail = (props)=>{
 			<AuctionInfo
 			timeRemaining={timeRemaining}
 			data={props.data}
+			myid={props.myid}
 			/>
 		</div>
 	)
@@ -268,16 +278,9 @@ const Bidding = (props)=>{
 		props.submitBid(document.getElementById("bid-price").value,true)
 		e.preventDefault()
 	}
-	if(props.isAuctioneer){
-		return(
-			<div id="bidding-is-auctioneer">
-				<p>You cannot bid on your own auction</p>
-			</div>
-		)
-	}
 	if(props.isEnded){
 		return(
-			<div id="bidding-is-auctioneer">
+			<div id="bidding-message">
 				<p>Bidding has ended</p>
 			</div>
 		)
@@ -285,7 +288,9 @@ const Bidding = (props)=>{
 	if(props.isFiveMinutes){
 		if(props.myLastBid < 1){
 			return (
-				<p>You cannot bid this auction</p>
+				<div id="bidding-is-auctioneer">
+					<p>You cannot bid this auction</p>
+				</div>
 			)
 		}
 		return(
@@ -325,15 +330,12 @@ const Auction = (props) =>{
 	const { auctionId } = useParams();
 	const [data,setData] = useState({});
 	const [status,setStatus]=useState("unknown");
-	const showHistory=true; // testing
-	const showRanking=false; //show ranking and move gallery // testing
-	const [lastBid,setLastBid] = useState(0)
-	const [auctioneer,setAuctioneer] = useState("")
 	const [history,setHistory] = useState([])
 	const [historyError,setHistoryError] = useState("")
 	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
 	const [error,setError] = useState("")
 	const isLoggedIn = localStorage.getItem("isLoggedIn")
+	const myid = localStorage.getItem("id")
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
 		if(!isAbsolute){
@@ -352,7 +354,6 @@ const Auction = (props) =>{
 				setData(prevData=>{
 					return { ...prevData, currentPrice: price }
 				})
-				setLastBid(price)
 
 				const timeRemaining = data.endDate - Date.now()
 				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
@@ -369,7 +370,7 @@ const Auction = (props) =>{
 	const getHistory = ()=>{
 		getData(`/auction/${auctionId}/bid-history`)
 		.then((res)=>{
-			setHistory(res.bidHistory)
+			setHistory(res.data)
 			setHistoryError(false)
 		})
 		.catch(e=>{
@@ -381,8 +382,6 @@ const Auction = (props) =>{
 		.then((res)=>{
 			setStatus(res.status);
 			setData(res.data);
-			setLastBid(res.data.myLastBid)
-			setAuctioneer(res.data.auctioneerName)
 			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
 			return res.data.auctioneerID
 		})
@@ -421,6 +420,7 @@ const Auction = (props) =>{
 					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					submitBid={submitBid}
 					isLoggedIn={isLoggedIn}
+					myid={myid}
 					/>
 				</div>
 				<PopupError

@@ -14,71 +14,69 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
-import FilePondPluginImageCrop from 'filepond-plugin-image-crop'
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
 
 // Register the plugins
 registerPlugin(
   FilePondPluginFileEncode,
   FilePondPluginImagePreview,
   FilePondPluginFileValidateType,
-  FilePondPluginImageCrop
+  FilePondPluginImageTransform,
+  FilePondPluginImageResize
 )
 
 const AuctionDetail = () => {
-  const itemNameInputRef = useRef()
-  const itemDetailsInputRef = useRef()
-  const itemCategoryInputRef = useRef()
-  const startingPriceInputRef = useRef()
-  const minimumBidStepInputRef = useRef()
-  const expectedPriceInputRef = useRef()
-  const endDateInputRef = useRef()
+  const [auctionDetails, setAuctionDetails] = useState({
+    productName: '',
+    description: '',
+    category: '',
+    isOpenBid: false,
+    startingPrice: '',
+    endDate: '',
+    bidStep: '',
+    expectedPrice: '',
+    productPicture: [],
+  })
   const uploadFileRef = useRef()
-  const openBidInputRef = useRef()
   const [modalShow, setModalShow] = useState(false)
   const navigate = useNavigate()
 
   const submitHandler = (event) => {
-    const enteredItemName = itemNameInputRef.current.value
-    const enteredItemDetails = itemDetailsInputRef.current.value
-    const enteredItemCategory = itemCategoryInputRef.current.value
-    const enteredStartingPrice = startingPriceInputRef.current.value
-    const enteredMinimumBidStep = minimumBidStepInputRef.current.value
-    const enteredExpectedPrice = expectedPriceInputRef.current.value
-    const enteredEndDate = endDateInputRef.current.value
     const uploadedFile = uploadFileRef.current.getFiles()
-    const checkedIsOpenBid = openBidInputRef.current.checked
 
     let auctionData = {
-      productName: enteredItemName,
-      description: enteredItemDetails,
-      category: enteredItemCategory,
-      isOpenBid: checkedIsOpenBid,
-      startingPrice: Number(enteredStartingPrice),
-      endDate: String(new Date(enteredEndDate).getTime()),
+      ...auctionDetails,
+      isOpenBid: auctionDetails.isOpenBid === 'open' ? true : false,
+      startingPrice: Number(auctionDetails.startingPrice),
+      endDate: String(new Date(auctionDetails.endDate).getTime()),
       productPicture: uploadedFile.map((f) => {
         return f.getFileEncodeDataURL()
       }),
     }
 
-    console.log(JSON.stringify(auctionData))
-
-    if (enteredMinimumBidStep.length > 0) {
-      auctionData.bidStep = Number(enteredMinimumBidStep)
+    if (auctionData.bidStep !== '') {
+      auctionData.bidStep = Number(auctionData.bidStep)
+    } else {
+      delete auctionData.bidStep
     }
-    if (enteredExpectedPrice.length > 0) {
-      auctionData.expectedPrice = Number(enteredExpectedPrice)
+    if (auctionData.expectedPrice !== '') {
+      auctionData.expectedPrice = Number(auctionData.expectedPrice)
+    } else {
+      delete auctionData.expectedPrice
     }
 
     postData('/auction/upload', JSON.stringify(auctionData)).then((res) => {
       console.log(res)
       console.log(JSON.stringify(auctionData))
-      navigate(`/auction/${res.data.auctionID}`)
+      navigate(`/`)
     })
+    console.log(auctionData)
   }
 
   return (
     <div>
-      <h1 className="header">Place Auction</h1>
+      <div className="header">Place Auction</div>
       <form
         className="place-auction-form"
         onSubmit={(event) => {
@@ -96,7 +94,12 @@ const AuctionDetail = () => {
               type="text"
               className="form-control"
               placeholder="e.g. White fluffy bunny doll"
-              ref={itemNameInputRef}
+              onChange={(e) =>
+                setAuctionDetails({
+                  ...auctionDetails,
+                  productName: e.target.value,
+                })
+              }
               required
             ></input>
           </div>
@@ -109,7 +112,12 @@ const AuctionDetail = () => {
               className="form-control"
               rows="8"
               placeholder="e.g. White bunny with soft fur"
-              ref={itemDetailsInputRef}
+              onChange={(e) =>
+                setAuctionDetails({
+                  ...auctionDetails,
+                  description: e.target.value,
+                })
+              }
               required
             ></textarea>
           </div>
@@ -119,11 +127,16 @@ const AuctionDetail = () => {
             </label>
             <select
               className="form-select form-control"
-              ref={itemCategoryInputRef}
-              defaultValue={'Select Category'}
+              onChange={(e) => {
+                setAuctionDetails({
+                  ...auctionDetails,
+                  category: e.target.value,
+                })
+              }}
+              defaultValue={''}
               required
             >
-              <option value="Select Category" disabled>
+              <option value="" disabled>
                 Select Category
               </option>
               <option value="Home Improvement">Home Improvement</option>
@@ -153,7 +166,9 @@ const AuctionDetail = () => {
                 maxFiles={10}
                 allowFileEncode={true}
                 acceptedFileTypes={['image/png', 'image/jpeg']}
-                imageCropAspectRatio="1:1"
+                imageResizeTargetWidth={1000}
+                imageResizeTargetHeight={1000}
+                imageResizeMode="contain"
                 ref={uploadFileRef}
                 credits={false}
                 required
@@ -172,7 +187,12 @@ const AuctionDetail = () => {
               className="form-control"
               placeholder="e.g. 500"
               min={1}
-              ref={startingPriceInputRef}
+              onChange={(e) =>
+                setAuctionDetails({
+                  ...auctionDetails,
+                  startingPrice: e.target.value,
+                })
+              }
               required
             ></input>
           </div>
@@ -186,6 +206,12 @@ const AuctionDetail = () => {
                   name="auctioningType"
                   value="closed"
                   id="closed-radio"
+                  onChange={(e) =>
+                    setAuctionDetails({
+                      ...auctionDetails,
+                      isOpenBid: e.target.value,
+                    })
+                  }
                   defaultChecked
                 ></input>
                 <label className="form-check-label" htmlFor="closed-radio">
@@ -199,7 +225,12 @@ const AuctionDetail = () => {
                   name="auctioningType"
                   value="open"
                   id="open-radio"
-                  ref={openBidInputRef}
+                  onChange={(e) =>
+                    setAuctionDetails({
+                      ...auctionDetails,
+                      isOpenBid: e.target.value,
+                    })
+                  }
                 ></input>
                 <label className="form-check-label" htmlFor="open-radio">
                   Open Bid
@@ -214,7 +245,12 @@ const AuctionDetail = () => {
             <input
               type="datetime-local"
               className="form-control"
-              ref={endDateInputRef}
+              onChange={(e) =>
+                setAuctionDetails({
+                  ...auctionDetails,
+                  endDate: e.target.value,
+                })
+              }
               required
             ></input>
           </div>
@@ -225,9 +261,14 @@ const AuctionDetail = () => {
             <input
               type="number"
               className="form-control"
+              onChange={(e) =>
+                setAuctionDetails({
+                  ...auctionDetails,
+                  bidStep: e.target.value,
+                })
+              }
               placeholder="e.g. 500"
               min={1}
-              ref={minimumBidStepInputRef}
             ></input>
           </div>
           <div className="form-input-field">
@@ -239,7 +280,12 @@ const AuctionDetail = () => {
               className="form-control"
               placeholder="e.g. 500"
               min={1}
-              ref={expectedPriceInputRef}
+              onChange={(e) =>
+                setAuctionDetails({
+                  ...auctionDetails,
+                  expectedPrice: e.target.value,
+                })
+              }
             ></input>
           </div>
         </div>

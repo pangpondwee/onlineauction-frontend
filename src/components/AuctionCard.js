@@ -1,5 +1,17 @@
 import {Link} from "react-router-dom";
 import { getDate } from "./util";
+function getPrice(price){
+	if(price < 1000000)
+		return price
+	price = price/1000000;
+	if(price < 1000)
+		return `${price.toFixed(2)}M`
+	price = price/1000;
+	if(price < 1000)
+		return `${price.toFixed(2)}B`
+	price = price/1000;
+	return `${price.toFixed(2)}T`
+}
 
 const AuctionCard = (props) =>{
 	let timeClass = "timeBox"
@@ -16,7 +28,7 @@ const AuctionCard = (props) =>{
 				<Link to="#" className="itemName-link">
 					<p className="itemName">{props.name}</p>
 				</Link>
-				<p className="card-text">{props.price}฿</p>			
+				<p className="card-text">{getPrice(props.price)}฿</p>			
 			</div>			
 		</div>
 	)

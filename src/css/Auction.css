@@ -17,7 +17,6 @@
     margin: 25px 25px 25px 0;
     border-right: 1px var(--color-primary) solid;
     height: 700px;
-    overflow: scroll;
 }
 #auction-top h2{
     text-align: center;
@@ -25,6 +24,8 @@
 }
 #topbidder-list{
     margin-right: 30px;
+    overflow: scroll;
+    height: 500px;
 }
 .topbidder-element{
     font-size: 1.2em;
@@ -95,6 +96,9 @@
     display: inline;
     width: 30vw;
 }
+#auction-bid-pane{
+    width: 100%;
+}
 #auction-desc-pane{
     overflow: scroll;
 }
@@ -107,13 +111,11 @@
 #bidding{
     margin-bottom: 1em;
 }
-#bidding-is-auctioneer{
-    border: 2px solid #000;
-    border-radius: 14px;
+#bidding-message{
     display: flex;
     justify-content: center;
-    padding: 30% 20%;
-    margin-bottom: 1em;
+    margin: 20px;
+    font-size: 20px;
 }
 #static-price{
     display: flex;

@@ -2,22 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import fetchData from "./fetchData";
 import kong from "../pictures/kong.png";
-import fullStar from "../pictures/fullStar.png";
-import emptyStar from "../pictures/emptyStar.png";
-import half_star from "../pictures/star_half.png"
+import fullStar from "../pictures/star.png";
+import emptyStar from "../pictures/star_blank.png";
+import halfStar from "../pictures/star_half.png"
 import badge1 from "../pictures/badge1.png";
 import badge2 from "../pictures/badge2.png";
 import badge3 from "../pictures/badge3.png";
 import stat from "../pictures/stat.png";
-import leftButton from "../pictures/leftButton.png";
-import rightButton from "../pictures/rightButton.png";
 import '../css/AuctioneerProfile.css';
 import getData from "./fetchData";
 
 const Profile = (props) => {
     const auctioneer = props.auctioneer
     const description = props.description
-    // const profilePicture = props.profilePicture
+    const profilePicture = props.profilePicture
     const rating = props.rating
     const totalAuctioned = props.totalAuctioned
     const successAuctioned = props.successAuctioned
@@ -27,8 +25,8 @@ const Profile = (props) => {
 
     return (
         <div className="AucPro">
-            {/* <img className="AucProImg" src={profilePicture} alt="this-is-kong-desuwa" /> */}
-            <img className="AucProImg" src={kong} alt="this-is-kong-desuwa" />
+            <img className="AucProImg" src={profilePicture} alt="this-is-kong-desuwa" />
+            {/* <img className="AucProImg" src={kong} alt="this-is-kong-desuwa" /> */}
             <div className="AucDetail">
                 <div className="AucDes">
                     <h1>{auctioneer}</h1>
@@ -75,109 +73,108 @@ const Profile = (props) => {
     )
 }
 
-const Review = (props) => {
-    const reviews = props.reviews
-    // const star = []
-    // let tmp = 0
+const Review = () => {
+    // const reviews = props.reviews
 
-    const reviewList = reviews.map((reviews) => {
-        const star = []
-        let tmp = reviews.rating
-        while(tmp>=1){
-            star.push(<img src={fullStar} className="star" alt="star"/>)
-            tmp-=1
-        }
-        if(tmp===0.5) star.push(<img src={half_star} className="star" alt="star"/>)
-        while(star.length<5) star.push(<img src={emptyStar} className="star" alt="star"/>);
+    // const reviewList = reviews.map((reviews) => {
+    //     const star = []
+    //     let tmp = reviews.rating
+    //     while(tmp>=1){
+    //         star.push(<img src={fullStar} className="star" alt="star"/>)
+    //         tmp-=1
+    //     }
+    //     if(tmp===0.5) star.push(<img src={halfStar} className="star" alt="star"/>)
+    //     while(star.length<5) star.push(<img src={emptyStar} className="star" alt="star"/>);
 
-        return (
-            <div className="review-card">
-                <div className="review-detail">
-                    <div className="review-star-zone">
-                        {star}
-                        {/* <img src={fullStar} alt="review-star" />
-                        <img src={fullStar} alt="review-star" />
-                        <img src={fullStar} alt="review-star" />
-                        <img src={fullStar} alt="review-star" />
-                        <img src={fullStar} alt="review-star" /> */}
-                    </div>
-                    <h6>{reviews.reviewer}</h6>
-                    <h6>{reviews.productName}</h6>
-                    <div className="review-text">{reviews.comment}</div>
-                </div>
-            </div>
-        )
-    })
+    //     return (
+    //         <div className="review-card">
+    //             <div className="review-detail">
+    //                 <div className="review-star-zone">
+    //                     {star}
+    //                     {/* <img src={fullStar} alt="review-star" />
+    //                     <img src={fullStar} alt="review-star" />
+    //                     <img src={fullStar} alt="review-star" />
+    //                     <img src={fullStar} alt="review-star" />
+    //                     <img src={fullStar} alt="review-star" /> */}
+    //                 </div>
+    //                 <h6>{reviews.reviewer}</h6>
+    //                 <h6>{reviews.productName}</h6>
+    //                 <div className="review-text">{reviews.comment}</div>
+    //             </div>
+    //         </div>
+    //     )
+    // })
 
     return (
         <div>
             <h4 className="auc-pro-head">Review</h4>
-            <div className="review">
-                {/* <img className="btn-scroll" src={leftButton} alt="left-button" /> */}
-                <div className="review-list">
-                    {reviewList}
-                    {/* <div className="review-card">
-                        <div className="review-detail">
-                            <div className="review-star-zone">
-                                <img src={fullStar} alt="review-star" />
-                                <img src={fullStar} alt="review-star" />
-                                <img src={fullStar} alt="review-star" />
-                                <img src={fullStar} alt="review-star" />
-                                <img src={fullStar} alt="review-star" />
-                            </div>
-                            <h6>By someone</h6>
-                            <h6>Something</h6>
-                            <div className="review-text">lorem</div>
+            <div className="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+                {/* {reviewList} */}
+                <div className="review-card">
+                    <div className="review-detail">
+                        <div className="review-star-zone">
+                            <img src={fullStar} alt="review-star" />
+                            <img src={fullStar} alt="review-star" />
+                            <img src={fullStar} alt="review-star" />
+                            <img src={fullStar} alt="review-star" />
+                            <img src={fullStar} alt="review-star" />
                         </div>
-                    </div> */}
+                        <h6>By someone</h6>
+                        <h6>Something</h6>
+                        <div className="review-text">lorem</div>
+                    </div>
                 </div>
-                {/* <img className="btn-scroll" src={rightButton} alt="right-button" /> */}
             </div>
         </div>
     )
 }
 
 const AuctioneerProfile = () => {
-    // const { auctioneerID } = useParams();
-    // console.log(auctioneerID)
-    // const [data, setData] = useState({});
-    // const [status, setStatus] = useState("unk")
+    const { auctioneerID } = useParams();
+    console.log(auctioneerID)
+    const [data, setData] = useState({});
+    const [status, setStatus] = useState("unk")
     
-    // useEffect(() => {
-    //     getData(`/user/profile/${auctioneerID}`).then((res) => {
-    //         setStatus(res.status);
-    //         if(status == "success"){
-    //             setData(res.data)
-    //         }
-    //         else{
-    //             setData(res.message);
-    //         }
-    //     })
-    // },[]);
-
-    const data = {
-        displayName: "Kong Pakkrapol",
-        description: "Hiiiiiiiiiiiii",
-        profilePicture: "kong",
-        rating: 4,
-        totalAuctioned: 20,
-        successAuctioned: 13,
-        isFraud: true,
-        reviews: [
-            {
-                reviewer: "Kong",
-                rating: 4,
-                comment: "so-so delivery spd",
-                productName: "Nintendo"
-            },
-            {
-                reviewer: "New Kong",
-                rating: 4.5,
-                comment: "maybe fast delivery spd",
-                productName: "Nintendo Switch"
+    useEffect(() => {
+        console.log("Begin getData")
+        getData(`/user/profile/${auctioneerID}`).then((res) => {
+            setStatus(res.status);
+            console.log(status)
+            if(res.status == "success"){
+                setData(res.data)
+                // console.log(data)
             }
-        ]
-    }
+            else{
+                setData(res.message);
+            }
+        })
+    },[]);
+
+    console.log(data)
+
+    // const data = {
+    //     displayName: "Kong Pakkrapol",
+    //     description: "Hiiiiiiiiiiiii",
+    //     profilePicture: "kong",
+    //     rating: 4,
+    //     totalAuctioned: 20,
+    //     successAuctioned: 13,
+    //     isFraud: true,
+    //     reviews: [
+    //         {
+    //             reviewer: "Kong",
+    //             rating: 4,
+    //             comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    //             productName: "Nintendo"
+    //         },
+    //         {
+    //             reviewer: "New Kong",
+    //             rating: 3,
+    //             comment: "maybe fast delivery spd",
+    //             productName: "Nintendo Switch"
+    //         }
+    //     ]
+    // }
 
     return (
         <div>

@@ -75,6 +75,11 @@
   margin-left: 45px;
   margin-bottom: 20px;
 }
+
+.star-rating {
+  /* border: 1px solid black; */
+  margin-left: 10px;
+}
   
 .review-box {
   border: 3px solid var(--color-primary);
