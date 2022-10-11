@@ -158,7 +158,7 @@ const SignUp = () => {
       if(res.status == "fail" || res.status == "error") throw new Error(res.message)
       navigate("/signup-success")
     })
-    .catch((error)=>{Verify
+    .catch((error)=>{
       setError(error.message)
     })
   }
