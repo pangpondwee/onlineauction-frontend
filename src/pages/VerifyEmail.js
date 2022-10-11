@@ -26,9 +26,6 @@ function VerifyEmail() {
         <div className={classes.text}>
           <h1>Your Email is now Verified!</h1>
         </div>
-        <div className={classes.text2}>
-          <p>(for ???)</p>
-        </div>
       </>
     );
   }
