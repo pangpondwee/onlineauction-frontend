@@ -426,18 +426,18 @@ const Auction = (props) =>{
 			setStatus(res.status);
 			setData(res.data);
 			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
+			return res.data
 		})
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
 		})
 		// follow
-		.then(()=>{
-			if(data.auctioneerID != myid && data.myLastBid < 1){
+		.then((d)=>{
+			if(d.auctioneerID != myid && d.myLastBid < 1){
 				getData(`/auction/${auctionId}/follow`)
 				.then((res)=>{
 					setFollow(res.data.following == "true")
-					console.log(res.data.following)
 				})
 				.catch((e)=>{
 					console.log(e)
