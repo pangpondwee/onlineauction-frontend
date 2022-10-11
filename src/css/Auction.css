@@ -92,6 +92,38 @@
     background-color: var(--color-dark);
 }
 
+#product-title > button{
+    margin-left: 1em;
+}
+#product-title > h1{
+    vertical-align: middle;
+    display: inline;
+}
+/* Follow buttons */
+.follow-btn, 
+.follow-btn:focus{
+    border-color: var(--color-dark);
+}
+.follow-btn:hover{
+    background-color: #eee;
+}
+.follow-btn:active{
+    background-color: #ccc;
+}
+/* Follow active */
+.follow-btn.active, 
+.follow-btn:focus.active{
+    border-color: none;
+    background-color: #be2525;
+    color: #fff;
+}
+.follow-btn:hover.active{
+    background-color: #d94b4b;
+}
+.follow-btn:active.active{
+    background-color: #901c1c;
+}
+
 #auction-detail{
     display: inline;
     width: 30vw;

@@ -4,6 +4,7 @@ import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import {getDateSince,getDate,prepend} from "../components/util";
 import PopupError from '../components/PopupError';
+import heart from '../pictures/heart-fill.svg';
 
 function getHistory(data){
 	const history=data.sort((a,b)=>{
@@ -199,39 +200,61 @@ const AuctionDetail = (props)=>{
 	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 	const isEnded = timeRemaining < 0 ? true : false;
 	const canBid = !props.data.isAuctioneer && props.isLoggedIn;
+	let follow;
+	let followClass = 'follow-btn btn';
+	let followText = 'Follow';
+	if(props.follow){
+		followClass+=" active";
+		follow = "Following"
+	}
+	
+	if(!canBid || props.data.myLastBid > 0){ // auctioneer or anonymous
+		follow = (<></>);
+	}
+	else{ // following
+		follow = (<button 
+		onClick={() => props.followClick(!props.follow)}
+		className={followClass}>
+			{followText}&nbsp;&nbsp;<img id="follow-icon" src={heart}/>
+		</button>)
+	}
+
 	return(
 		<div id="auction-detail">
-			<h1>{props.data.productDetail.productName}</h1>
-				<ul className="nav nav-tabs" id="auction-nav" role="tablist">
-            	<li className="nav-item" role="presentation">
-            	<button
-                className="nav-link active"
-                id="desc-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#auction-desc-pane"
-                type="button"
-                role="tab"
-              	>
-                Description
-              	</button>
-            	</li>
-				<li className="nav-item" role="presentation">
-				{canBid ?
-					<button
-						className="nav-link"
-						id="bid-tab"
-						data-bs-toggle="tab"
-						data-bs-target="#auction-bid-pane"
-						type="button"
-						role="tab"
-					>
-						Bid
-					</button>
-					:
-					<></>
-				}
-				</li>
-          		</ul>
+			<div id="product-title">
+				<h1>{props.data.productDetail.productName}</h1>
+				{follow}
+			</div>
+			<ul className="nav nav-tabs" id="auction-nav" role="tablist">
+			<li className="nav-item" role="presentation">
+			<button
+			className="nav-link active"
+			id="desc-tab"
+			data-bs-toggle="tab"
+			data-bs-target="#auction-desc-pane"
+			type="button"
+			role="tab"
+			>
+			Description
+			</button>
+			</li>
+			<li className="nav-item" role="presentation">
+			{canBid ?
+				<button
+					className="nav-link"
+					id="bid-tab"
+					data-bs-toggle="tab"
+					data-bs-target="#auction-bid-pane"
+					type="button"
+					role="tab"
+				>
+					Bid
+				</button>
+				:
+				<></>
+			}
+			</li>
+			</ul>
 		  	<div className="tab-content" id="auction-content">
 				<div
 				className="tab-pane fade show active"
@@ -255,6 +278,7 @@ const AuctionDetail = (props)=>{
 					isEnded={isEnded}
 					isFiveMinutes={isFiveMinutes}
 					isAlreadyBid5Minute={props.isAlreadyBid5Minute}
+					myLastBid={props.data.myLastBid}
 					/>
 				</div>
           	</div>
@@ -335,6 +359,7 @@ const Auction = (props) =>{
 	const [historyError,setHistoryError] = useState("")
 	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
 	const [error,setError] = useState("")
+	const [follow,setFollow] = useState(false)
 	const isLoggedIn = localStorage.getItem("isLoggedIn")
 	const myid = localStorage.getItem("id")
 	const submitBid = (price, isAbsolute)=>{
@@ -357,7 +382,7 @@ const Auction = (props) =>{
 			))
 			.then((res)=>{
 				setData(prevData=>{
-					return { ...prevData, currentPrice: price }
+					return { ...prevData, currentPrice: price, myLastBid: price }
 				})
 
 				const timeRemaining = data.endDate - Date.now()
@@ -371,6 +396,19 @@ const Auction = (props) =>{
 				setError(e.message)
 			})
 		}
+	}
+	const followClick =(value)=>{
+		postData(`/auction/${auctionId}/follow`,JSON.stringify(
+			{
+				follow: String(value)
+			}
+		))
+		.then((res)=>{
+			setFollow(!follow)
+		})
+		.catch(e=>{
+			setError("Error: Could not follow/unfollow")
+		})
 	}
 	const getHistory = ()=>{
 		getData(`/auction/${auctionId}/bid-history`)
@@ -388,14 +426,31 @@ const Auction = (props) =>{
 			setStatus(res.status);
 			setData(res.data);
 			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
-			return res.data.auctioneerID
-		})
-		.then(()=>{
-			getHistory() // first time
 		})
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
+		})
+		// follow
+		.then(()=>{
+			if(data.auctioneerID != myid && data.myLastBid < 1){
+				getData(`/auction/${auctionId}/follow`)
+				.then((res)=>{
+					setFollow(res.data.following == "true")
+					console.log(res.data.following)
+				})
+				.catch((e)=>{
+					console.log(e)
+				})
+			}
+		})
+		// history
+		.then(()=>{
+			return getHistory() // first time
+		})
+		.catch((e)=>{
+			console.log(e)
+			setError("Error: Could not get history")
 		})
 		const timer = setInterval(()=>{
 			getData(`/auction/${auctionId}/refresh`)
@@ -425,6 +480,8 @@ const Auction = (props) =>{
 					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					submitBid={submitBid}
 					isLoggedIn={isLoggedIn}
+					followClick={followClick}
+					follow={follow}
 					myid={myid}
 					/>
 				</div>
