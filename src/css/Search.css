@@ -10,14 +10,6 @@
     font-style: italic;
 }
 
-.scrolling-wrapper{
-	overflow-x: auto;
-}
-
-.scrolling-wrapper::-webkit-scrollbar{
-    display: none;
-}
-
 /* .row{
     overflow-x: scroll;
 } */
