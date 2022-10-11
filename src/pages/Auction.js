@@ -314,14 +314,15 @@ const Bidding = (props)=>{
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="static-price">
 				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+{bidStep}</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}</button>
 				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+{bidStep*3}</button>
 			</div>
-			<div id="or-wrapper"><p>OR&nbsp;&nbsp;<span style={{color: "rgb(153, 153, 153)"}}>{`Min: ${bidStep}฿`}</span></p></div>
+			<div id="or-wrapper"><p>OR</p></div>
 			<div id="bid-group" className="input-group">
 				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
 				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
 			</div>
+			<p id="min-price">{`Note: Bid has to increase by at least ${bidStep}฿`}</p>
 		</form>
 	)
 }
@@ -338,11 +339,15 @@ const Auction = (props) =>{
 	const myid = localStorage.getItem("id")
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
+		if(isNaN(price)){
+			setError("You have not entered a price")
+			return;
+		}
 		if(!isAbsolute){
 			price=price+data.currentPrice
 		}
-		if(isNaN(price)){
-			setError("Price is not a number")
+		if(price < data.currentPrice+data.bidStep){
+			setError("The price you set is lower than the minimum: "+(data.currentPrice+data.bidStep)+"฿")
 		}
 		else{
 			postData(`/auction/${auctionId}/bid`,JSON.stringify(
