@@ -99,7 +99,7 @@ const Gallery = (props)=>{
 					{picture_elements}
 				</div>
 				:
-				<p>No pictures</p>
+				<></>
 			}
 		</div>
 	);
@@ -313,11 +313,11 @@ const Bidding = (props)=>{
 		<form onSubmit={submitWrapper} id="bidding">
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="static-price">
-				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+{bidStep}</button>
 				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+{bidStep*3}</button>
 			</div>
-			<div id="or-wrapper"><p>OR</p></div>
+			<div id="or-wrapper"><p>OR&nbsp;&nbsp;<span style={{color: "rgb(153, 153, 153)"}}>{`Min: ${bidStep}฿`}</span></p></div>
 			<div id="bid-group" className="input-group">
 				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
 				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
