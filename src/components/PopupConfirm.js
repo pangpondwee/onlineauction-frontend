@@ -11,8 +11,6 @@ const PopupConfirm = (props) => {
     const auctionID = props.auctionID
     // const auctionID = "633d37c44cb5c704804ea3b6"
     const [data, setData] = useState({})
-    // const [status, setStatus] = useState("unk")
-    // const [name, setName] = useState("")
     const [rating, setRating] = useState("")
     const [reviewtext, setReview] = useState("")
     const shippingDict = {
@@ -36,33 +34,15 @@ const PopupConfirm = (props) => {
         console.log("Begin getData billinginfo")
         getData(`/shipping/${auctionID}/tracking`).then((res) => {
             setData(res.data.trackingInfo)
-            // setStatus(res.status)
-            // console.log(status)
-            // if (res.status == "success") {
-            //     setData(res)
-            // } else {
-            //     setData(res.message)
-            // }
         })
     },[]);
 
-    // useEffect(() => {
-    //     getData(`/user/profile/${data.auctioneerID}`).then((res) => {
-    //         setStatus(res.status)
-    //         if (res.status == "success") {
-    //             setName(res.data.displayName)
-    //         } else {
-    //             setName(res.message)
-    //         }
-    //     })
-    // },[]);
-
-    console.log(data)
-    console.log(data.delivery)
+    // console.log(data)
+    // console.log(data.delivery)
 
     function onConfirm(e) {
         // e.preventDefault()
-        console.log("Begin postData confirm")
+        console.log("Begin postData confirm popupConfirm")
         postData(`/shipping/${auctionID}`, JSON.stringify(
             {
                 "confirm": true
@@ -78,7 +58,7 @@ const PopupConfirm = (props) => {
 
     function onDeny(e) {
         // e.preventDefault()
-        console.log("Begin postData confirm")
+        console.log("Begin postData deny popupconfirm")
         postData(`/shipping/${auctionID}`, JSON.stringify(
             {
                 "confirm": false
@@ -93,7 +73,8 @@ const PopupConfirm = (props) => {
     }
 
     function onReview(e) {
-        e.preventDefault()
+        // e.preventDefault()
+        console.log("Begin postData review")
         postData(`/review/${auctionID}`, JSON.stringify(
             {
                 "rating": rating,

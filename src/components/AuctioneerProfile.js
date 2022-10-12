@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // import fetchData from "./fetchData";
-import kong from "../pictures/kong.png";
+// import kong from "../pictures/kong.png";
 import fullStar from "../pictures/star.png";
 import emptyStar from "../pictures/star_blank.png";
 import halfStar from "../pictures/star_half.png"
 import badge1 from "../pictures/badge1.png";
 import badge2 from "../pictures/badge2.png";
 import badge3 from "../pictures/badge3.png";
-import stat from "../pictures/stat.png";
+// import stat from "../pictures/stat.png";
 import '../css/AuctioneerProfile.css';
 import getData from "./fetchData";
 
@@ -19,9 +19,22 @@ const Profile = (props) => {
     const rating = props.rating
     const totalAuctioned = props.totalAuctioned
     const successAuctioned = props.successAuctioned
-    // const isFraud = props.isFraud
+    const isFraud = props.isFraud
     // const badges = props.badges
-    // const activeAuctionList = props.activeAuctionList
+    // console.log(rating)
+
+    const star = []
+    if (rating === undefined) {
+
+    } else {
+        let tmp = rating
+        while(tmp>=1){
+            star.push(<img src={fullStar} className="star" alt="star"/>)
+            tmp-=1
+        }
+        if(tmp===0.5) star.push(<img src={halfStar} className="star" alt="star"/>)
+        while(star.length<5) star.push(<img src={emptyStar} className="star" alt="star"/>);
+    }
 
     return (
         <div className="AucPro">
@@ -29,7 +42,12 @@ const Profile = (props) => {
             {/* <img className="AucProImg" src={kong} alt="this-is-kong-desuwa" /> */}
             <div className="AucDetail">
                 <div className="AucDes">
-                    <h1>{auctioneer}</h1>
+                    {(isFraud === true)?
+                        <h1>{auctioneer} (Fraud Warning)</h1>
+                        :
+                        <h1>{auctioneer}</h1>
+                    }
+                    {/* <h1>{auctioneer}</h1> */}
                     <h6>Auctioneer Veteran</h6>
                     <div>{description}</div>
                 </div>
@@ -48,10 +66,18 @@ const Profile = (props) => {
                     </div>
                     <div className="AucBadges">
                         <h6>Badges</h6>
+                        {/* {(badges.length === 0)?
+                            <div className="badges">
+                                <h6>No Badge</h6>
+                            </div>
+                            :
+                            <div className="badges">
+                                <img src={badges[0]} alt="badge" />
+                                <img src={badges[1]} alt="badge" />
+                                <img src={badges[2]} alt="badge" />
+                            </div>
+                        } */}
                         <div className="badges">
-                            {/* <img src={badges[0]} alt="badge" />
-                            <img src={badges[1]} alt="badge" />
-                            <img src={badges[2]} alt="badge" /> */}
                             <img src={badge1} alt="badge" />
                             <img src={badge2} alt="badge" />
                             <img src={badge3} alt="badge" />
@@ -60,7 +86,7 @@ const Profile = (props) => {
                     <div className="AucStat">
                         <h6>Auction Statistic</h6>
                         <div className="stat">
-                            <img src={stat} alt="stat" />
+                            {/* <img src={stat} alt="stat" /> */}
                             <h6>
                                 Items submitted : {totalAuctioned}<br></br>
                                 Items sold : {successAuctioned}
@@ -73,57 +99,48 @@ const Profile = (props) => {
     )
 }
 
-const Review = () => {
-    // const reviews = props.reviews
+const Review = (props) => {
+    const reviews = props.reviews
+    // console.log(reviews)
+    let reviewList = []
 
-    // const reviewList = reviews.map((reviews) => {
-    //     const star = []
-    //     let tmp = reviews.rating
-    //     while(tmp>=1){
-    //         star.push(<img src={fullStar} className="star" alt="star"/>)
-    //         tmp-=1
-    //     }
-    //     if(tmp===0.5) star.push(<img src={halfStar} className="star" alt="star"/>)
-    //     while(star.length<5) star.push(<img src={emptyStar} className="star" alt="star"/>);
-
-    //     return (
-    //         <div className="review-card">
-    //             <div className="review-detail">
-    //                 <div className="review-star-zone">
-    //                     {star}
-    //                     {/* <img src={fullStar} alt="review-star" />
-    //                     <img src={fullStar} alt="review-star" />
-    //                     <img src={fullStar} alt="review-star" />
-    //                     <img src={fullStar} alt="review-star" />
-    //                     <img src={fullStar} alt="review-star" /> */}
-    //                 </div>
-    //                 <h6>{reviews.reviewer}</h6>
-    //                 <h6>{reviews.productName}</h6>
-    //                 <div className="review-text">{reviews.comment}</div>
-    //             </div>
-    //         </div>
-    //     )
-    // })
+    if (reviews === undefined) {
+        
+    } else if (reviews.length === 0) {
+        reviewList = (
+            <h5 className="no-review-text">This auctioneer hasn't been reviewed yet.</h5>
+        )
+    } else {
+        reviewList = reviews.map((reviews) => {
+            const star = []
+            let tmp = reviews.rating
+            while(tmp>=1){
+                star.push(<img src={fullStar} className="star" alt="star"/>)
+                tmp-=1
+            }
+            if(tmp===0.5) star.push(<img src={halfStar} className="star" alt="star"/>)
+            while(star.length<5) star.push(<img src={emptyStar} className="star" alt="star"/>);
+            
+            return (
+                <div className="review-card">
+                    <div className="review-detail">
+                        <div className="review-star-zone">
+                            {star}
+                        </div>
+                        <h6>{reviews.reviewer}</h6>
+                        <h6>{reviews.productName}</h6>
+                        <div className="review-text">{reviews.comment}</div>
+                    </div>
+                </div>
+            )
+        })
+    }
 
     return (
         <div>
             <h4 className="auc-pro-head">Review</h4>
             <div className="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
-                {/* {reviewList} */}
-                <div className="review-card">
-                    <div className="review-detail">
-                        <div className="review-star-zone">
-                            <img src={fullStar} alt="review-star" />
-                            <img src={fullStar} alt="review-star" />
-                            <img src={fullStar} alt="review-star" />
-                            <img src={fullStar} alt="review-star" />
-                            <img src={fullStar} alt="review-star" />
-                        </div>
-                        <h6>By someone</h6>
-                        <h6>Something</h6>
-                        <div className="review-text">lorem</div>
-                    </div>
-                </div>
+                {reviewList}
             </div>
         </div>
     )
@@ -136,7 +153,7 @@ const AuctioneerProfile = () => {
     const [status, setStatus] = useState("unk")
     
     useEffect(() => {
-        // console.log("Begin getData")
+        console.log("Begin getData AuctioneerProfile")
         getData(`/user/profile/${auctioneerID}`).then((res) => {
             setStatus(res.status);
             // console.log(status)
@@ -187,9 +204,9 @@ const AuctioneerProfile = () => {
             successAuctioned={data.successAuctioned}
             isFraud={data.isFraud}
             badges={data.badgeNames}
-            // activeAuctionList={data.activeAuctionList}
             />
             <Review reviews={data.reviews}/>
+            <h4 className="auc-pro-head">Auctions by this auctioneer</h4>
         </div>
     )
 }
