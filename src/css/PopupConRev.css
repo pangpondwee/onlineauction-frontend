@@ -43,6 +43,11 @@
   margin-left: 65px;
 }
 
+.tracking-img img {
+  width: 300px;
+  height: 200px;
+}
+
 .billing {
   position: absolute;
   right: 30px;
@@ -74,6 +79,11 @@
   margin-top: 20px;
   margin-left: 45px;
   margin-bottom: 20px;
+}
+
+.star-rating {
+  /* border: 1px solid black; */
+  margin-left: 10px;
 }
   
 .review-box {

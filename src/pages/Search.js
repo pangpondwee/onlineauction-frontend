@@ -9,6 +9,47 @@ import arrow_left from "../pictures/arrow_left.png";
 import arrow_right from "../pictures/arrow_right.png";
 import { getDate } from "../components/util";
 
+const categoryTypesEnum = [
+	"Home Improvement",
+	"Jewellery",
+	"Coins, Currency, Stamps",
+	"Watches",
+	"Fashion",
+	"Arts",
+	"Antiques & Collectables and Amulet",
+	"Electronics",
+	"Cars & Automotive",
+	"Handbags",
+	"Miscellaneous",
+];
+
+function getHeadSearch(searchParams){
+	const searchTerm = searchParams.get("name");
+	const searchCategory = searchParams.get("category");
+	const searchSort = searchParams.get("sort");
+	
+	let title = "";
+	let subtitle = "";
+
+	if(searchTerm){
+		title = searchTerm;
+		if(searchCategory){
+			subtitle += "Category: " + searchCategory + " "
+		}
+	}
+	else if(searchCategory){
+		title = "Category: " + searchCategory
+	}
+	console.log(searchTerm)
+	subtitle = subtitle.trim()
+	return (
+		<div className="headSearch">
+			<h1>{title}</h1>
+			<p>{subtitle}</p>
+		</div>
+	)
+}
+
 const PageNav = (props)=>{
 	const page = props.page;
 	const pageCount = props.pageCount
@@ -54,22 +95,38 @@ const PageNav = (props)=>{
 }
 
 const Search = (props) =>{
+	// Page number
 	const { pageNumber } = useParams();
-	const [searchParams, setSearchParams] = useSearchParams();
-	let page = pageNumber ? Number(pageNumber) : 1; // Get page number
+	let page = pageNumber ? Number(pageNumber) : 1;
 	if(page < 1) page = 1 // limit to 1
-	const [data,setData] = useState([])
+
+	// Search Params
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [status,setStatus] = useState("loading")
+	const [data,setData] = useState({})
 	const [pageCount,setPageCount] = useState(1)
-	const name = searchParams.get("name");
+
+	const headSearch = getHeadSearch(searchParams)
+
 	if(! searchParams.get("sort")){ // if no sort set to newest
 		if(document.getElementById("select1")){
 			document.getElementById("select1").value = "newest";
 		}
 	}
+	if(! searchParams.get("category")){ // if no sort set to newest
+		if(document.getElementById("select2")){
+			document.getElementById("select2").value = "";
+		}
+	}
+
 	const selectSort = (e) =>{
 		const s = document.getElementById("select1").value
 		searchParams.set("sort",s)
+		setSearchParams(searchParams)
+	}
+	const selectCate = (e)=>{
+		const s = document.getElementById("select2").value
+		searchParams.set("category",s)
 		setSearchParams(searchParams)
 	}
 
@@ -86,14 +143,13 @@ const Search = (props) =>{
 		})
 	},[searchParams])
 
-
 	if(status == "success"){
-		const auctionData = data.auctionList
-		let auctionCard_element = []
+		const auctionData = data.auctionList;
+		let AuctionElements = []
 		for(let i=0;i<auctionData.length;i++){
 			const timeRemaining = Number(auctionData[i].endDate) - Date.now()
 			const price = auctionData[i].currentPrice ? auctionData[i].currentPrice : "Unknown";
-			auctionCard_element.push(
+			AuctionElements.push(
 				<AuctionCard 
 				key={i} 
 				id={auctionData[i].auctionID}
@@ -103,23 +159,34 @@ const Search = (props) =>{
 				time={timeRemaining}/>
 			)
 		}
+
 		return (
 			<>
-			<p className="headSearch">{name}</p>
+			{headSearch}
 			<div className="topSearch">		
-				<p className="detailSearch">{auctionCard_element.length} items found for "{name}"</p>
-				<p className="">Sort by
-					<select id="select1" onChange={selectSort} >
-						<option value="newest">Newest</option>
-						<option value="time_remaining">Time remaining</option>
-						<option value="highest_bid">Highest Bid Price</option>
-						<option value="lowest_bid">Lowest Bid Price</option>
-					</select>
-				</p>
+				<p className="detailSearch">{AuctionElements.length} auctions found</p>
+				
 			</div>
-
+			<div className="searchSort">
+				<select id="select1" onChange={selectSort} >
+					<option value="newest">Newest</option>
+					<option value="time_remaining">Time remaining</option>
+					<option value="highest_bid">Highest Bid Price</option>
+					<option value="lowest_bid">Lowest Bid Price</option>
+				</select>
+				<span className="">Sort by</span>
+				<br></br>
+				<select id="select2" onChange={selectCate} >
+				{categoryTypesEnum.map((val, key) => {
+					return (
+					<option key={key} value={val}>{val}</option>
+					);
+				})}
+				</select>
+				<span className="">Category</span>
+			</div>
 			<div className="row searchRow">
-				{auctionCard_element}
+				{AuctionElements}
 			</div>
 			<PageNav page={page} pageCount={pageCount}/>
 			</>

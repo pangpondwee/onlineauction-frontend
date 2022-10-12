@@ -1,16 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
-import React from "react";
-import confirm from "../pictures/confirm.png";
+import { Link, useNavigate } from 'react-router-dom'
+import React from 'react'
+import confirm from '../pictures/confirm.png'
 import '../css/PopupConRev.css'
 
-import goods from "../pictures/nintendo.png"
+import goods from '../pictures/nintendo.png'
 
-const OrderObj = (props) =>{
-    const navigate = useNavigate()
+const OrderObj = (props) => {
+  const navigate = useNavigate()
 
-    const navigateTo = ()=>{
-        if(props.data.auctionStatus==="bidding") navigate(`/auction/${props.data.auctionID}`)
-    }
+  const navigateTo = () => {
+    if (props.data.auctionStatus === 'bidding')
+      navigate(`/auction/${props.data.auctionID}`)
+  }
 
     const status_text = {
         "bid-bidding": "Currently Bid",
@@ -26,7 +27,12 @@ const OrderObj = (props) =>{
         "auction-completed": "Completed",
     }
 
-    let status_of_auction = props.type+'-'+(props.data.billingStatus? props.data.billingStatus : props.data.auctionStatus)
+  let status_of_auction =
+    props.type +
+    '-' +
+    (props.data.billingStatus
+      ? props.data.billingStatus
+      : props.data.auctionStatus)
 
     function getDate(timeRemaining){
         // TODO make date lighter
@@ -60,30 +66,47 @@ const OrderObj = (props) =>{
         else return
     }
 
-	return (
-        <>
-		<div className="Review-box Order-box">
-			<img src={props.data.productPicture} alt="List_goods" className="mini-pic-goods"/>
-            <span>
-                <div className="d-flex">
-                    <h4>{props.data.productName}</h4>
-                    <pre>     </pre>
-                    {props.type==="bid"? <h6>(By {props.data.auctioneerDisplayname})</h6> : <></>}
-                </div>
-                
-                <h6>Highest Bid : {props.data.lastBid} Baht</h6>
-                <h6 className="status-text">{text_alert(status_of_auction)}</h6>
-            </span>
-            <div className="d-flex justify-content-end">
-                <div className= {`Follow-button ${status_of_auction}`} 
-                data-bs-toggle= {status_of_auction==="bid-waitingForConfirm"? "modal":""} data-bs-target={status_of_auction==="bid-waitingForConfirm"? "#confirmModal":""}
-                onClick={navigateTo}>
-                    <h6>{status_text[status_of_auction]}</h6>
-                </div>
-            </div> 
-		</div>
+  return (
+    <>
+      <div className="Review-box Order-box">
+        <img
+          src={props.data.productPicture}
+          alt="List_goods"
+          className="mini-pic-goods"
+        />
+        <span>
+          <div className="d-flex">
+            <h4>{props.data.productName}</h4>
+            <pre> </pre>
+            {props.type === 'bid' ? (
+              <h6>(By {props.data.auctioneerDisplayname})</h6>
+            ) : (
+              <></>
+            )}
+          </div>
+
+          <h6>Highest Bid : {props.data.lastBid} Baht</h6>
+          <h6 className="status-text">{text_alert(status_of_auction)}</h6>
+        </span>
+        <div className="d-flex justify-content-end">
+          <div
+            className={`Follow-button ${status_of_auction}`}
+            data-bs-toggle={
+              status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''
+            }
+            data-bs-target={
+              status_of_auction === 'bid-waitingForConfirm'
+                ? '#confirmModal'
+                : ''
+            }
+            onClick={navigateTo}
+          >
+            <h6>{status_text[status_of_auction]}</h6>
+          </div>
+        </div>
+      </div>
     </>
-	)
+  )
 }
 
-export default OrderObj;
+export default OrderObj

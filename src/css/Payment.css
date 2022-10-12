@@ -1,3 +1,9 @@
+:root {
+  --line-border-fill: #228be6;
+  --line-border-empty: #dee2e6;
+  --text-color-empty: #ced4da;
+}
+
 /* Form */
 .place-auction-form {
   color: var(--color-text);
@@ -26,6 +32,8 @@
 }
 
 .header {
+  font-size: 200%;
+  font-weight: 600;
   color: var(--color-text);
   margin: 1% 0 1% 2%;
 }
@@ -60,6 +68,18 @@
   margin-right: 20px;
 }
 
+/* Place Auction*/
+.place-auction-upload-description {
+  margin-top: 0;
+  font-size: 80%;
+  color: #868e96;
+}
+
+.auction-type-button {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /* Preview Picture */
 .preview-picture {
   max-width: 60%;
@@ -84,10 +104,40 @@
 }
 
 /* Billing Info Page */
+
 .billing-info-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 2% 10% 2% 10%;
+  display: grid;
+  grid-template-columns: 2% 1fr 1fr 2%;
+  grid-template-areas:
+    '. order order .'
+    '. progress progress .'
+    'address address tracking tracking'
+    'summary summary tracking tracking';
+}
+
+.billing-info-order-grid {
+  grid-area: order;
+}
+
+.billing-info-address-box-grid {
+  grid-area: address;
+  margin: 2% 2% 2% 0;
+}
+
+.billing-info-tracking-card-grid {
+  grid-area: tracking;
+  margin: 2% 0 0 2%;
+}
+
+.billing-info-summary-card-grid {
+  grid-area: summary;
+  margin: 2% 2% 0 0;
+}
+
+.billing-info-progress-grid {
+  grid-area: progress;
+  margin: 4% 0 4% 0;
 }
 
 /* Address Card */
@@ -95,18 +145,63 @@
   background-color: var(--color-grey-box);
   border-radius: var(--radius);
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-  padding: 20px;
+  padding: 15px 20px;
 }
 
-/* Billing Info Section */
-.billing-info {
+.address-box {
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  width: 80%;
-  margin-top: 30px;
-  row-gap: 10px;
+}
+
+.address-box-name {
+  font-size: 130%;
+  font-weight: 600;
+}
+
+.address-box-address {
+  margin-left: 10%;
+}
+
+.address-box-phone {
+  font-size: 100%;
+  font-weight: 500;
+  align-self: flex-end;
+}
+
+/* Shipping card */
+.shipping-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.shipping-header {
+  font-size: 130%;
+  font-weight: 600;
+}
+
+.shipping-detail {
+  margin: 2% 0 2% 5%;
+  font-size: 110%;
+}
+
+/* Summary Card */
+
+.summary-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.summary-card-header {
+  font-size: 130%;
+  font-weight: 600;
+}
+
+.summary-card-total {
 }
 
 /* Item Card */
@@ -131,16 +226,10 @@
   margin-left: 30px;
 }
 
-.billing-info-subcard {
-  width: 48%;
-  height: auto;
-  row-gap: 10px;
-}
-
 .package-picture {
   border-radius: var(--radius);
   margin: 10px;
-  width: 50%;
+  width: 40%;
   height: auto;
 }
 
@@ -148,12 +237,6 @@
   display: flex;
   flex-direction: column;
   justify-items: center;
-}
-
-.vertical-align-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .page-with-summary {
@@ -178,12 +261,34 @@
   position: sticky;
   top: 150px;
   width: 300px;
-  height: 400px;
+  height: 420px;
 }
 
 .payment-summary-card img {
   width: 80%;
   height: auto;
+}
+
+.payment-summary-header {
+  font-size: 150%;
+  font-weight: 600;
+}
+
+.payment-summary-detail {
+  font-size: 110%;
+}
+
+.payment-summary-pic-container {
+  margin: 5% 0 5% 0;
+}
+
+.payment-summary-pic {
+  border-radius: var(--radius);
+}
+
+.payment-summary-price {
+  font-size: 125%;
+  font-weight: 600;
 }
 
 /* handle responsive */
@@ -228,4 +333,141 @@
 .promptpay-header {
   width: 140px;
   height: auto;
+}
+
+/* Progress Bar */
+.progress-bar-icon {
+  width: 50%;
+}
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.progress-container::before {
+  content: '';
+  background-color: var(--line-border-empty);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  z-index: 0;
+  transition: 0.4s ease;
+}
+
+.progress {
+  background-color: var(--line-border-fill);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 0%;
+  z-index: 0;
+  transition: 2s linear;
+}
+.progress.waitingForPayment {
+  width: 20%;
+  transition: 0.5s linear;
+}
+
+.progress.waitingConfirmSlip {
+  width: 40%;
+  transition: 1s linear;
+}
+
+.progress.waitingForShipping {
+  width: 60%;
+  transition: 1.5s linear;
+}
+
+.progress.waitingForConfirm {
+  width: 80%;
+  transition: 2s linear;
+}
+
+.progress.completed {
+  width: 100%;
+  transition: 2.5s linear;
+}
+
+.circle {
+  background-color: white;
+  color: #999;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  border: 3px solid var(--line-border-empty);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s ease;
+  z-index: 1;
+}
+
+.circle.waitingForPayment {
+  transition: 0.25s ease 0.5s;
+}
+
+.circle.waitingConfirmSlip {
+  transition: 0.25s ease 1s;
+}
+
+.circle.waitingForShipping {
+  transition: 0.25s ease 1.5s;
+}
+
+.circle.waitingForConfirm {
+  transition: 0.25s ease 2s;
+}
+
+.circle.completed {
+  transition: 0.25s ease 2.5s;
+}
+
+.circle.active {
+  border-color: var(--line-border-fill);
+}
+
+.status-section {
+  padding: 0 5% 0 5%;
+}
+
+.progress-description {
+  margin-top: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.description-box {
+  color: var(--text-color-empty);
+  text-align: center;
+  width: 15%;
+}
+
+.description-box.waitingForPayment {
+  transition: color 0.25s ease 0.5s;
+}
+
+.description-box.waitingConfirmSlip {
+  transition: color 0.25s ease 1s;
+}
+
+.description-box.waitingForShipping {
+  transition: color 0.25s ease 1.5s;
+}
+
+.description-box.waitingForConfirm {
+  transition: color 0.25s ease 2s;
+}
+
+.description-box.completed {
+  transition: color 0.25s ease 2.5s;
+}
+
+.description-box.active {
+  color: var(--color-text);
 }

@@ -1,173 +1,173 @@
 /* lefthand-nav */
 .lefthand-nav {
-    margin: 25px;
-    /* width: 235px; */
-    width: 30vh;
-    border-right: 1px var(--color-primary) solid;
-    display: flex;
-    flex-direction: column;
+  margin: 25px;
+  /* width: 235px; */
+  width: 30vh;
+  border-right: 1px var(--color-primary) solid;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu {
-    margin-bottom: 25px;
-    padding: 10px 12px;
-    width: fit-content;
-    border-radius: 8%;
+  margin-bottom: 25px;
+  padding: 10px 12px;
+  width: fit-content;
+  border-radius: 8%;
 }
 
 ul.no-bullets {
-    list-style: none;
-    margin: 0;
+  list-style: none;
+  margin: 0;
 }
 
 li.menu-dropdown {
-    margin-top: 10px;
-    padding: 10px 12px;
-    width: fit-content;
-    border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  width: fit-content;
+  border-radius: 5px;
 }
 
 .menu-link {
-    font-size: 20px;
-    text-decoration: none;
-    color: var(--color-dark);
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--color-dark);
 }
 
 .current-tab {
-    background-color: var(--color-primary);
+  background-color: var(--color-primary);
 }
 
 /* AccountPage(Profile) */
 .main-account-page {
-    display: grid;
-    /* grid-template-columns: 235px auto; */
-    grid-template-columns: 30vh auto;
-    column-gap: 60px;
+  display: grid;
+  /* grid-template-columns: 235px auto; */
+  grid-template-columns: 30vh auto;
+  column-gap: 60px;
 }
 
 .profile-page {
-    padding: 15px 25px;
+  padding: 15px 25px;
 }
 
 .edit-profile {
-    background-color: #2B4257;
-    color: white;
-    width: 120px;
-    height: 50px;
-    padding: 10px 10px 0 10px;
-    border-radius: 5%;
-    margin-bottom: 10px;
-    text-align: center;
-    cursor: pointer;
+  background-color: #2b4257;
+  color: white;
+  width: 120px;
+  height: 50px;
+  padding: 10px 10px 0 10px;
+  border-radius: 5%;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .profile-pic {
-    width: 25vw;
-    height: 45vh;
-    max-width: 350px;
-    max-height: 350px;
-    min-width: 200px;
-    min-height: 200px;
-    /* border-color: black;
+  width: 25vw;
+  height: 45vh;
+  max-width: 350px;
+  max-height: 350px;
+  min-width: 200px;
+  min-height: 200px;
+  /* border-color: black;
   border-style: solid; */
 }
 
 .main-info-profile {
-    margin: 10px 10px 30px 10px;
-    display: grid;
-    grid-template-columns: 380px auto;
-    column-gap: 30px;
+  margin: 10px 10px 30px 10px;
+  display: grid;
+  grid-template-columns: 380px auto;
+  column-gap: 30px;
 }
 
 .sub-info-profile {
-    margin: 10px;
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
 }
 
 .account-info {
-    width: 300px;
-    padding-left: 30px;
+  width: 300px;
+  padding-left: 30px;
 }
 
 .about-you {
-    margin: 10px;
-    padding: 20px 30px 20px 30px;
-    width: fit-content;
-    height: fit-content;
-    box-shadow: 0px 3px 3px gray;
-    border-radius: 3%;
-    background-color: #F8F9FA;
+  margin: 10px;
+  padding: 20px 30px 20px 30px;
+  width: fit-content;
+  height: fit-content;
+  box-shadow: 0px 3px 3px gray;
+  border-radius: 3%;
+  background-color: #f8f9fa;
 }
 
 .badge-pic {
-    width: 50px;
-    height: 50px;
-    margin: 5px 10px;
+  width: 50px;
+  height: 50px;
+  margin: 5px 10px;
 }
 
 .star {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .link-button {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 /* EditProfilePage */
 .editing {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    cursor: default;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  cursor: default;
 }
 
 .cancel {
-    background-color: white;
-    color: var(--color-dark);
-    border: 3px var(--color-dark) solid;
+  background-color: white;
+  color: var(--color-dark);
+  border: 3px var(--color-dark) solid;
 }
 
 .main-editing-page {
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 380px auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 380px auto;
 }
 
 .input-editing {
-    border: 3px var(--color-secondary) solid;
-    border-radius: 5px;
-    padding: 3px 8px;
-    width: 400px;
-    margin-bottom: 20px;
+  border: 3px var(--color-secondary) solid;
+  border-radius: 5px;
+  padding: 3px 8px;
+  width: 400px;
+  margin-bottom: 20px;
 }
 
 .choose-image {
-    width: 25vw;
-    max-width: 350px;
-    min-width: 200px;
+  width: 25vw;
+  max-width: 350px;
+  min-width: 200px;
 }
 
 /* MyOrderNav */
 .My-Order-Nav {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
 }
 
 .Order-Menu {
-    margin: 20px;
-    border-radius: 5px;
-    width: fit-content;
-    padding: 10px;
+  margin: 20px;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 10px;
 }
 
 /* AccountPage(Review) */
 
 .all-review {
-    margin: 25px auto;
+  margin: 25px auto;
 }
 
 .Review-box {
@@ -188,51 +188,51 @@ li.menu-dropdown {
 }
 
 .Review-boxV2 {
-    border: 2px var(--color-primary) solid;
-    border-radius: 10px;
-    display: grid;
-    height: fit-content;
-    max-height: 180px;
-    grid-template-columns: 250px auto;
-    overflow: hidden;
-    padding: 20px 25px 30px 25px;
-    margin-bottom: 20px;
+  border: 2px var(--color-primary) solid;
+  border-radius: 10px;
+  display: grid;
+  height: fit-content;
+  max-height: 180px;
+  grid-template-columns: 250px auto;
+  overflow: hidden;
+  padding: 20px 25px 30px 25px;
+  margin-bottom: 20px;
 }
 
 /* AccountPage(Following) */
 
 .Follow-button {
-    border: 3px #228BE6 solid;
-    border-radius: 20px;
-    background-color: white;
-    display: flex;
-    height: 40px;
-    width: 150px;
-    padding: 5px 20px;
-    color: #228BE6;
-    justify-content: center;
-    cursor: pointer;
+  border: 3px #228be6 solid;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  height: 40px;
+  width: 150px;
+  padding: 5px 20px;
+  color: #228be6;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .followHeart {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 
 /* MyOrderPage */
 .status-text {
-    margin-top: 25px;
-    color: #FA5252;
-    font-size: 20px;
-    /* visibility: hidden; */
+  margin-top: 25px;
+  color: #fa5252;
+  font-size: 20px;
+  /* visibility: hidden; */
 }
 
 .Order-box {
-    grid-template-columns: 200px 500px auto;
-    height: fit-content;
-    max-height: 200px;
-    overflow: hidden;
+  grid-template-columns: 200px 500px auto;
+  height: fit-content;
+  max-height: 200px;
+  overflow: hidden;
 }
 
 .no-data-page {
@@ -247,19 +247,25 @@ li.menu-dropdown {
 
 /* fontcolor&bordercolor in myorder */
 
-.bid-currently .bid-waitingConfirmSlip .bid-waitingForShipping .auction-on .auction-waitingForPayment .auction-waitingForConfirm {
-    color: #228BE6;
-    border-color: #228BE6;
+.bid-currently
+  .bid-waitingConfirmSlip
+  .bid-waitingForShipping
+  .auction-on
+  .auction-waitingForPayment
+  .auction-waitingForConfirm {
+  color: #228be6;
+  border-color: #228be6;
 }
 
 .bid-waitingForPayment,
 .bid-waitingForConfirm,
 .auction-waitingForShipping {
-    color: #FA5252;
-    border-color: #FA5252;
+  color: #fa5252;
+  border-color: #fa5252;
 }
 
-.bid-finished, .auction-finished {
-    color: #2F9E44;
-    border-color: #2F9E44;
+.bid-finished,
+.auction-finished {
+  color: #2f9e44;
+  border-color: #2f9e44;
 }

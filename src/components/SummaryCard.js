@@ -1,10 +1,14 @@
-const SummaryCard = () => {
+const SummaryCard = (props) => {
   return (
-    <div class="grey-box">
-      <div>Bid Price 2000.00 Baht</div>
-      <div>Service Fee 2% -40.00 Baht</div>
-      <hr></hr>
-      <div>Total 1960.00 Baht</div>
+    <div className="summary-card">
+      <div className="summary-card-header">Summary</div>
+      <div className="summary-card-bidprice">
+        Bid Price {props.bidPrice} Baht
+      </div>
+      <div className="summary-card-total">
+        <hr />
+        Total {props.bidPrice} Baht
+      </div>
     </div>
   )
 }

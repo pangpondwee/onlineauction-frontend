@@ -6,6 +6,7 @@ import PopupReview from "../components/PopupReview";
 import AuctionCardRow from "../components/AuctionCardRow";
 import { useEffect, useState } from "react";
 import getData from "../components/fetchData";
+import { useParams } from "react-router-dom";
 import "../css/ViewAuctioneer.css"
 
 const AuctionList = (props)=>{
@@ -45,6 +46,7 @@ const AuctionList = (props)=>{
 }
 
 const ViewAuctioneer = () => {
+    const { auctioneerID } = useParams();
     return (
         <div>
             <div style={{display:"flex"}}>
@@ -55,7 +57,7 @@ const ViewAuctioneer = () => {
             <AuctioneerProfile />
             <AuctionList 
             message="There are no bids by this auctioneer"
-            url="/auction/auction-list?filter=popular"
+            url={"/auction/auction-list?filter=auctioneer&auctioneer="+auctioneerID}
             />
         </div>
     )
