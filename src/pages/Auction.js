@@ -62,7 +62,13 @@ const Timer = (props)=>{
 	const [time,setTime] = useState(props.timeRemaining);
 	useEffect(()=>{
 		const timer = setInterval(() => {
-			setTime(time-1000)
+			if(time > props.timeRemaining){
+				setTime(props.timeRemaining)
+				console.log(time)
+			}
+			else{
+				setTime(time-1000)
+			}
 		}, 1000);
 		return ()=>clearInterval(timer);
 	})
