@@ -1,3 +1,5 @@
+import '../css/Payment.css'
+
 const SummaryCard = (props) => {
   return (
     <div className="summary-card">

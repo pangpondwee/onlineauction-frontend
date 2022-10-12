@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import getData from '../components/fetchData'
 import ProgressBar from '../components/ProgressBar'
+import '../css/Payment.css'
 
 const MapShippingCompany = {
   KEX: 'Kerry Express',

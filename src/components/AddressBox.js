@@ -1,3 +1,5 @@
+import '../css/Payment.css'
+
 const AddressBox = (props) => {
   return (
     <div className="address-box">

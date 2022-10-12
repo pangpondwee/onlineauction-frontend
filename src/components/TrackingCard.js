@@ -1,3 +1,5 @@
+import '../css/Payment.css'
+
 const TrackingCard = (props) => {
   return (
     <div className="shipping-card">

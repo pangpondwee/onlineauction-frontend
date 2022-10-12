@@ -4,6 +4,7 @@ import waitingConfirmPayment from '../pictures/confirm-payment.png'
 import waitingShipping from '../pictures/waiting-shipping.png'
 import waitingDeliver from '../pictures/waiting-deliver.png'
 import complete from '../pictures/complete.png'
+import '../css/Payment.css'
 
 const ProgressBar = (props) => {
   let State = {
