@@ -1,5 +1,5 @@
 import AddressBox from '../components/AddressBox'
-// import Package from '../pictures/package.jpeg'
+import '../css/Payment.css'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import { FilePond, registerPlugin } from 'react-filepond'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
@@ -95,7 +95,7 @@ const Shipping = () => {
     ).then((res) => {
       console.log(shippingInfo)
       console.log(res)
-      navigate('/account/myorder?list=bid?type=all')
+      navigate('/account/myorder?list=auction&type=shipped')
     })
   }
 

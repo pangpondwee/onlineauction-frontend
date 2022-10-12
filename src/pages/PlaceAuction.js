@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { postData } from '../components/fetchData'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 import { useNavigate } from 'react-router-dom'
+import '../css/Payment.css'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
