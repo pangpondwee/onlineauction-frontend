@@ -3,31 +3,36 @@ import emptyHeart from "../pictures/emptyHeart.png";
 import { Link } from "react-router-dom";
 import { postData } from "./fetchData";
 import { useState } from "react";
+import heart from '../pictures/heart-fill.svg';
+import "../css/AccountPage.css";
 
 const FollowObj = (props) =>{
-    const [img, setImg] = useState(followHeart);
-    const [_isfollow, set_isfollow] = useState(false);
+    const [_isfollow, set_isfollow] = useState(true);
+
+    let followClass = 'follow-btn btn';
+	let followText = 'Follow';
+	if(_isfollow){
+		followClass+=" active";
+	}
 
     const cilckFollow = () =>{
         set_isfollow(!_isfollow)
         let new_data = {}
         if(_isfollow){
             new_data["follow"]="true"
-            setImg(followHeart)
         } else {
             new_data["follow"]="false"
-            setImg(emptyHeart)
         }
 
-        // postData(`/auction/${props.data.auctionID}/follow`,JSON.stringify(new_data))
-        // .then((res)=>{
-        //     if(!res.status) throw new Error("Could not get status")
-        //     if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
-        //     console.log(res.status)
-        // })
-        // .catch(e=>{
-        //     console.log(e.message)
-        // })
+        postData(`/auction/${props.data.auctionID}/follow`,JSON.stringify(new_data))
+        .then((res)=>{
+            if(!res.status) throw new Error("Could not get status")
+            if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
+            console.log(res.status)
+        })
+        .catch(e=>{
+            console.log(e.message)
+        })
     }
 
 	return (
@@ -41,10 +46,11 @@ const FollowObj = (props) =>{
             </span>
             <div className="d-flex justify-content-end">
                 <div>
-                    <button className="Follow-button" onClick={cilckFollow}>
-                        <img src={img} alt="heart" className="followHeart"/>
-                        <h6>Following</h6>
-                    </button>
+                    <button 
+		                onClick={cilckFollow}
+		                className={followClass}>
+			            {followText}&nbsp;&nbsp;<img id="follow-icon" src={heart}/>
+		            </button>
                     <br/>
                     <Link to={`/auction/${props.data.auctionID}`}>Visit the Auction</Link>
                 </div>
