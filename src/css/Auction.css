@@ -17,7 +17,6 @@
     margin: 25px 25px 25px 0;
     border-right: 1px var(--color-primary) solid;
     height: 700px;
-    overflow: scroll;
 }
 #auction-top h2{
     text-align: center;
@@ -25,6 +24,8 @@
 }
 #topbidder-list{
     margin-right: 30px;
+    overflow: scroll;
+    height: 500px;
 }
 .topbidder-element{
     font-size: 1.2em;
@@ -91,9 +92,44 @@
     background-color: var(--color-dark);
 }
 
+#product-title > button{
+    margin-left: 1em;
+}
+#product-title > h1{
+    vertical-align: middle;
+    display: inline;
+}
+/* Follow buttons */
+.follow-btn, 
+.follow-btn:focus{
+    border-color: var(--color-dark);
+}
+.follow-btn:hover{
+    background-color: #eee;
+}
+.follow-btn:active{
+    background-color: #ccc;
+}
+/* Follow active */
+.follow-btn.active, 
+.follow-btn:focus.active{
+    border-color: none;
+    background-color: #be2525;
+    color: #fff;
+}
+.follow-btn:hover.active{
+    background-color: #d94b4b;
+}
+.follow-btn:active.active{
+    background-color: #901c1c;
+}
+
 #auction-detail{
     display: inline;
     width: 30vw;
+}
+#auction-bid-pane{
+    width: 100%;
 }
 #auction-desc-pane{
     overflow: scroll;
@@ -101,19 +137,17 @@
 #auction-content{
     display: flex;
     padding: 10px;
-    height: 30%;
+    height: 16em;
 }
 
 #bidding{
     margin-bottom: 1em;
 }
-#bidding-is-auctioneer{
-    border: 2px solid #000;
-    border-radius: 14px;
+#bidding-message{
     display: flex;
     justify-content: center;
-    padding: 30% 20%;
-    margin-bottom: 1em;
+    margin: 20px;
+    font-size: 20px;
 }
 #static-price{
     display: flex;
@@ -144,6 +178,17 @@
     outline: 2px solid var(--color-blue);
     border: none;
     outline-offset: -2px;
+}
+#or-wrapper, #select-wrapper{
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: center;
+}
+#min-price{
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    color: rgb(153, 153, 153);
+    margin-left: 2em;
 }
 
 #auction-info #info-top{

@@ -4,6 +4,7 @@ import "../css/Auction.css";
 import {getData, postData} from '../components/fetchData';
 import {getDateSince,getDate,prepend} from "../components/util";
 import PopupError from '../components/PopupError';
+import heart from '../pictures/heart-fill.svg';
 
 function getHistory(data){
 	const history=data.sort((a,b)=>{
@@ -30,7 +31,7 @@ const HistoryModal = (props)=>{
 				<td>{d.toLocaleDateString("en-US")}</td>
 				<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
 				<td>{item.bidderName}</td>
-				<td>{item.biddingPrice}</td>
+				<td>{item.biddingPrice}฿</td>
 			</tr>
 		)
 	})
@@ -99,7 +100,7 @@ const Gallery = (props)=>{
 					{picture_elements}
 				</div>
 				:
-				<p>No pictures</p>
+				<></>
 			}
 		</div>
 	);
@@ -107,7 +108,7 @@ const Gallery = (props)=>{
 
 const AuctionTop = (props)=>{
 	const history = getHistory(props.data);
-	let history_elements = history.map((item,index)=>{
+	let history_elements = history.slice(0,5).map((item,index)=>{
 		const timesince = Date.now()-Number(item.biddingDate);
 		const timeformat = getDateSince(timesince);
 		return (
@@ -116,7 +117,7 @@ const AuctionTop = (props)=>{
 					<span className='bidding-name'>{item.bidderName}</span>
 					<span className='bidding-date'>{timeformat}</span>
 				</div>
-				<span className='bidding-price'>{item.biddingPrice} Baht</span>
+				<span className='bidding-price'>{item.biddingPrice}฿</span>
 			</li>
 		)
 	})	
@@ -172,13 +173,20 @@ const AuctionInfo = (props)=>{
 			<div id="info-top">
 				<p>Auctioneer</p>
 				<p>Category</p>
-				<Link className="info-data" to={auctioneerLink}>{props.data.auctioneerName}</Link>
+				<p>
+					<Link className="info-data" to={auctioneerLink}>
+					{props.myid == props.data.auctioneerID ?
+					"You"
+					:
+					props.data.auctioneerName
+					}</Link>
+				</p>
 				<p className="info-data" >{props.data.productDetail.category}</p>
 			</div>
 			<div id="info-bottom" className="card border-light mb-3">
 				<p>Highest Bid</p>
 				<p>Time Remaining</p>
-				<p className="info-data" >{props.data.currentPrice}</p>
+				<p className="info-data" >{props.data.currentPrice}฿</p>
 				<Timer
 					timeRemaining={props.timeRemaining}
 				/>
@@ -191,39 +199,62 @@ const AuctionDetail = (props)=>{
 	const timeRemaining = props.data.endDate - Date.now()
 	const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 	const isEnded = timeRemaining < 0 ? true : false;
+	const canBid = !props.data.isAuctioneer && props.isLoggedIn;
+	let follow;
+	let followClass = 'follow-btn btn';
+	let followText = 'Follow';
+	if(props.follow){
+		followClass+=" active";
+		follow = "Following"
+	}
+	
+	if(!canBid || props.data.myLastBid > 0){ // auctioneer or anonymous
+		follow = (<></>);
+	}
+	else{ // following
+		follow = (<button 
+		onClick={() => props.followClick(!props.follow)}
+		className={followClass}>
+			{followText}&nbsp;&nbsp;<img id="follow-icon" src={heart}/>
+		</button>)
+	}
+
 	return(
 		<div id="auction-detail">
-			<h1>{props.data.productDetail.productName}</h1>
-				<ul className="nav nav-tabs" id="auction-nav" role="tablist">
-            	<li className="nav-item" role="presentation">
-            	<button
-                className="nav-link active"
-                id="desc-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#auction-desc-pane"
-                type="button"
-                role="tab"
-              	>
-                Description
-              	</button>
-            	</li>
-				<li className="nav-item" role="presentation">
-				{props.isLoggedIn ?
-					<button
-						className="nav-link"
-						id="bid-tab"
-						data-bs-toggle="tab"
-						data-bs-target="#auction-bid-pane"
-						type="button"
-						role="tab"
-					>
-						Bid
-					</button>
-					:
-					<></>
-				}
-				</li>
-          		</ul>
+			<div id="product-title">
+				<h1>{props.data.productDetail.productName}</h1>
+				{follow}
+			</div>
+			<ul className="nav nav-tabs" id="auction-nav" role="tablist">
+			<li className="nav-item" role="presentation">
+			<button
+			className="nav-link active"
+			id="desc-tab"
+			data-bs-toggle="tab"
+			data-bs-target="#auction-desc-pane"
+			type="button"
+			role="tab"
+			>
+			Description
+			</button>
+			</li>
+			<li className="nav-item" role="presentation">
+			{canBid ?
+				<button
+					className="nav-link"
+					id="bid-tab"
+					data-bs-toggle="tab"
+					data-bs-target="#auction-bid-pane"
+					type="button"
+					role="tab"
+				>
+					Bid
+				</button>
+				:
+				<></>
+			}
+			</li>
+			</ul>
 		  	<div className="tab-content" id="auction-content">
 				<div
 				className="tab-pane fade show active"
@@ -247,12 +278,14 @@ const AuctionDetail = (props)=>{
 					isEnded={isEnded}
 					isFiveMinutes={isFiveMinutes}
 					isAlreadyBid5Minute={props.isAlreadyBid5Minute}
+					myLastBid={props.data.myLastBid}
 					/>
 				</div>
           	</div>
 			<AuctionInfo
 			timeRemaining={timeRemaining}
 			data={props.data}
+			myid={props.myid}
 			/>
 		</div>
 	)
@@ -269,16 +302,9 @@ const Bidding = (props)=>{
 		props.submitBid(document.getElementById("bid-price").value,true)
 		e.preventDefault()
 	}
-	if(props.isAuctioneer){
-		return(
-			<div id="bidding-is-auctioneer">
-				<p>You cannot bid on your own auction</p>
-			</div>
-		)
-	}
 	if(props.isEnded){
 		return(
-			<div id="bidding-is-auctioneer">
+			<div id="bidding-message">
 				<p>Bidding has ended</p>
 			</div>
 		)
@@ -286,7 +312,9 @@ const Bidding = (props)=>{
 	if(props.isFiveMinutes){
 		if(props.myLastBid < 1){
 			return (
-				<p>You cannot bid this auction</p>
+				<div id="bidding-is-auctioneer">
+					<p>You cannot bid this auction</p>
+				</div>
 			)
 		}
 		return(
@@ -309,15 +337,16 @@ const Bidding = (props)=>{
 		<form onSubmit={submitWrapper} id="bidding">
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="static-price">
-				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+${bidStep}</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}$</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+${bidStep*3}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+{bidStep}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}</button>
+				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+{bidStep*3}</button>
 			</div>
 			<div id="or-wrapper"><p>OR</p></div>
 			<div id="bid-group" className="input-group">
 				<input id="bid-price" type="text" placeholder="Enter bid price" className='form-control'></input>
 				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
 			</div>
+			<p id="min-price">{`Note: Bid has to increase by at least ${bidStep}฿`}</p>
 		</form>
 	)
 }
@@ -326,22 +355,24 @@ const Auction = (props) =>{
 	const { auctionId } = useParams();
 	const [data,setData] = useState({});
 	const [status,setStatus]=useState("unknown");
-	const showHistory=true; // testing
-	const showRanking=false; //show ranking and move gallery // testing
-	const [lastBid,setLastBid] = useState(0)
-	const [auctioneer,setAuctioneer] = useState("")
 	const [history,setHistory] = useState([])
 	const [historyError,setHistoryError] = useState("")
 	const [isAlreadyBid5Minute,setIsAlreadyBid5Minute] = useState(false);
 	const [error,setError] = useState("")
+	const [follow,setFollow] = useState(false)
 	const isLoggedIn = localStorage.getItem("isLoggedIn")
+	const myid = localStorage.getItem("id")
 	const submitBid = (price, isAbsolute)=>{
 		price = parseInt(price)
+		if(isNaN(price)){
+			setError("You have not entered a price")
+			return;
+		}
 		if(!isAbsolute){
 			price=price+data.currentPrice
 		}
-		if(isNaN(price)){
-			setError("Price is not a number")
+		if(price < data.currentPrice+data.bidStep){
+			setError("The price you set is lower than the minimum: "+(data.currentPrice+data.bidStep)+"฿")
 		}
 		else{
 			postData(`/auction/${auctionId}/bid`,JSON.stringify(
@@ -351,9 +382,8 @@ const Auction = (props) =>{
 			))
 			.then((res)=>{
 				setData(prevData=>{
-					return { ...prevData, currentPrice: price }
+					return { ...prevData, currentPrice: price, myLastBid: price }
 				})
-				setLastBid(price)
 
 				const timeRemaining = data.endDate - Date.now()
 				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
@@ -367,10 +397,23 @@ const Auction = (props) =>{
 			})
 		}
 	}
+	const followClick =(value)=>{
+		postData(`/auction/${auctionId}/follow`,JSON.stringify(
+			{
+				follow: String(value)
+			}
+		))
+		.then((res)=>{
+			setFollow(!follow)
+		})
+		.catch(e=>{
+			setError("Error: Could not follow/unfollow")
+		})
+	}
 	const getHistory = ()=>{
 		getData(`/auction/${auctionId}/bid-history`)
 		.then((res)=>{
-			setHistory(res.bidHistory)
+			setHistory(res.data)
 			setHistoryError(false)
 		})
 		.catch(e=>{
@@ -382,17 +425,32 @@ const Auction = (props) =>{
 		.then((res)=>{
 			setStatus(res.status);
 			setData(res.data);
-			setLastBid(res.data.myLastBid)
-			setAuctioneer(res.data.auctioneerName)
 			setIsAlreadyBid5Minute(res.data.isAlreadyBid5Minute)
-			return res.data.auctioneerID
-		})
-		.then(()=>{
-			getHistory() // first time
+			return res.data
 		})
 		.catch((e)=>{
 			setStatus("error");
 			setData(e.message)
+		})
+		// follow
+		.then((d)=>{
+			if(d.auctioneerID != myid && d.myLastBid < 1){
+				getData(`/auction/${auctionId}/follow`)
+				.then((res)=>{
+					setFollow(res.data.following == "true")
+				})
+				.catch((e)=>{
+					console.log(e)
+				})
+			}
+		})
+		// history
+		.then(()=>{
+			return getHistory() // first time
+		})
+		.catch((e)=>{
+			console.log(e)
+			setError("Error: Could not get history")
 		})
 		const timer = setInterval(()=>{
 			getData(`/auction/${auctionId}/refresh`)
@@ -422,6 +480,9 @@ const Auction = (props) =>{
 					isAlreadyBid5Minute={isAlreadyBid5Minute}
 					submitBid={submitBid}
 					isLoggedIn={isLoggedIn}
+					followClick={followClick}
+					follow={follow}
+					myid={myid}
 					/>
 				</div>
 				<PopupError

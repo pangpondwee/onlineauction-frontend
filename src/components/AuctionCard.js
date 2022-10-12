@@ -1,15 +1,16 @@
 import {Link} from "react-router-dom";
 import { getDate } from "./util";
 function getPrice(price){
-	if(price < 1000000){
+	if(price < 1000000)
 		return price
-	}
 	price = price/1000000;
-	if(price < 1000000){
+	if(price < 1000)
 		return `${price.toFixed(2)}M`
-	}
-	price = price/1000000;
-	return `${price.toFixed(2)}B`
+	price = price/1000;
+	if(price < 1000)
+		return `${price.toFixed(2)}B`
+	price = price/1000;
+	return `${price.toFixed(2)}T`
 }
 
 const AuctionCard = (props) =>{

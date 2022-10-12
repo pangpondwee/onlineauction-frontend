@@ -28,6 +28,7 @@ import AdminBlacklist from './pages/AdminBlacklist'
 import AdminConfirmDelivery from './pages/AdminConfirmDelivery'
 import AdminConfirmPayment from './pages/AdminConfirmPayment'
 import AdminReport from './pages/AdminReport'
+import SignupSuccess from './pages/SignupSuccess'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="signup-success" element={<SignupSuccess />} />
           <Route path="auction/:auctionId" element={<Auction />} />
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />

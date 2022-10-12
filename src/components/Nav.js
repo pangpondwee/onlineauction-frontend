@@ -17,6 +17,24 @@ const Nav = (props) => {
 			search: "?name=" + encodeURIComponent(searchTerm)});
 		e.preventDefault()
 	}
+	const categoryTypesEnum = [
+		"Home Improvement",
+		"Jewellery",
+		"Coins, Currency, Stamps",
+		"Watches",
+		"Fashion",
+		"Arts",
+		"Antiques & Collectables and Amulet",
+		"Electronics",
+		"Cars & Automotive",
+		"Handbags",
+		"Miscellaneous",
+	];
+	let category_elements = categoryTypesEnum.map((item,index)=>{
+		return (
+			<Link key={index} to={"/search?category="+encodeURIComponent(item)} className="ps-4 dropdown-item nav-link">{item}</Link>
+		)
+	})	
 	return (
 		<nav className="navbar d-flex sticky-top">{/* add sticky-top */}
 			{/* Nav Bar BEGIN*/}
@@ -60,17 +78,7 @@ const Nav = (props) => {
 				<div className="navbar-nav">
 					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
 					<div className="dropdown-menu nav-dropdown show" >
-						<Link to="search/" className="ps-4 dropdown-item nav-link">Home Improvement</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Jewellery</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Coins, Currency, Stamps</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Watches</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Fashion</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Arts</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Antiques & Collectables and Amulet</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Electronics</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Cars & Automotive</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Handbags</Link>
-						<Link to="#" className="ps-4 dropdown-item nav-link">Miscellaneous</Link>
+					{category_elements}
 					</div>
 					<Link to="#" className="nav-link nav-item">Place Auction</Link>
 					<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">Currently Bidding</Link>
