@@ -1,13 +1,15 @@
-import followHeart from "../pictures/heart-blue.png";
-import emptyHeart from "../pictures/emptyHeart.png";
 import { Link } from "react-router-dom";
 import { postData } from "./fetchData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import heart from '../pictures/heart-fill.svg';
+import {getDate} from "../components/util";
+
 import "../css/AccountPage.css";
 
 const FollowObj = (props) =>{
     const [_isfollow, set_isfollow] = useState(true);
+
+    const timeRemaining = props.data.endDate - Date.now()
 
     let followClass = 'follow-btn btn';
 	let followText = 'Follow';
@@ -35,6 +37,19 @@ const FollowObj = (props) =>{
         })
     }
 
+    const Timer = (props)=>{
+        const [time,setTime] = useState(props.timeRemaining);
+        useEffect(()=>{
+          const timer = setInterval(() => {
+            setTime(time-1000)
+          }, 1000);
+          return ()=>clearInterval(timer);
+        })
+        return (
+          <h6 id="time-remaining" className='info-data'>End in : {getDate(time)}</h6>
+        )
+      }
+
 	return (
 		<div className="Review-box">
 			<img src={props.data.productPicture} alt="Review_goods" className="mini-pic-goods"/>
@@ -42,7 +57,7 @@ const FollowObj = (props) =>{
                 <h4>{props.data.productName}</h4>
                 <h6>By : {props.data.auctioneerName}</h6>
                 <h6>Highest Bid : {props.data.highestBid} Baht</h6>
-                <h6>End in : </h6>
+                <Timer timeRemaining={timeRemaining}/>
             </span>
             <div className="d-flex justify-content-end">
                 <div>

@@ -13,6 +13,7 @@ const OrderObj = (props) => {
   const navigateTo = () => {
     if (props.data.auctionStatus === 'bidding') navigate(`/auction/${props.data.auctionID}`)
     else if(status_of_auction === 'bid-waitingForPayment') navigate(`/payment/${props.data.auctionID}`)
+    else if(status_of_auction === 'auction-waitingForShipping') navigate(`/shipping/${props.data.auctionID}`)
     else navigate(`/billing-info/${props.data.auctionID}`)
   }
 
@@ -76,9 +77,9 @@ const OrderObj = (props) => {
         <span>
           <div className="d-flex">
             <h4>{props.data.productName}</h4>
-            <pre> </pre>
+            <pre>  </pre>
             {props.type === 'bid' ? (
-              <h6>(By {props.data.auctioneerDisplayname})</h6>
+              <h6 className='pt-1'>(By {props.data.auctioneerDisplayname})</h6>
             ) : (
               <></>
             )}
