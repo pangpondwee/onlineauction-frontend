@@ -102,7 +102,10 @@ const OrderObj = (props) => {
           </div>
 
           <h6>Highest Bid : {props.data.lastBid} Baht</h6>
-          <div className="status-box">
+          <div className="status-box can_click"
+          onClick={navigateTo}
+          data-bs-toggle={ status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''}
+          data-bs-target={ status_of_auction === 'bid-waitingForConfirm'? '#confirmModal': ''}>
             <h6 className="status-text">{text_alert(status_of_auction)}</h6>
             {(status_of_auction==="auction-bidding" || status_of_auction==="bid-bidding")? <Timer timeRemaining={timeRemaining}/> : <></>}
           </div>

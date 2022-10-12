@@ -100,9 +100,9 @@ const PopupConfirm = (props) => {
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
-            <button type="button" class="PopupCon btn-primary d-none" data-bs-toggle="modal" data-bs-target="#confirmModal">
+            {/* <button type="button" class="PopupCon btn-primary d-none" data-bs-toggle="modal" data-bs-target="#confirmModal">
                 Confirm
-            </button>
+            </button> */}
 
             {/* <!-- Modal --> */}
             <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
