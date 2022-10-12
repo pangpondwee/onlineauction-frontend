@@ -106,7 +106,7 @@ const Payment = () => {
       (res) => {
         console.log(billingInfo)
         console.log(res)
-        navigate('/account/myorder?list=bid?type=all')
+        navigate('/account/myorder?list=bid&type=pay')
       }
     )
   }
