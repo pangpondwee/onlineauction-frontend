@@ -298,7 +298,7 @@ const Shipping = () => {
                   required
                 />
               </div>
-              <div>
+              <div className="form-submit-btn">
                 <button type="submit" className="btn btn-primary first-button">
                   Proceed
                 </button>
