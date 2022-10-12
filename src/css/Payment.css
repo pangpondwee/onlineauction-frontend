@@ -64,8 +64,23 @@
   margin-bottom: 2%;
 }
 
+.input-field-flex {
+  display: flex;
+  flex-direction: row;
+}
+.currency {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .first-button {
   margin-right: 20px;
+}
+
+.form-submit-btn {
+  margin-top: 25px;
 }
 
 /* Place Auction*/
@@ -319,8 +334,10 @@
 /* Payment Page*/
 .no-outline-btn {
   border: none;
+  padding: 0;
   background-color: transparent;
-  margin: 1% 0 1% 0;
+  text-decoration: underline;
+  font-weight: 500;
   color: var(--color-text);
 }
 
