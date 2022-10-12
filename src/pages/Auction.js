@@ -381,14 +381,15 @@ const Auction = (props) =>{
 				}
 			))
 			.then((res)=>{
-				setData(prevData=>{
-					return { ...prevData, currentPrice: price, myLastBid: price }
-				})
-
 				const timeRemaining = data.endDate - Date.now()
 				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 				if(isFiveMinutes){
 					setIsAlreadyBid5Minute(true)
+				}
+				else{
+					setData(prevData=>{
+						return { ...prevData, currentPrice: price, myLastBid: price }
+					})
 				}
 				getHistory() // after bid
 			})
