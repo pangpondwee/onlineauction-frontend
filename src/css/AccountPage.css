@@ -184,6 +184,7 @@ li.menu-dropdown {
 .mini-pic-goods {
     width: 160px;
     height: 160px;
+    cursor: pointer;
 }
 
 .Review-boxV2 {
@@ -196,6 +197,10 @@ li.menu-dropdown {
   overflow: hidden;
   padding: 20px 25px 30px 25px;
   margin-bottom: 20px;
+}
+
+.can_click {
+  cursor: pointer;
 }
 
 /* AccountPage(Following) */
@@ -274,12 +279,13 @@ li.menu-dropdown {
 
 /* fontcolor&bordercolor in myorder */
 
-.bid-currently
-  .bid-waitingConfirmSlip
-  .bid-waitingForShipping
-  .auction-on
-  .auction-waitingForPayment
-  .auction-waitingForConfirm {
+.bid-currently,
+.bid-waitingConfirmSlip,
+.bid-waitingForShipping,
+.auction-on,
+.auction-waitingForPayment,
+.auction-waitingForConfirm,
+.auction-waitingAdminPayment {
   color: #228be6;
   border-color: #228be6;
 }
@@ -292,7 +298,8 @@ li.menu-dropdown {
 }
 
 .bid-finished,
-.auction-finished {
+.auction-finished,
+.bid-waitingAdminPayment {
   color: #2f9e44;
   border-color: #2f9e44;
 }

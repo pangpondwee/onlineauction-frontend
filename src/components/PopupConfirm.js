@@ -46,17 +46,6 @@ const PopupConfirm = (props) => {
         })
     },[]);
 
-    // useEffect(() => {
-    //     getData(`/user/profile/${data.auctioneerID}`).then((res) => {
-    //         setStatus(res.status)
-    //         if (res.status == "success") {
-    //             setName(res.data.displayName)
-    //         } else {
-    //             setName(res.message)
-    //         }
-    //     })
-    // },[]);
-
     console.log(data)
     console.log(data.delivery)
 
@@ -111,7 +100,7 @@ const PopupConfirm = (props) => {
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
-            <button type="button" class="PopupCon btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+            <button type="button" class="PopupCon btn-primary d-none" data-bs-toggle="modal" data-bs-target="#confirmModal">
                 Confirm
             </button>
 
@@ -128,7 +117,7 @@ const PopupConfirm = (props) => {
                             {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
                         <div class="modal-body-confirm">
-                            <Link to={"/billing-info"} >
+                            <Link to={`/billing-info/${auctionID}`} >
                                 <button className="billing btn-link" data-bs-dismiss="modal">Billing Info</button>
                             </Link>
                             {(Object.keys(data).length === 0)?
