@@ -18,12 +18,12 @@ const OrderObj = (props) =>{
         "bid-waitingConfirmSlip": "To Pay",
         "bid-waitingForShipping": "To Delivered",
         "bid-waitingForConfirm": "To Confirm",
-        "bid-finished": "Completed",
+        "bid-completed": "Completed",
         "auction-bidding": "On Auction",
         "auction-waitingForPayment": "To Pay",
         "auction-waitingForShipping": "To Shipped",
         "auction-waitingForConfirm": "To Confirm",
-        "auction-finished": "Completed",
+        "auction-completed": "Completed",
     }
 
     let status_of_auction = props.type+'-'+(props.data.billingStatus? props.data.billingStatus : props.data.auctionStatus)

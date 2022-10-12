@@ -117,11 +117,11 @@ const AccountEdit = () =>{
                         </div>
                         <div>
                             <label><h5>Address</h5></label><br/>
-                            <textarea type="text" id="address" className="input-editing" placeholder={data.address} maxlength="250"/>
+                            <textarea type="text" id="address" className="input-editing" placeholder={data.address} maxlength="1000"/>
                         </div>
                         <div>
                             <label><h5>Description</h5></label><br/>
-                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription} maxlength="0"/>
+                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription} maxlength="2000"/>
                         </div>
                     </div>
                 </div>
