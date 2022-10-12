@@ -3,6 +3,9 @@ import confirm from "../pictures/confirm.png";
 import '../css/PopupConRev.css'
 import { Link } from 'react-router-dom'
 import getData, { postData } from "./fetchData";
+import PopupReview from "./PopupReview";
+
+import review from "../pictures/review.png";
 
 const PopupConfirm = () => {
     // const auctionID = props.auctionID
@@ -11,7 +14,7 @@ const PopupConfirm = () => {
     // const [name, setName] = useState('')
 
     // useEffect(() => {
-    //     getData(`api/billingInfo/${auctionID}`).then((res) => {
+    //     getData(`/billingInfo/${auctionID}`).then((res) => {
     //         setStatus(res.status)
     //         if (res.status == "success") {
     //             setData(res.data)
@@ -22,7 +25,7 @@ const PopupConfirm = () => {
     // },[]);
 
     // useEffect(() => {
-    //     getData(`/api/user/profile/${data.auctioneerID}`).then((res) => {
+    //     getData(`/user/profile/${data.auctioneerID}`).then((res) => {
     //         setStatus(res.status)
     //         if (res.status == "success") {
     //             setName(res.data.displayName)
@@ -34,7 +37,7 @@ const PopupConfirm = () => {
 
     // function onConfirm(e) {
     //     e.preventDefault()
-    //     postData(`/api/shipping/${auctionID}`, JSON.stringify(
+    //     postData(`/shipping/${auctionID}`, JSON.stringify(
     //         {
     //             "confirm": true
     //         }
@@ -44,6 +47,22 @@ const PopupConfirm = () => {
     //     })
     //     .catch(e => {
     //         console.log(e.message)
+    //     })
+    // }
+
+    // function onReview(e) {
+    //     e.preventDefault()
+    //     postData(`/review/${auctionID}`, JSON.stringify(
+    //         {
+    //             "rating":"rating-num",
+    //             "comment":"comment-text"
+    //         }
+    //     ))
+    //     .then((res) => {
+    //         console.log(e.status)
+    //     })
+    //     .catch(e => {
+    //         console.log("error")
     //     })
     // }
 
@@ -85,12 +104,41 @@ const PopupConfirm = () => {
                         </div>
                         <div class="modal-footer-confirm">
                             {/* btn-confirm ต้องมี func สำหรับแก้ไข status ของสินค้าเป็น completed */}
-                            <button type="button" class="btn btn-primary" /*onClick={onConfirm}*/ data-bs-toggle="modal" data-bs-target="#reviewModal">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
                                 Confirm
                             </button>
                             
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Deny</button>
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Not Yet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* <!-- Modal --> */}
+            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img className="popup-review-img" src={review} alt="review" />
+                            <div className="modal-review-header-text">
+                                <div class="modal-title" id="reviewModalLabel">What did you think of your recent bidding item?</div>
+                                <h6 class="modal-title" id="reviewModalLabel">Your feedback is valuable to us and everyone</h6>
+                            </div>
+                            {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+                        </div>
+                        <div class="modal-body-review">
+                            <h6>Review Item : Nintendo Switch</h6>
+                            {/* <h6>Iten Name : {data.productName}</h6> */}
+                            <h6>Auctioneer Name : Kong Pakkapol</h6>
+                            {/* <h6>Auctioneer Name : {name}</h6> */}
+                            <h6>Rating : </h6>
+                            <h6>Review : </h6>
+                            <textarea className="review-box" type="text" placeholder="Write a review here..."></textarea>
+                        </div>
+                        <div class="modal-footer-review">
+                            <button type="button" class="btn btn-primary">Confirm</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Skip</button>
                         </div>
                     </div>
                 </div>
