@@ -51,8 +51,6 @@ const Payment = () => {
     winningPrice: '',
     productPicture: '',
   })
-  const [checked, setChecked] = useState(false)
-  const [inputDisabled, setInputDisabled] = useState(false)
 
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
@@ -67,27 +65,28 @@ const Payment = () => {
       .catch((e) => console.log(e))
   }, [])
 
-  const getInformationFromProfileHandler = (checked) => {
-    if (checked === true) {
-      getData('/user/myprofile')
-        .then((res) => {
-          console.log(res)
+  const getInformationFromProfileHandler = () => {
+    getData('/user/myprofile')
+      .then((res) => {
+        console.log(res)
+        if ('displayName' in res.data) {
           setPaymentDetails({
             ...paymentDetails,
             bidderName: res.data.displayName,
+          })
+        } else if ('phoneNumber' in res.data) {
+          setPaymentDetails({
+            ...paymentDetails,
             phoneNumber: res.data.phoneNumber,
+          })
+        } else if ('address' in res.data) {
+          setPaymentDetails({
+            ...paymentDetails,
             bidderAddress: res.data.address,
           })
-        })
-        .catch((e) => console.log(e))
-    } else {
-      setPaymentDetails({
-        ...paymentDetails,
-        bidderName: '',
-        phoneNumber: '',
-        bidderAddress: '',
+        }
       })
-    }
+      .catch((e) => console.log(e))
   }
 
   const submitHandler = () => {
@@ -139,7 +138,6 @@ const Payment = () => {
                   })
                 }
                 placeholder="e.g. Peeranat Srisuthangkul"
-                disabled={inputDisabled}
                 required
               ></input>
             </div>
@@ -158,7 +156,6 @@ const Payment = () => {
                   })
                 }
                 placeholder="e.g. 0620000000"
-                disabled={inputDisabled}
                 required
               ></input>
             </div>
@@ -177,25 +174,16 @@ const Payment = () => {
                   })
                 }
                 placeholder="50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
-                disabled={inputDisabled}
                 required
               ></textarea>
             </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                checked={checked}
-                onChange={(e) => {
-                  setChecked(!checked)
-                  setInputDisabled(!checked)
-                  getInformationFromProfileHandler(!checked)
-                }}
-              />
-              <label className="form-check-label">
-                Use information from profile
-              </label>
-            </div>
+            <button
+              type="button"
+              className="no-outline-btn"
+              onClick={getInformationFromProfileHandler}
+            >
+              Use information from profile
+            </button>
           </div>
           <div className="form-heading1">TRANSACTION INFO</div>
           <div className="sub-form">
@@ -247,20 +235,26 @@ const Payment = () => {
               <label htmlFor="value" className="form-label">
                 VALUE
               </label>
-              <input
-                type="number"
-                className="form-control"
-                onChange={(e) =>
-                  setPaymentDetails({
-                    ...paymentDetails,
-                    value: e.target.value,
-                  })
-                }
-                placeholder="e.g. 500"
-                required
-              ></input>
+              <div className="input-field-flex">
+                <input
+                  type="text"
+                  className="form-control"
+                  pattern="[0-9]+"
+                  onChange={(e) =>
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      value: e.target.value,
+                    })
+                  }
+                  placeholder="e.g. 500"
+                  required
+                ></input>
+                <div className="currency">
+                  <div>BAHT</div>
+                </div>
+              </div>
             </div>
-            <div>
+            <div className="form-submit-btn">
               <button type="submit" className="btn btn-primary first-button">
                 Proceed
               </button>
