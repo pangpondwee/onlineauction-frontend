@@ -1,6 +1,7 @@
 :root {
   --line-border-fill: #228be6;
   --line-border-empty: #dee2e6;
+  --text-color-empty: #ced4da;
 }
 
 /* Form */
@@ -366,26 +367,31 @@
   height: 4px;
   width: 0%;
   z-index: 0;
-  transition: 2s ease;
+  transition: 2s linear;
 }
 .progress.waitingForPayment {
   width: 20%;
+  transition: 0.5s linear;
 }
 
 .progress.waitingConfirmSlip {
   width: 40%;
+  transition: 1s linear;
 }
 
 .progress.waitingForShipping {
   width: 60%;
+  transition: 1.5s linear;
 }
 
 .progress.waitingForConfirm {
   width: 80%;
+  transition: 2s linear;
 }
 
 .progress.completed {
   width: 100%;
+  transition: 2.5s linear;
 }
 
 .circle {
@@ -398,10 +404,70 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 2s ease;
+  transition: 0.4s ease;
   z-index: 1;
+}
+
+.circle.waitingForPayment {
+  transition: 0.25s ease 0.5s;
+}
+
+.circle.waitingConfirmSlip {
+  transition: 0.25s ease 1s;
+}
+
+.circle.waitingForShipping {
+  transition: 0.25s ease 1.5s;
+}
+
+.circle.waitingForConfirm {
+  transition: 0.25s ease 2s;
+}
+
+.circle.completed {
+  transition: 0.25s ease 2.5s;
 }
 
 .circle.active {
   border-color: var(--line-border-fill);
+}
+
+.status-section {
+  padding: 0 5% 0 5%;
+}
+
+.progress-description {
+  margin-top: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.description-box {
+  color: var(--text-color-empty);
+  text-align: center;
+  width: 15%;
+}
+
+.description-box.waitingForPayment {
+  transition: color 0.25s ease 0.5s;
+}
+
+.description-box.waitingConfirmSlip {
+  transition: color 0.25s ease 1s;
+}
+
+.description-box.waitingForShipping {
+  transition: color 0.25s ease 1.5s;
+}
+
+.description-box.waitingForConfirm {
+  transition: color 0.25s ease 2s;
+}
+
+.description-box.completed {
+  transition: color 0.25s ease 2.5s;
+}
+
+.description-box.active {
+  color: var(--color-text);
 }
