@@ -1,22 +1,55 @@
 #content{
-    max-width: 1000px;
+    max-width: 2000px;
     margin: auto;
-}
-#auction-main{
     width: 100%;
     display: inline-block;
 }
-#auction-detail{
+#auction-main{
+    margin: 25px 25px 25px 0;
+    height: 700px;
+    justify-content: space-around;
     display: flex;
-    width: 100%;
-    margin: auto 1rem;
 }
-
-/*** Gallery ***/
+/* Auction Top */
+#auction-top{
+    float: left;
+    width: 20vw;
+    margin: 25px 25px 25px 0;
+    border-right: 1px var(--color-primary) solid;
+    height: 700px;
+}
+#auction-top h2{
+    text-align: center;
+    margin-bottom: 1em;
+}
+#topbidder-list{
+    margin-right: 30px;
+    overflow: scroll;
+    height: 500px;
+}
+.topbidder-element{
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+.topbidder-element::marker{
+    margin-left: 0;
+}
+.bidding-price{
+    float: right;
+}
+.bidding-date{
+    font-size: 0.7em;
+    color: #858585;
+}
+.bidding-front{
+    display: inline-grid;
+    width: 50%;
+}
+/* Gallery */
 
 #gallery{
     float: left;
-    width: 55%;
+    width: 40%;
     height: 700px;
 }
 #main-picture-wrapper{
@@ -26,6 +59,8 @@
 }
 #picture-list{
     height: 5em;
+    overflow: scroll;
+    overflow-x: scroll;
 }
 #main-picture{
     /* height: 100%; */
@@ -37,6 +72,9 @@
     width: 5em;
     object-fit:cover;
     margin: auto 5px;
+}
+.list-picture:hover{
+    border: var(--color-blue-dark) solid 5px;
 }
 #button-right{
     margin: 0 auto;
@@ -54,72 +92,62 @@
     background-color: var(--color-dark);
 }
 
-/*** Bid Field ***/
+#product-title > button{
+    margin-left: 1em;
+}
+#product-title > h1{
+    vertical-align: middle;
+    display: inline;
+}
+/* Follow buttons */
+.follow-btn, 
+.follow-btn:focus{
+    border-color: var(--color-dark);
+}
+.follow-btn:hover{
+    background-color: #eee;
+}
+.follow-btn:active{
+    background-color: #ccc;
+}
+/* Follow active */
+.follow-btn.active, 
+.follow-btn:focus.active{
+    border-color: none;
+    background-color: #be2525;
+    color: #fff;
+}
+.follow-btn:hover.active{
+    background-color: #d94b4b;
+}
+.follow-btn:active.active{
+    background-color: #901c1c;
+}
 
-#bid-field{
+#auction-detail{
     display: inline;
-    justify-content: center;
-    float: right;
-    width: 45%;
-    height: 700px;
-    padding: 3rem;
+    width: 30vw;
 }
-#item-wrapper{
-    display: block;
-}
-#name-wrapper{
-    display: block;
-}
-/** Statistics **/
-#statistics{
-    display: flex;
-    justify-content: space-around;
+#auction-bid-pane{
     width: 100%;
 }
-#statistics div{
-    width: 45%;
-    display: inline;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
+#auction-desc-pane{
+    overflow: scroll;
 }
-.stat-name{
-    font-size: 18px;
-    margin-bottom: 0;
-    font-weight: 700;
-}
-#highest-bid{
-    font-size: 2.5rem;
-    margin-top: 1em;
-}
-#time-remaining{
-    font-size: 2rem;
-}
-#select-wrapper, #or-wrapper{
-    width: 100%;
+#auction-content{
     display: flex;
-    justify-content: center;
-    margin: 1em auto;
+    padding: 10px;
+    height: 16em;
 }
-#select-wrapper{
-    margin-bottom: 0;
-    font-size: 18;
-}
-#or-wrapper p{
-    margin-bottom: 0;
-    font-size: 20px;
-    font-weight: 400;
-}
-/** Price **/
+
 #bidding{
     margin-bottom: 1em;
 }
-#bidding-is-auctioneer{
-    border: 2px solid #000;
-    border-radius: 14px;
+#bidding-message{
     display: flex;
     justify-content: center;
-    padding: 30% 20%;
-    margin-bottom: 1em;
+    margin: 20px;
+    font-size: 20px;
 }
 #static-price{
     display: flex;
@@ -151,59 +179,48 @@
     border: none;
     outline-offset: -2px;
 }
+#or-wrapper, #select-wrapper{
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: center;
+}
+#min-price{
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    color: rgb(153, 153, 153);
+    margin-left: 2em;
+}
+
+#auction-info #info-top{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#auction-info #info-bottom{
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+  background-color: #F8F9FA;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 2em;
+}
+#info-top .info-data{
+    font-size: 1.2em;
+}
+#info-bottom .info-data{
+    font-size: 2em;
+}
 #history-button{
-    float: right;
-    border-color: var(--color-dark);
+    border: #858585 solid 1px;
 }
 #history-button:hover{
-    background-color: var(--color-blue-dark);
+    background-color: #858585;
 }
-#history-button:active{
-    background-color: var(--color-dark);
-    color: #ffffff;
-}
-
-/*** Auction Detail ***/
-#description{
-    float: right;
-    font-size: 1.2rem;
-    margin: 1em 1em 3em 1em;
-}
-#description-with-gallery{
-    width: 50%;
-    float: right;
-    font-size: 1.2rem;
-    margin: 1em 1em 3em 1em;
-
-}
-
-/*** Ranking ***/
-#ranking{
-    float: left;
-    width: 55%;
-    height: 700px;
+#history-wrapper{
+    width: 100%;
+    padding-top: 1em;
     display: flex;
     justify-content: center;
-    padding-top: 15%;
-    padding-bottom: 15%;
 }
-#ranking-table{
-    width: 90%;
-    background-color: var(--color-primary);
-    border-radius: 14px;
-    text-align: center;
-    font-size: 25px;
-}
-#ranking tbody td:nth-child(2n+1){
-    border-right: 1px #fff solid;
-}
-#ranking tbody td:nth-child(2n){
-    border-left: 1px #fff solid;
-}
-#ranking thead{
-    border-bottom: 1px #fff solid;
-}
-
 /*** History ***/
 #history-modal{
     max-width: 700px;
@@ -235,6 +252,5 @@
 }
 #history-error{
     text-align: center;
-    font-size: 25px;
-    padding: 4em 0.5em;
+    font-size: 1.5em;
 }

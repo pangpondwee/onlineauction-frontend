@@ -15,7 +15,7 @@ const Layout = () => {
 			<Nav loggedIn={loggedIn} setloggedIn={(x)=>{
 				setloggedIn(x);
 			}}/>
-			<main className="m-4 p-3">
+			<main>
 				<Outlet context={[loggedIn,setloggedIn]}/>
 			</main>
 		</>

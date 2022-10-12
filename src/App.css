@@ -53,16 +53,24 @@
   --box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0;
 }
 /* General */
-html,
-#root {
+html, body{
+  min-height:100%;
   background-color: var(--color-primary);
+}
+body{
+  height:100%;
+}
+#root{
+  min-height: 100vh;
 }
 
 /* Main */
 main {
 	background-color: white;
-	height: 100%;
-  border-radius: var(--radius)
+  min-height: calc(100vh - 6rem);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 1rem;
 }
 
 .alertBox-container{
@@ -72,9 +80,11 @@ main {
 
 .alertBox {
   visibility: hidden;
+  font-size: 1.2em;
   position: fixed;
-  bottom: 20px;
-  max-width: 600px;
+  top: 70px;
+  z-index: 1024;
+  max-width: 1000px;
 }
 .alertBox.show{
   visibility: visible;
