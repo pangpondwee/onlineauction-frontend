@@ -307,7 +307,11 @@ const AuctionDetail = () => {
             <button type="submit" className="btn btn-primary first-button">
               Place Auction
             </button>
-            <button type="button" className="btn btn-outline-primary">
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={() => navigate(`/`)}
+            >
               Cancel
             </button>
           </div>

@@ -302,7 +302,13 @@ const Shipping = () => {
                 <button type="submit" className="btn btn-primary first-button">
                   Proceed
                 </button>
-                <button type="submit" className="btn btn-outline-primary">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={() =>
+                    navigate('/account/myorder?list=auction&type=shipped')
+                  }
+                >
                   Cancel
                 </button>
               </div>
