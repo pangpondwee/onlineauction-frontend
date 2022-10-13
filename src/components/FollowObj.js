@@ -59,16 +59,11 @@ const FollowObj = (props) =>{
                 <Timer timeRemaining={timeRemaining}/>
             </span>
             <div className="d-flex justify-content-end">
-                <div>
-                    <button 
-		                onClick={cilckFollow}
-		                className={followClass}>
-			            {followText}&nbsp;&nbsp;<img id="follow-icon" src={heart}/>
-		            </button>
-                    <br/>
-                    <Link to={`/auction/${props.data.auctionID}`}>Visit the Auction</Link>
-                </div>
-                
+                <button 
+		            onClick={cilckFollow}
+		            className={followClass}>
+			        {followText}&nbsp;&nbsp;<img id="follow-icon" src={heart}/>
+		        </button>
             </div>
             
 		</div>

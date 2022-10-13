@@ -29,13 +29,13 @@ const MyReview = () =>{
     });
 
 	return (
-        <>
+        <div>
             <h1>My Review</h1>
             <div className="all-review">
                 {/* store each review */}
                 {display.length===0? <div className="no-data-page">No Data</div> : display}
             </div>
-        </>
+        </div>
 	)
 }
 export default MyReview;

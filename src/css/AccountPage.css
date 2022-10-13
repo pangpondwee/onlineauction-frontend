@@ -2,7 +2,7 @@
 .lefthand-nav {
   margin: 25px;
   /* width: 235px; */
-  width: 30vh;
+  width: 15vw;
   border-right: 1px var(--color-primary) solid;
   display: flex;
   flex-direction: column;
@@ -40,21 +40,22 @@ li.menu-dropdown {
 /* AccountPage(Profile) */
 .main-account-page {
   display: grid;
-  /* grid-template-columns: 235px auto; */
-  grid-template-columns: 30vh auto;
-  column-gap: 60px;
+  width: 100%;
+  grid-template-columns: 15vw auto;
+  column-gap: 5vw;
 }
 
 .profile-page {
   padding: 15px 25px;
+  width: 75vw;
 }
 
 .edit-profile {
   background-color: #2b4257;
   color: white;
-  width: 120px;
-  height: 50px;
-  padding: 10px 10px 0 10px;
+  width: 8vw;
+  height: fit-content;
+  padding: 10px 10px 10px 10px;
   border-radius: 5%;
   margin-bottom: 10px;
   text-align: center;
@@ -62,12 +63,12 @@ li.menu-dropdown {
 }
 
 .profile-pic {
-  width: 25vw;
-  height: 45vh;
-  max-width: 350px;
+  width: 23vw;
+  height: 23vw;
+  /* max-width: 350px;
   max-height: 350px;
   min-width: 200px;
-  min-height: 200px;
+  min-height: 200px; */
   /* border-color: black;
   border-style: solid; */
 }
@@ -75,8 +76,10 @@ li.menu-dropdown {
 .main-info-profile {
   margin: 10px 10px 30px 10px;
   display: grid;
-  grid-template-columns: 380px auto;
-  column-gap: 30px;
+  /* grid-template-columns: 380px auto;
+  column-gap: 30px; */
+  grid-template-columns: 30vw auto;
+  /* column-gap: 5vw; */
 }
 
 .sub-info-profile {
@@ -89,6 +92,8 @@ li.menu-dropdown {
 .account-info {
   width: 300px;
   padding-left: 30px;
+  /* color: var(--color-dark); */
+  color: #2679b9;
 }
 
 .about-you {
@@ -133,28 +138,28 @@ li.menu-dropdown {
 .main-editing-page {
   padding: 10px;
   display: grid;
-  grid-template-columns: 380px auto;
+  grid-template-columns: 30vw auto;
 }
 
 .input-editing {
   border: 3px var(--color-secondary) solid;
   border-radius: 5px;
   padding: 3px 8px;
-  width: 400px;
+  width: 25vw;
   margin-bottom: 20px;
 }
 
 .choose-image {
-  width: 25vw;
-  max-width: 350px;
-  min-width: 200px;
+  width: 23vw;
+  height: 23vw;
 }
 
 /* MyOrderNav */
 .My-Order-Nav {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 10px;
+  justify-content: space-evenly;
 }
 
 .Order-Menu {
@@ -175,15 +180,15 @@ li.menu-dropdown {
     border-radius: 10px;
     display: grid;
     height: fit-content;
-    grid-template-columns: 200px 300px auto;
+    grid-template-columns: 13vw 32vw auto;
     overflow: hidden;
     padding: 20px 20px 20px 35px;
     margin-bottom: 20px;
 }
 
 .mini-pic-goods {
-    width: 160px;
-    height: 160px;
+    width: 10vw;
+    height: 10vw;
     cursor: pointer;
 }
 
@@ -209,11 +214,13 @@ li.menu-dropdown {
   border: 3px #228be6 solid;
   border-radius: 20px;
   background-color: white;
-  display: flex;
-  height: 40px;
-  width: 150px;
-  padding: 5px 20px;
+  height: fit-content;
+  width: 10vw;
+  min-width: 100px;
+  padding: 5px 20px 0px;
   color: #228be6;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   cursor: pointer;
 }
@@ -236,10 +243,11 @@ li.menu-dropdown {
 }
 
 .Order-box {
-  grid-template-columns: 200px 500px auto;
+  grid-template-columns: 13vw 32vw auto;
   height: fit-content;
   max-height: 200px;
   overflow: hidden;
+  margin-right: 2vw;
 }
 
 .no-data-page {
@@ -256,6 +264,7 @@ li.menu-dropdown {
 .follow-btn, 
 .follow-btn:focus{
     border-color: var(--color-dark);
+    height: fit-content;
 }
 .follow-btn:hover{
     background-color: #eee;
