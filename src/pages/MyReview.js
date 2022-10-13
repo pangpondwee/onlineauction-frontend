@@ -20,11 +20,11 @@ const MyReview = () =>{
 		})
 	},[]);
 
-    console.log(data)
+    // console.log(data)
 
     const display = []
     data.forEach(element => {
-        console.log(element)
+        // console.log(element)
         display.push(<ReviewObj name={element.productName} bidder={element.commenter} rating={element.rating} reviewing={element.comment}/>)
     });
 
