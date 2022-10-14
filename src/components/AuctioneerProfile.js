@@ -5,12 +5,38 @@ import { useParams } from "react-router-dom";
 import fullStar from "../pictures/star.png";
 import emptyStar from "../pictures/star_blank.png";
 import halfStar from "../pictures/star_half.png"
-import badge1 from "../pictures/badge1.png";
-import badge2 from "../pictures/badge2.png";
-import badge3 from "../pictures/badge3.png";
+
+// Badges
+import badge_top_10 from "../pictures/badge-top-10.png"
+import badge_top_100 from "../pictures/badge-top-100.png"
+import badge_fraud from "../pictures/badge-fraud.png"
+import badge_rising_stars from "../pictures/badge-rising-stars.png"
+import badge_top_seller_100 from "../pictures/badge-top-seller-100.png"
+import badge_top_seller_1k from "../pictures/badge-top-seller-1k.png"
+import badge_top_seller_10k from "../pictures/badge-top-seller-10k.png"
+import badge_newbie from "../pictures/badge-newbie.png"
+import badge_admin from "../pictures/badge-admin.png"
+import badge_official from "../pictures/badge-official.png"
+
+// import badge1 from "../pictures/badge1.png";
+// import badge2 from "../pictures/badge2.png";
+// import badge3 from "../pictures/badge3.png";
 // import stat from "../pictures/stat.png";
 import '../css/AuctioneerProfile.css';
 import getData from "./fetchData";
+
+const dictBadge = {
+    "top-10":badge_top_10 ,
+    "top-100":badge_top_100,
+    "fraud":badge_fraud ,
+    "rising-stars":badge_rising_stars ,
+    "top-seller-100": badge_top_seller_100,
+    "top-seller-1k":badge_top_seller_1k,
+    "top-seller-10k":badge_top_seller_10k,
+    "newbie":badge_newbie,
+    "admin":badge_admin,
+    "official":badge_official,
+}
 
 const Profile = (props) => {
     const auctioneer = props.auctioneer
@@ -20,10 +46,23 @@ const Profile = (props) => {
     const totalAuctioned = props.totalAuctioned
     const successAuctioned = props.successAuctioned
     const isFraud = props.isFraud
-    // const badges = props.badges
-    // console.log(rating)
+    const badges = props.badges
 
     const star = []
+    let badge = []
+
+    if (badges === undefined) {
+
+    } else {
+        badge = badges.map((val,key)=>{
+            let badgeName = dictBadge[val]
+            return (
+                <img src={badgeName} key={key} alt={val} />
+            )
+        })
+        console.log(badges)
+    }
+
     if (rating === undefined) {
 
     } else {
@@ -66,22 +105,15 @@ const Profile = (props) => {
                     </div>
                     <div className="AucBadges">
                         <h6>Badges</h6>
-                        {/* {(badges.length === 0)?
+                        {(badge.length === 0)?
                             <div className="badges">
                                 <h6>No Badge</h6>
                             </div>
                             :
                             <div className="badges">
-                                <img src={badges[0]} alt="badge" />
-                                <img src={badges[1]} alt="badge" />
-                                <img src={badges[2]} alt="badge" />
+                                {badge}
                             </div>
-                        } */}
-                        <div className="badges">
-                            <img src={badge1} alt="badge" />
-                            <img src={badge2} alt="badge" />
-                            <img src={badge3} alt="badge" />
-                        </div>
+                        }
                     </div>
                     <div className="AucStat">
                         <h6>Auction Statistic</h6>
