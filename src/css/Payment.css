@@ -276,7 +276,6 @@
   position: sticky;
   top: 150px;
   width: 300px;
-  height: 420px;
 }
 
 .payment-summary-card img {
@@ -487,4 +486,16 @@
 
 .description-box.active {
   color: var(--color-text);
+}
+
+/* Hide arrows in number input field */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  appearance: textfield; /* Firefox */
 }
