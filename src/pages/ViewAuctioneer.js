@@ -50,7 +50,7 @@ const ViewAuctioneer = () => {
     return (
         <div>
             <div style={{display:"flex"}}>
-                <PopupConfirm />
+                {/* <PopupConfirm /> */}
                 {/* <PopupReview /> */}
                 <AuctioneerReport />
             </div>

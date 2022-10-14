@@ -59,8 +59,8 @@ const MyOrder = () =>{
 
     
     const display = []
-    _data.forEach(element => {
-        display.push(<OrderObj data={element} type={list.slice(5)}/>) //bid or auction
+    _data.forEach((element,index) => {
+        display.push(<OrderObj data={element} key={index} type={list.slice(5)}/>) //bid or auction
     });
 
 	return (

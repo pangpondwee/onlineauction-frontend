@@ -62,7 +62,13 @@ const Timer = (props)=>{
 	const [time,setTime] = useState(props.timeRemaining);
 	useEffect(()=>{
 		const timer = setInterval(() => {
-			setTime(time-1000)
+			if(time > props.timeRemaining){
+				setTime(props.timeRemaining)
+				console.log(time)
+			}
+			else{
+				setTime(time-1000)
+			}
 		}, 1000);
 		return ()=>clearInterval(timer);
 	})
@@ -174,7 +180,7 @@ const AuctionInfo = (props)=>{
 				<p>Auctioneer</p>
 				<p>Category</p>
 				<p>
-					<Link className="info-data" to={auctioneerLink}>
+					<Link id="auctioneerName" className="info-data" to={auctioneerLink}>
 					{props.myid == props.data.auctioneerID ?
 					"You"
 					:
@@ -186,7 +192,7 @@ const AuctionInfo = (props)=>{
 			<div id="info-bottom" className="card border-light mb-3">
 				<p>Highest Bid</p>
 				<p>Time Remaining</p>
-				<p className="info-data" >{props.data.currentPrice}฿</p>
+				<p className="info-data" >{props.data.currentPrice} <span id='currency'>Baht</span></p>
 				<Timer
 					timeRemaining={props.timeRemaining}
 				/>
@@ -209,7 +215,9 @@ const AuctionDetail = (props)=>{
 	}
 	
 	if(!canBid || props.data.myLastBid > 0){ // auctioneer or anonymous
-		follow = (<></>);
+		// follow = (<button 
+		// 	className={followClass} disabled>Disabled</button>);
+		follow=(<></>)
 	}
 	else{ // following
 		follow = (<button 

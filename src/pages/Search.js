@@ -168,14 +168,13 @@ const Search = (props) =>{
 				
 			</div>
 			<div className="searchSort">
-				<select id="select1" onChange={selectSort} >
+				<select id="select1" value="" onChange={selectSort} >
 					<option value="newest">Newest</option>
 					<option value="time_remaining">Time remaining</option>
 					<option value="highest_bid">Highest Bid Price</option>
 					<option value="lowest_bid">Lowest Bid Price</option>
 				</select>
 				<span className="">Sort by</span>
-				<br></br>
 				<select id="select2" onChange={selectCate} >
 				{categoryTypesEnum.map((val, key) => {
 					return (
