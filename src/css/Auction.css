@@ -133,11 +133,13 @@
 }
 #auction-desc-pane{
     overflow: scroll;
+    width: 100%;
 }
 #auction-content{
     display: flex;
     padding: 10px;
     height: 16em;
+    width: 100%;
 }
 
 #bidding{

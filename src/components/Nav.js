@@ -74,7 +74,7 @@ const Nav = (props) => {
 					<h5 className="offcanvas-title">Auction Online</h5>
 					<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 				</div>
-				<Link id="offcanvas-profile" className="nav-link p-3" to="#">{displayName}</Link>
+				<Link id="offcanvas-profile" className="nav-link p-3" to="/account/profile">{displayName}</Link>
 				<div className="navbar-nav">
 					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
 					<div className="dropdown-menu nav-dropdown show" >

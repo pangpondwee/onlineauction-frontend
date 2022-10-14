@@ -5,6 +5,7 @@ import SummaryCard from '../components/SummaryCard'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import getData from '../components/fetchData'
+import ProgressBar from '../components/ProgressBar'
 
 const MapShippingCompany = {
   KEX: 'Kerry Express',
@@ -81,24 +82,27 @@ const BillingInfo = () => {
 
   return (
     <div className="billing-info-page">
-      <div className="order-card">
+      <div className="billing-info-order-grid">
         <OrderObj data={orderDetails} type={isAuctioneer ? 'auction' : 'bid'} />
       </div>
-      <div className="address-box">
+      <div className="billing-info-progress-grid">
+        <ProgressBar status={orderDetails.billingStatus} />
+      </div>
+      <div className="billing-info-address-box-grid grey-box">
         <AddressBox
           name={shippingAddress.name}
           address={shippingAddress.address}
           phone={shippingAddress.phone}
         ></AddressBox>
       </div>
-      <div className="tracking-card">
+      <div className="billing-info-tracking-card-grid grey-box">
         <TrackingCard
           shippingCompany={MapShippingCompany[shippingDetails.shippingCompany]}
           trackingNumber={shippingDetails.trackingNumber}
           packagePicture={shippingDetails.packagePicture}
         ></TrackingCard>
       </div>
-      <div className="summary-card">
+      <div className="billing-info-summary-card-grid grey-box">
         <SummaryCard bidPrice={orderDetails.lastBid}></SummaryCard>
       </div>
     </div>

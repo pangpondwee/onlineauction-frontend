@@ -171,20 +171,19 @@ li.menu-dropdown {
 }
 
 .Review-box {
-  border: 2px var(--color-primary) solid;
-  border-radius: 10px;
-  display: grid;
-  height: fit-content;
-  max-height: 180px;
-  grid-template-columns: 200px 250px auto;
-  overflow: hidden;
-  padding: 20px 25px 30px 25px;
-  margin-bottom: 20px;
+    border: 2px var(--color-primary) solid;
+    border-radius: 10px;
+    display: grid;
+    height: fit-content;
+    grid-template-columns: 200px 250px auto;
+    overflow: hidden;
+    padding: 20px 20px 20px 35px;
+    margin-bottom: 20px;
 }
 
 .mini-pic-goods {
-  width: 160px;
-  height: 160px;
+    width: 160px;
+    height: 160px;
 }
 
 .Review-boxV2 {
@@ -221,8 +220,11 @@ li.menu-dropdown {
 }
 
 /* MyOrderPage */
-.status-text {
+.status-box {
   margin-top: 25px;
+}
+
+.status-text {
   color: #fa5252;
   font-size: 20px;
   /* visibility: hidden; */
@@ -233,6 +235,41 @@ li.menu-dropdown {
   height: fit-content;
   max-height: 200px;
   overflow: hidden;
+}
+
+.no-data-page {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    color: rgb(202, 201, 201);
+    font-size: 30px;
+    font-style: italic;
+    font-style: bold;
+}
+
+/* Follow buttons */
+.follow-btn, 
+.follow-btn:focus{
+    border-color: var(--color-dark);
+}
+.follow-btn:hover{
+    background-color: #eee;
+}
+.follow-btn:active{
+    background-color: #ccc;
+}
+/* Follow active */
+.follow-btn.active, 
+.follow-btn:focus.active{
+    border-color: none;
+    background-color: #be2525;
+    color: #fff;
+}
+.follow-btn:hover.active{
+    background-color: #d94b4b;
+}
+.follow-btn:active.active{
+    background-color: #901c1c;
 }
 
 /* fontcolor&bordercolor in myorder */
