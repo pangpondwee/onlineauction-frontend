@@ -61,7 +61,10 @@ const Shipping = () => {
         console.log(res)
         setItemDetails(res.data)
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e)
+        navigate('/404')
+      })
     getData(`/billingInfo/${auctionId}`)
       .then((res) => {
         console.log(res)
@@ -72,7 +75,10 @@ const Shipping = () => {
           phone: res.data.bidderPhoneNumber,
         })
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e)
+        navigate('/404')
+      })
     setShippingAddress({
       name: 'Someone',
       address: 'Some Address',
@@ -130,6 +136,7 @@ const Shipping = () => {
                 <input
                   type="text"
                   className="form-control"
+                  pattern="[0-9]+"
                   placeholder="e.g. 0718785888"
                   onChange={(e) =>
                     setShippingDetails({
@@ -237,6 +244,7 @@ const Shipping = () => {
                 <input
                   type="text"
                   className="form-control"
+                  pattern="[a-zA-Z0-9]+"
                   placeholder="e.g. ABCDEF123456"
                   onChange={(e) =>
                     setShippingDetails({

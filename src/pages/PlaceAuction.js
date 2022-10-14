@@ -190,9 +190,8 @@ const AuctionDetail = () => {
             </label>
             <div className="input-field-flex">
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                pattern="[0-9]+"
                 placeholder="e.g. 500"
                 min={1}
                 onChange={(e) =>
@@ -272,9 +271,9 @@ const AuctionDetail = () => {
             </label>
             <div className="input-field-flex">
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                pattern="[0-9]*"
+                min={1}
                 onChange={(e) =>
                   setAuctionDetails({
                     ...auctionDetails,
@@ -282,7 +281,6 @@ const AuctionDetail = () => {
                   })
                 }
                 placeholder="e.g. 500"
-                min={1}
               />
               <div className="currency">
                 <div>BAHT</div>
@@ -295,11 +293,10 @@ const AuctionDetail = () => {
             </label>
             <div className="input-field-flex">
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                pattern="[0-9]*"
-                placeholder="e.g. 500"
                 min={1}
+                placeholder="e.g. 500"
                 onChange={(e) =>
                   setAuctionDetails({
                     ...auctionDetails,

@@ -62,7 +62,10 @@ const Payment = () => {
         console.log(res)
         setItemDetails(res.data)
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e)
+        navigate('/404')
+      })
   }, [])
 
   const getInformationFromProfileHandler = () => {
@@ -148,6 +151,7 @@ const Payment = () => {
               <input
                 type="text"
                 className="form-control"
+                pattern="[0-9]+"
                 value={paymentDetails.phoneNumber}
                 onChange={(e) =>
                   setPaymentDetails({
@@ -237,9 +241,9 @@ const Payment = () => {
               </label>
               <div className="input-field-flex">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
-                  pattern="[0-9]+"
+                  min={1}
                   onChange={(e) =>
                     setPaymentDetails({
                       ...paymentDetails,
