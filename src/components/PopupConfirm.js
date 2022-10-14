@@ -92,23 +92,23 @@ const PopupConfirm = (props) => {
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
-            <button type="button" class="PopupCon btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+            <button type="button" className="PopupCon btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
                 Confirm
             </button>
 
             {/* <!-- Modal --> */}
-            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
+            <div className="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
                             <img className="popup-confirm-img" src={confirm} alt="shipping"/>
                             <div className="modal-confirm-header-text">
-                                <div className="modal-confirm-head-st" class="modal-title" id="confirmModalLabel">Your item is on its way</div>
-                                <h6 class="modal-title" id="confirmModalLabel">Check item information and a tracking number below</h6>
+                                <div className="modal-confirm-head-st modal-title" id="confirmModalLabel">Your item is on its way</div>
+                                <h6 className="modal-title" id="confirmModalLabel">Check item information and a tracking number below</h6>
                             </div>
-                            {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+                            {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
-                        <div class="modal-body-confirm">
+                        <div className="modal-body-confirm">
                             <Link to={"/billing-info"} >
                                 <button className="billing btn-link" data-bs-dismiss="modal">Billing Info</button>
                             </Link>
@@ -144,32 +144,32 @@ const PopupConfirm = (props) => {
                             </div> */}
                             <h6>Do you confirm that the package has arrived correctly?</h6>
                         </div>
-                        <div class="modal-footer-confirm">
+                        <div className="modal-footer-confirm">
                             {/* btn-confirm ต้องมี func สำหรับแก้ไข status ของสินค้าเป็น completed */}
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" onClick={onConfirm}>
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" onClick={onConfirm}>
                                 Confirm
                             </button>
                             
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onClick={onDeny}>Deny</button>
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Not Yet</button>
+                            <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal" onClick={onDeny}>Deny</button>
+                            <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Not Yet</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* <!-- Modal --> */}
-            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
+            <div className="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
                             <img className="popup-review-img" src={review} alt="review" />
                             <div className="modal-review-header-text">
-                                <div class="modal-title" id="reviewModalLabel">What did you think of your recent bidding item?</div>
-                                <h6 class="modal-title" id="reviewModalLabel">Your feedback is valuable to us and everyone</h6>
+                                <div className="modal-title" id="reviewModalLabel">What did you think of your recent bidding item?</div>
+                                <h6 className="modal-title" id="reviewModalLabel">Your feedback is valuable to us and everyone</h6>
                             </div>
-                            {/* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+                            {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
-                        <div class="modal-body-review">
+                        <div className="modal-body-review">
                             <h6>Review Item : Nintendo Switch</h6>
                             {/* <h6>Iten Name : {data.productName}</h6> */}
                             <h6>Auctioneer Name : Kong Pakkapol</h6>
@@ -189,9 +189,9 @@ const PopupConfirm = (props) => {
                             <h6>Review : </h6>
                             <textarea className="review-box" type="text" placeholder="Write a review here..." value={reviewtext} onChange={e => setReview(e.target.value)} ></textarea>
                         </div>
-                        <div class="modal-footer-review">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={onReview}>Confirm</button>
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Skip</button>
+                        <div className="modal-footer-review">
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={onReview}>Confirm</button>
+                            <button type="button" className="btn btn-light" data-bs-dismiss="modal">Skip</button>
                         </div>
                     </div>
                 </div>
