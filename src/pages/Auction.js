@@ -62,7 +62,13 @@ const Timer = (props)=>{
 	const [time,setTime] = useState(props.timeRemaining);
 	useEffect(()=>{
 		const timer = setInterval(() => {
-			setTime(time-1000)
+			if(time > props.timeRemaining){
+				setTime(props.timeRemaining)
+				console.log(time)
+			}
+			else{
+				setTime(time-1000)
+			}
 		}, 1000);
 		return ()=>clearInterval(timer);
 	})
@@ -381,14 +387,15 @@ const Auction = (props) =>{
 				}
 			))
 			.then((res)=>{
-				setData(prevData=>{
-					return { ...prevData, currentPrice: price, myLastBid: price }
-				})
-
 				const timeRemaining = data.endDate - Date.now()
 				const isFiveMinutes = timeRemaining <= 5*60*1000 ? true : false;
 				if(isFiveMinutes){
 					setIsAlreadyBid5Minute(true)
+				}
+				else{
+					setData(prevData=>{
+						return { ...prevData, currentPrice: price, myLastBid: price }
+					})
 				}
 				getHistory() // after bid
 			})
