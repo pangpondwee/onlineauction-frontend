@@ -140,7 +140,7 @@ const Payment = () => {
                     bidderName: e.target.value,
                   })
                 }
-                placeholder="e.g. Peeranat Srisuthangkul"
+                placeholder="e.g. John Doe"
                 required
               ></input>
             </div>
@@ -159,7 +159,7 @@ const Payment = () => {
                     phoneNumber: e.target.value,
                   })
                 }
-                placeholder="e.g. 0620000000"
+                placeholder="e.g. 0621234567"
                 required
               ></input>
             </div>
@@ -177,7 +177,7 @@ const Payment = () => {
                     bidderAddress: e.target.value,
                   })
                 }
-                placeholder="50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
+                placeholder="e.g. 50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
                 required
               ></textarea>
             </div>
