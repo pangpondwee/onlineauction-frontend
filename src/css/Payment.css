@@ -152,7 +152,38 @@
 
 .billing-info-progress-grid {
   grid-area: progress;
-  margin: 4% 0 4% 0;
+  margin: 2% 0 2% 0;
+}
+
+.billing-info-page-nocard {
+  display: flex;
+  padding: 2% 12% 2% 12%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.status-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-description-text {
+  margin-top: 1%;
+  font-size: 130%;
+}
+
+.status-description-pic {
+  width: 250px;
+}
+
+.status-description-btn {
+  margin-top: 2%;
+}
+
+.billing-info-progress {
+  margin: 2% 0 2% 0;
 }
 
 /* Address Card */
@@ -176,7 +207,7 @@
 }
 
 .address-box-address {
-  margin-left: 10%;
+  margin: 0 10% 0 10%;
 }
 
 .address-box-phone {
@@ -202,6 +233,23 @@
   font-size: 110%;
 }
 
+.shipping-card-not-ready {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wait-shipping-pic {
+  width: 250px;
+}
+
+.wait-shipping-description {
+  margin: 2% 0 4% 0;
+  width: 75%;
+  text-align: center;
+}
+
 /* Summary Card */
 
 .summary-card {
@@ -216,7 +264,22 @@
   font-weight: 600;
 }
 
-.summary-card-total {
+.summary-card-price-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-card-price-section.hidden {
+  visibility: hidden;
+}
+
+.summary-card-bidprice {
+  font-size: 110%;
+}
+
+.summary-card-price {
+  font-size: 110%;
+  font-weight: 600;
 }
 
 /* Item Card */
@@ -300,6 +363,11 @@
   border-radius: var(--radius);
 }
 
+.payment-summary-price-section {
+  display: flex;
+  justify-content: space-between;
+}
+
 .payment-summary-price {
   font-size: 125%;
   font-weight: 600;
@@ -327,6 +395,28 @@
   }
   #payment-form {
     font-size: 90%;
+  }
+
+  .billing-info-page {
+    padding: 2% 10% 2% 10%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .billing-info-address-box-grid {
+    margin: 2% 0 0 2%;
+  }
+
+  .billing-info-tracking-card-grid {
+    margin: 2% 0 0 2%;
+  }
+
+  .billing-info-summary-card-grid {
+    margin: 2% 0 0 2%;
+  }
+
+  .billing-info-progress-grid {
+    margin: 2% 0 0 2%;
   }
 }
 
@@ -385,27 +475,27 @@
   z-index: 0;
   transition: 2s linear;
 }
-.progress.waitingForPayment {
+.progress.state2 {
   width: 20%;
   transition: 0.5s linear;
 }
 
-.progress.waitingConfirmSlip {
+.progress.state3 {
   width: 40%;
   transition: 1s linear;
 }
 
-.progress.waitingForShipping {
+.progress.state4 {
   width: 60%;
   transition: 1.5s linear;
 }
 
-.progress.waitingForConfirm {
+.progress.state5 {
   width: 80%;
   transition: 2s linear;
 }
 
-.progress.completed {
+.progress.state6 {
   width: 100%;
   transition: 2.5s linear;
 }
@@ -424,23 +514,23 @@
   z-index: 1;
 }
 
-.circle.waitingForPayment {
+.circle.state2 {
   transition: 0.25s ease 0.5s;
 }
 
-.circle.waitingConfirmSlip {
+.circle.state3 {
   transition: 0.25s ease 1s;
 }
 
-.circle.waitingForShipping {
+.circle.state4 {
   transition: 0.25s ease 1.5s;
 }
 
-.circle.waitingForConfirm {
+.circle.state5 {
   transition: 0.25s ease 2s;
 }
 
-.circle.completed {
+.circle.state6 {
   transition: 0.25s ease 2.5s;
 }
 
@@ -464,23 +554,23 @@
   width: 15%;
 }
 
-.description-box.waitingForPayment {
+.description-box.state2 {
   transition: color 0.25s ease 0.5s;
 }
 
-.description-box.waitingConfirmSlip {
+.description-box.state3 {
   transition: color 0.25s ease 1s;
 }
 
-.description-box.waitingForShipping {
+.description-box.state4 {
   transition: color 0.25s ease 1.5s;
 }
 
-.description-box.waitingForConfirm {
+.description-box.state5 {
   transition: color 0.25s ease 2s;
 }
 
-.description-box.completed {
+.description-box.state6 {
   transition: color 0.25s ease 2.5s;
 }
 
