@@ -7,6 +7,9 @@ import { useParams } from 'react-router-dom'
 import getData from '../components/fetchData'
 import ProgressBar from '../components/ProgressBar'
 import '../css/Payment.css'
+import waitingForPaymentPic from '../pictures/waiting-for-payment.png'
+import waitingForPaymentAuctioneer from '../pictures/waiting-for-payment-auctioneer.jpg'
+import { useNavigate } from 'react-router-dom'
 
 const MapShippingCompany = {
   KEX: 'Kerry Express',
@@ -27,16 +30,17 @@ const MapShippingCompany = {
 
 const BillingInfo = () => {
   const { auctionId } = useParams()
+  const navigate = useNavigate()
 
   const [orderDetails, setOrderDetails] = useState({
     auctionID: '',
-    auctionStatus: '',
     auctioneerDisplayname: '',
     auctioneerID: '',
     billingStatus: '',
     lastBid: '',
     productName: '',
     productPicture: '',
+    isAuctioneer: '',
   })
 
   const [shippingAddress, setShippingAddress] = useState({
@@ -65,6 +69,7 @@ const BillingInfo = () => {
           lastBid: res.data.winningPrice,
           productName: res.data.productName,
           productPicture: res.data.productPicture,
+          isAuctioneer: res.data.isAuctioneer,
         })
         setShippingAddress({
           name: res.data.bidderName,
@@ -81,33 +86,192 @@ const BillingInfo = () => {
       .catch((e) => console.log(e))
   }, [])
 
-  return (
-    <div className="billing-info-page">
-      <div className="billing-info-order-grid">
+  if (
+    orderDetails.billingStatus === 'waitingForPayment' &&
+    orderDetails.isAuctioneer === false
+  ) {
+    return (
+      <div className="billing-info-page-nocard">
         <OrderObj data={orderDetails} type={isAuctioneer ? 'auction' : 'bid'} />
+        <div className="billing-info-progress">
+          <ProgressBar
+            status={orderDetails.billingStatus}
+            isAuctioneer={orderDetails.isAuctioneer}
+          />
+        </div>
+        <div className="status-description">
+          <img
+            className="status-description-pic"
+            src={waitingForPaymentPic}
+            alt="waiting-payment"
+          />
+          <div className="status-description-text">
+            We're waiting for your payment.
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary status-description-btn"
+            onClick={() => navigate(`/payment/${auctionId}`)}
+          >
+            Go to Payment Page
+          </button>
+        </div>
       </div>
-      <div className="billing-info-progress-grid">
-        <ProgressBar status={orderDetails.billingStatus} />
+    )
+  } else if (
+    orderDetails.billingStatus === 'waitingForShipping' &&
+    orderDetails.isAuctioneer === false
+  ) {
+    return (
+      <div className="billing-info-page">
+        <div className="billing-info-order-grid">
+          <OrderObj
+            data={orderDetails}
+            type={isAuctioneer ? 'auction' : 'bid'}
+          />
+        </div>
+        <div className="billing-info-progress-grid">
+          <ProgressBar
+            status={orderDetails.billingStatus}
+            isAuctioneer={orderDetails.isAuctioneer}
+          />
+        </div>
+        <div className="billing-info-address-box-grid grey-box">
+          <AddressBox
+            name={shippingAddress.name}
+            address={shippingAddress.address}
+            phone={shippingAddress.phone}
+          ></AddressBox>
+        </div>
+        <div className="billing-info-summary-card-grid grey-box">
+          <SummaryCard
+            bidPrice={orderDetails.lastBid}
+            isAuctioneer={orderDetails.isAuctioneer}
+          ></SummaryCard>
+        </div>
+        <div className="billing-info-tracking-card-grid grey-box">
+          <TrackingCard
+            status="waitingForShipping"
+            isAuctioneer={orderDetails.isAuctioneer}
+            shippingCompany={
+              MapShippingCompany[shippingDetails.shippingCompany]
+            }
+            trackingNumber={shippingDetails.trackingNumber}
+            packagePicture={shippingDetails.packagePicture}
+          ></TrackingCard>
+        </div>
       </div>
-      <div className="billing-info-address-box-grid grey-box">
-        <AddressBox
-          name={shippingAddress.name}
-          address={shippingAddress.address}
-          phone={shippingAddress.phone}
-        ></AddressBox>
+    )
+  } else if (
+    orderDetails.billingStatus === 'waitingForPayment' &&
+    orderDetails.isAuctioneer === true
+  ) {
+    return (
+      <div className="billing-info-page-nocard">
+        <OrderObj data={orderDetails} type={isAuctioneer ? 'auction' : 'bid'} />
+        <div className="billing-info-progress">
+          <ProgressBar
+            status={orderDetails.billingStatus}
+            isAuctioneer={orderDetails.isAuctioneer}
+          />
+        </div>
+        <div className="status-description">
+          <img
+            className="status-description-pic"
+            src={waitingForPaymentAuctioneer}
+            alt="waiting-payment"
+          />
+          <div className="status-description-text">
+            We're working on your order.
+          </div>
+        </div>
       </div>
-      <div className="billing-info-tracking-card-grid grey-box">
-        <TrackingCard
-          shippingCompany={MapShippingCompany[shippingDetails.shippingCompany]}
-          trackingNumber={shippingDetails.trackingNumber}
-          packagePicture={shippingDetails.packagePicture}
-        ></TrackingCard>
+    )
+  } else if (
+    orderDetails.billingStatus === 'waitingForShipping' &&
+    orderDetails.isAuctioneer === true
+  ) {
+    return (
+      <div className="billing-info-page">
+        <div className="billing-info-order-grid">
+          <OrderObj
+            data={orderDetails}
+            type={isAuctioneer ? 'auction' : 'bid'}
+          />
+        </div>
+        <div className="billing-info-progress-grid">
+          <ProgressBar
+            status={orderDetails.billingStatus}
+            isAuctioneer={orderDetails.isAuctioneer}
+          />
+        </div>
+        <div className="billing-info-address-box-grid grey-box">
+          <AddressBox
+            name={shippingAddress.name}
+            address={shippingAddress.address}
+            phone={shippingAddress.phone}
+          ></AddressBox>
+        </div>
+        <div className="billing-info-summary-card-grid grey-box">
+          <SummaryCard
+            bidPrice={orderDetails.lastBid}
+            isAuctioneer={orderDetails.isAuctioneer}
+          ></SummaryCard>
+        </div>
+        <div className="billing-info-tracking-card-grid grey-box">
+          <TrackingCard
+            status="waitingForShipping"
+            isAuctioneer={true}
+            auctionId={auctionId}
+            shippingCompany={
+              MapShippingCompany[shippingDetails.shippingCompany]
+            }
+            trackingNumber={shippingDetails.trackingNumber}
+            packagePicture={shippingDetails.packagePicture}
+          ></TrackingCard>
+        </div>
       </div>
-      <div className="billing-info-summary-card-grid grey-box">
-        <SummaryCard bidPrice={orderDetails.lastBid}></SummaryCard>
+    )
+  } else {
+    return (
+      <div className="billing-info-page">
+        <div className="billing-info-order-grid">
+          <OrderObj
+            data={orderDetails}
+            type={isAuctioneer ? 'auction' : 'bid'}
+          />
+        </div>
+        <div className="billing-info-progress-grid">
+          <ProgressBar
+            status={orderDetails.billingStatus}
+            isAuctioneer={orderDetails.isAuctioneer}
+          />
+        </div>
+        <div className="billing-info-address-box-grid grey-box">
+          <AddressBox
+            name={shippingAddress.name}
+            address={shippingAddress.address}
+            phone={shippingAddress.phone}
+          ></AddressBox>
+        </div>
+        <div className="billing-info-summary-card-grid grey-box">
+          <SummaryCard
+            bidPrice={orderDetails.lastBid}
+            isAuctioneer={orderDetails.isAuctioneer}
+          ></SummaryCard>
+        </div>
+        <div className="billing-info-tracking-card-grid grey-box">
+          <TrackingCard
+            shippingCompany={
+              MapShippingCompany[shippingDetails.shippingCompany]
+            }
+            trackingNumber={shippingDetails.trackingNumber}
+            packagePicture={shippingDetails.packagePicture}
+          ></TrackingCard>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default BillingInfo
