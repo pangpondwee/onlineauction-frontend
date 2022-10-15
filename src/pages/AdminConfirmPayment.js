@@ -30,6 +30,8 @@ const PopupConfirm = (props) => { // TODO use component popup confirm
                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body-confirm">
+                      <h6>Auction ID</h6>
+                      <p>{props.auction}</p>
                       <h6>Name</h6>
                       <p>{props.data.receiverName ? props.data.receiverName : "-"}</p>
                       <h6>Telephone</h6>
