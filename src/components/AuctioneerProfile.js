@@ -196,7 +196,7 @@ const AuctioneerProfile = () => {
         })
     },[]);
 
-    console.log(data)
+    // console.log(data)
 
     // const data = {
     //     displayName: "Kong Pakkrapol",

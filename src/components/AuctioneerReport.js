@@ -15,7 +15,7 @@ const AuctioneerReport = () => {
     const [message, setMessage] = useState("")
 
     useEffect(() => {
-        // console.log("Begin getData")
+        console.log("Begin getData for report auctioneer")
         getData(`/user/profile/${auctioneerID}`).then((res) => {
             setStatus(res.status);
             // console.log(status)
