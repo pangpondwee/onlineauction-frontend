@@ -8,10 +8,11 @@ import PopupError from "../components/PopupError";
 import eye from "../pictures/eye.svg";
 import eye_blind from "../pictures/eye_blind.svg";
 import { postData } from "../components/fetchData";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ResetPassword = () => {
 	const { userId } = useParams();
+  const navigate = useNavigate();
   const newPasswordRef = useRef();
   const passwordConfirmRef = useRef();
   const [error,setError] = useState();
@@ -39,8 +40,8 @@ const ResetPassword = () => {
     postData("/user/reset-password?id="+userId,JSON.stringify({
       newPassword: newPassword
     }))
-    .then((res)=>{
-      console.log("okay")
+    .then(()=>{
+      navigate('/reset-success')
     })
     .catch(e=>{
       setError(e.message)
@@ -68,6 +69,7 @@ const ResetPassword = () => {
               <li>Contains no spaces</li>
             </ul>
             <br/>
+            <label htmlFor="signup-password">New Password</label>
             <div className="input-group">
               <input id="signup-password" type="password" placeholder="Password" className='form-control' ref={newPasswordRef}></input>
               <img src={eye_icon} className="btn" style={{width: "40px",padding: 0, margin: "1em auto"}} onClick ={togglePassword} />
