@@ -28,10 +28,12 @@ const TabSignUp = (props)=>{
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       <ul style={{paddingLeft: "1em", textAlign: "start", marginBottom: "0"}} >
-        <li>At least 10 characters</li>
-        <li>At least 1 lower case character</li>
-        <li>At least 1 upper case character</li>
-        <li>At least 1 special character</li>
+        <li>Be 10-30 characters long</li>
+        <li>Contains at least 1 number</li>
+        <li>Contains at least 1 lower case character</li>
+        <li>Contains at least 1 upper case character</li>
+        <li>Contains at least 1 special character</li>
+        <li>Contains no spaces</li>
       </ul>
     </Tooltip>
   );
