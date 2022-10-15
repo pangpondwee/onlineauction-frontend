@@ -76,9 +76,12 @@ const Profile = (props) => {
             <div className="AucDetail">
                 <div className="AucDes">
                     {(isFraud === true)?
-                        <h1>{auctioneer} (Fraud Warning)</h1>
+                        <div style={{display:"flex"}}>
+                            <h1 className="auctioneer-name">{auctioneer}</h1>
+                            <h3 className="fraud pt-3"> (Fraud Warning)</h3>
+                        </div>
                         :
-                        <h1>{auctioneer}</h1>
+                        <h1 className="auctioneer-name">{auctioneer}</h1>
                     }
                     {/* <h1>{auctioneer}</h1> */}
                     <h6>Auctioneer Veteran</h6>
@@ -89,11 +92,12 @@ const Profile = (props) => {
                         <h6>Rating</h6>
                         <div className="rating-star">
                             <h6>{rating}</h6>
-                            <img src={fullStar} alt="full-star" />
+                            {star}
+                            {/* <img src={fullStar} alt="full-star" />
                             <img src={fullStar} alt="full-star" />
                             <img src={fullStar} alt="full-star" />
                             <img src={halfStar} alt="full-star" />
-                            <img src={emptyStar} alt="empty-star" />
+                            <img src={emptyStar} alt="empty-star" /> */}
                         </div>
                     </div>
                     <div className="AucStat">
