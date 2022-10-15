@@ -21,6 +21,8 @@ const MyOrder = () =>{
         "bid-waitingForConfirm" : "confirm",
         "auction-waitingForConfirm" : "confirm",
         "bid-waitingForShipping" : "delivered",
+        "auction-waitingConfirmSlip": "pay",
+        "auction-waitingAdminPayment": "confirm",
     }
 
     useEffect(()=>{
@@ -53,7 +55,11 @@ const MyOrder = () =>{
     
     if(type==="type=all") _data = list==="list=bid"? data_mybid : data_myauction;
     else if(type==="type=current") _data = (list==="list=bid"? data_mybid : data_myauction).filter(d=>(d.auctionStatus==="bidding"))
-    else if(type==="type=complete") _data = (list==="list=bid"? data_mybid : data_myauction).filter(d=>(d.auctionStatus==="finished"))
+    else if(type==="type=complete") {
+        if(list==="list=bid"){
+            _data = data_mybid.filter(d=>(d.auctionStatus==="finished" || d.billingStatus==="waitingAdminPayment"))
+        } else _data = data_myauction.filter(d=>(d.auctionStatus==="finished"))
+    }
     else if(list==="list=bid") _data = data_mybid.filter(d=>(status_to_link["bid-"+d.billingStatus]===type.slice(5)))
     else if(list==="list=auction") _data = data_myauction.filter(d=>(status_to_link["auction-"+d.billingStatus]===type.slice(5)))
 
