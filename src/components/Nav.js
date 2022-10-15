@@ -58,7 +58,7 @@ const Nav = (props) => {
 					</div>
 				</div>
 				:
-				<Link className="btn ms-auto" to="/signup">Sign In/Sign Up</Link>
+				<Link className="btn ms-auto" to="/signup">Sign In/Sign Up</Link>				
 			}
 			
 			{/* <div className="dropdown p-2">
@@ -70,7 +70,7 @@ const Nav = (props) => {
 			{/* Nav Bar END*/}
 
 			{/* Offcanvas BEGIN*/}
-			<div id="offcanvas-nav" className="offcanvas offcanvas-start ps-4">
+			{/* <div id="offcanvas-nav" className="offcanvas offcanvas-start ps-4">
 				<div className="offcanvas-header">
 					<h5 className="offcanvas-title">Auction Online</h5>
 					<button className="btn-close" data-bs-dismiss="offcanvas"></button>
@@ -89,8 +89,41 @@ const Nav = (props) => {
 					<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">Currently on Auction</Link>
 					<Link to="/account/following" className="nav-link nav-item">My Following List</Link>
 				</div>
-			</div>
+			</div> */}
 			{/* Offcanvas END*/}
+			{loggedIn ?
+				<div id="offcanvas-nav" className="offcanvas offcanvas-start ps-4">
+					<div className="offcanvas-header">
+						<h5 className="offcanvas-title">Auction Online</h5>
+						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
+					</div>
+					<Link id="offcanvas-profile" className="nav-link p-3" to="/account/profile">{displayName}</Link>
+					<div className="navbar-nav">
+						<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
+						<div className="dropdown-menu nav-dropdown show" >
+						{category_elements}
+						</div>
+						<Link to="#" className="nav-link nav-item">Place Auction</Link>
+						<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">Currently Bidding</Link>
+						<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">Currently on Auction</Link>
+						<Link to="/account/following" className="nav-link nav-item">My Following List</Link>
+					</div>
+				</div>
+				:
+				<div id="offcanvas-nav" className="offcanvas offcanvas-start ps-4">
+					<div className="offcanvas-header">
+						<h5 className="offcanvas-title">Auction Online</h5>
+						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
+					</div>
+				
+					<div className="navbar-nav">
+						<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
+						<div className="dropdown-menu nav-dropdown show" >
+						{category_elements}
+						</div>
+					</div>
+			</div>
+			}
 		</nav>
   );
 };
