@@ -1,34 +1,62 @@
 import styles from "../css/AdminConfirmDelivery.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect,useState } from "react";
-import getData from "../components/fetchData";
+import getData, { postData } from "../components/fetchData";
 
-const data = [
-  {
-    Auctioneer: "abcdefg@gmail.com",
-    Winner: "peeranat.sri@ku.th",
-    Price: "2000$",
-  },
-  {
-    Auctioneer: "abcdefg@gmail.com",
-    Winner: "kittipak.wi@ku.th",
-    Price: "2500$",
-  },
-  {
-    Auctioneer: "abcdefg@gmail.com",
-    Winner: "peeranat.sri@ku.th",
-    Price: "7000$",
-  },
-  {
-    Auctioneer: "abcdefg@gmail.com",
-    Winner: "pakapol.na@ku.th",
-    Price: "6969$",
-  },
-];
+const PopupConfirm = (props) => { // TODO use component popup confirm
+  if(!props.data.bankName){
+    return (
+      <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                  <p style={{paddingBottom: "686.4px"}}>Loading...</p>
+              </div>
+          </div>
+      </div>
+    )
+  }
+  return (
+      <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                  <div className="modal-header">
+                      <div className="modal-confirm-header-text">
+                          <div className="modal-confirm-head-st modal-title" id="confirmModalLabel">Confirm Payment</div>
+                      </div>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body-confirm">
+                      <h6>Auction ID</h6>
+                      <p>{props.auction}</p>
+                      <h6>Bank</h6>
+                      <p>{props.data.bankName ? props.data.bankName : "-"}</p>
+                      <h6>Account Number</h6>
+                      <p>{props.data.accountNumber ? props.data.accountNumber : "-"}</p>
+                      <h6>Account Name</h6>
+                      <p>{props.data.accountName ? props.data.accountName : "-"}</p>
+                      <h6>Tracking Number</h6>
+                      <p>{props.data.trackingNumber ? props.data.trackingNumber : "-"}</p>
+                      <h6>Shipping Company</h6>
+                      <p>{props.data.shippingCompany ? props.data.shippingCompany : "-"}</p>
+                      <h6>Package Picture</h6>
+                      <img src={props.data.packagePicture} className="tracking-img"/>
+                  </div>
+                  <div className="modal-footer-confirm">
+                      <button type="button" className="btn btn-primary" onClick={()=>props.confirm(props.auction)}>Confirm</button>
+                      {/* <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Deny</button> */}
+                      <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  )
+}
 
 const AdminConfirmDelivery = () => {
   const [data,setData] = useState([]);
   const [status,setStatus] = useState("loading")
+  const [auctionID,setAuctionID] = useState(null)
+  const [transaction,setTransaction] = useState({})
   useEffect(()=>{
     getData("/admin/transaction-list?filter=payAuctioneer")
     .then(res=>{
@@ -40,9 +68,40 @@ const AdminConfirmDelivery = () => {
       setData(e.message)
     })
   },[])
+
+  const getTransaction = (billingInfoID,auctionID)=>{
+    setTransaction({})
+    getData("/admin/transaction/"+billingInfoID+"?detail=delivery")
+    .then(res=>{
+      setTransaction(res.detail)
+      setAuctionID(auctionID)
+      setStatus(res.status)
+    })
+    .catch(e=>{
+      setStatus("error");
+      setData(e.message)
+    })
+  }
+  const confirmTransaction = (auction)=>{
+    postData("/admin/transaction/confirm/"+auction,
+    JSON.stringify({
+      "confirm":"payment"
+    }))
+    .then(res=>{
+      console.log("No error")
+    })
+    .catch(e=>{
+      console.log(e)
+    })
+  }
   if(status == "success"){
     return (
       <>
+        <PopupConfirm
+        data={transaction}
+        auction={auctionID}
+        confirm={confirmTransaction}
+        />
         <h1>Confirm Delivery</h1>
         <div className={styles.App4}>
           <table className={styles.table}>
@@ -58,11 +117,11 @@ const AdminConfirmDelivery = () => {
             {data.map((val, key) => {
               return (
                 <tr key={key} className={styles.tr}>
-                  <td className={styles.td}>{val.Auctioneer}</td>
-                  <td className={styles.td}>{val.Winner}</td>
-                  <td className={styles.td}>{val.Price}</td>
+                  <td className={styles.td}>{val.auctioneerEmail}</td>
+                  <td className={styles.td}>{val.bidderEmail}</td>
+                  <td className={styles.td}>{val.winningPrice}</td>
                   <td className={styles.td}>
-                    <Link to="#">detail</Link>
+                    <a href="" onClick={()=>getTransaction(val.billingInfoID,val.auctionID)} data-bs-toggle="modal" data-bs-target="#confirmModal">detail</a>
                   </td>
                 </tr>
               );
