@@ -61,7 +61,7 @@ const AccountEdit = () =>{
         personal_info.forEach((_info)=>{
             const tmp = document.getElementById(_info).value
             if (tmp != ""){
-                console.log(tmp)
+                // console.log(tmp)
                 _changed[_info] = tmp
             }
         })
@@ -83,7 +83,7 @@ const AccountEdit = () =>{
 		})
 	},[]);
 
-    console.log(data)
+    // console.log(data)
 
 	return (
         <div className="profile-page d-flex justify-content-between">
@@ -117,11 +117,11 @@ const AccountEdit = () =>{
                         </div>
                         <div>
                             <label><h5>Address</h5></label><br/>
-                            <textarea type="text" id="address" className="input-editing" placeholder={data.address} maxlength="250"/>
+                            <textarea type="text" id="address" className="input-editing" placeholder={data.address} maxlength="1000"/>
                         </div>
                         <div>
                             <label><h5>Description</h5></label><br/>
-                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription} maxlength="500"/>
+                            <textarea type="text" id="accountDescription" className="input-editing" rows="7" placeholder={data.accountDescription} maxlength="2000"/>
                         </div>
                     </div>
                 </div>
