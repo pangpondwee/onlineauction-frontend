@@ -83,7 +83,10 @@ const BillingInfo = () => {
         })
         setIsAuctioneer(res.data.isAuctioneer)
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e)
+        navigate('/404')
+      })
   }, [])
 
   if (
