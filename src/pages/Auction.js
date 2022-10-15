@@ -180,7 +180,7 @@ const AuctionInfo = (props)=>{
 				<p>Auctioneer</p>
 				<p>Category</p>
 				<p>
-					<Link className="info-data" to={auctioneerLink}>
+					<Link id="auctioneerName" className="info-data" to={auctioneerLink}>
 					{props.myid == props.data.auctioneerID ?
 					"You"
 					:
@@ -192,7 +192,7 @@ const AuctionInfo = (props)=>{
 			<div id="info-bottom" className="card border-light mb-3">
 				<p>Highest Bid</p>
 				<p>Time Remaining</p>
-				<p className="info-data" >{props.data.currentPrice}฿</p>
+				<p className="info-data" >{props.data.currentPrice} <span id='currency'>Baht</span></p>
 				<Timer
 					timeRemaining={props.timeRemaining}
 				/>
@@ -215,7 +215,9 @@ const AuctionDetail = (props)=>{
 	}
 	
 	if(!canBid || props.data.myLastBid > 0){ // auctioneer or anonymous
-		follow = (<></>);
+		// follow = (<button 
+		// 	className={followClass} disabled>Disabled</button>);
+		follow=(<></>)
 	}
 	else{ // following
 		follow = (<button 
