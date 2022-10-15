@@ -42,7 +42,7 @@ const ForgetPassword = () => {
       setError={setError}
       />
       <div className={classes.SignUp}>
-        <div>
+        <div className={classes.signupArt}>
           <h1>Anything You Want, At A Super Satisfying Price!</h1>
           <h2 className="text-primary">Create An Account Now!</h2>
           <img className={classes.loginimg} src={pic1} />
