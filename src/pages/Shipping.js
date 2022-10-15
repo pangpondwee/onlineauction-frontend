@@ -80,9 +80,9 @@ const Shipping = () => {
         navigate('/404')
       })
     setShippingAddress({
-      name: 'Someone',
-      address: 'Some Address',
-      phone: '0620000000',
+      name: 'Full Name',
+      address: 'Address',
+      phone: '0621234567',
     })
   }, [])
 
@@ -224,7 +224,7 @@ const Shipping = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="e.g. Peeranat Srisuthangkul"
+                  placeholder="e.g. John Doe"
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
