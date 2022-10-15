@@ -29,6 +29,7 @@ import AdminConfirmDelivery from './pages/AdminConfirmDelivery'
 import AdminConfirmPayment from './pages/AdminConfirmPayment'
 import AdminReport from './pages/AdminReport'
 import SignupSuccess from './pages/SignupSuccess'
+import ForgetSuccess from './pages/ForgetSuccess'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="signup-success" element={<SignupSuccess />} />
           <Route path="auction/:auctionId" element={<Auction />} />
           <Route path="forget-password" element={<ForgetPassword />} />
+          <Route path="forget-success" element={<ForgetSuccess />} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="place-auction" element={<PlaceAuction />} />
           <Route path="payment/:auctionId" element={<Payment />} />

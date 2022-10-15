@@ -8,7 +8,7 @@ function SignupSuccess() {
             <img className={classes.successIcon} src={successIcon} />
         </div>
         <div className={classes.desc}>
-            <h1>Signup Success</h1>
+            <h1></h1>
             <p>Please Click the Link in Your Email to Continue</p>
         </div>
         </>

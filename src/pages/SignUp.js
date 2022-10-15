@@ -112,7 +112,7 @@ const TabSignIn = (props)=>{
 				  <input id="password" type="password" placeholder="Password" className='form-control' ref={props.password}></input>
 				  <img src={eye_icon} className="btn" style={{width: "40px",padding: 0, margin: "1em auto"}} onClick ={togglePassword} />
 			  </div>
-        <Link to={"#"}>Forgot Password?</Link>
+        <Link to="/forget-password">Forgot Password?</Link>
         
         <div>
           <input type="submit" className={classes.button} value="Sign In"/>
