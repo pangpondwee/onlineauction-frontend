@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import fetchData from "./fetchData";
-// import kong from "../pictures/kong.png";
-import fullStar from "../pictures/star.png";
-import emptyStar from "../pictures/star_blank.png";
-import halfStar from "../pictures/star_half.png"
+import fullStar from "../pictures/star-full.png";
+import emptyStar from "../pictures/star-empty.png";
+import halfStar from "../pictures/star-half-empty.png"
+import '../css/AuctioneerProfile.css';
+import getData from "./fetchData";
 
 // Badges
 import badge_top_10 from "../pictures/badge-top-10.png"
@@ -17,13 +17,6 @@ import badge_top_seller_10k from "../pictures/badge-top-seller-10k.png"
 import badge_newbie from "../pictures/badge-newbie.png"
 import badge_admin from "../pictures/badge-admin.png"
 import badge_official from "../pictures/badge-official.png"
-
-// import badge1 from "../pictures/badge1.png";
-// import badge2 from "../pictures/badge2.png";
-// import badge3 from "../pictures/badge3.png";
-// import stat from "../pictures/stat.png";
-import '../css/AuctioneerProfile.css';
-import getData from "./fetchData";
 
 const dictBadge = {
     "top-10":badge_top_10 ,
@@ -47,6 +40,7 @@ const Profile = (props) => {
     const successAuctioned = props.successAuctioned
     const isFraud = props.isFraud
     const badges = props.badges
+    // console.log(rating)
 
     const star = []
     let badge = []
@@ -57,7 +51,7 @@ const Profile = (props) => {
         badge = badges.map((val,key)=>{
             let badgeName = dictBadge[val]
             return (
-                <img src={badgeName} key={key} alt={val} />
+                <img src={badgeName} key={key} alt={val} className="badge-img" />
             )
         })
         console.log(badges)
@@ -95,25 +89,12 @@ const Profile = (props) => {
                         <h6>Rating</h6>
                         <div className="rating-star">
                             <h6>{rating}</h6>
-                            {/* still thinking how to map rating no into star */}
                             <img src={fullStar} alt="full-star" />
                             <img src={fullStar} alt="full-star" />
                             <img src={fullStar} alt="full-star" />
-                            <img src={fullStar} alt="full-star" />
+                            <img src={halfStar} alt="full-star" />
                             <img src={emptyStar} alt="empty-star" />
                         </div>
-                    </div>
-                    <div className="AucBadges">
-                        <h6>Badges</h6>
-                        {(badge.length === 0)?
-                            <div className="badges">
-                                <h6>No Badge</h6>
-                            </div>
-                            :
-                            <div className="badges">
-                                {badge}
-                            </div>
-                        }
                     </div>
                     <div className="AucStat">
                         <h6>Auction Statistic</h6>
@@ -126,6 +107,18 @@ const Profile = (props) => {
                         </div>
                     </div>
                 </div>
+                <div className="AucBadges">
+                        <h6>Badges</h6>
+                        {(badge.length === 0)?
+                            <div className="badges">
+                                <h6>No Badge</h6>
+                            </div>
+                            :
+                            <div className="badges">
+                                {badge}
+                            </div>
+                        }
+                    </div>
             </div>
         </div>
     )
@@ -199,7 +192,7 @@ const AuctioneerProfile = () => {
         })
     },[]);
 
-    // console.log(data)
+    console.log(data)
 
     // const data = {
     //     displayName: "Kong Pakkrapol",
