@@ -31,7 +31,7 @@ const PopupConfirm = (props) => {
        }
 
     useEffect(() => {
-        console.log("Begin getData billinginfo")
+        console.log("Begin getData tracking")
         getData(`/shipping/${auctionID}/tracking`).then((res) => {
             setData(res.data.trackingInfo)
         })
