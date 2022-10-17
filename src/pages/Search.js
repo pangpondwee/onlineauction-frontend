@@ -161,6 +161,7 @@ const Search = (props) =>{
 				
 			</div>
 			<div className="searchSort">
+				<span className="searchSortBy">Sort by</span>
 				<select id="select1" value={p1 == null ? "" : p1} onChange={selectSort} >
 					<option value="" disabled>-- Select --</option>
 					<option value="newest">Newest</option>
@@ -168,7 +169,7 @@ const Search = (props) =>{
 					<option value="highest_bid">Highest Bid Price</option>
 					<option value="lowest_bid">Lowest Bid Price</option>
 				</select>
-				<span className="">Sort by</span>
+				<span className="searchCategory">Category</span>
 				<select id="select2" value={p2 == null ? "" : p2} onChange={selectCate} >
 					<option value="" disabled>-- Select --</option>
 				{categoryTypesEnum.map((val, key) => {
@@ -177,8 +178,9 @@ const Search = (props) =>{
 					);
 				})}
 				</select>
-				<span className="">Category</span>
+				
 			</div>
+			
 			<div className="row searchRow">
 				{AuctionElements}
 			</div>
