@@ -99,7 +99,7 @@ const Nav = (props) => {
 						<div className="dropdown-menu nav-dropdown show" >
 						{category_elements}
 						</div>
-						<Link to="#" className="nav-link nav-item">Place Auction</Link>
+						<Link to="/place-auction" className="nav-link nav-item">Place Auction</Link>
 						<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">Currently Bidding</Link>
 						<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">Currently on Auction</Link>
 						<Link to="/account/following" className="nav-link nav-item">My Following List</Link>
