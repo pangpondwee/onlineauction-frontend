@@ -14,7 +14,8 @@
 #auction-top{
     float: left;
     width: 20vw;
-    margin: 25px 25px 25px 0;
+    margin: 25px 0 25px 0;
+    padding-right: 25px;
     border-right: 1px var(--color-primary) solid;
     height: 700px;
 }
@@ -24,7 +25,6 @@
 }
 #topbidder-list{
     margin-right: 30px;
-    overflow: scroll;
     height: 500px;
 }
 .topbidder-element{
@@ -141,7 +141,7 @@
     width: 100%;
 }
 #auction-desc-pane{
-    overflow: scroll;
+    overflow-y: scroll;
     width: 100%;
 }
 #auction-content{
@@ -283,5 +283,5 @@
 }
 #history-error{
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1em;
 }
