@@ -4,6 +4,7 @@ import confirm from '../pictures/confirm.png'
 import '../css/PopupConRev.css'
 import { useState, useEffect } from 'react'
 import {getDateSince, getDate} from "../components/util";
+import PopupConfirm from "../components/PopupConfirm";
 
 const OrderObj = (props) => {
   const navigate = useNavigate()
@@ -14,6 +15,7 @@ const OrderObj = (props) => {
     if (props.data.auctionStatus === 'bidding') navigate(`/auction/${props.data.auctionID}`)
     else if(status_of_auction === 'bid-waitingForPayment') navigate(`/payment/${props.data.auctionID}`)
     else if(status_of_auction === 'auction-waitingForShipping') navigate(`/shipping/${props.data.auctionID}`)
+    else if(status_of_auction === 'bid-waitingForConfirm') ;
     else navigate(`/billing-info/${props.data.auctionID}`)
   }
 
@@ -23,12 +25,14 @@ const OrderObj = (props) => {
         "bid-waitingConfirmSlip": "To Pay",
         "bid-waitingForShipping": "To Delivered",
         "bid-waitingForConfirm": "To Confirm",
+        "bid-waitingAdminPayment": "Completed",
         "bid-completed": "Completed",
         "auction-bidding": "On Auction",
         "auction-waitingForPayment": "To Pay",
         "auction-waitingConfirmSlip": "To Pay",
         "auction-waitingForShipping": "To Shipped",
         "auction-waitingForConfirm": "To Confirm",
+        // "auction-waitingAdminPayment": "To Confirm",
         "auction-completed": "Completed",
     }
 
@@ -73,10 +77,22 @@ const OrderObj = (props) => {
           src={props.data.productPicture}
           alt="List_goods"
           className="mini-pic-goods"
+          onClick={navigateTo}
+          data-bs-toggle={
+            status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''
+          }
+          data-bs-target={
+            status_of_auction === 'bid-waitingForConfirm'
+              ? '#confirmModal'
+              : ''}
         />
         <span>
           <div className="d-flex">
-            <h4>{props.data.productName}</h4>
+            <h4 onClick={navigateTo} className="can_click" 
+            data-bs-toggle={ status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''}
+            data-bs-target={ status_of_auction === 'bid-waitingForConfirm'? '#confirmModal' : ''}>
+              {props.data.productName}
+            </h4>
             <pre>  </pre>
             {props.type === 'bid' ? (
               <h6 className='pt-1'>(By {props.data.auctioneerDisplayname})</h6>
@@ -86,7 +102,10 @@ const OrderObj = (props) => {
           </div>
 
           <h6>Highest Bid : {props.data.lastBid} Baht</h6>
-          <div className="status-box">
+          <div className="status-box can_click"
+          onClick={navigateTo}
+          data-bs-toggle={ status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''}
+          data-bs-target={ status_of_auction === 'bid-waitingForConfirm'? '#confirmModal': ''}>
             <h6 className="status-text">{text_alert(status_of_auction)}</h6>
             {(status_of_auction==="auction-bidding" || status_of_auction==="bid-bidding")? <Timer timeRemaining={timeRemaining}/> : <></>}
           </div>
@@ -108,6 +127,7 @@ const OrderObj = (props) => {
           </div>
         </div>
       </div>
+      {(status_of_auction==="bid-waitingForConfirm")? <PopupConfirm auctionID={props.data.auctionID}/> : <></>}
     </>
   )
 }

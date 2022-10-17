@@ -51,8 +51,6 @@ const Payment = () => {
     winningPrice: '',
     productPicture: '',
   })
-  const [checked, setChecked] = useState(false)
-  const [inputDisabled, setInputDisabled] = useState(false)
 
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
@@ -64,30 +62,34 @@ const Payment = () => {
         console.log(res)
         setItemDetails(res.data)
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e)
+        navigate('/404')
+      })
   }, [])
 
-  const getInformationFromProfileHandler = (checked) => {
-    if (checked === true) {
-      getData('/user/myprofile')
-        .then((res) => {
-          console.log(res)
+  const getInformationFromProfileHandler = () => {
+    getData('/user/myprofile')
+      .then((res) => {
+        console.log(res)
+        if ('displayName' in res.data) {
           setPaymentDetails({
             ...paymentDetails,
             bidderName: res.data.displayName,
+          })
+        } else if ('phoneNumber' in res.data) {
+          setPaymentDetails({
+            ...paymentDetails,
             phoneNumber: res.data.phoneNumber,
+          })
+        } else if ('address' in res.data) {
+          setPaymentDetails({
+            ...paymentDetails,
             bidderAddress: res.data.address,
           })
-        })
-        .catch((e) => console.log(e))
-    } else {
-      setPaymentDetails({
-        ...paymentDetails,
-        bidderName: '',
-        phoneNumber: '',
-        bidderAddress: '',
+        }
       })
-    }
+      .catch((e) => console.log(e))
   }
 
   const submitHandler = () => {
@@ -106,7 +108,7 @@ const Payment = () => {
       (res) => {
         console.log(billingInfo)
         console.log(res)
-        navigate('/account/myorder?list=bid?type=all')
+        navigate('/account/myorder?list=bid&type=pay')
       }
     )
   }
@@ -138,8 +140,7 @@ const Payment = () => {
                     bidderName: e.target.value,
                   })
                 }
-                placeholder="e.g. Peeranat Srisuthangkul"
-                disabled={inputDisabled}
+                placeholder="e.g. John Doe"
                 required
               ></input>
             </div>
@@ -150,6 +151,7 @@ const Payment = () => {
               <input
                 type="text"
                 className="form-control"
+                pattern="[0-9]+"
                 value={paymentDetails.phoneNumber}
                 onChange={(e) =>
                   setPaymentDetails({
@@ -157,8 +159,7 @@ const Payment = () => {
                     phoneNumber: e.target.value,
                   })
                 }
-                placeholder="e.g. 0620000000"
-                disabled={inputDisabled}
+                placeholder="e.g. 0621234567"
                 required
               ></input>
             </div>
@@ -176,26 +177,17 @@ const Payment = () => {
                     bidderAddress: e.target.value,
                   })
                 }
-                placeholder="50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
-                disabled={inputDisabled}
+                placeholder="e.g. 50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
                 required
               ></textarea>
             </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                checked={checked}
-                onChange={(e) => {
-                  setChecked(!checked)
-                  setInputDisabled(!checked)
-                  getInformationFromProfileHandler(!checked)
-                }}
-              />
-              <label className="form-check-label">
-                Use information from profile
-              </label>
-            </div>
+            <button
+              type="button"
+              className="no-outline-btn"
+              onClick={getInformationFromProfileHandler}
+            >
+              Use information from profile
+            </button>
           </div>
           <div className="form-heading1">TRANSACTION INFO</div>
           <div className="sub-form">
@@ -247,24 +239,34 @@ const Payment = () => {
               <label htmlFor="value" className="form-label">
                 VALUE
               </label>
-              <input
-                type="number"
-                className="form-control"
-                onChange={(e) =>
-                  setPaymentDetails({
-                    ...paymentDetails,
-                    value: e.target.value,
-                  })
-                }
-                placeholder="e.g. 500"
-                required
-              ></input>
+              <div className="input-field-flex">
+                <input
+                  type="number"
+                  className="form-control"
+                  min={1}
+                  onChange={(e) =>
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      value: e.target.value,
+                    })
+                  }
+                  placeholder="e.g. 500"
+                  required
+                ></input>
+                <div className="currency">
+                  <div>BAHT</div>
+                </div>
+              </div>
             </div>
-            <div>
+            <div className="form-submit-btn">
               <button type="submit" className="btn btn-primary first-button">
                 Proceed
               </button>
-              <button type="button" className="btn btn-outline-primary">
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => navigate('/account/myorder?list=bid&type=pay')}
+              >
                 Cancel
               </button>
             </div>

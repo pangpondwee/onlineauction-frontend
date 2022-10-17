@@ -66,13 +66,13 @@ const AccountPage = () =>{
             <div className="main-info-profile">
                 <img className="profile-pic" alt="ProfilePic" src={data.profilePicture}/>
                 <div>
-                    <h5>Display Name</h5>
+                    <h4>Display Name</h4>
                     {data.displayName? <div className="account-info"><h5>{data.displayName}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
-                    <h5>Email</h5>
+                    <h4>Email</h4>
                     {data.email? <div className="account-info"><h5>{data.email}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
-                    <h5>Phone Number</h5>
+                    <h4>Phone Number</h4>
                     {data.phoneNumber? <div className="account-info"><h5>{data.phoneNumber}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
-                    <h5>Address</h5>
+                    <h4>Address</h4>
                     {data.address? <div className="account-info"><h5>{data.address}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                 </div>
             </div>

@@ -46,8 +46,9 @@ const Nav = (props) => {
 				<input id="nav-search" className="form-control me-2" type="search" placeholder="Search"/>
 			</form>
 			{loggedIn ? 
-				<div className="dropdown ms-auto p-2">
-					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">{displayName}</Link>
+				<div id="nav-right" className="dropdown ms-auto p-2">
+					<img id="navProfilePic" src={localStorage.getItem("profilePicture")}></img>
+					<Link id="profile-link" className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">{displayName}</Link>
 					<div className="dropdown-menu dropdown-menu-end ms-auto p-2">
 						<Link to="/account/profile" className="dropdown-item">Profile</Link>
 						<Link to="/account/myorder?list=bid&type=all" className="dropdown-item">Bid & Auction</Link>
@@ -74,13 +75,16 @@ const Nav = (props) => {
 					<h5 className="offcanvas-title">Auction Online</h5>
 					<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 				</div>
-				<Link id="offcanvas-profile" className="nav-link p-3" to="/account/profile">{displayName}</Link>
+				<div id="offcanvas-profile">
+					<img id="navProfilePic" src={localStorage.getItem("profilePicture")}></img>
+					<Link id="offcanvas-profile" className="nav-link p-3" to="/account/profile">{displayName}</Link>
+				</div>
 				<div className="navbar-nav">
 					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
 					<div className="dropdown-menu nav-dropdown show" >
 					{category_elements}
 					</div>
-					<Link to="#" className="nav-link nav-item">Place Auction</Link>
+					<Link to="/place-auction" className="nav-link nav-item">Place Auction</Link>
 					<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">Currently Bidding</Link>
 					<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">Currently on Auction</Link>
 					<Link to="/account/following" className="nav-link nav-item">My Following List</Link>

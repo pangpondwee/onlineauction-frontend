@@ -18,7 +18,7 @@ const MyFollowing = () =>{
 		})
 	},[]);
 
-    console.log(data)
+    // console.log(data)
     
     const display = []
     data.forEach(element => {
@@ -26,13 +26,13 @@ const MyFollowing = () =>{
     });
 
 	return (
-        <>
+        <div>
             <h1>My Following List</h1>
             <div className="all-review">
                 {/* store each review */}
                 {display.length===0? <div className="no-data-page">No Data</div> : display}
             </div>
-        </>
+        </div>
 	)
 }
 export default MyFollowing;

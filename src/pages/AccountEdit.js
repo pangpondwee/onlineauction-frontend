@@ -61,7 +61,7 @@ const AccountEdit = () =>{
         personal_info.forEach((_info)=>{
             const tmp = document.getElementById(_info).value
             if (tmp != ""){
-                console.log(tmp)
+                // console.log(tmp)
                 _changed[_info] = tmp
             }
         })
@@ -83,7 +83,7 @@ const AccountEdit = () =>{
 		})
 	},[]);
 
-    console.log(data)
+    // console.log(data)
 
 	return (
         <div className="profile-page d-flex justify-content-between">
