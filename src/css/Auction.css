@@ -58,9 +58,9 @@
     justify-content: center;
 }
 #picture-list{
-    height: 5em;
-    overflow: scroll;
-    overflow-x: scroll;
+    /* height: 5em; */
+    /* overflow: scroll; */
+    overflow-y: scroll;
 }
 #main-picture{
     /* height: 100%; */
