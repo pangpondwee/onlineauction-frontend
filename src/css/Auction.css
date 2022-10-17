@@ -24,7 +24,6 @@
 }
 #topbidder-list{
     margin-right: 30px;
-    overflow: scroll;
     height: 500px;
 }
 .topbidder-element{
@@ -141,7 +140,7 @@
     width: 100%;
 }
 #auction-desc-pane{
-    overflow: scroll;
+    overflow-y: scroll;
     width: 100%;
 }
 #auction-content{
