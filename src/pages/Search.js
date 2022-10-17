@@ -40,7 +40,7 @@ function getHeadSearch(searchParams){
 	else if(searchCategory){
 		title = "Category: " + searchCategory
 	}
-	console.log(searchTerm)
+	// console.log(searchTerm)
 	subtitle = subtitle.trim()
 	return (
 		<div className="headSearch">
@@ -108,16 +108,8 @@ const Search = (props) =>{
 
 	const headSearch = getHeadSearch(searchParams)
 
-	if(! searchParams.get("sort")){ // if no sort set to newest
-		if(document.getElementById("select1")){
-			document.getElementById("select1").value = "newest";
-		}
-	}
-	if(! searchParams.get("category")){ // if no sort set to newest
-		if(document.getElementById("select2")){
-			document.getElementById("select2").value = "";
-		}
-	}
+	const p1 = searchParams.get("sort")
+	const p2 = searchParams.get("category")
 
 	const selectSort = (e) =>{
 		const s = document.getElementById("select1").value
@@ -131,6 +123,7 @@ const Search = (props) =>{
 	}
 
 	useEffect(()=>{
+		setStatus("loading")
 		getData("/auction/search?"+searchParams.toString())
 		.then((res)=>{
 			setStatus(res.status)
@@ -168,14 +161,16 @@ const Search = (props) =>{
 				
 			</div>
 			<div className="searchSort">
-				<select id="select1" value="" onChange={selectSort} >
+				<select id="select1" value={p1 == null ? "" : p1} onChange={selectSort} >
+					<option value="" disabled>-- Select --</option>
 					<option value="newest">Newest</option>
 					<option value="time_remaining">Time remaining</option>
 					<option value="highest_bid">Highest Bid Price</option>
 					<option value="lowest_bid">Lowest Bid Price</option>
 				</select>
 				<span className="">Sort by</span>
-				<select id="select2" onChange={selectCate} >
+				<select id="select2" value={p2 == null ? "" : p2} onChange={selectCate} >
+					<option value="" disabled>-- Select --</option>
 				{categoryTypesEnum.map((val, key) => {
 					return (
 					<option key={key} value={val}>{val}</option>
