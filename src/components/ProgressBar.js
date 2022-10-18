@@ -9,6 +9,7 @@ import '../css/Payment.css'
 
 const ProgressBar = (props) => {
   const auctioneerState = {
+    waitingForPayment: 2,
     waitingConfirmSlip: 2,
     waitingForShipping: 3,
     waitingForConfirm: 4,
@@ -21,6 +22,7 @@ const ProgressBar = (props) => {
     waitingConfirmSlip: 3,
     waitingForShipping: 4,
     waitingForConfirm: 5,
+    waitingAdminPayment: 6,
     completed: 6,
   }
 
