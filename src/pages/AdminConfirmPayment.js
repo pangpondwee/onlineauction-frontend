@@ -37,7 +37,7 @@ const PopupConfirm = (props) => { // TODO use component popup confirm
                       <h6>Telephone</h6>
                       <p>{props.data.telephoneNO ? props.data.telephoneNO : "-"}</p>
                       <h6>Address</h6>
-                      <p>{props.data.address ? "No address" : props.data.address}</p>
+                      <p>{props.data.address ? props.data.address : "No address"}</p>
                       <h6>Transfer date and time</h6>
                       <p>{String(time)}</p>
                       <h6>Transaction Slip</h6>
