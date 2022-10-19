@@ -151,7 +151,7 @@ li.menu-dropdown {
 
 .choose-image {
   width: 23vw;
-  height: 10vh;
+  /* height: 10vh; */
 }
 
 /* Hide arrows in number input field */

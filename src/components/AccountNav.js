@@ -28,6 +28,9 @@ const AccountNav = () =>{
 					</li>
 				</ul>
 			</div>
+			<div className={`menu ${c_tab("mypayment", "")}`}>
+				<Link to="/account/mypayment" className="menu-link">My Payment</Link>
+			</div>
 			<div className={`menu ${c_tab("review", "")}`}>
 				<Link to="/account/review" className="menu-link">My Review</Link>
 			</div>
