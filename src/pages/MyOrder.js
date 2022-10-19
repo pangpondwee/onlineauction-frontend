@@ -69,6 +69,13 @@ const MyOrder = () =>{
         display.push(<OrderObj data={element} key={index} type={list.slice(5)}/>) //bid or auction
     });
 
+    if(status != "success"){
+        return (
+            <div className="all-review">
+                <div className="no-data-page">Loading...</div>
+            </div>
+        )
+    }
 	return (
         <div>
             {(list === "list=bid")? <MyBidNav/> : <MyAuctionNav/>}
