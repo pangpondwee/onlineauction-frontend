@@ -31,6 +31,7 @@ import AdminReport from './pages/AdminReport'
 import SignupSuccess from './pages/SignupSuccess'
 import ForgetSuccess from './pages/ForgetSuccess'
 import ResetSuccess from './pages/ResetSuccess'
+import AdminConfirmRefund from './pages/AdminConfirmRefund'
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
             <Route path="report" element={<AdminReport />} />
             <Route path="confirmpayment" element={<AdminConfirmPayment />} />
             <Route path="confirmdelivery" element={<AdminConfirmDelivery />} />
+            <Route path="confirmrefund" element={<AdminConfirmRefund />} />
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>

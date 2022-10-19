@@ -5,52 +5,68 @@ import { getData,postData } from "../components/fetchData";
 import React from "react";
 import confirm from "../pictures/confirm.png";
 import '../css/PopupConRev.css'
+import Modal from "react-bootstrap/Modal";
+import PopupError from "../components/PopupError";
 
 const PopupConfirm = (props) => { // TODO use component popup confirm
-  if(!props.data.transferDataTime){
-    return (
-      <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-          <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                  <p style={{paddingBottom: "686.4px"}}>Loading...</p>
-              </div>
-          </div>
-      </div>
-    )
-  }
   const time = new Date(Number(props.data.transferDataTime))
   return (
-      <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-          <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                  <div className="modal-header">
-                      <div className="modal-confirm-header-text">
-                          <div className="modal-confirm-head-st modal-title" id="confirmModalLabel">Confirm Payment</div>
-                      </div>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div className="modal-body-confirm">
-                      <h6>Auction ID</h6>
-                      <p>{props.auction}</p>
-                      <h6>Name</h6>
-                      <p>{props.data.receiverName ? props.data.receiverName : "-"}</p>
-                      <h6>Telephone</h6>
-                      <p>{props.data.telephoneNO ? props.data.telephoneNO : "-"}</p>
-                      <h6>Address</h6>
-                      <p>{props.data.address ? props.data.address : "No address"}</p>
-                      <h6>Transfer date and time</h6>
-                      <p>{String(time)}</p>
-                      <h6>Transaction Slip</h6>
-                      <img src={props.data.transactionSlip} className="tracking-img"/>
-                  </div>
-                  <div className="modal-footer-confirm">
-                      <button type="button" className="btn btn-primary" onClick={()=>props.confirm(props.auction)}>Confirm</button>
-                      {/* <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Deny</button> */}
-                      <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                  </div>
-              </div>
-          </div>
-      </div>
+    <Modal
+      show={props.modalShow}
+      onHide={() => props.setModalShow(false)}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title id="contained-modal-title-vcenter">Confirm?</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h6>Auction ID</h6>
+        <p>{props.auction}</p>
+        <h6>Name</h6>
+        <p>{props.data.receiverName ? props.data.receiverName : "-"}</p>
+        <h6>Telephone</h6>
+        <p>{props.data.telephoneNO ? props.data.telephoneNO : "-"}</p>
+        <h6>Address</h6>
+        <p>{props.data.address ? props.data.address : "No address"}</p>
+        <h6>Transfer date and time</h6>
+        <p>{String(time)}</p>
+        <h6>Transaction Slip</h6>
+        <img src={props.data.transactionSlip} className="tracking-img"/>
+      </Modal.Body>
+      <Modal.Footer>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            props.confirm(props.auction,"confirm")
+            props.setModalShow(false)
+          }}
+        >
+          Confirm
+        </button>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => {
+            props.confirm(props.auction,"deny")
+            props.setModalShow(false)
+          }}
+        >
+          Deny
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary"
+          onClick={() => {
+            props.setModalShow(false)
+          }}
+        >
+          Cancel
+        </button>
+      </Modal.Footer>
+    </Modal>
   )
 }
 
@@ -59,7 +75,12 @@ const AdminConfirmPayment = () => {
   const [status,setStatus] = useState("loading")
   const [auctionID,setAuctionID] = useState(null)
   const [transaction,setTransaction] = useState({})
+  const [modalShow, setModalShow] = useState(false)
+  const [error, setError] = useState(false)
   useEffect(()=>{
+    getList();
+  },[])
+  const getList = ()=>{
     getData("/admin/transaction-list?filter=confirmSlip")
     .then(res=>{
       setData(res.transactionList)
@@ -69,7 +90,7 @@ const AdminConfirmPayment = () => {
       setStatus("error");
       setData(e.message)
     })
-  },[])
+  }
   const getTransaction = (billingInfoID,auctionID)=>{
     setTransaction({})
     getData("/admin/transaction/"+billingInfoID+"?detail=payment")
@@ -77,22 +98,24 @@ const AdminConfirmPayment = () => {
       setTransaction(res.detail)
       setAuctionID(auctionID)
       setStatus(res.status)
+      setModalShow(true)
     })
     .catch(e=>{
       setStatus("error");
       setData(e.message)
     })
   }
-  const confirmTransaction = (auction)=>{
+  const confirmTransaction = (auction,confirmStatus)=>{
     postData("/admin/transaction/confirm/"+auction,
     JSON.stringify({
-      "confirm":"slip"
+      confirm:"slip",
+      confirmStatus: confirmStatus
     }))
     .then(res=>{
-      console.log("No error")
+      getList()
     })
     .catch(e=>{
-      console.log(e)
+      setError(e.message)
     })
   }
   if(status == "success"){
@@ -117,7 +140,10 @@ const AdminConfirmPayment = () => {
                   <td className={styles.td}>{val.bidderEmail}</td>
                   <td className={styles.td}>{val.winningPrice}</td>
                   <td className={styles.td}>
-                    <a href="" onClick={()=>getTransaction(val.billingInfoID,val.auctionID)} data-bs-toggle="modal" data-bs-target="#confirmModal">detail</a>
+                    <a href="" onClick={(e)=>{
+                      getTransaction(val.billingInfoID,val.auctionID)
+                      e.preventDefault()
+                      }}>detail</a>
                   </td>
                 </tr>
               );
@@ -126,9 +152,15 @@ const AdminConfirmPayment = () => {
           </table>
         </div>
         <PopupConfirm
+        modalShow={modalShow}
+        setModalShow={setModalShow}
         data={transaction}
         auction={auctionID}
         confirm={confirmTransaction}
+        />
+        <PopupError
+        error={error}
+        setError={setError}
         />
       </>
     );
