@@ -104,8 +104,8 @@ const Nav = (props) => {
 						{category_elements}
 						</div>
 						<Link to="/place-auction" className="nav-link nav-item">Place Auction</Link>
-						<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">Currently Bidding</Link>
-						<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">Currently on Auction</Link>
+						<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">My Bid</Link>
+						<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">My Auction</Link>
 						<Link to="/account/following" className="nav-link nav-item">My Following List</Link>
 					</div>
 				</div>
