@@ -32,6 +32,11 @@ const AdminNav = () => {
           Confirm Delivery
         </Link>
       </div>
+      <div className={c_tab("confirmrefund")}>
+        <Link to="/admin/confirmrefund" className="menu-link">
+          Confirm Refund
+        </Link>
+      </div>
     </div>
   );
 };
