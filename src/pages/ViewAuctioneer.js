@@ -7,7 +7,6 @@ import AuctionCardRow from "../components/AuctionCardRow";
 import { useEffect, useState } from "react";
 import getData from "../components/fetchData";
 import { useParams } from "react-router-dom";
-import "../css/ViewAuctioneer.css"
 
 const AuctionList = (props)=>{
 	const [data,setData] = useState([])

@@ -17,7 +17,8 @@
 .AucPro {
   /* display: grid; */
   display: flex;
-  padding: 10px;
+  padding: 25px;
+  /* border: solid 1px black; */
 }
   
 .AucDetail {
