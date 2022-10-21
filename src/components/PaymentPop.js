@@ -1,30 +1,10 @@
 import React, { useState, useEffect } from "react";
-import confirm from "../pictures/confirm.png";
 import '../css/PopupConRev.css'
 import { Link } from 'react-router-dom'
 import getData, { postData } from "./fetchData";
-import Rating from '@mui/material/Rating';
-
-import review from "../pictures/review.png";
 
 const PaymentPop = (props) => {
-
-    const shippingDict = {
-        "KEX":"Kerry Express" ,
-        "GRAB ":"Grab" ,
-        "LLMV ":"Lalamove" ,
-        "NIM":"Nim Express" ,
-        "LINE":"Line Man" ,
-        "TNT":"TNT Express" ,
-        "DHL":"DHL Express" ,
-        "SCG":"SCG Express" ,
-        "FLASH":"Flash Express" ,
-        "SKT ":"Skootar" ,
-        "J&T" :"J&T Express",
-        "BEST ":"Best Express" ,
-        "IEL ":"Inter Express Logistics" ,
-        "NINJA ":"Ninja Van" 
-       }
+    const id = "confirmModal" + props.id
 
     function onConfirm(e) {
         // e.preventDefault()
@@ -44,14 +24,8 @@ const PaymentPop = (props) => {
 
     return (
         <div>
-            {/* <!-- Button trigger modal --> */}
-
-            <button type="button" class="PopupCon btn-primary d-none" data-bs-toggle="modal" data-bs-target="#confirmModal">
-                Confirm
-            </button>
-
             {/* <!-- Modal --> */}
-            <div className="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div className="modal fade" id={id} tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -60,7 +34,7 @@ const PaymentPop = (props) => {
                         <div class="modal-body-confirm">
                             <div>
                                 <label>Account Number</label><br/>
-                                <input type="text" id="displayName" className="input-editing" maxlength="15" />
+                                <input type="text" id="displayName" className="input-editing" maxlength="15" required/>
                             </div>
                             <div className="form-input-field">
                                 <label htmlFor="bankName" className="form-label">BANK</label><br/>
@@ -94,7 +68,7 @@ const PaymentPop = (props) => {
 
                             <div>
                                 <label>Account Name</label><br/>
-                                <input type="text" id="displayName" className="input-editing" maxlength="15" placeholder="John Doe"/>
+                                <input type="text" id="displayName" className="input-editing" maxlength="15" placeholder="John Doe" required/>
                             </div>
                         </div>
                         <div className="modal-footer-confirm">

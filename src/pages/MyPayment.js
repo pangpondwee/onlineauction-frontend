@@ -4,7 +4,7 @@ import getData from "../components/fetchData";
 import kbank from '../pictures/KBANK.png';
 
 const MyPayment = () =>{
-    const [data, setData]=useState([{"productPicture" : kbank, "productName" : "Kbank", "number" : "07187958888", "name" : " John Doe"}])
+    const [data, setData]=useState([{"productPicture" : kbank, "productName" : "Kbank", "number" : "07187958888", "name" : " John Doe"}, {"productPicture" : kbank, "productName" : "Kbank", "number" : "07187958888", "name" : " John Doe"}])
     const [status,setStatus]=useState("unknown");
     
     // useEffect(()=>{
@@ -21,9 +21,11 @@ const MyPayment = () =>{
 
     // console.log(data)
     
+    let id=0;
     const display = []
     data.forEach(element => {
-        display.push(<PaymentObj data={element}/>)
+        display.push(<PaymentObj data={element} id={id}/>)
+        id += 1;
     });
 
 	return (

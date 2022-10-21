@@ -8,13 +8,12 @@ import "../css/AccountPage.css";
 
 const PaymentObj = (props) =>{
     const navigate = useNavigate()
-    const [_isfollow, set_isfollow] = useState(true);
 
-    let followClass = 'follow-btn btn';
-	let followText = 'Follow';
-	if(_isfollow){
-		followClass+=" active";
-	}
+    const [accountName, setAccountName] = useState("")
+    const [bank, setBank] = useState("")
+    const [accountNumber, setAccountNumber] = useState("")
+
+    let bs_target = "#confirmModal" + props.id;
 
 	return (
         <div>
@@ -27,12 +26,12 @@ const PaymentObj = (props) =>{
                     <h6>Account Name : {props.data.name}</h6>
                 </span>
                 <div className="d-flex justify-content-end">
-                    <button className="btn-primary button-edit-payment" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                    <button className="btn-primary button-edit-payment" data-bs-toggle="modal" data-bs-target={bs_target}>
                         <img id="follow-icon" src={edit} className='edit-payment'/>
                     </button>
                 </div>
 		    </div>
-        <PaymentPop/>
+        <PaymentPop id={props.id}/>
         </div>
 	)
 }
