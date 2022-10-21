@@ -11,11 +11,11 @@ const PaymentPop = (props) => {
 
     function onConfirm(e) {
         e.preventDefault()
-        const personal_info = [id_name, id_bank, id_number]
+        const personal_info = ["account_name", "bank", "account_number"]
         
         const _changed = {}
         personal_info.forEach((_info)=>{
-            const tmp = document.getElementById(_info).value
+            const tmp = document.getElementById(_info+ props.id).value
             if (tmp != ""){
                 // console.log(tmp)
                 _changed[_info] = tmp
@@ -46,6 +46,7 @@ const PaymentPop = (props) => {
                         <div className="modal-header">
                             <div className="modal-confirm-head-st modal-title" id="confirmModalLabel"><h3 className="mb-0">Payment Details</h3></div>
                         </div>
+                        <form onSubmit={onConfirm}>
                         <div class="modal-body-confirm">
                             <div>
                                 <label>Account Number</label><br/>
@@ -88,9 +89,10 @@ const PaymentPop = (props) => {
                             </div>
                         </div>
                         <div className="modal-footer-confirm">
-                            <button type="button" className="btn btn-outline-primary" data-bs-dismiss="modal" onClick={onConfirm}>Confirm</button>
+                            <button type="submit" className="btn btn-outline-primary">Confirm</button>
                             <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
