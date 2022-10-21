@@ -5,9 +5,24 @@ import getData, { postData } from "./fetchData";
 
 const PaymentPop = (props) => {
     const id = "confirmModal" + props.id
+    const id_name = "account_name" + props.id
+    const id_bank = "bank" + props.id
+    const id_number = "account_number" + props.id
 
     function onConfirm(e) {
-        // e.preventDefault()
+        e.preventDefault()
+        const personal_info = [id_name, id_bank, id_number]
+        
+        const _changed = {}
+        personal_info.forEach((_info)=>{
+            const tmp = document.getElementById(_info).value
+            if (tmp != ""){
+                // console.log(tmp)
+                _changed[_info] = tmp
+            }
+        })
+
+        console.log(_changed)
         // console.log("Begin postData confirm popupConfirm")
         // postData(`/shipping/${auctionID}`, JSON.stringify(
         //     {
@@ -34,11 +49,12 @@ const PaymentPop = (props) => {
                         <div class="modal-body-confirm">
                             <div>
                                 <label>Account Number</label><br/>
-                                <input type="text" id="displayName" className="input-editing" maxlength="15" required/>
+                                <input type="text" id={id_number} className="input-editing" maxlength="15" required/>
                             </div>
                             <div className="form-input-field">
                                 <label htmlFor="bankName" className="form-label">BANK</label><br/>
                                 <select
+                                    id={id_bank}
                                     className="input-editing"
                                     defaultValue={''}
                                     required>
@@ -68,11 +84,11 @@ const PaymentPop = (props) => {
 
                             <div>
                                 <label>Account Name</label><br/>
-                                <input type="text" id="displayName" className="input-editing" maxlength="15" placeholder="John Doe" required/>
+                                <input type="text" id={id_name} className="input-editing" maxlength="15" placeholder="John Doe" required/>
                             </div>
                         </div>
                         <div className="modal-footer-confirm">
-                            <button type="button" className="btn btn-outline-primary" data-bs-dismiss="modal">Confirm</button>
+                            <button type="button" className="btn btn-outline-primary" data-bs-dismiss="modal" onClick={onConfirm}>Confirm</button>
                             <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
