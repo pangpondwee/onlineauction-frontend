@@ -1,9 +1,10 @@
 import PaymentObj from "../components/PaymentObj";
 import { useState, useEffect } from "react";
 import getData from "../components/fetchData";
+import kbank from '../pictures/KBANK.png';
 
 const MyPayment = () =>{
-    const [data, setData]=useState([])
+    const [data, setData]=useState([{"productPicture" : kbank, "productName" : "Kbank", "number" : "07187958888", "name" : " John Doe"}])
     const [status,setStatus]=useState("unknown");
     
     // useEffect(()=>{
@@ -27,7 +28,7 @@ const MyPayment = () =>{
 
 	return (
         <div>
-            <h1>My Following List</h1>
+            <h1>My Payment</h1>
             <div className="all-review">
                 {/* store each review */}
                 {display.length===0? <div className="no-data-page">No Data</div> : display}

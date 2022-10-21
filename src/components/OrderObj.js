@@ -68,6 +68,8 @@ const OrderObj = (props) => {
         else if(status_of_auction==="auction-waitingForShipping") return "Waiting for your shipping"
         else if(status_of_auction==="auction-waitingForConfirm") return "Waiting for bidder to confirm"
         else if(status_of_auction==="auction-waitingAdminPayment") return "Waiting for payment from admin"
+        //else if(status_of_auction==="auction-waitingAdminPayment") return "Your order has been canceled. Please contact admin."
+        //else if(status_of_auction==="auction-waitingAdminPayment") return "Your order has been canceled. Please contact admin."
         else return
     }
 

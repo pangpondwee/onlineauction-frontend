@@ -324,3 +324,20 @@ input[type='number'] {
   color: #2f9e44;
   border-color: #2f9e44;
 }
+
+/* payment */
+.edit-payment{
+  height: 2vw;
+  width: 2vw;
+  border-color: #fff;
+  background-color: #fff;
+  box-shadow: none;
+  visibility: visible;
+}
+
+.button-edit-payment{
+  visibility: hidden;
+  height: 2vw;
+  width: 2vw;
+  margin-right: 1vw;
+}
