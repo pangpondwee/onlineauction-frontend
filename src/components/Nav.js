@@ -97,15 +97,18 @@ const Nav = (props) => {
 						<h5 className="offcanvas-title">Auction Online</h5>
 						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 					</div>
-					<Link id="offcanvas-profile" className="nav-link p-3" to="/account/profile">{displayName}</Link>
+					<div id="offcanvas-profile">
+						<img id="navProfilePic" src={localStorage.getItem("profilePicture")}></img>
+						<Link id="offcanvas-profile-link" className="nav-link p-3" to="/account/profile">{displayName}</Link>
+					</div>
 					<div className="navbar-nav">
 						<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
 						<div className="dropdown-menu nav-dropdown show" >
 						{category_elements}
 						</div>
 						<Link to="/place-auction" className="nav-link nav-item">Place Auction</Link>
-						<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">Currently Bidding</Link>
-						<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">Currently on Auction</Link>
+						<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">My Bid</Link>
+						<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">My Auction</Link>
 						<Link to="/account/following" className="nav-link nav-item">My Following List</Link>
 					</div>
 				</div>

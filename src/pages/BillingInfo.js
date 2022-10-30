@@ -166,8 +166,11 @@ const BillingInfo = () => {
       </div>
     )
   } else if (
-    orderDetails.billingStatus === 'waitingForPayment' &&
-    orderDetails.isAuctioneer === true
+    ((orderDetails.billingStatus === 'waitingForPayment' ||
+      orderDetails.billingInfoStatus === 'waitingConfirmSlip') &&
+      orderDetails.isAuctioneer === true) ||
+    (orderDetails.billingStatus === 'waitingConfirmSlip' &&
+      orderDetails.isAuctioneer === false)
   ) {
     return (
       <div className="billing-info-page-nocard">

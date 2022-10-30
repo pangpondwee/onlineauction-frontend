@@ -151,7 +151,19 @@ li.menu-dropdown {
 
 .choose-image {
   width: 23vw;
-  height: 23vw;
+  height: 10vh;
+}
+
+/* Hide arrows in number input field */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  appearance: textfield; /* Firefox */
 }
 
 /* MyOrderNav */

@@ -32,7 +32,7 @@ const OrderObj = (props) => {
         "auction-waitingConfirmSlip": "To Pay",
         "auction-waitingForShipping": "To Shipped",
         "auction-waitingForConfirm": "To Confirm",
-        // "auction-waitingAdminPayment": "To Confirm",
+        "auction-waitingAdminPayment": "To Pay",
         "auction-completed": "Completed",
     }
 
@@ -67,6 +67,7 @@ const OrderObj = (props) => {
         else if(status_of_auction=== "auction-waitingConfirmSlip") return "Waiting for admin to confirm bidder's payment"
         else if(status_of_auction==="auction-waitingForShipping") return "Waiting for your shipping"
         else if(status_of_auction==="auction-waitingForConfirm") return "Waiting for bidder to confirm"
+        else if(status_of_auction==="auction-waitingAdminPayment") return "Waiting for payment from admin"
         else return
     }
 

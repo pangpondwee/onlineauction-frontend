@@ -15,13 +15,17 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop'
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
 
 // Register the plugins
 registerPlugin(
   FilePondPluginFileEncode,
   FilePondPluginImagePreview,
   FilePondPluginFileValidateType,
-  FilePondPluginImageCrop
+  FilePondPluginImageCrop,
+  FilePondPluginImageTransform,
+  FilePondPluginImageResize
 )
 
 const AccountEdit = () =>{
@@ -100,6 +104,9 @@ const AccountEdit = () =>{
                             acceptedFileTypes={['image/png', 'image/jpeg']}
                             imageCropAspectRatio="1:1"
                             ref={uploadFileRef}
+                            imageResizeTargetWidth={1000}
+                            imageResizeTargetHeight={1000}
+                            imageResizeMode="contain"
                             credits={false}/>
                     </div>
                     <div>
