@@ -2,38 +2,47 @@ import PaymentObj from "../components/PaymentObj";
 import { useState, useEffect } from "react";
 import getData from "../components/fetchData";
 import kbank from '../pictures/KBANK.png';
+import PaymentPop from "../components/PaymentPop";
 
 const MyPayment = () =>{
-    const [data, setData]=useState([{"productPicture" : kbank, "productName" : "Kbank", "number" : "07187958888", "name" : " John Doe"}, {"productPicture" : kbank, "productName" : "Kbank", "number" : "07187958888", "name" : " John Doe"}])
+    const [data, setData]=useState({})
     const [status,setStatus]=useState("unknown");
     
-    // useEffect(()=>{
-	// 	getData(`/user/myfollowing`).then((res)=>{
-	// 		setStatus(res.status);
-	// 		if(res.status === "success"){
-	// 			setData(res.data);
-	// 		}
-	// 		else{
-	// 			setData(res.message);
-	// 		}
-	// 	})
-	// },[]);
+    useEffect(()=>{
+		getData(`/user/mypayment`).then((res)=>{
+			setStatus(res.status);
+			if(res.status === "success"){
+				setData(res.data);
+			}
+			else{
+				setData(res.message);
+			}
+		})
+	},[]);
 
-    // console.log(data)
+    console.log(data)
     
     let id=0;
     const display = []
-    data.forEach(element => {
-        display.push(<PaymentObj data={element} id={id}/>)
-        id += 1;
-    });
+    // data.forEach(element => {
+    //     display.push(<PaymentObj data={element} id={id}/>)
+    //     id += 1;
+    // });
+    // }
+    if(data.bankAccountName==="" && data.bankNO==="" && data.bankName===""){
+        display.push(<div>Your account currently has no bank account. Feel free to add your information.</div>)
+        display.push(<button data-bs-toggle="modal" data-bs-target="#confirmModal0">Add</button>)
+    } else {
+        display.push(<PaymentObj data={data} id={id}/>)
+    }
 
 	return (
         <div>
             <h1>My Payment</h1>
             <div className="all-review">
                 {/* store each review */}
-                {display.length===0? <div className="no-data-page">No Data</div> : display}
+                {display}
+                <PaymentPop id={0}/>
             </div>
         </div>
 	)
