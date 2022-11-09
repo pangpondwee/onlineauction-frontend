@@ -15,7 +15,7 @@ const OrderObj = (props) => {
     if (props.data.auctionStatus === 'bidding') navigate(`/auction/${props.data.auctionID}`)
     else if(status_of_auction === 'bid-waitingForPayment') navigate(`/payment/${props.data.auctionID}`)
     else if(status_of_auction === 'auction-waitingForShipping') navigate(`/shipping/${props.data.auctionID}`)
-    else if(status_of_auction === 'bid-waitingForConfirm') ;
+    else if(status_of_auction === 'bid-waitingForConfirm' || status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
     else navigate(`/billing-info/${props.data.auctionID}`)
   }
 
@@ -34,6 +34,8 @@ const OrderObj = (props) => {
         "auction-waitingForConfirm": "To Confirm",
         "auction-waitingAdminPayment": "To Pay",
         "auction-completed": "Completed",
+        "auction-failed": "Failed",
+        "bid-failed": "Failed",
     }
 
   let status_of_auction =
@@ -68,8 +70,8 @@ const OrderObj = (props) => {
         else if(status_of_auction==="auction-waitingForShipping") return "Waiting for your shipping"
         else if(status_of_auction==="auction-waitingForConfirm") return "Waiting for bidder to confirm"
         else if(status_of_auction==="auction-waitingAdminPayment") return "Waiting for payment from admin"
-        //else if(status_of_auction==="auction-waitingAdminPayment") return "Your order has been canceled. Please contact admin."
-        //else if(status_of_auction==="auction-waitingAdminPayment") return "Your order has been canceled. Please contact admin."
+        else if(status_of_auction==="auction-failed") return "Your order had failed. Please contact admin for more infomations."
+        else if(status_of_auction==="bid-failed") return "Your order had failed. Please contact admin for more infomations."
         else return
     }
 
