@@ -8,7 +8,9 @@ const SummaryCard = (props) => {
       <div className="summary-card-header">Summary</div>
       <div className="summary-card-price-section">
         <div className="summary-card-bidprice">Bid Price</div>
-        <div className="summary-card-bidprice">{props.bidPrice} Baht</div>
+        <div className="summary-card-bidprice">
+          {props.bidPrice.toLocaleString('en-US')} Baht
+        </div>
       </div>
       <div
         className={`summary-card-price-section ${
@@ -16,16 +18,22 @@ const SummaryCard = (props) => {
         }`}
       >
         <div className="summary-card-bidprice">Service Fee 2%</div>
-        <div className="summary-card-bidprice">- {serviceFee} Baht</div>
+        <div className="summary-card-bidprice">
+          - {serviceFee.toLocaleString('en-US')} Baht
+        </div>
       </div>
       <div>
         <hr />
         <div className="summary-card-price-section">
           <div className="summary-card-price">Total</div>
           {props.isAuctioneer ? (
-            <div className="summary-card-price">{total} Baht</div>
+            <div className="summary-card-price">
+              {total.toLocaleString('en-US')} Baht
+            </div>
           ) : (
-            <div className="summary-card-price">{props.bidPrice} Baht</div>
+            <div className="summary-card-price">
+              {props.bidPrice.toLocaleString('en-US')} Baht
+            </div>
           )}
         </div>
       </div>
