@@ -32,7 +32,7 @@ const Nav = (props) => {
 	];
 	let category_elements = categoryTypesEnum.map((item,index)=>{
 		return (
-			<Link key={index} to={"/search?category="+encodeURIComponent(item)} className="ps-4 dropdown-item nav-link">{item}</Link>
+			<Link key={index} to={"/search?category="+encodeURIComponent(item)} className="ps-5 dropdown-item nav-link">{item}</Link>
 		)
 	})	
 	return (
@@ -41,9 +41,10 @@ const Nav = (props) => {
 			<button className="ms-2 navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-nav">
 				<span className="navbar-toggler-icon"></span>
 			</button>
-			<Link className="navbar-brand me-auto p-2" to="/">Online Auction</Link>
-			<form onSubmit={searchSubmit}>
-				<input id="nav-search" className="form-control me-2" type="search" placeholder="Search"/>
+			<Link className="navbar-brand me-auto p-2" to="/"><img src="/icon-auction.png" className="nav-icon"/>Online Auction</Link>
+			<form id="nav-search-block" onSubmit={searchSubmit}>
+				<img src="/icon-search.png" className="nav-icon" />
+				<input id="nav-search" className="me-2" type="search" placeholder="Search"/>
 			</form>
 			{loggedIn ? 
 				<div id="nav-right" className="dropdown ms-auto p-2">
@@ -92,24 +93,28 @@ const Nav = (props) => {
 			</div> */}
 			{/* Offcanvas END*/}
 			{loggedIn ?
-				<div id="offcanvas-nav" className="offcanvas offcanvas-start ps-4">
+				<div id="offcanvas-nav" className="offcanvas offcanvas-start">
 					<div className="offcanvas-header">
-						<h5 className="offcanvas-title">Auction Online</h5>
+						<h5 className="offcanvas-title">Online Auction</h5>
 						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 					</div>
-					<div id="offcanvas-profile">
+					<div id="offcanvas-profile" className="offcanvas-item">
 						<img id="navProfilePic" src={localStorage.getItem("profilePicture")}></img>
 						<Link id="offcanvas-profile-link" className="nav-link p-3" to="/account/profile">{displayName}</Link>
 					</div>
 					<div className="navbar-nav">
-						<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
+						<Link className="nav-link dropdown-toggle nav-item ps-4 offcanvas-item" to="#" data-bs-toggle="dropdown">
+							<img className="nav-icon" src={"/icon-category.png"} />Categories</Link>
 						<div className="dropdown-menu nav-dropdown show" >
 						{category_elements}
 						</div>
-						<Link to="/place-auction" className="nav-link nav-item">Place Auction</Link>
-						<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">My Bid</Link>
-						<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">My Auction</Link>
-						<Link to="/account/following" className="nav-link nav-item">My Following List</Link>
+						<Link to="/place-auction" className="offcanvas-item nav-link nav-item ps-4">
+							Place Auction</Link>
+						<Link to="/account/myorder?list=bid&type=all" className="offcanvas-item nav-link nav-item ps-4">
+							My Bid</Link>
+						<Link to="/account/myorder?list=auction&type=all" className="offcanvas-item nav-link nav-item ps-4">
+							My Auction</Link>
+						<Link to="/account/following" className="offcanvas-item nav-link nav-item ps-4">My Following List</Link>
 					</div>
 				</div>
 				:
