@@ -31,7 +31,7 @@ const PopupConfirm = (props) => {
        }
 
     useEffect(() => {
-        console.log("Begin getData billinginfo")
+        console.log("Begin getData tracking")
         getData(`/shipping/${auctionID}/tracking`).then((res) => {
             setData(res.data.trackingInfo)
         })
@@ -171,10 +171,10 @@ const PopupConfirm = (props) => {
                             {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
                         <div className="modal-body-review">
-                            <h6>Review Item : Nintendo Switch</h6>
-                            {/* <h6>Iten Name : {data.productName}</h6> */}
-                            <h6>Auctioneer Name : Kong Pakkapol</h6>
-                            {/* <h6>Auctioneer Name : {name}</h6> */}
+                            {/* <h6>Review Item : Nintendo Switch</h6> */}
+                            <h6>Iten Name : {data.productName}</h6>
+                            {/* <h6>Auctioneer Name : Kong Pakkapol</h6> */}
+                            <h6>Auctioneer Name : {data.auctioneerName}</h6>
                             <h6>
                                 Rating : 
                                 {/* have to install mui first to use this rating code */}

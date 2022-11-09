@@ -23,6 +23,7 @@ const FollowObj = (props) =>{
             "follow": String(!_isfollow)
         }
         // console.log(new_data)
+        // console.log(props.data.auctionID)
 
         postData(`/auction/${props.data.auctionID}/follow`,JSON.stringify(new_data))
         .then((res)=>{

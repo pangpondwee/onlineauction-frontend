@@ -28,6 +28,9 @@ export const MyAuctionNav = () =>{
 			<div className={`Order-Menu ${c_tab("type=complete")}`}>
                 <Link to="/account/myorder?list=auction&type=complete" className="menu-link">Completed</Link>
 			</div>
+			<div className={`Order-Menu ${c_tab("type=canceled")}`}>
+                <Link to="/account/myorder?list=auction&type=canceled" className="menu-link">Canceled</Link>
+			</div>
 		</nav>
 	)
 }
@@ -58,6 +61,9 @@ export const MyBidNav = () =>{
 			</div>
 			<div className={`Order-Menu ${c_tab("type=complete")}`}>
 				<Link to="/account/myorder?list=bid&type=complete" className="menu-link">Completed</Link>
+			</div>
+			<div className={`Order-Menu ${c_tab("type=canceled")}`}>
+                <Link to="/account/myorder?list=auction&type=canceled" className="menu-link">Canceled</Link>
 			</div>
 		</nav>
 	)

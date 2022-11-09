@@ -51,7 +51,6 @@ const ViewAuctioneer = () => {
         <div>
             <div style={{display:"flex"}}>
                 {/* <PopupConfirm /> */}
-                {/* <PopupReview /> */}
                 <AuctioneerReport />
             </div>
             <AuctioneerProfile />
