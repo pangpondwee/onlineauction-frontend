@@ -9,6 +9,7 @@ import '../css/Payment.css'
 
 const ProgressBar = (props) => {
   const auctioneerState = {
+    waitingForPayment: 2,
     waitingConfirmSlip: 2,
     waitingForShipping: 3,
     waitingForConfirm: 4,
@@ -21,6 +22,7 @@ const ProgressBar = (props) => {
     waitingConfirmSlip: 3,
     waitingForShipping: 4,
     waitingForConfirm: 5,
+    waitingAdminPayment: 6,
     completed: 6,
   }
 
@@ -98,9 +100,7 @@ const ProgressBar = (props) => {
             currentState >= 4 ? 'active' : ''
           }`}
         >
-          {props.isAuctioneer
-            ? 'Waiting for delivered'
-            : 'Waiting for shipping'}
+          {props.isAuctioneer ? 'In transit' : 'Waiting for shipping'}
         </div>
         <div
           className={`description-box state5 ${
@@ -109,7 +109,7 @@ const ProgressBar = (props) => {
         >
           {props.isAuctioneer
             ? "We're processing your transaction"
-            : 'Waiting for delivered'}
+            : 'In transit'}
         </div>
         <div
           className={`description-box state6 ${
