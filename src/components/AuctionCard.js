@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import { getDate } from "./util";
 function getPrice(price){
 	if(price < 1000000)
-		return price
+		return price.toLocaleString('en-US')
 	price = price/1000000;
 	if(price < 1000)
 		return `${price.toFixed(2)}M`
