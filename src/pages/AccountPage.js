@@ -21,16 +21,13 @@ const AccountPage = () =>{
 			setStatus(res.status);
 			if(res.status == "success"){
 				setData(res.data);
+                return res.data._id;
 			}
 			else{
 				setData(res.message);
 			}
 		})
-	},[]);
-
-    let userId = data._id;
-    useEffect(()=>{
-        // console.log(userId)
+        .then((userId)=>
         getData(`/user/profile/${userId}`).then((res)=>{ 
 			setStatus(res.status);
 			if(res.status == "success"){
@@ -39,8 +36,8 @@ const AccountPage = () =>{
 			else{
 				setOther_data(res.message);
 			}
-		})
-    }, [userId])
+		}))
+    }, [])
 
     // console.log(data)
     // console.log(other_data)
