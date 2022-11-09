@@ -100,6 +100,7 @@ li.menu-dropdown {
   margin: 10px;
   padding: 20px 30px 20px 30px;
   width: fit-content;
+  max-width: 30vw;
   height: fit-content;
   box-shadow: 0px 3px 3px gray;
   border-radius: 3%;
@@ -151,7 +152,7 @@ li.menu-dropdown {
 
 .choose-image {
   width: 23vw;
-  height: 10vh;
+  /* height: 10vh; */
 }
 
 /* Hide arrows in number input field */
@@ -323,4 +324,27 @@ input[type='number'] {
 .bid-waitingAdminPayment {
   color: #2f9e44;
   border-color: #2f9e44;
+}
+
+/* payment */
+.edit-payment{
+  height: 2vw;
+  width: 2vw;
+  border-color: #fff;
+  background-color: #fff;
+  box-shadow: none;
+  visibility: visible;
+}
+
+.button-edit-payment{
+  visibility: hidden;
+  height: 2vw;
+  width: 2vw;
+  margin-right: 1vw;
+}
+
+.badge-img{
+  height: 3vw;
+  width: 3vw;
+  margin: 10px;
 }

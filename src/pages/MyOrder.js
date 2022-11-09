@@ -46,6 +46,16 @@ const MyOrder = () =>{
 				setData_myAuction(res.message);
 			}
 		})
+        //canceled
+        // getData(`/refundlist`).then((res)=>{
+		// 	setStatus(res.status);
+		// 	if(res.status === "success"){
+		// 		setData_myAuction(res.data);
+		// 	}
+		// 	else{
+		// 		setData_myAuction(res.message);
+		// 	}
+		// })
 	},[]);
 
     // console.log(data_mybid)

@@ -19,6 +19,7 @@ import AccountLayout from './pages/AccountLayout'
 import AccountPage from './pages/AccountPage'
 import AccountEdit from './pages/AccountEdit'
 import MyOrder from './pages/MyOrder'
+import MyPayment from './pages/MyPayment'
 import MyReview from './pages/MyReview'
 import MyFollowing from './pages/MyFollowing'
 import Auction from './pages/Auction'
@@ -60,6 +61,7 @@ function App() {
             <Route path="profile" element={<AccountPage />} />
             <Route path="edit" element={<AccountEdit />} />
             <Route path="myorder" element={<MyOrder />} />
+            <Route path="mypayment" element={<MyPayment />} />
             <Route path="review" element={<MyReview />} />
             <Route path="following" element={<MyFollowing />} />
           </Route>
