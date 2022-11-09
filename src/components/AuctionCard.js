@@ -25,7 +25,7 @@ const AuctionCard = (props) =>{
 					<img src={props.picture} className="card-img-top"></img>
 				</Link>
 				<div className={timeClass}>{getDate(props.time)}</div>
-				<Link to="#" className="itemName-link">
+				<Link to={"/auction/"+props.id} className="itemName-link">
 					<p className="itemName">{props.name}</p>
 				</Link>
 				<p className="card-text">{getPrice(props.price)}฿</p>			
