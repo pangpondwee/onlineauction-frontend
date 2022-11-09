@@ -116,7 +116,6 @@ const Search = (props) =>{
 	const [searchSort,setSearchSort] = useState("newest");
 
 	useEffect(()=>{
-		setStatus("loading")
 		getData("/auction/search?"+searchParams.toString())
 		.then((res)=>{
 			setStatus(res.status)

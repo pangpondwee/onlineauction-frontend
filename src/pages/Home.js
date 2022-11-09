@@ -43,6 +43,16 @@ const Home = () =>{
 	const isLoggedIn = localStorage.getItem("isLoggedIn")
 	return (
 		<>
+			<div id="jumbotron">
+				<div>
+					<h1>Anything at a SUPER AWESOME price</h1>
+					<br></br>
+					<Link to="/search?sort=time_remaining" className="">Ending Soon</Link>
+				</div>
+				<div>
+				<img src="/image-auction.png"/>
+				</div>
+			</div>
 			{isLoggedIn?
 			<>
 				<p className="headHome">Welcome, {displayName}! Let’s see what you got...</p>		
@@ -60,7 +70,7 @@ const Home = () =>{
 			:
 			<></>
 			}
-			<p className="detail">Popular</p>
+			<p id="#popular" className="detail">Popular</p>
 			<AuctionList
 			message="There are no popular bids"
 			url="/auction/auction-list?filter=popular"
