@@ -60,18 +60,29 @@ const PageNav = (props)=>{
 	for(let i=1;i<pageCount+1;i++){
 		let c = "page-item";
 		if(i == page) c = c + " active" // active item
+
+		const sp = new URLSearchParams(props.searchParams);
+		sp.set("page",i);
+
 		pageList.push(
 			<li key={i} className={c}>
-				<Link className="page-link" to="#">{i}</Link>
+				<Link className="page-link" to={"?"+sp.toString()}>{i}</Link>
 			</li>
 		)
 	}
+
+	const sp = new URLSearchParams(props.searchParams);
+	sp.set("page",props.searchParams.get("page")+1);
+
+	const sn = new URLSearchParams(props.searchParams);
+	sn.set("page",props.searchParams.get("page")-1);
+
 	return (
 		<nav aria-label="Page navigation example">
 			<ul className="pagination justify-content-center">
 				{ // previous page
 				hasPrev ? <li className="page-item">
-					<Link className="page-link" to="#" aria-label="Previous">
+					<Link className="page-link" to={"?"+sn.toString()} aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 						<span className="sr-only"></span>
 					</Link>
@@ -82,7 +93,7 @@ const PageNav = (props)=>{
 
 				{ // Next page
 				hasNext ? <li className="page-item">
-					<Link className="page-link" to="#" aria-label="Next">
+					<Link className="page-link" to={"?"+sp.toString()} aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 						<span className="sr-only"></span>
 					</Link>
@@ -95,32 +106,14 @@ const PageNav = (props)=>{
 }
 
 const Search = (props) =>{
-	// Page number
-	const { pageNumber } = useParams();
-	let page = pageNumber ? Number(pageNumber) : 1;
-	if(page < 1) page = 1 // limit to 1
-
-	// Search Params
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [status,setStatus] = useState("loading")
 	const [data,setData] = useState({})
-	const [pageCount,setPageCount] = useState(1)
 
-	const headSearch = getHeadSearch(searchParams)
-
-	const p1 = searchParams.get("sort")
-	const p2 = searchParams.get("category")
-
-	const selectSort = (e) =>{
-		const s = document.getElementById("select1").value
-		searchParams.set("sort",s)
-		setSearchParams(searchParams)
-	}
-	const selectCate = (e)=>{
-		const s = document.getElementById("select2").value
-		searchParams.set("category",s)
-		setSearchParams(searchParams)
-	}
+	const [searchPage,setSearchPage] = useState(1);
+	const [searchPageCount,setSearchPageCount] = useState(1);
+	const [searchCategory,setSearchCategory] = useState("all");
+	const [searchSort,setSearchSort] = useState("newest");
 
 	useEffect(()=>{
 		setStatus("loading")
@@ -128,13 +121,43 @@ const Search = (props) =>{
 		.then((res)=>{
 			setStatus(res.status)
 			setData(res.data)
-			setPageCount(res.data.pageCount)
+			setSearchPageCount(res.data.pageCount);
 		})
 		.catch(e=>{
 			setStatus("error")
 			setData(e.message)
 		})
+
+		let page = Number(searchParams.get("page"));
+		if(!page || page < 1) page = 1; // limit to 1
+		setSearchPage(page)
+
+		let category = searchParams.get("category");
+		if(!category) category = "none";
+		setSearchCategory(category);
+
+		let sort = searchParams.get("sort");
+		if(!sort) sort = "newest";
+		setSearchSort(sort);
+	
 	},[searchParams])
+
+	const selectSort = ()=>{
+		const s = document.getElementById("sort").value
+		searchParams.set("sort",s)
+		setSearchParams(searchParams)
+	}
+
+	const selectCategory = (e)=>{
+		let s = document.getElementById("category").value
+		if(!s || s == "all"){
+			searchParams.delete("category")
+		}
+		else{
+			searchParams.set("category",s)
+		}
+		setSearchParams(searchParams)
+	}
 
 	if(status == "success"){
 		const auctionData = data.auctionList;
@@ -155,28 +178,26 @@ const Search = (props) =>{
 
 		return (
 			<>
-			{headSearch}
+			{getHeadSearch(searchParams)}
 			<div className="topSearch">		
-				<p className="detailSearch">{AuctionElements.length} auctions found</p>
-				
+				<p className="detailSearch">{data.itemCount} auctions found</p>
 			</div>
 			<div className="searchSort">
+				<span className="searchCategory">Category</span>
+				<select id="category" value={searchCategory} onChange={selectCategory} >
+					<option value="all">All</option>
+					{categoryTypesEnum.map((val, key) => {
+						return (
+						<option key={key} value={val}>{val}</option>
+						);
+					})}
+				</select>
 				<span className="searchSortBy">Sort by</span>
-				<select id="select1" value={p1 == null ? "" : p1} onChange={selectSort} >
-					<option value="" disabled>-- Select --</option>
+				<select id="sort" value={searchSort} onChange={selectSort} >
 					<option value="newest">Newest</option>
 					<option value="time_remaining">Time remaining</option>
 					<option value="highest_bid">Highest Bid Price</option>
 					<option value="lowest_bid">Lowest Bid Price</option>
-				</select>
-				<span className="searchCategory">Category</span>
-				<select id="select2" value={p2 == null ? "" : p2} onChange={selectCate} >
-					<option value="" disabled>-- Select --</option>
-				{categoryTypesEnum.map((val, key) => {
-					return (
-					<option key={key} value={val}>{val}</option>
-					);
-				})}
 				</select>
 				
 			</div>
@@ -184,7 +205,7 @@ const Search = (props) =>{
 			<div className="row searchRow">
 				{AuctionElements}
 			</div>
-			<PageNav page={page} pageCount={pageCount}/>
+			<PageNav page={searchPage} pageCount={searchPageCount} searchParams={searchParams} setSearchParams={setSearchParams}/>
 			</>
 		)
 	}
