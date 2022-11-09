@@ -31,7 +31,7 @@ const HistoryModal = (props)=>{
 				<td>{d.toLocaleDateString("en-US")}</td>
 				<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
 				<td>{item.bidderName}</td>
-				<td>{item.biddingPrice}฿</td>
+				<td>{item.biddingPrice.toLocaleString('en-US')}฿</td>
 			</tr>
 		)
 	})
@@ -123,7 +123,7 @@ const AuctionTop = (props)=>{
 					<span className='bidding-name'>{item.bidderName}</span>
 					<span className='bidding-date'>{timeformat}</span>
 				</div>
-				<span className='bidding-price'>{item.biddingPrice}฿</span>
+				<span className='bidding-price'>{item.biddingPrice.toLocaleString('en-US')}฿</span>
 			</li>
 		)
 	})	
@@ -192,7 +192,7 @@ const AuctionInfo = (props)=>{
 			<div id="info-bottom" className="card border-light mb-3">
 				<p>Highest Bid</p>
 				<p>Time Remaining</p>
-				<p className="info-data" >{props.data.currentPrice} <span id='currency'>Baht</span></p>
+				<p className="info-data" >{props.data.currentPrice.toLocaleString('en-US')} <span id='currency'>Baht</span></p>
 				<Timer
 					timeRemaining={props.timeRemaining}
 				/>

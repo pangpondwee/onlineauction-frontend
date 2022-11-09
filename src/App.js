@@ -30,6 +30,9 @@ import AdminConfirmDelivery from './pages/AdminConfirmDelivery'
 import AdminConfirmPayment from './pages/AdminConfirmPayment'
 import AdminReport from './pages/AdminReport'
 import SignupSuccess from './pages/SignupSuccess'
+import ForgetSuccess from './pages/ForgetSuccess'
+import ResetSuccess from './pages/ResetSuccess'
+import AdminConfirmRefund from './pages/AdminConfirmRefund'
 
 function App() {
   return (
@@ -40,8 +43,6 @@ function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="signup-success" element={<SignupSuccess />} />
           <Route path="auction/:auctionId" element={<Auction />} />
-          <Route path="forget-password" element={<ForgetPassword />} />
-          <Route path="reset-password" element={<ResetPassword />} />
           <Route path="place-auction" element={<PlaceAuction />} />
           <Route path="payment/:auctionId" element={<Payment />} />
           <Route path="shipping/:auctionId" element={<Shipping />} />
@@ -52,6 +53,10 @@ function App() {
           <Route path="search" element={<Search />} />
           <Route path="search/:pageNumber" element={<Search />} />
           <Route path="account/verify/:userId" element={<VerifyEmail />} />
+          <Route path="forget-password" element={<ForgetPassword />} />
+          <Route path="forget-success" element={<ForgetSuccess />} />
+          <Route path="reset-success" element={<ResetSuccess />} />
+          <Route path="account/reset-password/:userId" element={<ResetPassword />} />
           <Route path="account" element={<AccountLayout />}>
             <Route path="profile" element={<AccountPage />} />
             <Route path="edit" element={<AccountEdit />} />
@@ -65,6 +70,7 @@ function App() {
             <Route path="report" element={<AdminReport />} />
             <Route path="confirmpayment" element={<AdminConfirmPayment />} />
             <Route path="confirmdelivery" element={<AdminConfirmDelivery />} />
+            <Route path="confirmrefund" element={<AdminConfirmRefund />} />
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>

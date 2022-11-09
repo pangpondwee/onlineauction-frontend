@@ -1,18 +1,21 @@
+import { Link } from "react-router-dom";
 import classes from "../css/VerifyEmail.module.css";
 import successIcon from "../pictures/blue_circle_check.png";
 
-function SignupSuccess() {
+function ResetSuccess() {
     return (
         <>
         <div className={classes.successIconWrapper} >
             <img className={classes.successIcon} src={successIcon} />
         </div>
         <div className={classes.desc}>
-            <h1></h1>
-            <p>Please Click the Link in Your Email to Continue</p>
+            <h1>Password Has Been Reset</h1>
+            <div className={classes.returnsignin}>
+              <Link to={"/signup"}>Return To Sign In</Link>
+            </div>
         </div>
         </>
     );
 }
 
-export default SignupSuccess;
+export default ResetSuccess;

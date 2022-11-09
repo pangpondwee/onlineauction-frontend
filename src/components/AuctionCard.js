@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import { getDate } from "./util";
 function getPrice(price){
 	if(price < 1000000)
-		return price
+		return price.toLocaleString('en-US')
 	price = price/1000000;
 	if(price < 1000)
 		return `${price.toFixed(2)}M`
@@ -25,7 +25,7 @@ const AuctionCard = (props) =>{
 					<img src={props.picture} className="card-img-top"></img>
 				</Link>
 				<div className={timeClass}>{getDate(props.time)}</div>
-				<Link to="#" className="itemName-link">
+				<Link to={"/auction/"+props.id} className="itemName-link">
 					<p className="itemName">{props.name}</p>
 				</Link>
 				<p className="card-text">{getPrice(props.price)}฿</p>			
