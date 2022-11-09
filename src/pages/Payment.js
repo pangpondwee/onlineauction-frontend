@@ -72,22 +72,13 @@ const Payment = () => {
     getData('/user/myprofile')
       .then((res) => {
         console.log(res)
-        if ('displayName' in res.data) {
-          setPaymentDetails({
-            ...paymentDetails,
-            bidderName: res.data.displayName,
-          })
-        } else if ('phoneNumber' in res.data) {
-          setPaymentDetails({
-            ...paymentDetails,
-            phoneNumber: res.data.phoneNumber,
-          })
-        } else if ('address' in res.data) {
-          setPaymentDetails({
-            ...paymentDetails,
-            bidderAddress: res.data.address,
-          })
-        }
+        setPaymentDetails({
+          ...paymentDetails,
+          bidderName: 'displayName' in res.data ? res.data.displayName : '',
+          phoneNumber: 'phoneNumber' in res.data ? res.data.phoneNumber : '',
+          bidderAddress: 'address' in res.data ? res.data.address : '',
+        })
+        console.log(paymentDetails)
       })
       .catch((e) => console.log(e))
   }
