@@ -155,7 +155,7 @@ const Shipping = () => {
             <div className="sub-form">
               <div className="form-input-field">
                 <label htmlFor="bankAccount" className="form-label">
-                  BANK ACCOUNT
+                  ACCOUNT NUMBER
                 </label>
                 <input
                   type="text"
