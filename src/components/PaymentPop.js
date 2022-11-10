@@ -1,40 +1,42 @@
 import React, { useState, useEffect } from "react";
 import '../css/PopupConRev.css'
-import { Link } from 'react-router-dom'
-import getData, { postData } from "./fetchData";
+import { Link, useNavigate } from 'react-router-dom'
+import {patchData} from './fetchData';
 
 const PaymentPop = (props) => {
+    const navigate = useNavigate()
+
     const id = "confirmModal" + props.id
-    const id_name = "account_name" + props.id
-    const id_bank = "bank" + props.id
-    const id_number = "account_number" + props.id
+    const id_name = "bankAccountName" + props.id
+    const id_bank = "bankName" + props.id
+    const id_number = "bankNO" + props.id
 
     function onConfirm(e) {
         e.preventDefault()
-        const personal_info = ["account_name", "bank", "account_number"]
+        const personal_info = ["bankAccountName", "bankName", "bankNO"]
         
         const _changed = {}
         personal_info.forEach((_info)=>{
             const tmp = document.getElementById(_info+ props.id).value
-            if (tmp != ""){
+            if (tmp !== ""){
                 // console.log(tmp)
                 _changed[_info] = tmp
             }
         })
 
-        console.log(_changed)
-        // console.log("Begin postData confirm popupConfirm")
-        // postData(`/shipping/${auctionID}`, JSON.stringify(
-        //     {
-        //         "confirm": true
-        //     }
-        // ))
-        // .then((res) => {
-        //     console.log("Confirmed successfully")
-        // })
-        // .catch(e => {
-        //     console.log(e.message)
-        // })
+        // console.log(_changed)
+
+        patchData(`/user/edit`,JSON.stringify(_changed))
+        .then((res)=>{
+            if(!res.status) throw new Error("Could not get status")
+            if(res.status === "fail" || res.status === "error" || res.status === "err") throw new Error(res.message)
+            console.log(res.status)
+            window.location.reload();
+        })
+        .catch(e=>{
+            console.log(e.message)
+        })
+
     }
 
     return (
@@ -50,7 +52,7 @@ const PaymentPop = (props) => {
                         <div class="modal-body-confirm">
                             <div>
                                 <label>Account Number</label><br/>
-                                <input type="text" id={id_number} className="input-editing" maxlength="15" required/>
+                                <input type="number" id={id_number} className="input-editing" maxlength="15" required/>
                             </div>
                             <div className="form-input-field">
                                 <label htmlFor="bankName" className="form-label">BANK</label><br/>
@@ -65,7 +67,7 @@ const PaymentPop = (props) => {
                                 <option value="SCB">Siam Commercial Bank (ธนาคารไทยพาณิชย์)</option>
                                 <option value="BBL">Bangkok Bank (ธนาคารกรุงเทพ)</option>
                                 <option value="TTB">TMBThanachat Bank (ธนาคารทหารไทยธนชาติ)</option>
-                                <option value="ิBAY">Bank of Ayudhya (ธนาคารกรุงศรี)</option>
+                                <option value="BAY">Bank of Ayudhya (ธนาคารกรุงศรี)</option>
                                 <option value="GSB">Government Savings Bank (ธนาคารออมสิน)</option>
                                 <option value="CIMBT">CIMB Thai Bank (ธนาคารซีไอเอ็มบีไทย)</option>
                                 <option value="UOB">United Overseas Bank (Thai) (ธนาคารยูโอบี)</option>
@@ -89,7 +91,7 @@ const PaymentPop = (props) => {
                             </div>
                         </div>
                         <div className="modal-footer-confirm">
-                            <button type="submit" className="btn btn-outline-primary">Confirm</button>
+                            <button type="submit" className="btn btn-outline-primary" onClick={onConfirm} data-bs-dismiss="modal">Confirm</button>
                             <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
                         </div>
                         </form>

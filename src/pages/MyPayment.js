@@ -1,11 +1,10 @@
 import PaymentObj from "../components/PaymentObj";
 import { useState, useEffect } from "react";
 import getData from "../components/fetchData";
-import kbank from '../pictures/KBANK.png';
 import PaymentPop from "../components/PaymentPop";
 
 const MyPayment = () =>{
-    const [data, setData]=useState({})
+    const [data, setData]=useState({bankAccountName: "", bankNO: "", bankName: ""})
     const [status,setStatus]=useState("unknown");
     
     useEffect(()=>{
@@ -20,7 +19,7 @@ const MyPayment = () =>{
 		})
 	},[]);
 
-    console.log(data)
+    // console.log(data)
     
     let id=0;
     const display = []
