@@ -24,7 +24,7 @@ const PopupConfirm = (props) => {
         "SCG":"SCG Express" ,
         "FLASH":"Flash Express" ,
         "SKT":"Skootar" ,
-        "J&T" :"J&T Express",
+        "J&T":"J&T Express",
         "BEST":"Best Express" ,
         "IEL":"Inter Express Logistics" ,
         "NINJA":"Ninja Van" 
