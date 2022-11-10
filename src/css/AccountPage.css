@@ -229,7 +229,7 @@ input[type='number'] {
   height: fit-content;
   width: 10vw;
   min-width: 100px;
-  padding: 0.5vw 2vw 0vw;
+  padding: 0.5vw 1vw 0vw;
   color: #228be6;
   display: flex;
   flex-wrap: wrap;
