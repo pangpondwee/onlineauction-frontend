@@ -74,7 +74,7 @@ const TrackingCard = (props) => {
             <></>
           )}
         </div>
-        <PopupConfirm />
+        <PopupConfirm auctionID={props.auctionID} />
       </div>
     )
   }
