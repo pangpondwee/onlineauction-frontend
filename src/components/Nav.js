@@ -89,14 +89,15 @@ const Nav = (props) => {
 					</div>
 				</div>
 				:
-				<div id="offcanvas-nav" className="offcanvas offcanvas-start ps-4">
-					<div className="offcanvas-header">
-						<h5 className="offcanvas-title">Auction Online</h5>
+				<div id="offcanvas-nav" className="offcanvas offcanvas-start">
+					<div className="offcanvas-header ps-4">
+						<h5 className="offcanvas-title"><img src="/icon-auction.png" className="nav-icon"/>Auction Online</h5>
 						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 					</div>
 				
 					<div className="navbar-nav">
-						<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
+						<Link className="nav-link dropdown-toggle nav-item ps-4 offcanvas-item" to="#" data-bs-toggle="dropdown">
+							<img className="nav-icon" src={"/icon-category.png"} />Categories</Link>
 						<div className="dropdown-menu nav-dropdown show" >
 						{category_elements}
 						</div>
