@@ -195,7 +195,7 @@ input[type='number'] {
     height: fit-content;
     grid-template-columns: 13vw 32vw auto;
     overflow: hidden;
-    padding: 20px 20px 20px 35px;
+    padding: 1.5vw 1.5vw 1.5vw 2vw;
     margin-bottom: 20px;
 }
 
@@ -210,11 +210,10 @@ input[type='number'] {
   border-radius: 10px;
   display: grid;
   height: fit-content;
-  max-height: 180px;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 20vw auto;
   overflow: hidden;
-  padding: 20px 25px 30px 25px;
-  margin-bottom: 20px;
+  padding: 2vw 2.5vw 3vw 2.5vw;
+  margin-bottom: 2vw;
 }
 
 .can_click {
@@ -230,7 +229,7 @@ input[type='number'] {
   height: fit-content;
   width: 10vw;
   min-width: 100px;
-  padding: 5px 20px 0px;
+  padding: 0.5vw 2vw 0vw;
   color: #228be6;
   display: flex;
   flex-wrap: wrap;
@@ -354,5 +353,5 @@ input[type='number'] {
 .badge-img{
   height: 3vw;
   width: 3vw;
-  margin: 10px;
+  margin: 1vw;
 }
