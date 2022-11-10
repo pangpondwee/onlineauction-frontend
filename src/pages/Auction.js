@@ -5,6 +5,7 @@ import {getData, postData} from '../components/fetchData';
 import {getDateSince,getDate,prepend} from "../components/util";
 import PopupError from '../components/PopupError';
 import heart from '../pictures/heart-fill.svg';
+import PopupConfirmBid from '../components/PopupConfirmBid';
 
 function getHistory(data){
 	const history=data.sort((a,b)=>{
@@ -31,7 +32,7 @@ const HistoryModal = (props)=>{
 				<td>{d.toLocaleDateString("en-US")}</td>
 				<td>{`${d_hour}:${d_minute}:${d_seconds}`}</td>
 				<td>{item.bidderName}</td>
-				<td>{item.biddingPrice}฿</td>
+				<td>{item.biddingPrice.toLocaleString('en-US')}฿</td>
 			</tr>
 		)
 	})
@@ -123,7 +124,7 @@ const AuctionTop = (props)=>{
 					<span className='bidding-name'>{item.bidderName}</span>
 					<span className='bidding-date'>{timeformat}</span>
 				</div>
-				<span className='bidding-price'>{item.biddingPrice}฿</span>
+				<span className='bidding-price'>{item.biddingPrice.toLocaleString('en-US')}฿</span>
 			</li>
 		)
 	})	
@@ -180,7 +181,7 @@ const AuctionInfo = (props)=>{
 				<p>Auctioneer</p>
 				<p>Category</p>
 				<p>
-					<Link className="info-data" to={auctioneerLink}>
+					<Link id="auctioneerName" className="info-data" to={auctioneerLink}>
 					{props.myid == props.data.auctioneerID ?
 					"You"
 					:
@@ -192,7 +193,7 @@ const AuctionInfo = (props)=>{
 			<div id="info-bottom" className="card border-light mb-3">
 				<p>Highest Bid</p>
 				<p>Time Remaining</p>
-				<p className="info-data" >{props.data.currentPrice}฿</p>
+				<p className="info-data" >{props.data.currentPrice.toLocaleString('en-US')} <span id='currency'>Baht</span></p>
 				<Timer
 					timeRemaining={props.timeRemaining}
 				/>
@@ -215,7 +216,9 @@ const AuctionDetail = (props)=>{
 	}
 	
 	if(!canBid || props.data.myLastBid > 0){ // auctioneer or anonymous
-		follow = (<></>);
+		// follow = (<button 
+		// 	className={followClass} disabled>Disabled</button>);
+		follow=(<></>)
 	}
 	else{ // following
 		follow = (<button 
@@ -303,11 +306,23 @@ const AuctionDesc = (props)=>{
 }
 
 const Bidding = (props)=>{
+	const [confirmBidShow,setConfirmBidShow] = useState(false);
+	const [price,setPrice] = useState(0);
+	const [isAbsolute,setIsAbsolute] = useState(true);
 	const bidStep = props.bidStep;
 	const submitWrapper = (e)=>{ //wrapper for written bid price
-		props.submitBid(document.getElementById("bid-price").value,true)
+		submitBid(document.getElementById("bid-price").value,true);
 		e.preventDefault()
 	}
+	const submitBid = (price,isAbsolute) => {
+		setConfirmBidShow(true);
+		setPrice(price);
+		setIsAbsolute(isAbsolute);
+	}
+	const submitHandler = ()=>{
+		props.submitBid(price,isAbsolute);
+	}
+
 	if(props.isEnded){
 		return(
 			<div id="bidding-message">
@@ -343,9 +358,9 @@ const Bidding = (props)=>{
 		<form onSubmit={submitWrapper} id="bidding">
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="static-price">
-				<button type="button" onClick={()=>props.submitBid(bidStep,false)} className='bid-button btn'>+{bidStep}</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}</button>
-				<button type="button" onClick={()=>props.submitBid(bidStep*3,false)} className='bid-button btn'>+{bidStep*3}</button>
+				<button type="button" onClick={()=>submitBid(bidStep,false)} className='bid-button btn'>+{bidStep}</button>
+				<button type="button" onClick={()=>submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}</button>
+				<button type="button" onClick={()=>submitBid(bidStep*3,false)} className='bid-button btn'>+{bidStep*3}</button>
 			</div>
 			<div id="or-wrapper"><p>OR</p></div>
 			<div id="bid-group" className="input-group">
@@ -353,6 +368,11 @@ const Bidding = (props)=>{
 				<button id="bid-price-button" type="submit" className='bid-button btn'>Bid</button>
 			</div>
 			<p id="min-price">{`Note: Bid has to increase by at least ${bidStep}฿`}</p>
+			<PopupConfirmBid 
+				modalShow={confirmBidShow}
+				setModalShow={setConfirmBidShow}
+				submitHandler={submitHandler}
+				/>
 		</form>
 	)
 }

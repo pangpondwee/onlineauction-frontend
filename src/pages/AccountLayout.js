@@ -5,9 +5,7 @@ const AccountLayout = () => {
 	return (
 		<div className="main-account-page">
 			<AccountNav />
-			<main>
-				<Outlet/>
-			</main>
+			<Outlet/>
 		</div>
 	)
 }

@@ -11,6 +11,31 @@ import { useParams } from "react-router-dom";
 import {getData} from '../components/fetchData';
 import "../css/AccountPage.css";
 
+import badge_top_10 from "../pictures/badge-top-10.png"
+import badge_top_100 from "../pictures/badge-top-100.png"
+import badge_fraud from "../pictures/badge-fraud.png"
+import badge_rising_stars from "../pictures/badge-rising-stars.png"
+import badge_top_seller_100 from "../pictures/badge-top-seller-100.png"
+import badge_top_seller_1k from "../pictures/badge-top-seller-1k.png"
+import badge_top_seller_10k from "../pictures/badge-top-seller-10k.png"
+import badge_newbie from "../pictures/badge-newbie.png"
+import badge_admin from "../pictures/badge-admin.png"
+import badge_official from "../pictures/badge-official.png"
+import { Badge } from "react-bootstrap";
+
+const dictBadge = {
+    "top-10":badge_top_10 ,
+    "top-100":badge_top_100,
+    "fraud":badge_fraud ,
+    "rising-stars":badge_rising_stars ,
+    "top-seller-100": badge_top_seller_100,
+    "top-seller-1k":badge_top_seller_1k,
+    "top-seller-10k":badge_top_seller_10k,
+    "newbie":badge_newbie,
+    "admin":badge_admin,
+    "official":badge_official,
+}
+
 const AccountPage = () =>{
     const [data,setData] = useState({})
     const [other_data, setOther_data] = useState({})
@@ -21,16 +46,13 @@ const AccountPage = () =>{
 			setStatus(res.status);
 			if(res.status == "success"){
 				setData(res.data);
+                return res.data._id;
 			}
 			else{
 				setData(res.message);
 			}
 		})
-	},[]);
-
-    let userId = data._id;
-    useEffect(()=>{
-        // console.log(userId)
+        .then((userId)=>
         getData(`/user/profile/${userId}`).then((res)=>{ 
 			setStatus(res.status);
 			if(res.status == "success"){
@@ -39,13 +61,14 @@ const AccountPage = () =>{
 			else{
 				setOther_data(res.message);
 			}
-		})
-    }, [userId])
+		}))
+    }, [])
 
     // console.log(data)
     // console.log(other_data)
 
     const allstar = []
+    let badges = []
 
     let tmp = other_data.rating
     while(tmp>=1){
@@ -54,6 +77,15 @@ const AccountPage = () =>{
     }
     if(tmp===0.5) allstar.push(<img src={half_star} className="star" alt="star"/>)
     while(allstar.length<5) allstar.push(<img src={blank_star} className="star" alt="star"/>)
+
+    if(data.badge){
+        badges = data.badge.map((val,key)=>{
+            let badgeName = dictBadge[val]
+            return (
+                <img src={badgeName} key={key} alt={val} className="badge-img" />
+            )
+        })
+    }
 
 	return (
         <div className="profile-page">
@@ -66,13 +98,13 @@ const AccountPage = () =>{
             <div className="main-info-profile">
                 <img className="profile-pic" alt="ProfilePic" src={data.profilePicture}/>
                 <div>
-                    <h5>Display Name</h5>
+                    <h4>Display Name</h4>
                     {data.displayName? <div className="account-info"><h5>{data.displayName}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
-                    <h5>Email</h5>
+                    <h4>Email</h4>
                     {data.email? <div className="account-info"><h5>{data.email}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
-                    <h5>Phone Number</h5>
+                    <h4>Phone Number</h4>
                     {data.phoneNumber? <div className="account-info"><h5>{data.phoneNumber}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
-                    <h5>Address</h5>
+                    <h4>Address</h4>
                     {data.address? <div className="account-info"><h5>{data.address}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                 </div>
             </div>
@@ -82,19 +114,20 @@ const AccountPage = () =>{
                     {data.accountDescription? <h6>{data.accountDescription}</h6> : <h6>No information</h6>}
                 </div>
                 <div className="about-you">
-                    {/* <h5>My Badges & Statistics</h5> */}
-                    <h5>My Statistics</h5>
+                    <h5>My Badges & Statistics</h5>
                     <div>
                         {/* <img src={other_data.badge[0]} className="badge-pic" alt="BadgePic"/>
                         <img src={other_data.badge[1]} className="badge-pic" alt="BadgePic"/>
                         <img src={other_data.badge[2]} className="badge-pic" alt="BadgePic"/> */}
                     </div>
+                    {badges}
                     <div className="d-flex">
                         <h6>Average Rating:</h6>
                         {allstar}
                     </div>
                     <h6>Items submitted: {other_data.totalAuctioned}</h6>
                     <h6>Items sold: {other_data.successAuctioned}</h6>
+                    
                 </div>
             </div>
             

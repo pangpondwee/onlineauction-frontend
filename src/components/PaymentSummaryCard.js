@@ -15,7 +15,12 @@ const PaymentSummaryCard = (props) => {
         Auctioneer: {props.auctioneerName}
       </div>
       <hr></hr>
-      <div className="payment-summary-price">Price: {props.price} Baht</div>
+      <div className="payment-summary-price-section">
+        <div className="payment-summary-price">Price</div>
+        <div className="payment-summary-price">
+          {props.price.toLocaleString('en-US')} Baht
+        </div>
+      </div>
     </div>
   )
 }

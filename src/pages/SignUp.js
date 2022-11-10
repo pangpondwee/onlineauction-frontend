@@ -28,10 +28,12 @@ const TabSignUp = (props)=>{
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       <ul style={{paddingLeft: "1em", textAlign: "start", marginBottom: "0"}} >
-        <li>At least 10 characters</li>
-        <li>At least 1 lower case character</li>
-        <li>At least 1 upper case character</li>
-        <li>At least 1 special character</li>
+        <li>Be 10-30 characters long</li>
+        <li>Contains at least 1 number</li>
+        <li>Contains at least 1 lower case character</li>
+        <li>Contains at least 1 upper case character</li>
+        <li>Contains at least 1 special character</li>
+        <li>Contains no spaces</li>
       </ul>
     </Tooltip>
   );
@@ -112,7 +114,7 @@ const TabSignIn = (props)=>{
 				  <input id="password" type="password" placeholder="Password" className='form-control' ref={props.password}></input>
 				  <img src={eye_icon} className="btn" style={{width: "40px",padding: 0, margin: "1em auto"}} onClick ={togglePassword} />
 			  </div>
-        <Link to={"#"}>Forgot Password?</Link>
+        <Link to="/forget-password">Forgot Password?</Link>
         
         <div>
           <input type="submit" className={classes.button} value="Sign In"/>
@@ -178,6 +180,7 @@ const SignUp = () => {
       localStorage.setItem("userStatus", data.userStatus);
       localStorage.setItem("id", data._id);
       localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("profilePicture", data.profilePicture);
       setloggedIn(true);
       navigate("/");
     })
@@ -194,7 +197,7 @@ const SignUp = () => {
       setError={setError}
       />
       <div className={classes.SignUp}>
-        <div>
+        <div className={classes.signupArt}>
           <h1>Anything You Want, At A Super Satisfying Price!</h1>
           <h2 className="text-primary">Create An Account Now!</h2>
           <img className={classes.loginimg} src={pic1} />

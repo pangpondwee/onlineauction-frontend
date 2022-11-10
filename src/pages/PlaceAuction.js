@@ -2,6 +2,8 @@ import { useRef, useState } from 'react'
 import { postData } from '../components/fetchData'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 import { useNavigate } from 'react-router-dom'
+import '../css/Payment.css'
+import "react-datepicker/dist/react-datepicker.css";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -16,6 +18,7 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
 import FilePondPluginImageResize from 'filepond-plugin-image-resize'
+import ReactDatePicker from 'react-datepicker'
 
 // Register the plugins
 registerPlugin(
@@ -41,6 +44,7 @@ const AuctionDetail = () => {
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
   const navigate = useNavigate()
+  const [startDate, setStartDate] = useState(new Date());
 
   const submitHandler = (event) => {
     const uploadedFile = uploadFileRef.current.getFiles()
@@ -76,6 +80,13 @@ const AuctionDetail = () => {
 
   return (
     <div>
+      <ReactDatePicker
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+      timeIntervals={10}
+      showTimeSelect
+      dateFormat="MMMM d, yyyy h:mm aa"
+    />
       <div className="header">Place Auction</div>
       <form
         className="place-auction-form"
@@ -101,7 +112,7 @@ const AuctionDetail = () => {
                 })
               }
               required
-            ></input>
+            />
           </div>
           <div className="form-input-field">
             <label htmlFor="itemDetail" className="form-label">
@@ -119,7 +130,7 @@ const AuctionDetail = () => {
                 })
               }
               required
-            ></textarea>
+            />
           </div>
           <div className="form-input-field">
             <label htmlFor="itemCategory" className="form-label">
@@ -187,19 +198,24 @@ const AuctionDetail = () => {
             <label htmlFor="startingPrice" className="form-label">
               STARTING PRICE
             </label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="e.g. 500"
-              min={1}
-              onChange={(e) =>
-                setAuctionDetails({
-                  ...auctionDetails,
-                  startingPrice: e.target.value,
-                })
-              }
-              required
-            ></input>
+            <div className="input-field-flex">
+              <input
+                type="number"
+                className="form-control"
+                placeholder="e.g. 500"
+                min={1}
+                onChange={(e) =>
+                  setAuctionDetails({
+                    ...auctionDetails,
+                    startingPrice: e.target.value,
+                  })
+                }
+                required
+              />
+              <div className="currency">
+                <div>BAHT</div>
+              </div>
+            </div>
           </div>
           <div className="form-input-field">
             <label htmlFor="auctioningType">AUCTIONING TYPE</label>
@@ -218,7 +234,7 @@ const AuctionDetail = () => {
                     })
                   }
                   defaultChecked
-                ></input>
+                />
                 <label className="form-check-label" htmlFor="closed-radio">
                   Closed Bid
                 </label>
@@ -236,7 +252,7 @@ const AuctionDetail = () => {
                       isOpenBid: e.target.value,
                     })
                   }
-                ></input>
+                />
                 <label className="form-check-label" htmlFor="open-radio">
                   Open Bid
                 </label>
@@ -257,41 +273,51 @@ const AuctionDetail = () => {
                 })
               }
               required
-            ></input>
+            />
           </div>
           <div className="form-input-field">
             <label htmlFor="minimumBidStep" className="form-label">
               MINIMUM BID STEP (OPTIONAL)
             </label>
-            <input
-              type="number"
-              className="form-control"
-              onChange={(e) =>
-                setAuctionDetails({
-                  ...auctionDetails,
-                  bidStep: e.target.value,
-                })
-              }
-              placeholder="e.g. 500"
-              min={1}
-            ></input>
+            <div className="input-field-flex">
+              <input
+                type="number"
+                className="form-control"
+                min={1}
+                onChange={(e) =>
+                  setAuctionDetails({
+                    ...auctionDetails,
+                    bidStep: e.target.value,
+                  })
+                }
+                placeholder="e.g. 500"
+              />
+              <div className="currency">
+                <div>BAHT</div>
+              </div>
+            </div>
           </div>
           <div className="form-input-field">
             <label htmlFor="expectedPrice" className="form-label">
               EXPECTED PRICE (OPTIONAL)
             </label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="e.g. 500"
-              min={1}
-              onChange={(e) =>
-                setAuctionDetails({
-                  ...auctionDetails,
-                  expectedPrice: e.target.value,
-                })
-              }
-            ></input>
+            <div className="input-field-flex">
+              <input
+                type="number"
+                className="form-control"
+                min={1}
+                placeholder="e.g. 500"
+                onChange={(e) =>
+                  setAuctionDetails({
+                    ...auctionDetails,
+                    expectedPrice: e.target.value,
+                  })
+                }
+              />
+              <div className="currency">
+                <div>BAHT</div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="form-footer">
@@ -307,7 +333,11 @@ const AuctionDetail = () => {
             <button type="submit" className="btn btn-primary first-button">
               Place Auction
             </button>
-            <button type="button" className="btn btn-outline-primary">
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={() => navigate(`/`)}
+            >
               Cancel
             </button>
           </div>

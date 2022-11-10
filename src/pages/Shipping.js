@@ -1,5 +1,5 @@
 import AddressBox from '../components/AddressBox'
-// import Package from '../pictures/package.jpeg'
+import '../css/Payment.css'
 import PaymentSummaryCard from '../components/PaymentSummaryCard'
 import { FilePond, registerPlugin } from 'react-filepond'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
@@ -61,7 +61,10 @@ const Shipping = () => {
         console.log(res)
         setItemDetails(res.data)
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e)
+        navigate('/404')
+      })
     getData(`/billingInfo/${auctionId}`)
       .then((res) => {
         console.log(res)
@@ -72,11 +75,14 @@ const Shipping = () => {
           phone: res.data.bidderPhoneNumber,
         })
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        console.log(e)
+        navigate('/404')
+      })
     setShippingAddress({
-      name: 'Someone',
-      address: 'Some Address',
-      phone: '0620000000',
+      name: 'Full Name',
+      address: 'Address',
+      phone: '0621234567',
     })
   }, [])
 
@@ -95,8 +101,32 @@ const Shipping = () => {
     ).then((res) => {
       console.log(shippingInfo)
       console.log(res)
-      navigate('/account/myorder?list=bid?type=all')
+      navigate('/account/myorder?list=auction&type=shipped')
     })
+  }
+
+  const getInformationFromProfileHandler = () => {
+    getData('/user/mypayment')
+      .then((res) => {
+        console.log(res)
+        // bankAccountNO: '',
+        // bankName: '',
+        // bankAccountName: '',
+        setShippingDetails({
+          ...shippingDetails,
+          bankAccountNO: 'bankNO' in res.data ? res.data.bankNO : '',
+          bankName: 'bankName' in res.data ? res.data.bankNO : '',
+          bankAccountName: 'bankAccountName' in res.data ? res.data.bankAccountName : '',
+        })
+        // setPaymentDetails({
+        //   ...paymentDetails,
+        //   bidderName: 'displayName' in res.data ? res.data.displayName : '',
+        //   phoneNumber: 'phoneNumber' in res.data ? res.data.phoneNumber : '',
+        //   bidderAddress: 'address' in res.data ? res.data.address : '',
+        // })
+        console.log(shippingDetails)
+      })
+      .catch((e) => console.log(e))
   }
 
   return (
@@ -125,12 +155,14 @@ const Shipping = () => {
             <div className="sub-form">
               <div className="form-input-field">
                 <label htmlFor="bankAccount" className="form-label">
-                  BANK ACCOUNT
+                  ACCOUNT NUMBER
                 </label>
                 <input
                   type="text"
                   className="form-control"
+                  pattern="[0-9]+"
                   placeholder="e.g. 0718785888"
+                  value={shippingDetails.bankAccountNO}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
@@ -148,6 +180,7 @@ const Shipping = () => {
                 <select
                   className="form-select form-control"
                   defaultValue={''}
+                  value={shippingDetails.bankName}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
@@ -217,7 +250,8 @@ const Shipping = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="e.g. Peeranat Srisuthangkul"
+                  placeholder="e.g. John Doe"
+                  value={shippingDetails.bankAccountName}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
@@ -227,7 +261,16 @@ const Shipping = () => {
                   required
                 ></input>
               </div>
+              <button
+              type="button"
+              className="no-outline-btn"
+              onClick={getInformationFromProfileHandler}
+            >
+              Use information from profile
+            </button>
             </div>
+            
+
             <div className="form-heading1">SHIPPING INFO</div>
             <div className="sub-form">
               <div className="form-input-field">
@@ -237,6 +280,7 @@ const Shipping = () => {
                 <input
                   type="text"
                   className="form-control"
+                  pattern="[a-zA-Z0-9]+"
                   placeholder="e.g. ABCDEF123456"
                   onChange={(e) =>
                     setShippingDetails({
@@ -298,11 +342,17 @@ const Shipping = () => {
                   required
                 />
               </div>
-              <div>
+              <div className="form-submit-btn">
                 <button type="submit" className="btn btn-primary first-button">
                   Proceed
                 </button>
-                <button type="submit" className="btn btn-outline-primary">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={() =>
+                    navigate('/account/myorder?list=auction&type=shipped')
+                  }
+                >
                   Cancel
                 </button>
               </div>

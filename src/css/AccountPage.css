@@ -2,7 +2,7 @@
 .lefthand-nav {
   margin: 25px;
   /* width: 235px; */
-  width: 30vh;
+  width: 15vw;
   border-right: 1px var(--color-primary) solid;
   display: flex;
   flex-direction: column;
@@ -40,21 +40,22 @@ li.menu-dropdown {
 /* AccountPage(Profile) */
 .main-account-page {
   display: grid;
-  /* grid-template-columns: 235px auto; */
-  grid-template-columns: 30vh auto;
-  column-gap: 60px;
+  width: 100%;
+  grid-template-columns: 15vw auto;
+  column-gap: 5vw;
 }
 
 .profile-page {
   padding: 15px 25px;
+  width: 75vw;
 }
 
 .edit-profile {
   background-color: #2b4257;
   color: white;
-  width: 120px;
-  height: 50px;
-  padding: 10px 10px 0 10px;
+  width: 8vw;
+  height: fit-content;
+  padding: 10px 10px 10px 10px;
   border-radius: 5%;
   margin-bottom: 10px;
   text-align: center;
@@ -62,12 +63,12 @@ li.menu-dropdown {
 }
 
 .profile-pic {
-  width: 25vw;
-  height: 45vh;
-  max-width: 350px;
+  width: 23vw;
+  height: 23vw;
+  /* max-width: 350px;
   max-height: 350px;
   min-width: 200px;
-  min-height: 200px;
+  min-height: 200px; */
   /* border-color: black;
   border-style: solid; */
 }
@@ -75,8 +76,10 @@ li.menu-dropdown {
 .main-info-profile {
   margin: 10px 10px 30px 10px;
   display: grid;
-  grid-template-columns: 380px auto;
-  column-gap: 30px;
+  /* grid-template-columns: 380px auto;
+  column-gap: 30px; */
+  grid-template-columns: 30vw auto;
+  /* column-gap: 5vw; */
 }
 
 .sub-info-profile {
@@ -89,12 +92,15 @@ li.menu-dropdown {
 .account-info {
   width: 300px;
   padding-left: 30px;
+  /* color: var(--color-dark); */
+  color: #2679b9;
 }
 
 .about-you {
   margin: 10px;
   padding: 20px 30px 20px 30px;
   width: fit-content;
+  max-width: 30vw;
   height: fit-content;
   box-shadow: 0px 3px 3px gray;
   border-radius: 3%;
@@ -133,28 +139,40 @@ li.menu-dropdown {
 .main-editing-page {
   padding: 10px;
   display: grid;
-  grid-template-columns: 380px auto;
+  grid-template-columns: 30vw auto;
 }
 
 .input-editing {
   border: 3px var(--color-secondary) solid;
   border-radius: 5px;
   padding: 3px 8px;
-  width: 400px;
+  width: 25vw;
   margin-bottom: 20px;
 }
 
 .choose-image {
-  width: 25vw;
-  max-width: 350px;
-  min-width: 200px;
+  width: 23vw;
+  /* height: 10vh; */
+}
+
+/* Hide arrows in number input field */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  appearance: textfield; /* Firefox */
 }
 
 /* MyOrderNav */
 .My-Order-Nav {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 10px;
+  justify-content: space-evenly;
 }
 
 .Order-Menu {
@@ -175,15 +193,16 @@ li.menu-dropdown {
     border-radius: 10px;
     display: grid;
     height: fit-content;
-    grid-template-columns: 200px 250px auto;
+    grid-template-columns: 13vw 32vw auto;
     overflow: hidden;
-    padding: 20px 20px 20px 35px;
+    padding: 1.5vw 1.5vw 1.5vw 2vw;
     margin-bottom: 20px;
 }
 
 .mini-pic-goods {
-    width: 160px;
-    height: 160px;
+    width: 10vw;
+    height: 10vw;
+    cursor: pointer;
 }
 
 .Review-boxV2 {
@@ -191,11 +210,14 @@ li.menu-dropdown {
   border-radius: 10px;
   display: grid;
   height: fit-content;
-  max-height: 180px;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 20vw auto;
   overflow: hidden;
-  padding: 20px 25px 30px 25px;
-  margin-bottom: 20px;
+  padding: 2vw 2.5vw 3vw 2.5vw;
+  margin-bottom: 2vw;
+}
+
+.can_click {
+  cursor: pointer;
 }
 
 /* AccountPage(Following) */
@@ -204,11 +226,13 @@ li.menu-dropdown {
   border: 3px #228be6 solid;
   border-radius: 20px;
   background-color: white;
-  display: flex;
-  height: 40px;
-  width: 150px;
-  padding: 5px 20px;
+  height: fit-content;
+  width: 10vw;
+  min-width: 100px;
+  padding: 0.5vw 1vw 0vw;
   color: #228be6;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   cursor: pointer;
 }
@@ -231,10 +255,10 @@ li.menu-dropdown {
 }
 
 .Order-box {
-  grid-template-columns: 200px 500px auto;
+  grid-template-columns: 13vw 32vw auto;
   height: fit-content;
-  max-height: 200px;
   overflow: hidden;
+  margin-right: 2vw;
 }
 
 .no-data-page {
@@ -251,6 +275,7 @@ li.menu-dropdown {
 .follow-btn, 
 .follow-btn:focus{
     border-color: var(--color-dark);
+    height: fit-content;
 }
 .follow-btn:hover{
     background-color: #eee;
@@ -274,12 +299,13 @@ li.menu-dropdown {
 
 /* fontcolor&bordercolor in myorder */
 
-.bid-currently
-  .bid-waitingConfirmSlip
-  .bid-waitingForShipping
-  .auction-on
-  .auction-waitingForPayment
-  .auction-waitingForConfirm {
+.bid-currently,
+.bid-waitingConfirmSlip,
+.bid-waitingForShipping,
+.auction-on,
+.auction-waitingForPayment,
+.auction-waitingForConfirm,
+.auction-waitingAdminPayment {
   color: #228be6;
   border-color: #228be6;
 }
@@ -292,7 +318,39 @@ li.menu-dropdown {
 }
 
 .bid-finished,
-.auction-finished {
+.auction-finished,
+.auction-completed,
+.bid-completed,
+.bid-waitingAdminPayment {
   color: #2f9e44;
   border-color: #2f9e44;
+}
+
+.auction-failed,
+.bid-failed {
+  color: blueviolet;
+  border-color: blueviolet;
+}
+
+/* payment */
+.edit-payment{
+  height: 2vw;
+  width: 2vw;
+  border-color: #fff;
+  background-color: #fff;
+  box-shadow: none;
+  visibility: visible;
+}
+
+.button-edit-payment{
+  visibility: hidden;
+  height: 2vw;
+  width: 2vw;
+  margin-right: 1vw;
+}
+
+.badge-img{
+  height: 3vw;
+  width: 3vw;
+  margin: 1vw;
 }

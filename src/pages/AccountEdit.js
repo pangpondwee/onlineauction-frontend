@@ -15,13 +15,17 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop'
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
+import FilePondPluginImageResize from 'filepond-plugin-image-resize'
 
 // Register the plugins
 registerPlugin(
   FilePondPluginFileEncode,
   FilePondPluginImagePreview,
   FilePondPluginFileValidateType,
-  FilePondPluginImageCrop
+  FilePondPluginImageCrop,
+  FilePondPluginImageTransform,
+  FilePondPluginImageResize
 )
 
 const AccountEdit = () =>{
@@ -44,6 +48,9 @@ const AccountEdit = () =>{
         .then((res)=>{
             if(!res.status) throw new Error("Could not get status")
             if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
+            if ("profilePicture" in new_data){
+                localStorage.setItem("profilePicture",new_data["profilePicture"])
+            }
             console.log(res.status)
             navigate(`/account/profile`)
         })
@@ -61,7 +68,7 @@ const AccountEdit = () =>{
         personal_info.forEach((_info)=>{
             const tmp = document.getElementById(_info).value
             if (tmp != ""){
-                console.log(tmp)
+                // console.log(tmp)
                 _changed[_info] = tmp
             }
         })
@@ -83,7 +90,7 @@ const AccountEdit = () =>{
 		})
 	},[]);
 
-    console.log(data)
+    // console.log(data)
 
 	return (
         <div className="profile-page d-flex justify-content-between">
@@ -100,6 +107,9 @@ const AccountEdit = () =>{
                             acceptedFileTypes={['image/png', 'image/jpeg']}
                             imageCropAspectRatio="1:1"
                             ref={uploadFileRef}
+                            imageResizeTargetWidth={1000}
+                            imageResizeTargetHeight={1000}
+                            imageResizeMode="contain"
                             credits={false}/>
                     </div>
                     <div>

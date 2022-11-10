@@ -37,8 +37,8 @@ const PopupConfirm = (props) => {
         })
     },[]);
 
-    // console.log(data)
-    // console.log(data.delivery)
+    console.log(data)
+    console.log(data.delivery)
 
     function onConfirm(e) {
         // e.preventDefault()
@@ -100,7 +100,8 @@ const PopupConfirm = (props) => {
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
-            <button type="button" className="PopupCon btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+
+            <button type="button" class="PopupCon btn-primary d-none" data-bs-toggle="modal" data-bs-target="#confirmModal">
                 Confirm
             </button>
 
@@ -116,8 +117,8 @@ const PopupConfirm = (props) => {
                             </div>
                             {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
-                        <div className="modal-body-confirm">
-                            <Link to={"/billing-info"} >
+                        <div class="modal-body-confirm">
+                            <Link to={`/billing-info/${auctionID}`} >
                                 <button className="billing btn-link" data-bs-dismiss="modal">Billing Info</button>
                             </Link>
                             {(Object.keys(data).length === 0)?
@@ -178,10 +179,10 @@ const PopupConfirm = (props) => {
                             {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                         </div>
                         <div className="modal-body-review">
-                            <h6>Review Item : Nintendo Switch</h6>
-                            {/* <h6>Iten Name : {data.productName}</h6> */}
-                            <h6>Auctioneer Name : Kong Pakkapol</h6>
-                            {/* <h6>Auctioneer Name : {name}</h6> */}
+                            {/* <h6>Review Item : Nintendo Switch</h6> */}
+                            <h6>Iten Name : {data.productName}</h6>
+                            {/* <h6>Auctioneer Name : Kong Pakkapol</h6> */}
+                            <h6>Auctioneer Name : {data.auctioneerName}</h6>
                             <h6>
                                 Rating : 
                                 {/* have to install mui first to use this rating code */}

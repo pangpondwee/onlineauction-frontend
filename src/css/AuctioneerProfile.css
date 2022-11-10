@@ -1,16 +1,3 @@
-:root {
-  --color-primary: #c3d3e0;
-  --color-secondary: #a3bcd0;
-  --color-text: #2b4257;
-  --color-dark: #091235;
-  --color-attention: #f08c00;
-  --color-grey-box: #f8f9fa;
-  --color-blue: #228BE6;
-  --color-blue-dark: #1260a4;
-  --radius: 20px;
-  --box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0;
-}
-
 /* Auctioneer Detail */
 .AucProImg {
   height: 350px;

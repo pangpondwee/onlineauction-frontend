@@ -14,7 +14,8 @@
 #auction-top{
     float: left;
     width: 20vw;
-    margin: 25px 25px 25px 0;
+    margin: 25px 0 25px 0;
+    padding-right: 25px;
     border-right: 1px var(--color-primary) solid;
     height: 700px;
 }
@@ -24,7 +25,6 @@
 }
 #topbidder-list{
     margin-right: 30px;
-    overflow: scroll;
     height: 500px;
 }
 .topbidder-element{
@@ -58,9 +58,9 @@
     justify-content: center;
 }
 #picture-list{
-    height: 5em;
-    overflow: scroll;
-    overflow-x: scroll;
+    /* height: 5em; */
+    /* overflow: scroll; */
+    overflow-y: scroll;
 }
 #main-picture{
     /* height: 100%; */
@@ -91,6 +91,9 @@
 .picture-button:active{
     background-color: var(--color-dark);
 }
+#product-title{
+    margin-bottom: 1em;
+}
 
 #product-title > button{
     margin-left: 1em;
@@ -98,6 +101,12 @@
 #product-title > h1{
     vertical-align: middle;
     display: inline;
+}
+#auction-nav .nav-item{
+    width: 50%;
+}
+#auction-nav .nav-item button{
+    width: 100%;
 }
 /* Follow buttons */
 .follow-btn, 
@@ -132,7 +141,7 @@
     width: 100%;
 }
 #auction-desc-pane{
-    overflow: scroll;
+    overflow-y: scroll;
     width: 100%;
 }
 #auction-content{
@@ -175,13 +184,23 @@
     align-items: center;
     padding: 0 1em;
 }
+#bid-group > *{
+    height: 3em;
+    min-width: 14%;
+}
 #bid-price{
-    width: 80%;
+    width: 70%;
     outline: 2px solid var(--color-blue);
     border: none;
     outline-offset: -2px;
 }
+#bid-price-button{
+    height: 48px;
+    font-size: large;
+    font-weight: bold;
+}
 #or-wrapper, #select-wrapper{
+    color: #999;
     margin-bottom: 1em;
     margin-top: 1em;
     text-align: center;
@@ -208,8 +227,18 @@
 #info-top .info-data{
     font-size: 1.2em;
 }
+#info-top #auctioneerName{
+    text-decoration: none;
+    font-weight: bold;
+}
+#info-top p,#info-bottom p {
+    margin-bottom: 0.25em;
+}
 #info-bottom .info-data{
     font-size: 2em;
+}
+#info-bottom #currency{
+    font-size: 0.9em;
 }
 #history-button{
     border: #858585 solid 1px;
@@ -254,5 +283,5 @@
 }
 #history-error{
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1em;
 }

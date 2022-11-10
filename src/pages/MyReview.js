@@ -24,18 +24,18 @@ const MyReview = () =>{
 
     const display = []
     data.forEach(element => {
-        console.log(element)
+        // console.log(element)
         display.push(<ReviewObj name={element.productName} bidder={element.commenter} rating={element.rating} reviewing={element.comment}/>)
     });
 
 	return (
-        <>
+        <div>
             <h1>My Review</h1>
             <div className="all-review">
                 {/* store each review */}
                 {display.length===0? <div className="no-data-page">No Data</div> : display}
             </div>
-        </>
+        </div>
 	)
 }
 export default MyReview;

@@ -159,3 +159,42 @@
   border: 5px solid transparent;
   background-clip: content-box;
 }
+
+#jumbotron{
+  background-color: #0A3E8A;
+  padding-top: 4em;
+  padding-left: 5em;
+  padding-bottom: 1em;
+  border-radius: var(--radius);
+  width: 100%;
+  color: #fff;
+  display: flex;
+  margin-bottom: 2em;
+}
+
+#jumbotron div {
+  display: inline-block;
+  width:50%;
+}
+#jumbotron div h1 {
+  display: inline-block;
+  margin-bottom: 1em;
+}
+
+#jumbotron div a{
+  padding: 1em;
+  border: white;
+  border-radius: var(--radius);
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+}
+
+#jumbotron div a:hover{
+  background: #eee;
+}
+
+#jumbotron img {
+  display: block;
+  height: 22em;
+}
