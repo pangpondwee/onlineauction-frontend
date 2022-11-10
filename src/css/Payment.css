@@ -112,6 +112,11 @@
   justify-content: center;
 }
 
+.center-button {
+  display: flex;
+  justify-content: center;
+}
+
 /* Preview Transaction Slip Pic */
 .transaction-slip-pic {
   max-width: 50%;

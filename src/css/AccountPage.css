@@ -321,9 +321,17 @@ input[type='number'] {
 
 .bid-finished,
 .auction-finished,
+.auction-completed,
+.bid-completed,
 .bid-waitingAdminPayment {
   color: #2f9e44;
   border-color: #2f9e44;
+}
+
+.auction-failed,
+.bid-failed {
+  color: blueviolet;
+  border-color: blueviolet;
 }
 
 /* payment */

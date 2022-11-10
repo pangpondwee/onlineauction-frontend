@@ -268,6 +268,7 @@ const BillingInfo = () => {
         </div>
         <div className="billing-info-tracking-card-grid grey-box">
           <TrackingCard
+            status={orderDetails.billingStatus}
             shippingCompany={
               MapShippingCompany[shippingDetails.shippingCompany]
             }
