@@ -66,9 +66,11 @@ const PopupConfirm = (props) => {
         ))
         .then((res) => {
             console.log("Confirmed successfully")
+            window.location.reload()
         })
         .catch(e => {
             console.log(e.message)
+            window.location.reload()
         })
     }
 
@@ -83,10 +85,16 @@ const PopupConfirm = (props) => {
         ))
         .then((res) => {
             console.log("Review Successfully")
+            window.location.reload()
         })
         .catch(e => {
             console.log("error")
+            window.location.reload()
         })
+    }
+
+    function onSkip() {
+        window.location.reload()
     }
 
     return (
@@ -192,7 +200,7 @@ const PopupConfirm = (props) => {
                         </div>
                         <div className="modal-footer-review">
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={onReview}>Confirm</button>
-                            <button type="button" className="btn btn-light" data-bs-dismiss="modal">Skip</button>
+                            <button type="button" className="btn btn-light" data-bs-dismiss="modal" onSkip={onSkip}>Skip</button>
                         </div>
                     </div>
                 </div>
