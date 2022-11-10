@@ -40,23 +40,31 @@ const Profile = (props) => {
     const successAuctioned = props.successAuctioned
     const isFraud = props.isFraud
     const badges = props.badges
-    // console.log(rating)
+    // console.log(badges.length)
 
     const star = []
-    // let badge = []
+    let badge = []
     let badge1 = []
     let badge2 = []
 
     if (badges === undefined) {
 
-    } else {
-        // badge = badges.map((val,key)=>{
-        //     let badgeName = dictBadge[val]
-        //     return (
-        //         <img src={badgeName} key={key} alt={val} className="badge-img" />
-        //     )
-        // })
-        // console.log(badges)
+    } else if (badges.length === 0) {
+        badge = (
+            <div className="badges">
+                <h6>No Badge</h6>
+            </div>
+        )
+    } else if (badges.length <= 5) {
+        // console.log("Badge 1 row")
+        badge = badges.slice(0, badges.length).map((val, key) => {
+            let badgeName = dictBadge[val]
+            return (
+                <img src={badgeName} key={key} alt={val} className="badge-img" />
+            )
+        })
+    } else if (badges.length > 5) {
+        // console.log("Badge 2 row")
         badge1 = badges.slice(0, 5).map((val, key) => {
             let badgeName = dictBadge[val]
             return (
@@ -69,6 +77,12 @@ const Profile = (props) => {
                 <img src={badgeName} key={key} alt={val} className="badge-img" />
             )
         })
+        badge = (
+            <div className="badges">
+                {badge1}
+                {badge2}
+            </div>
+        )
     }
 
     if (rating === undefined) {
@@ -120,17 +134,7 @@ const Profile = (props) => {
                     </div>
                     <div className="AucBadges">
                         <h6>Badges</h6>
-                        {(badges.length === 0)?
-                            <div className="badges">
-                                <h6>No Badge</h6>
-                            </div>
-                            :
-                            <div className="badges">
-                                {/* {badge} */}
-                                {badge1}
-                                {badge2}
-                            </div>
-                        }
+                        {badge}
                     </div>
                 </div>
                 <div className="AucStat">
@@ -243,7 +247,7 @@ const AuctioneerProfile = () => {
         })
     },[]);
 
-    // console.log(data)
+    console.log(data)
 
     return (
         <div>
