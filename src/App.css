@@ -93,8 +93,8 @@ main {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&family=Kanit:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap');
 
 * {
-  font-family: 'Figtree', 'Kanit', sans-serif;
+  font-family: 'Kanit', sans-serif;
 }
