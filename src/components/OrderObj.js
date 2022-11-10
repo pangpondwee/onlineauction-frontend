@@ -16,6 +16,7 @@ const OrderObj = (props) => {
     // else if(status_of_auction === 'bid-waitingForPayment') navigate(`/payment/${props.data.auctionID}`)
     // else if(status_of_auction === 'auction-waitingForShipping') navigate(`/shipping/${props.data.auctionID}`)
     // else if(status_of_auction === 'bid-waitingForConfirm' || status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
+    // else if(status_of_auction === 'bid-waitingForConfirm' || status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
     else if(status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
     else navigate(`/billing-info/${props.data.auctionID}`)
   }

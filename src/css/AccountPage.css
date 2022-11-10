@@ -229,7 +229,7 @@ input[type='number'] {
   height: fit-content;
   width: 10vw;
   min-width: 100px;
-  padding: 0.5vw 2vw 0vw;
+  padding: 0.5vw 1vw 0vw;
   color: #228be6;
   display: flex;
   flex-wrap: wrap;
@@ -257,7 +257,6 @@ input[type='number'] {
 .Order-box {
   grid-template-columns: 13vw 32vw auto;
   height: fit-content;
-  max-height: 200px;
   overflow: hidden;
   margin-right: 2vw;
 }
