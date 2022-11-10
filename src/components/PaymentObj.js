@@ -50,6 +50,29 @@ const Bank_pic = {
     "HSBC": hsbc_logo,
 }
 
+const Bank_fullname = {
+    "KTB": "Krung Thai Bank (ธนาคารกรุงไทย)",
+    "KBANK": "Kasikornbank (ธนาคารกสิกรไทย)",
+    "SCB": "Siam Commercial Bank (ธนาคารไทยพาณิชย์)",
+    "BBL": "Bangkok Bank (ธนาคารกรุงเทพ)",
+    "TTB": "TMBThanachat Bank (ธนาคารทหารไทยธนชาติ)",
+    "BAY": "Bank of Ayudhya (ธนาคารกรุงศรี)",
+    "GSB": "Government Savings Bank (ธนาคารออมสิน)",
+    "CIMBT": "CIMB Thai Bank (ธนาคารซีไอเอ็มบีไทย)",
+    "UOB": "United Overseas Bank (Thai) (ธนาคารยูโอบี)",
+    "TISCO": "Tisco Bank (ธนาคารทิสโก้ จำกัด)",
+    "KKP": "Kiatnakin Phatra Bank (ธนาคารเกียรตินาคินภัทร)",
+    "ICB": "Industrial and Commercial Bank of China Limited (ธนาคารพาณิชย์อุตสาหกรรมแห่งประเทศจีน)",
+    "LH": "Land & Houses Bank (ธนาคารแลนด์ แอนด์ เฮ้าส์)",
+    "SCT": "Standard Chartered Bank (ธนาคารสแตนดาร์ดชาร์เตอร์ด)",
+    "CITI": "Citibank (ธนาคารซิตี้แบงก์)",
+    "GHB": "Government Housing Bank (ธนาคารอาคารสงเคราะห์)",
+    "BAAC": "Bank for Agriculture and Agricultural Cooperatives (ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร)",
+    "IBT": "Islamic Bank of Thailand (ธนาคารอิสลามแห่งประเทศไทย)",
+    "TCRB": "The Thai Credit Retail Bank (ธนาคารไทยเครดิต เพื่อรายย่อย)",
+    "HSBC": "HSBC BANK (เอชเอสบีซี โฮลดิ้งส์)"
+}
+
 const PaymentObj = (props) =>{
     const navigate = useNavigate()
 
@@ -64,7 +87,7 @@ const PaymentObj = (props) =>{
             <div className="Review-box">
 			    <img src={Bank_pic[props.data.bankName]} alt="Bank_pic" className="mini-pic-goods"/>
                 <span>
-                    <h4>{props.data.productName}</h4>
+                    <h4>{Bank_fullname[props.data.bankName]}</h4>
                     <br/>
                     <h6>Account Number : {props.data.bankNO}</h6>
                     <h6>Account Name : {props.data.bankAccountName}</h6>
