@@ -358,7 +358,7 @@ const Bidding = (props)=>{
 		<form onSubmit={submitWrapper} id="bidding">
 			<div id="select-wrapper"><p>Select your bid price</p></div>
 			<div id="static-price">
-				<button type="button" onClick={()=>submitBid(bidStep,false)} className='bid-button btn'>+{bidStep*2}</button>
+				<button type="button" onClick={()=>submitBid(bidStep,false)} className='bid-button btn'>+{bidStep}</button>
 				<button type="button" onClick={()=>submitBid(bidStep*2,false)} className='bid-button btn'>+{bidStep*2}</button>
 				<button type="button" onClick={()=>submitBid(bidStep*3,false)} className='bid-button btn'>+{bidStep*3}</button>
 			</div>
