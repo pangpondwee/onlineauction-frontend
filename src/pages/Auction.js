@@ -65,7 +65,6 @@ const Timer = (props)=>{
 		const timer = setInterval(() => {
 			if(time > props.timeRemaining){
 				setTime(props.timeRemaining)
-				console.log(time)
 			}
 			else{
 				setTime(time-1000)
@@ -311,7 +310,6 @@ const Bidding = (props)=>{
 	const [isAbsolute,setIsAbsolute] = useState(true);
 	const bidStep = props.bidStep;
 	const submitBid = (price,isAbsolute) => {
-		console.log(confirmBidShow);
 		setConfirmBidShow(true);
 		setPrice(price);
 		setIsAbsolute(isAbsolute);
@@ -423,7 +421,7 @@ const Auction = (props) =>{
 						return { ...prevData, currentPrice: price, myLastBid: price }
 					})
 				}
-				getHistory() // after bid
+				getFetchHistory() // after bid
 			})
 			.catch(e=>{
 				setError(e.message)
