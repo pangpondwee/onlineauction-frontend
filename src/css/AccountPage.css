@@ -257,7 +257,6 @@ input[type='number'] {
 .Order-box {
   grid-template-columns: 13vw 32vw auto;
   height: fit-content;
-  max-height: 200px;
   overflow: hidden;
   margin-right: 2vw;
 }

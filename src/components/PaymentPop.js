@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import '../css/PopupConRev.css'
-import { Link, useNavigate } from 'react-router-dom'
 import {patchData} from './fetchData';
 
 const PaymentPop = (props) => {
-    const navigate = useNavigate()
-
     const id = "confirmModal" + props.id
     const id_name = "bankAccountName" + props.id
     const id_bank = "bankName" + props.id
