@@ -44,7 +44,7 @@ const PaymentPop = (props) => {
             {/* <!-- Modal --> */}
             <div className="modal fade" id={id} tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
+                    <div className="modal-content fit">
                         <div className="modal-header">
                             <div className="modal-confirm-head-st modal-title" id="confirmModalLabel"><h3 className="mb-0">Payment Details</h3></div>
                         </div>
