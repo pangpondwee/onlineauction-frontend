@@ -2,6 +2,7 @@ import '../css/Payment.css'
 import bidderWaitingForShipping from '../pictures/waiting-for-shipping-bidder.png'
 import auctioneerWaitingForShipping from '../pictures/waiting-for-shipping-auctioneer.png'
 import { useNavigate } from 'react-router-dom'
+import PopupConfirm from './PopupConfirm'
 
 const TrackingCard = (props) => {
   const navigate = useNavigate()
@@ -58,6 +59,22 @@ const TrackingCard = (props) => {
             alt="package"
           ></img>
         </div>
+        <div className="center-button">
+          {props.status === 'waitingForConfirm' &&
+          props.isAuctioneer === false ? (
+            <button
+              type="button"
+              className="btn btn-primary status-description-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#confirmModal"
+            >
+              Confirm Recieve Package
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
+        <PopupConfirm />
       </div>
     )
   }
