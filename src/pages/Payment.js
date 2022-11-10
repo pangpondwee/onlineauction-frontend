@@ -10,6 +10,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 import ReactDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import NoPage from './NoPage'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -37,7 +38,7 @@ const PromptpayQR = (props) => {
 
 const Payment = () => {
   const { auctionId } = useParams()
-  // const auctionId = '632c09fb1e43a833d78ad748'
+  const [isError, setIsError] = useState(false)
 
   const [paymentDetails, setPaymentDetails] = useState({
     bidderName: '',
@@ -66,7 +67,7 @@ const Payment = () => {
       })
       .catch((e) => {
         console.log(e)
-        navigate('/404')
+        setIsError(true)
       })
   }, [])
 
@@ -105,197 +106,189 @@ const Payment = () => {
       }
     )
   }
-
-  return (
-    <div className="page-with-summary">
-      <div className="form-section">
-        <h1 className="header">Payment</h1>
-        <form
-          className="payment-form"
-          onSubmit={(event) => {
-            setModalShow(true)
-            event.preventDefault()
-          }}
-        >
-          <div className="form-heading1">SHIPPING INFO</div>
-          <div className="sub-form">
-            <div className="form-input-field">
-              <label htmlFor="fullName" className="form-label">
-                RECIPIENT NAME
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                value={paymentDetails.bidderName}
-                onChange={(e) =>
-                  setPaymentDetails({
-                    ...paymentDetails,
-                    bidderName: e.target.value,
-                  })
-                }
-                placeholder="e.g. John Doe"
-                required
-              ></input>
-            </div>
-            <div className="form-input-field">
-              <label htmlFor="telephone" className="form-label">
-                TELEPHONE
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                pattern="[0-9]+"
-                value={paymentDetails.phoneNumber}
-                onChange={(e) =>
-                  setPaymentDetails({
-                    ...paymentDetails,
-                    phoneNumber: e.target.value,
-                  })
-                }
-                placeholder="e.g. 0621234567"
-                required
-              ></input>
-            </div>
-            <div className="form-input-field">
-              <label htmlFor="billingAddress" className="form-label">
-                SHIPPING ADDRESS
-              </label>
-              <textarea
-                type="text"
-                className="form-control"
-                value={paymentDetails.bidderAddress}
-                onChange={(e) =>
-                  setPaymentDetails({
-                    ...paymentDetails,
-                    bidderAddress: e.target.value,
-                  })
-                }
-                placeholder="e.g. 50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
-                required
-              ></textarea>
-            </div>
-            <button
-              type="button"
-              className="no-outline-btn"
-              onClick={getInformationFromProfileHandler}
-            >
-              Use information from profile
-            </button>
-          </div>
-          <div className="form-heading1">TRANSACTION INFO</div>
-          <div className="sub-form">
-            <div className="form-input-field promptpay">
-              <img
-                className="promptpay-header"
-                src={promptpayheader}
-                alt="promptpay"
-              />
-              <PromptpayQR
-                ppID={'0909754062'}
-                amount={itemDetails.winningPrice}
-              />
-            </div>
-            <div className="form-input-field">
-              <label htmlFor="uploadTransactionSlip" className="form-label">
-                UPLOAD TRANSACTION SLIP
-              </label>
-              <FilePond
-                allowFileEncode={true}
-                imageTransformOutputQuality={50}
-                imageTransformOutputQualityMode="always"
-                acceptedFileTypes={['image/png', 'image/jpeg']}
-                imageResizeTargetWidth={1000}
-                imageResizeTargetHeight={1000}
-                imageResizeMode="contain"
-                ref={uploadFileRef}
-                credits={false}
-                required
-              />
-            </div>
-            <div className="form-input-field">
-              <label htmlFor="transactionDateTime" className="form-label">
-                TRANSACTION DATE AND TIME
-              </label>
-              {/* <input
-                type="datetime-local"
-                className="form-control"
-                onChange={(e) =>
-                  setPaymentDetails({
-                    ...paymentDetails,
-                    transferDate: e.target.value,
-                  })
-                }
-                required
-              ></input> */}
-              <ReactDatePicker
-                className="form-control"
-                selected={paymentDetails.transferDate}
-                onChange={(date) =>
-                  setPaymentDetails({
-                    ...paymentDetails,
-                    transferDate: date,
-                  })
-                }
-                timeIntervals={10}
-                showTimeSelect
-                dateFormat="d MMMM yyyy HH:mm"
-                timeFormat="HH:mm"
-                required
-              />
-            </div>
-            <div className="form-input-field">
-              <label htmlFor="value" className="form-label">
-                VALUE
-              </label>
-              <div className="input-field-flex">
+  if (isError) {
+    return <NoPage />
+  } else {
+    return (
+      <div className="page-with-summary">
+        <div className="form-section">
+          <h1 className="header">Payment</h1>
+          <form
+            className="payment-form"
+            onSubmit={(event) => {
+              setModalShow(true)
+              event.preventDefault()
+            }}
+          >
+            <div className="form-heading1">SHIPPING INFO</div>
+            <div className="sub-form">
+              <div className="form-input-field">
+                <label htmlFor="fullName" className="form-label">
+                  RECIPIENT NAME
+                </label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
-                  min={1}
+                  value={paymentDetails.bidderName}
                   onChange={(e) =>
                     setPaymentDetails({
                       ...paymentDetails,
-                      value: e.target.value,
+                      bidderName: e.target.value,
                     })
                   }
-                  placeholder="e.g. 500"
+                  placeholder="e.g. John Doe"
                   required
                 ></input>
-                <div className="currency">
-                  <div>BAHT</div>
-                </div>
               </div>
-            </div>
-            <div className="form-submit-btn">
-              <button type="submit" className="btn btn-primary first-button">
-                Proceed
-              </button>
+              <div className="form-input-field">
+                <label htmlFor="telephone" className="form-label">
+                  TELEPHONE
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  pattern="[0-9]+"
+                  value={paymentDetails.phoneNumber}
+                  onChange={(e) =>
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      phoneNumber: e.target.value,
+                    })
+                  }
+                  placeholder="e.g. 0621234567"
+                  required
+                ></input>
+              </div>
+              <div className="form-input-field">
+                <label htmlFor="billingAddress" className="form-label">
+                  SHIPPING ADDRESS
+                </label>
+                <textarea
+                  type="text"
+                  className="form-control"
+                  value={paymentDetails.bidderAddress}
+                  onChange={(e) =>
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      bidderAddress: e.target.value,
+                    })
+                  }
+                  placeholder="e.g. 50 Ngamwongwan Rd, Chatuchak Bangkok 10900 Thailand"
+                  required
+                ></textarea>
+              </div>
               <button
                 type="button"
-                className="btn btn-outline-primary"
-                onClick={() => navigate('/account/myorder?list=bid&type=pay')}
+                className="no-outline-btn"
+                onClick={getInformationFromProfileHandler}
               >
-                Cancel
+                Use information from profile
               </button>
             </div>
-          </div>
-        </form>
+            <div className="form-heading1">TRANSACTION INFO</div>
+            <div className="sub-form">
+              <div className="form-input-field promptpay">
+                <img
+                  className="promptpay-header"
+                  src={promptpayheader}
+                  alt="promptpay"
+                />
+                <PromptpayQR
+                  ppID={'0909754062'}
+                  amount={itemDetails.winningPrice}
+                />
+              </div>
+              <div className="form-input-field">
+                <label htmlFor="uploadTransactionSlip" className="form-label">
+                  UPLOAD TRANSACTION SLIP
+                </label>
+                <FilePond
+                  allowFileEncode={true}
+                  imageTransformOutputQuality={50}
+                  imageTransformOutputQualityMode="always"
+                  acceptedFileTypes={['image/png', 'image/jpeg']}
+                  imageResizeTargetWidth={1000}
+                  imageResizeTargetHeight={1000}
+                  imageResizeMode="contain"
+                  ref={uploadFileRef}
+                  credits={false}
+                  required
+                />
+              </div>
+              <div className="form-input-field">
+                <label htmlFor="transactionDateTime" className="form-label">
+                  TRANSACTION DATE AND TIME
+                </label>
+                <ReactDatePicker
+                  className="form-control"
+                  selected={paymentDetails.transferDate}
+                  onChange={(date) =>
+                    setPaymentDetails({
+                      ...paymentDetails,
+                      transferDate: date,
+                    })
+                  }
+                  timeIntervals={10}
+                  showTimeSelect
+                  dateFormat="d MMMM yyyy HH:mm"
+                  timeFormat="HH:mm"
+                  required
+                />
+              </div>
+              <div className="form-input-field">
+                <label htmlFor="value" className="form-label">
+                  VALUE
+                </label>
+                <div className="input-field-flex">
+                  <input
+                    type="number"
+                    className="form-control"
+                    min={1}
+                    onChange={(e) =>
+                      setPaymentDetails({
+                        ...paymentDetails,
+                        value: e.target.value,
+                      })
+                    }
+                    placeholder="e.g. 500"
+                    required
+                  ></input>
+                  <div className="currency">
+                    <div>BAHT</div>
+                  </div>
+                </div>
+              </div>
+              <div className="form-submit-btn">
+                <button type="submit" className="btn btn-primary first-button">
+                  Proceed
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={() => navigate('/account/myorder?list=bid&type=pay')}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className="payment-summary-section">
+          <PaymentSummaryCard
+            itemName={itemDetails.productName}
+            auctioneerName={itemDetails.auctioneerName}
+            price={itemDetails.winningPrice}
+            productPicture={itemDetails.productPicture}
+          ></PaymentSummaryCard>
+        </div>
+        <PopupConfirmSubmit
+          modalShow={modalShow}
+          submitHandler={submitHandler}
+          setModalShow={setModalShow}
+        />
       </div>
-      <div className="payment-summary-section">
-        <PaymentSummaryCard
-          itemName={itemDetails.productName}
-          auctioneerName={itemDetails.auctioneerName}
-          price={itemDetails.winningPrice}
-          productPicture={itemDetails.productPicture}
-        ></PaymentSummaryCard>
-      </div>
-      <PopupConfirmSubmit
-        modalShow={modalShow}
-        submitHandler={submitHandler}
-        setModalShow={setModalShow}
-      />
-    </div>
-  )
+    )
+  }
 }
 
 export default Payment
