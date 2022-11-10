@@ -56,7 +56,7 @@ const Profile = (props) => {
         //         <img src={badgeName} key={key} alt={val} className="badge-img" />
         //     )
         // })
-        console.log(badges)
+        // console.log(badges)
         badge1 = badges.slice(0, 5).map((val, key) => {
             let badgeName = dictBadge[val]
             return (
@@ -99,7 +99,11 @@ const Profile = (props) => {
                     }
                     {/* <h1>{auctioneer}</h1> */}
                     <h6>Auctioneer Veteran</h6>
-                    <div>{description}</div>
+                    {(description === "")?
+                        <div><h6>No description</h6></div>
+                        :
+                        <div>{description}</div>
+                    }
                 </div>
                 <div className="AucAllStat">
                     <div className="AucRating">
@@ -145,36 +149,36 @@ const Profile = (props) => {
 }
 
 const Review = (props) => {
-    const reviews = props.reviews
+    // const reviews = props.reviews
     // console.log(reviews)
     let reviewList = []
 
-    // const reviews = [
-    //     {
-    //         "reviewer": "Kong",
-    //         "rating": 4.5,
-    //         "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
-    //         "productName": "Nintendo Switch New Super Limited Edition"
-    //     },
-    //     {
-    //         "reviewer": "Kong",
-    //         "rating": 1,
-    //         "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-    //         "productName": "Nintendo Switch New Super Limited Edition"
-    //     },
-    //     {
-    //         "reviewer": "Kong",
-    //         "rating": 4.5,
-    //         "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
-    //         "productName": "Nintendo Switch New Super Limited Edition"
-    //     },
-    //     {
-    //         "reviewer": "Kong",
-    //         "rating": 4.5,
-    //         "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
-    //         "productName": "Nintendo Switch New Super Limited Edition"
-    //     }
-    // ]
+    const reviews = [
+        {
+            "reviewer": "Kong",
+            "rating": 4.5,
+            "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
+            "productName": "Nintendo Switch New Super Limited Edition"
+        },
+        {
+            "reviewer": "Kong",
+            "rating": 1,
+            "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+            "productName": "Nintendo Switch New Super Limited Edition"
+        },
+        {
+            "reviewer": "Kong",
+            "rating": 4.5,
+            "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
+            "productName": "Nintendo Switch New Super Limited Edition"
+        },
+        {
+            "reviewer": "Kong",
+            "rating": 4.5,
+            "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
+            "productName": "Nintendo Switch New Super Limited Edition"
+        }
+    ]
 
     if (reviews === undefined) {
         
@@ -245,7 +249,7 @@ const AuctioneerProfile = () => {
         <div>
             <Profile
             auctioneer={data.displayName}
-            description={data.description}
+            description={data.accountDescription}
             profilePicture={data.profilePicture}
             rating={data.rating}
             totalAuctioned={data.totalAuctioned}
