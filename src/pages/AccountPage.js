@@ -64,8 +64,8 @@ const AccountPage = () =>{
 		}))
     }, [])
 
-    console.log(data)
-    console.log(other_data)
+    // console.log(data)
+    // console.log(other_data)
 
     const allstar = []
     let badges = []
@@ -115,7 +115,6 @@ const AccountPage = () =>{
                 </div>
                 <div className="about-you">
                     <h5>My Badges & Statistics</h5>
-                    {/* <h5>My Statistics</h5> */}
                     <div>
                         {/* <img src={other_data.badge[0]} className="badge-pic" alt="BadgePic"/>
                         <img src={other_data.badge[1]} className="badge-pic" alt="BadgePic"/>
