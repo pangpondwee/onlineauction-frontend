@@ -23,7 +23,7 @@
 
 .form-heading1 {
   font-size: 150%;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .form-label {
@@ -33,7 +33,7 @@
 
 .header {
   font-size: 200%;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-text);
   margin: 1% 0 1% 2%;
 }
@@ -191,7 +191,7 @@
 }
 
 .failed-reason {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .billing-info-progress {
@@ -215,7 +215,7 @@
 
 .address-box-name {
   font-size: 130%;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .address-box-address {
@@ -237,7 +237,7 @@
 
 .shipping-header {
   font-size: 130%;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .shipping-detail {
@@ -273,7 +273,7 @@
 
 .summary-card-header {
   font-size: 130%;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .summary-card-price-section {
@@ -291,7 +291,7 @@
 
 .summary-card-price {
   font-size: 110%;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* Item Card */
@@ -360,7 +360,7 @@
 
 .payment-summary-header {
   font-size: 150%;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .payment-summary-detail {
@@ -382,7 +382,7 @@
 
 .payment-summary-price {
   font-size: 125%;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* handle responsive */
