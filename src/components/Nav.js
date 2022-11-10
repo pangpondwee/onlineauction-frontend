@@ -64,7 +64,7 @@ const Nav = (props) => {
 
 			{loggedIn ?
 				<div id="offcanvas-nav" className="offcanvas offcanvas-start">
-					<div className="offcanvas-header">
+					<div className="offcanvas-header ps-4">
 						<h5 className="offcanvas-title"><img src="/icon-auction.png" className="nav-icon"/>Online Auction</h5>
 						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 					</div>
@@ -79,12 +79,13 @@ const Nav = (props) => {
 						{category_elements}
 						</div>
 						<Link to="/place-auction" className="offcanvas-item nav-link nav-item ps-4">
-							Place Auction</Link>
+						<img className="nav-icon" src={"/icon-package.png"} />Place Auction</Link>
 						<Link to="/account/myorder?list=bid&type=all" className="offcanvas-item nav-link nav-item ps-4">
-							My Bid</Link>
+						<img className="nav-icon" src={"/icon-bid.png"} />My Bid</Link>
 						<Link to="/account/myorder?list=auction&type=all" className="offcanvas-item nav-link nav-item ps-4">
-							My Auction</Link>
-						<Link to="/account/following" className="offcanvas-item nav-link nav-item ps-4">My Following List</Link>
+						<img className="nav-icon" src={"/icon-auction.png"} />My Auction</Link>
+						<Link to="/account/following" className="offcanvas-item nav-link nav-item ps-4">
+						<img className="nav-icon" src={"/icon-heart.png"} />My Following List</Link>
 					</div>
 				</div>
 				:
