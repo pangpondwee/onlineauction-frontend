@@ -175,6 +175,9 @@
 }
 
 .status-description-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 1%;
   font-size: 130%;
 }
@@ -185,6 +188,10 @@
 
 .status-description-btn {
   margin-top: 2%;
+}
+
+.failed-reason {
+  font-weight: 600;
 }
 
 .billing-info-progress {

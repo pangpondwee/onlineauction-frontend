@@ -3,6 +3,7 @@ import { postData } from '../components/fetchData'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 import { useNavigate } from 'react-router-dom'
 import '../css/Payment.css'
+import "react-datepicker/dist/react-datepicker.css";
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -17,6 +18,7 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginImageTransform from 'filepond-plugin-image-transform'
 import FilePondPluginImageResize from 'filepond-plugin-image-resize'
+import ReactDatePicker from 'react-datepicker'
 
 // Register the plugins
 registerPlugin(
@@ -42,6 +44,7 @@ const AuctionDetail = () => {
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
   const navigate = useNavigate()
+  const [startDate, setStartDate] = useState(new Date());
 
   const submitHandler = (event) => {
     const uploadedFile = uploadFileRef.current.getFiles()
@@ -77,6 +80,13 @@ const AuctionDetail = () => {
 
   return (
     <div>
+      <ReactDatePicker
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+      timeIntervals={10}
+      showTimeSelect
+      dateFormat="MMMM d, yyyy h:mm aa"
+    />
       <div className="header">Place Auction</div>
       <form
         className="place-auction-form"
