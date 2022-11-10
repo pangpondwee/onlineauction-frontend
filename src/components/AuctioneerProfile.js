@@ -149,36 +149,36 @@ const Profile = (props) => {
 }
 
 const Review = (props) => {
-    // const reviews = props.reviews
+    const reviews = props.reviews
     // console.log(reviews)
     let reviewList = []
 
-    const reviews = [
-        {
-            "reviewer": "Kong",
-            "rating": 4.5,
-            "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
-            "productName": "Nintendo Switch New Super Limited Edition"
-        },
-        {
-            "reviewer": "Kong",
-            "rating": 1,
-            "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-            "productName": "Nintendo Switch New Super Limited Edition"
-        },
-        {
-            "reviewer": "Kong",
-            "rating": 4.5,
-            "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
-            "productName": "Nintendo Switch New Super Limited Edition"
-        },
-        {
-            "reviewer": "Kong",
-            "rating": 4.5,
-            "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
-            "productName": "Nintendo Switch New Super Limited Edition"
-        }
-    ]
+    // const reviews = [
+    //     {
+    //         "reviewer": "Kong",
+    //         "rating": 4.5,
+    //         "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
+    //         "productName": "Nintendo Switch New Super Limited Edition"
+    //     },
+    //     {
+    //         "reviewer": "Kong",
+    //         "rating": 1,
+    //         "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+    //         "productName": "Nintendo Switch New Super Limited Edition"
+    //     },
+    //     {
+    //         "reviewer": "Kong",
+    //         "rating": 4.5,
+    //         "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
+    //         "productName": "Nintendo Switch New Super Limited Edition"
+    //     },
+    //     {
+    //         "reviewer": "Kong",
+    //         "rating": 4.5,
+    //         "comment": "ส่งเร็ว ส่งช้า ส่งไรเนี่ย",
+    //         "productName": "Nintendo Switch New Super Limited Edition"
+    //     }
+    // ]
 
     if (reviews === undefined) {
         
