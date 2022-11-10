@@ -51,7 +51,6 @@ function App() {
           {/* <Route path="view-auctioneer" element={<ViewAuctioneer />} /> */}
           <Route path="faq" element={<FAQ />} />
           <Route path="search" element={<Search />} />
-          <Route path="search/:pageNumber" element={<Search />} />
           <Route path="account/verify/:userId" element={<VerifyEmail />} />
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="forget-success" element={<ForgetSuccess />} />

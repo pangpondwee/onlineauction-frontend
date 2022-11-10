@@ -66,7 +66,7 @@ const AuctioneerReport = () => {
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
-            <button type="button" className="Report btn-primary" data-bs-toggle="modal" data-bs-target="#reportModal">
+            <button type="button" className="Report btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal">
                 Report
             </button>
 

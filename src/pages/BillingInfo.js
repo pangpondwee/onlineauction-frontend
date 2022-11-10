@@ -10,6 +10,7 @@ import '../css/Payment.css'
 import waitingForPaymentPic from '../pictures/waiting-for-payment.png'
 import waitingForPaymentAuctioneer from '../pictures/waiting-for-payment-auctioneer.jpg'
 import { useNavigate } from 'react-router-dom'
+import failedOrder from '../pictures/failed-order.jpg'
 
 const MapShippingCompany = {
   KEX: 'Kerry Express',
@@ -26,6 +27,13 @@ const MapShippingCompany = {
   BEST: 'Best Express',
   IEL: 'Inter Express Logistics',
   NINJA: 'Ninja Van',
+}
+
+const MapFailedReasons = {
+  noBidders: 'there was no bidder on your auction',
+  biddderPaymentDeadlineBroken: 'payment deadline has been exceeded',
+  auctioneerShippingDeadlineBroken: 'shipping deadline has been exceeded',
+  bidderDenyItemReceive: 'bidder denied the package',
 }
 
 const BillingInfo = () => {
@@ -55,6 +63,8 @@ const BillingInfo = () => {
     packagePicture: '',
   })
 
+  const [failureCause, setFailureCause] = useState('')
+
   const [isAuctioneer, setIsAuctioneer] = useState(false)
 
   useEffect(() => {
@@ -82,6 +92,9 @@ const BillingInfo = () => {
           packagePicture: res.data.packagePicture,
         })
         setIsAuctioneer(res.data.isAuctioneer)
+        if ('failureCause' in res.data) {
+          setFailureCause(res.data.failureCause)
+        }
       })
       .catch((e) => {
         console.log(e)
@@ -238,6 +251,37 @@ const BillingInfo = () => {
         </div>
       </div>
     )
+  } else if (orderDetails.billingStatus === 'failed') {
+    return (
+      <div className="billing-info-page-nocard">
+        <OrderObj data={orderDetails} type={isAuctioneer ? 'auction' : 'bid'} />
+        <div className="status-description">
+          <img
+            className="status-description-pic"
+            src={failedOrder}
+            alt="failed-order"
+          />
+          <div className="status-description-text">
+            <div>
+              Your order has been canceled due to{' '}
+              <span className="failed-reason">
+                {MapFailedReasons[failureCause]}
+              </span>
+              .
+            </div>
+            <div>Please contact our admin for more information.</div>
+            <div> We apologize for any inconvenience.</div>
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary status-description-btn"
+            onClick={() => window.open('mailto:ku.online.auction@gmail.com')}
+          >
+            Contact our admin
+          </button>
+        </div>
+      </div>
+    )
   } else {
     return (
       <div className="billing-info-page">
@@ -268,9 +312,12 @@ const BillingInfo = () => {
         </div>
         <div className="billing-info-tracking-card-grid grey-box">
           <TrackingCard
+            auctionID={auctionId}
+            status={orderDetails.billingStatus}
             shippingCompany={
               MapShippingCompany[shippingDetails.shippingCompany]
             }
+            isAuctioneer={orderDetails.isAuctioneer}
             trackingNumber={shippingDetails.trackingNumber}
             packagePicture={shippingDetails.packagePicture}
           ></TrackingCard>
