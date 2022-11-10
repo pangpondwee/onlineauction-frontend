@@ -23,6 +23,8 @@ const MyOrder = () =>{
         "bid-waitingForShipping" : "delivered",
         "auction-waitingConfirmSlip": "pay",
         "auction-waitingAdminPayment": "confirm",
+        "bid-failed": "failed",
+        "auction-failed": "failed",
     }
 
     useEffect(()=>{
@@ -46,20 +48,10 @@ const MyOrder = () =>{
 				setData_myAuction(res.message);
 			}
 		})
-        //canceled
-        // getData(`/refundlist`).then((res)=>{
-		// 	setStatus(res.status);
-		// 	if(res.status === "success"){
-		// 		setData_myAuction(res.data);
-		// 	}
-		// 	else{
-		// 		setData_myAuction(res.message);
-		// 	}
-		// })
 	},[]);
 
-    // console.log(data_mybid)
-    // console.log(data_myauction)
+    console.log(data_mybid)
+    console.log(data_myauction)
 
     let _data = []
     

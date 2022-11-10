@@ -85,7 +85,7 @@ const PaymentPop = (props) => {
 
                             <div>
                                 <label>Account Name</label><br/>
-                                <input type="text" id={id_name} className="input-editing" maxlength="15" placeholder="John Doe" required/>
+                                <input type="text" id={id_name} className="input-editing" maxlength="15" required/>
                             </div>
                         </div>
                         <div className="modal-footer-confirm">

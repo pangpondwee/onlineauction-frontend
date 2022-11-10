@@ -48,6 +48,9 @@ const AccountEdit = () =>{
         .then((res)=>{
             if(!res.status) throw new Error("Could not get status")
             if(res.status == "fail" || res.status == "error" || res.status == "err") throw new Error(res.message)
+            if ("profilePicture" in new_data){
+                localStorage.setItem("profilePicture",new_data["profilePicture"])
+            }
             console.log(res.status)
             navigate(`/account/profile`)
         })
