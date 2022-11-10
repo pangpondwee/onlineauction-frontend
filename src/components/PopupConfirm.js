@@ -15,19 +15,19 @@ const PopupConfirm = (props) => {
     const [reviewtext, setReview] = useState("")
     const shippingDict = {
         "KEX":"Kerry Express" ,
-        "GRAB ":"Grab" ,
-        "LLMV ":"Lalamove" ,
+        "GRAB":"Grab" ,
+        "LLMV":"Lalamove" ,
         "NIM":"Nim Express" ,
         "LINE":"Line Man" ,
         "TNT":"TNT Express" ,
         "DHL":"DHL Express" ,
         "SCG":"SCG Express" ,
         "FLASH":"Flash Express" ,
-        "SKT ":"Skootar" ,
+        "SKT":"Skootar" ,
         "J&T" :"J&T Express",
-        "BEST ":"Best Express" ,
-        "IEL ":"Inter Express Logistics" ,
-        "NINJA ":"Ninja Van" 
+        "BEST":"Best Express" ,
+        "IEL":"Inter Express Logistics" ,
+        "NINJA":"Ninja Van" 
        }
 
     useEffect(() => {
