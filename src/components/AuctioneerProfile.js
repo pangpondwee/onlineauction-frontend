@@ -43,7 +43,7 @@ const Profile = (props) => {
     // console.log(rating)
 
     const star = []
-    let badge = []
+    // let badge = []
     let badge1 = []
     let badge2 = []
 
@@ -120,7 +120,7 @@ const Profile = (props) => {
                     </div>
                     <div className="AucBadges">
                         <h6>Badges</h6>
-                        {(badge.length === 0)?
+                        {(badges.length === 0)?
                             <div className="badges">
                                 <h6>No Badge</h6>
                             </div>
