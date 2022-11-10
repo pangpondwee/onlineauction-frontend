@@ -11,6 +11,7 @@ import waitingForPaymentPic from '../pictures/waiting-for-payment.png'
 import waitingForPaymentAuctioneer from '../pictures/waiting-for-payment-auctioneer.jpg'
 import { useNavigate } from 'react-router-dom'
 import failedOrder from '../pictures/failed-order.jpg'
+import NoPage from './NoPage'
 
 const MapShippingCompany = {
   KEX: 'Kerry Express',
@@ -39,6 +40,7 @@ const MapFailedReasons = {
 const BillingInfo = () => {
   const { auctionId } = useParams()
   const navigate = useNavigate()
+  const [isError, setIsError] = useState(false)
 
   const [orderDetails, setOrderDetails] = useState({
     auctionID: '',
@@ -64,7 +66,6 @@ const BillingInfo = () => {
   })
 
   const [failureCause, setFailureCause] = useState('')
-
   const [isAuctioneer, setIsAuctioneer] = useState(false)
 
   useEffect(() => {
@@ -98,11 +99,13 @@ const BillingInfo = () => {
       })
       .catch((e) => {
         console.log(e)
-        navigate('/404')
+        setIsError(true)
       })
   }, [])
 
-  if (
+  if (isError) {
+    return <NoPage />
+  } else if (
     orderDetails.billingStatus === 'waitingForPayment' &&
     orderDetails.isAuctioneer === false
   ) {
