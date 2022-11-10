@@ -71,8 +71,17 @@ const OrderObj = (props) => {
         else if(status_of_auction==="auction-waitingForShipping") return "Waiting for your shipping"
         else if(status_of_auction==="auction-waitingForConfirm") return "Waiting for bidder to confirm"
         else if(status_of_auction==="auction-waitingAdminPayment") return "Waiting for payment from admin"
-        else if(status_of_auction==="auction-failed") return "Your order had failed. Please contact admin for more infomations."
-        else if(status_of_auction==="bid-failed") return "Your order had failed. Please contact admin for more infomations."
+        else if(status_of_auction==="auction-failed"){
+          if(props.data.failureCause==="noBidders") return "No one has bid on your item. You could try again next time."
+          if(props.data.failureCause==="biddderPaymentDeadlineBroken") return "The bidder hasn't made his payment on time."
+          if(props.data.failureCause==="auctioneerShippingDeadlineBroken") return "You forgot to ship your item. The order got canceled."
+          if(props.data.failureCause==="bidderDenyItemReceive") return "Something's wrong about the item. Please contact Admin for more infomations."
+        }
+        else if(status_of_auction==="bid-failed"){
+          if(props.data.failureCause==="biddderPaymentDeadlineBroken") return "You forgot to made your payment on time. The order got canceled."
+          if(props.data.failureCause==="auctioneerShippingDeadlineBroken") return "The auctioneer hasn't shipped his item yet."
+          if(props.data.failureCause==="bidderDenyItemReceive") return "You denied the item for some reasons."
+        }
         else return
     }
 
