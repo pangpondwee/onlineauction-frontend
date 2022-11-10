@@ -17,7 +17,7 @@ const OrderObj = (props) => {
     // else if(status_of_auction === 'auction-waitingForShipping') navigate(`/shipping/${props.data.auctionID}`)
     // else if(status_of_auction === 'bid-waitingForConfirm' || status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
     // else if(status_of_auction === 'bid-waitingForConfirm' || status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
-    else if(status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
+    // else if(status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
     else navigate(`/billing-info/${props.data.auctionID}`)
   }
 
@@ -112,7 +112,7 @@ const OrderObj = (props) => {
             </h4>
             <pre>  </pre>
             {props.type === 'bid' ? (
-              <h6 className='pt-1'>(By {props.data.auctioneerDisplayname})</h6>
+              <h6 className='pt-1 can_click' onClick={()=>navigate(`/auctioneer/${props.data.auctioneerID}`)}>(By {props.data.auctioneerDisplayname})</h6>
             ) : (
               <></>
             )}
