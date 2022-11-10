@@ -8,6 +8,8 @@ import { postData, getData } from '../components/fetchData'
 import { generatePayload } from '../components/promptpay'
 import { QRCodeSVG } from 'qrcode.react'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
+import ReactDatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -41,7 +43,7 @@ const Payment = () => {
     bidderName: '',
     phoneNumber: '',
     bidderAddress: '',
-    transferDate: '',
+    transferDate: new Date(),
     value: '',
     slipPicture: '',
   })
@@ -214,7 +216,7 @@ const Payment = () => {
               <label htmlFor="transactionDateTime" className="form-label">
                 TRANSACTION DATE AND TIME
               </label>
-              <input
+              {/* <input
                 type="datetime-local"
                 className="form-control"
                 onChange={(e) =>
@@ -224,7 +226,22 @@ const Payment = () => {
                   })
                 }
                 required
-              ></input>
+              ></input> */}
+              <ReactDatePicker
+                className="form-control"
+                selected={paymentDetails.transferDate}
+                onChange={(date) =>
+                  setPaymentDetails({
+                    ...paymentDetails,
+                    transferDate: date,
+                  })
+                }
+                timeIntervals={10}
+                showTimeSelect
+                dateFormat="d MMMM yyyy HH:mm"
+                timeFormat="HH:mm"
+                required
+              />
             </div>
             <div className="form-input-field">
               <label htmlFor="value" className="form-label">
