@@ -61,44 +61,14 @@ const Nav = (props) => {
 				:
 				<Link className="btn ms-auto" to="/signup">Sign In/Sign Up</Link>				
 			}
-			
-			{/* <div className="dropdown p-2">
-				<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Noti</Link>
-				<ul className="dropdown-menu ms-auto p-2" to="#">
-					<li className="dropdown-item"></li>
-				</ul>
-			</div> */}
-			{/* Nav Bar END*/}
 
-			{/* Offcanvas BEGIN*/}
-			{/* <div id="offcanvas-nav" className="offcanvas offcanvas-start ps-4">
-				<div className="offcanvas-header">
-					<h5 className="offcanvas-title">Auction Online</h5>
-					<button className="btn-close" data-bs-dismiss="offcanvas"></button>
-				</div>
-				<div id="offcanvas-profile">
-					<img id="navProfilePic" src={localStorage.getItem("profilePicture")}></img>
-					<Link id="offcanvas-profile" className="nav-link p-3" to="/account/profile">{displayName}</Link>
-				</div>
-				<div className="navbar-nav">
-					<Link className="nav-link dropdown-toggle" to="#" data-bs-toggle="dropdown">Categories</Link>
-					<div className="dropdown-menu nav-dropdown show" >
-					{category_elements}
-					</div>
-					<Link to="/place-auction" className="nav-link nav-item">Place Auction</Link>
-					<Link to="/account/myorder?list=bid&type=all" className="nav-link nav-item">Currently Bidding</Link>
-					<Link to="/account/myorder?list=auction&type=all" className="nav-link nav-item">Currently on Auction</Link>
-					<Link to="/account/following" className="nav-link nav-item">My Following List</Link>
-				</div>
-			</div> */}
-			{/* Offcanvas END*/}
 			{loggedIn ?
 				<div id="offcanvas-nav" className="offcanvas offcanvas-start">
 					<div className="offcanvas-header">
-						<h5 className="offcanvas-title">Online Auction</h5>
+						<h5 className="offcanvas-title"><img src="/icon-auction.png" className="nav-icon"/>Online Auction</h5>
 						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 					</div>
-					<div id="offcanvas-profile" className="offcanvas-item">
+					<div id="offcanvas-profile" className="ps-4 offcanvas-item">
 						<img id="navProfilePic" src={localStorage.getItem("profilePicture")}></img>
 						<Link id="offcanvas-profile-link" className="nav-link p-3" to="/account/profile">{displayName}</Link>
 					</div>

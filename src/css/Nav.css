@@ -7,21 +7,28 @@
 	font-size: 1.5em;
 }
 
+.nav-icon{
+	margin-top: auto;
+	margin-bottom: auto;
+	
+}
+
 #nav-search {
-	/* border-radius: var(--radius);*/
-	background-color: var(--color-secondary);
-	display: initial;
+	background-color: #fff;
+	display: block;
+	height: 100%;
 	border: none;
-	width: auto;
+	width: 100%;
 	outline: none;
 }
 
 #nav-search-block {
 	border-radius: var(--radius);
-	background-color: var(--color-secondary);
-	padding: 7px;
+	background-color: #fff;
+	height: 2.2em;
 	padding-left: 10px;
 	padding-right: 10px;
+	display: flex;
 	min-width: 30%;
 	width: 30%;
 }
