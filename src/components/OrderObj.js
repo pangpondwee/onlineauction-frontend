@@ -132,14 +132,14 @@ const OrderObj = (props) => {
         <div className="d-flex justify-content-end">
           <div
             className={`Follow-button ${status_of_auction}`}
-            data-bs-toggle={
-              status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''
-            }
-            data-bs-target={
-              status_of_auction === 'bid-waitingForConfirm'
-                ? '#confirmModal'
-                : ''
-            }
+            // data-bs-toggle={
+            //   status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''
+            // }
+            // data-bs-target={
+            //   status_of_auction === 'bid-waitingForConfirm'
+            //     ? '#confirmModal'
+            //     : ''
+            // }
             onClick={navigateTo}>
             <h6>{status_text[status_of_auction]}</h6>
           </div>
