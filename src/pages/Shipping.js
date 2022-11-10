@@ -105,6 +105,30 @@ const Shipping = () => {
     })
   }
 
+  const getInformationFromProfileHandler = () => {
+    getData('/user/mypayment')
+      .then((res) => {
+        console.log(res)
+        // bankAccountNO: '',
+        // bankName: '',
+        // bankAccountName: '',
+        setShippingDetails({
+          ...shippingDetails,
+          bankAccountNO: 'bankNO' in res.data ? res.data.bankNO : '',
+          bankName: 'bankName' in res.data ? res.data.bankNO : '',
+          bankAccountName: 'bankAccountName' in res.data ? res.data.bankAccountName : '',
+        })
+        // setPaymentDetails({
+        //   ...paymentDetails,
+        //   bidderName: 'displayName' in res.data ? res.data.displayName : '',
+        //   phoneNumber: 'phoneNumber' in res.data ? res.data.phoneNumber : '',
+        //   bidderAddress: 'address' in res.data ? res.data.address : '',
+        // })
+        console.log(shippingDetails)
+      })
+      .catch((e) => console.log(e))
+  }
+
   return (
     <div className="page-with-summary">
       <div className="form-section">
@@ -138,6 +162,7 @@ const Shipping = () => {
                   className="form-control"
                   pattern="[0-9]+"
                   placeholder="e.g. 0718785888"
+                  value={shippingDetails.bankAccountNO}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
@@ -155,6 +180,7 @@ const Shipping = () => {
                 <select
                   className="form-select form-control"
                   defaultValue={''}
+                  value={shippingDetails.bankName}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
@@ -225,6 +251,7 @@ const Shipping = () => {
                   type="text"
                   className="form-control"
                   placeholder="e.g. John Doe"
+                  value={shippingDetails.bankAccountName}
                   onChange={(e) =>
                     setShippingDetails({
                       ...shippingDetails,
@@ -234,7 +261,16 @@ const Shipping = () => {
                   required
                 ></input>
               </div>
+              <button
+              type="button"
+              className="no-outline-btn"
+              onClick={getInformationFromProfileHandler}
+            >
+              Use information from profile
+            </button>
             </div>
+            
+
             <div className="form-heading1">SHIPPING INFO</div>
             <div className="sub-form">
               <div className="form-input-field">
