@@ -17,7 +17,7 @@ const OrderObj = (props) => {
     // else if(status_of_auction === 'auction-waitingForShipping') navigate(`/shipping/${props.data.auctionID}`)
     // else if(status_of_auction === 'bid-waitingForConfirm' || status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
     // else if(status_of_auction === 'bid-waitingForConfirm' || status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
-    else if(status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
+    // else if(status_of_auction === 'bid-failed' || status_of_auction === 'auction-failed') ;
     else navigate(`/billing-info/${props.data.auctionID}`)
   }
 
@@ -112,7 +112,7 @@ const OrderObj = (props) => {
             </h4>
             <pre>  </pre>
             {props.type === 'bid' ? (
-              <h6 className='pt-1'>(By {props.data.auctioneerDisplayname})</h6>
+              <h6 className='pt-1 can_click' onClick={()=>navigate(`/auctioneer/${props.data.auctioneerID}`)}>(By {props.data.auctioneerDisplayname})</h6>
             ) : (
               <></>
             )}
@@ -132,14 +132,14 @@ const OrderObj = (props) => {
         <div className="d-flex justify-content-end">
           <div
             className={`Follow-button ${status_of_auction}`}
-            data-bs-toggle={
-              status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''
-            }
-            data-bs-target={
-              status_of_auction === 'bid-waitingForConfirm'
-                ? '#confirmModal'
-                : ''
-            }
+            // data-bs-toggle={
+            //   status_of_auction === 'bid-waitingForConfirm' ? 'modal' : ''
+            // }
+            // data-bs-target={
+            //   status_of_auction === 'bid-waitingForConfirm'
+            //     ? '#confirmModal'
+            //     : ''
+            // }
             onClick={navigateTo}>
             <h6>{status_text[status_of_auction]}</h6>
           </div>

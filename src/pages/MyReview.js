@@ -20,7 +20,7 @@ const MyReview = () =>{
 		})
 	},[]);
 
-    // console.log(data)
+    console.log(data)
 
     const display = []
     data.forEach(element => {
