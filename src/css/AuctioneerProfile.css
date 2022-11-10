@@ -1,8 +1,14 @@
-:root{
-	--color-primary: #C3D3E0;
-	--color-secondary: #A3BCD0;
-	--color-dark: #091235;
-	--radius: 20px;
+:root {
+  --color-primary: #c3d3e0;
+  --color-secondary: #a3bcd0;
+  --color-text: #2b4257;
+  --color-dark: #091235;
+  --color-attention: #f08c00;
+  --color-grey-box: #f8f9fa;
+  --color-blue: #228BE6;
+  --color-blue-dark: #1260a4;
+  --radius: 20px;
+  --box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0;
 }
 
 /* Auctioneer Detail */
@@ -91,6 +97,7 @@
   /* border: 1px solid black; */
   /* margin: auto; */
   margin-top: 0px;
+  margin-left: 10px;
 }
   
 .badges {
@@ -111,7 +118,7 @@
   /* border: 1px solid black; */
   /* margin: auto; */
   margin-right: 0px;
-  margin-top: 0px;
+  margin-top: 10px;
 }
    
 .stat h6 {
@@ -143,14 +150,15 @@
 }
   
 .review-card {
-  border: 1px solid black;
+  border: 3px solid black;
   width: 300px;
   height: 300px;
   border-radius: 10%;
-  /* margin-left: 15px; */
-  /* margin-right: 15px; */
+  margin-left: 15px;
+  margin-right: 15px;
   /* padding: 15px; */
   overflow: hidden;
+  background-color: var(--color-grey-box);
 }
   
 .review-star-zone {
