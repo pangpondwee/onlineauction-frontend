@@ -91,7 +91,7 @@ const OrderObj = (props) => {
     <>
       <div className="Review-box Order-box">
         <img
-          src={props.data.productPicture}
+          src={fetchPicture(props.data.productPicture)}
           alt="List_goods"
           className="mini-pic-goods"
           onClick={navigateTo}
