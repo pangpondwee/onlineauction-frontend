@@ -124,7 +124,7 @@ const AccountPage = () =>{
             <div className="main-info-profile">
                 <img className="profile-pic" alt="ProfilePic" src={data.profilePicture}/>
                 <div>
-                    <h4>Display Name</h4>
+                    <h4>Name</h4>
                     {data.displayName? <div className="account-info"><h5>{data.displayName}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                     <h4>Email</h4>
                     {data.email? <div className="account-info"><h5>{data.email}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
