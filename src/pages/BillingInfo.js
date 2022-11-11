@@ -11,6 +11,7 @@ import waitingForPaymentPic from '../pictures/waiting-for-payment.png'
 import waitingForPaymentAuctioneer from '../pictures/waiting-for-payment-auctioneer.jpg'
 import { useNavigate } from 'react-router-dom'
 import failedOrder from '../pictures/failed-order.jpg'
+import NoPage from './NoPage'
 
 const MapShippingCompany = {
   KEX: 'Kerry Express',
@@ -39,6 +40,7 @@ const MapFailedReasons = {
 const BillingInfo = () => {
   const { auctionId } = useParams()
   const navigate = useNavigate()
+  const [isError, setIsError] = useState(false)
 
   const [orderDetails, setOrderDetails] = useState({
     auctionID: '',
@@ -64,31 +66,38 @@ const BillingInfo = () => {
   })
 
   const [failureCause, setFailureCause] = useState('')
-
   const [isAuctioneer, setIsAuctioneer] = useState(false)
 
   useEffect(() => {
     getData(`/billingInfo/${auctionId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setOrderDetails({
           auctionID: auctionId,
-          auctioneerDisplayname: res.data.auctioneerName,
+          auctioneerDisplayname: res.data.auctioneerName
+            ? res.data.auctioneerName
+            : 'No data',
           auctioneerID: res.data.auctioneerID,
           billingStatus: res.data.billingInfoStatus,
-          lastBid: res.data.winningPrice,
-          productName: res.data.productName,
+          lastBid: res.data.winningPrice ? res.data.winningPrice : ' No data',
+          productName: res.data.productName ? res.data.productName : 'No data',
           productPicture: res.data.productPicture,
           isAuctioneer: res.data.isAuctioneer,
         })
         setShippingAddress({
-          name: res.data.bidderName,
-          address: res.data.bidderAddress,
-          phone: res.data.bidderPhoneNumber,
+          name: res.data.bidderName ? res.data.bidderName : 'No data',
+          address: res.data.bidderAddress ? res.data.bidderAddress : 'No data',
+          phone: res.data.bidderPhoneNumber
+            ? res.data.bidderPhoneNumber
+            : 'No data',
         })
         setShippingDetails({
-          shippingCompany: res.data.shippingCompany,
-          trackingNumber: res.data.trackingNumber,
+          shippingCompany: res.data.shippingCompany
+            ? res.data.shippingCompany
+            : 'No data',
+          trackingNumber: res.data.trackingNumber
+            ? res.data.trackingNumber
+            : 'No data',
           packagePicture: res.data.packagePicture,
         })
         setIsAuctioneer(res.data.isAuctioneer)
@@ -97,12 +106,14 @@ const BillingInfo = () => {
         }
       })
       .catch((e) => {
-        console.log(e)
-        navigate('/404')
+        // console.log(e)
+        setIsError(true)
       })
   }, [])
 
-  if (
+  if (isError) {
+    return <NoPage />
+  } else if (
     orderDetails.billingStatus === 'waitingForPayment' &&
     orderDetails.isAuctioneer === false
   ) {

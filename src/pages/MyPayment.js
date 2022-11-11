@@ -29,8 +29,8 @@ const MyPayment = () =>{
     // });
     // }
     if(data.bankAccountName==="" && data.bankNO==="" && data.bankName===""){
-        display.push(<div>Your account currently has no bank account. Feel free to add your information.</div>)
-        display.push(<button data-bs-toggle="modal" data-bs-target="#confirmModal0">Add</button>)
+        display.push(<button className="add-payment" data-bs-toggle="modal" data-bs-target="#confirmModal0">+ Add Payment Info</button>)
+        display.push(<div className="no-data-page">You don't have any payment information.</div>)
     } else {
         display.push(<PaymentObj data={data} id={id}/>)
     }

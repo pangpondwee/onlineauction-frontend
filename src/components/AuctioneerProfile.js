@@ -4,7 +4,7 @@ import fullStar from "../pictures/star-full.png";
 import emptyStar from "../pictures/star-empty.png";
 import halfStar from "../pictures/star-half-empty.png"
 import '../css/AuctioneerProfile.css';
-import getData from "./fetchData";
+import getData, { fetchPicture } from "./fetchData";
 
 // Badges
 import badge_top_10 from "../pictures/badge-top-10.png"
@@ -101,7 +101,7 @@ const Profile = (props) => {
 
     return (
         <div className="AucPro">
-            <img className="AucProImg" src={profilePicture} alt="this-is-kong-desuwa" />
+            <img className="AucProImg" src={fetchPicture(profilePicture)} alt="this-is-kong-desuwa" />
             {/* <img className="AucProImg" src={kong} alt="this-is-kong-desuwa" /> */}
             <div className="AucDetail">
                 <div className="AucDes">

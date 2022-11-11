@@ -6,6 +6,7 @@ import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 import { useState, useEffect, useRef } from 'react'
 import { postData, getData } from '../components/fetchData'
 import { useParams, useNavigate } from 'react-router-dom'
+import NoPage from './NoPage'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -28,6 +29,7 @@ registerPlugin(
 
 const Shipping = () => {
   const { auctionId } = useParams()
+  const [isError, setIsError] = useState(false)
 
   const [shippingDetails, setShippingDetails] = useState({
     bankAccountNO: '',
@@ -58,16 +60,16 @@ const Shipping = () => {
   useEffect(() => {
     getData(`/payment/${auctionId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setItemDetails(res.data)
       })
       .catch((e) => {
-        console.log(e)
-        navigate('/404')
+        // console.log(e)
+        setIsError(true)
       })
     getData(`/billingInfo/${auctionId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setShippingAddress({
           ...shippingAddress,
           name: res.data.bidderName,
@@ -76,8 +78,8 @@ const Shipping = () => {
         })
       })
       .catch((e) => {
-        console.log(e)
-        navigate('/404')
+        // console.log(e)
+        setIsError(true)
       })
     setShippingAddress({
       name: 'Full Name',
@@ -99,12 +101,11 @@ const Shipping = () => {
       `/shipping/${auctionId}/shipping`,
       JSON.stringify(shippingInfo)
     ).then((res) => {
-      console.log(shippingInfo)
-      console.log(res)
+      // console.log(shippingInfo)
+      // console.log(res)
       navigate('/account/myorder?list=auction&type=shipped')
     })
   }
-
   const getInformationFromProfileHandler = () => {
     getData('/user/mypayment')
       .then((res) => {
@@ -129,6 +130,9 @@ const Shipping = () => {
       .catch((e) => console.log(e))
   }
 
+  if (isError) {
+    return <NoPage />
+  } else {
   return (
     <div className="page-with-summary">
       <div className="form-section">
@@ -360,21 +364,9 @@ const Shipping = () => {
           </div>
         </form>
       </div>
-      <div className="payment-summary-section">
-        <PaymentSummaryCard
-          itemName={itemDetails.productName}
-          auctioneerName={itemDetails.auctioneerName}
-          price={itemDetails.winningPrice}
-          productPicture={itemDetails.productPicture}
-        ></PaymentSummaryCard>
-      </div>
-      <PopupConfirmSubmit
-        modalShow={modalShow}
-        submitHandler={submitHandler}
-        setModalShow={setModalShow}
-      />
     </div>
-  )
+    )
+  }
 }
 
 export default Shipping

@@ -3,7 +3,7 @@ import { postData } from '../components/fetchData'
 import PopupConfirmSubmit from '../components/PopupConfirmSubmit'
 import { useNavigate } from 'react-router-dom'
 import '../css/Payment.css'
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css'
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond'
@@ -36,7 +36,7 @@ const AuctionDetail = () => {
     category: '',
     isOpenBid: false,
     startingPrice: '',
-    endDate: '',
+    endDate: new Date(),
     bidStep: '',
     expectedPrice: '',
     productPicture: [],
@@ -44,7 +44,6 @@ const AuctionDetail = () => {
   const uploadFileRef = useRef()
   const [modalShow, setModalShow] = useState(false)
   const navigate = useNavigate()
-  const [startDate, setStartDate] = useState(new Date());
 
   const submitHandler = (event) => {
     const uploadedFile = uploadFileRef.current.getFiles()
@@ -71,22 +70,15 @@ const AuctionDetail = () => {
     }
 
     postData('/auction/upload', JSON.stringify(auctionData)).then((res) => {
-      console.log(res)
-      console.log(JSON.stringify(auctionData))
+      // console.log(res)
+      // console.log(JSON.stringify(auctionData))
       navigate(`/`)
     })
-    console.log(auctionData)
+    // console.log(auctionData)
   }
 
   return (
     <div>
-      <ReactDatePicker
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
-      timeIntervals={10}
-      showTimeSelect
-      dateFormat="MMMM d, yyyy h:mm aa"
-    />
       <div className="header">Place Auction</div>
       <form
         className="place-auction-form"
@@ -263,15 +255,19 @@ const AuctionDetail = () => {
             <label htmlFor="endDate" className="form-label">
               END DATE
             </label>
-            <input
-              type="datetime-local"
+            <ReactDatePicker
               className="form-control"
-              onChange={(e) =>
+              selected={auctionDetails.endDate}
+              onChange={(date) =>
                 setAuctionDetails({
                   ...auctionDetails,
-                  endDate: e.target.value,
+                  endDate: date,
                 })
               }
+              timeIntervals={10}
+              showTimeSelect
+              dateFormat="d MMMM yyyy HH:mm"
+              timeFormat="HH:mm"
               required
             />
           </div>

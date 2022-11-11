@@ -42,7 +42,17 @@ const AdminReport = () => {
     getData("/admin/reports")
     .then(res=>{
       console.log(res)
-      setData(res.reportList)
+      setData(res.reportList.sort((a,b)=>{
+        if(a.reportedDate>b.reportedDate){
+          return -1;
+        }
+        else if(a.reportedDate<b.reportedDate){
+          return 1;
+        }
+        else{
+          return 0;
+        }
+      }))
       setStatus(res.status)
     })
     .catch(e=>{
@@ -70,7 +80,7 @@ const AdminReport = () => {
                 <tr key={key}>
                   <td className={styles.td}>{val.reporterMail}</td>
                   <td className={styles.td}>{val.reportedMail}</td>
-                  <td className={styles.td}>{val.reportedDate}</td>
+                  <td className={styles.td}>{(new Date(Number(val.reportedDate))).toLocaleString()}</td>
                   <td className={styles.td}>{val.description}</td>
                 </tr>
               );
