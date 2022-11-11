@@ -90,8 +90,8 @@ const AccountPage = () =>{
 		}))
     }, [])
 
-    console.log(data)
-    console.log(other_data)
+    // console.log(data)
+    // console.log(other_data)
 
     const allstar = []
     let badges = []

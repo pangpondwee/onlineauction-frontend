@@ -50,8 +50,8 @@ const MyOrder = () =>{
 		})
 	},[]);
 
-    console.log(data_mybid)
-    console.log(data_myauction)
+    // console.log(data_mybid)
+    // console.log(data_myauction)
 
     let _data = []
     
