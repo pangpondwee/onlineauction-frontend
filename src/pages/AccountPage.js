@@ -101,7 +101,7 @@ const AccountPage = () =>{
         allstar.push(<img src={star} className="star" alt="star"/>)
         tmp-=1
     }
-    if(tmp===0.5) allstar.push(<img src={half_star} className="star" alt="star"/>)
+    if(tmp>=0.5) allstar.push(<img src={half_star} className="star" alt="star"/>)
     while(allstar.length<5) allstar.push(<img src={blank_star} className="star" alt="star"/>)
 
     if(data.badge){

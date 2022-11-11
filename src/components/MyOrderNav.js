@@ -53,8 +53,8 @@ export const MyBidNav = () =>{
 			<div className={`Order-Menu ${c_tab("type=pay")}`}>
 				<Link to="/account/myorder?list=bid&type=pay" className="menu-link">To Pay</Link>
 			</div>
-			<div className={`Order-Menu ${c_tab("type=delivered")}`}>
-				<Link to="/account/myorder?list=bid&type=delivered" className="menu-link">To Delivered</Link>
+			<div className={`Order-Menu ${c_tab("type=shipped")}`}>
+				<Link to="/account/myorder?list=bid&type=shipped" className="menu-link">To Shipped</Link>
 			</div>
 			<div className={`Order-Menu ${c_tab("type=confirm")}`}>
 				<Link to="/account/myorder?list=bid&type=confirm" className="menu-link">To Confirm</Link>
