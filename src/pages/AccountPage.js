@@ -2,12 +2,8 @@ import blank_profile from "../pictures/blank_profile.png";
 import blank_star from "../pictures/star_blank.png";
 import half_star from "../pictures/star_half.png"
 import star from "../pictures/star.png";
-import badge1 from "../pictures/badge1.png";
-import badge2 from "../pictures/badge2.png";
-import badge3 from "../pictures/badge3.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import {getData} from '../components/fetchData';
 import "../css/AccountPage.css";
 
@@ -64,8 +60,8 @@ const AccountPage = () =>{
 		}))
     }, [])
 
-    // console.log(data)
-    // console.log(other_data)
+    console.log(data)
+    console.log(other_data)
 
     const allstar = []
     let badges = []
