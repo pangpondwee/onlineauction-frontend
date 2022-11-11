@@ -4,6 +4,7 @@ import confirm from '../pictures/confirm.png'
 import '../css/PopupConRev.css'
 import { useState, useEffect } from 'react'
 import {getDateSince, getDate} from "../components/util";
+import { fetchPicture } from './fetchData'
 // import PopupConfirm from "../components/PopupConfirm";
 
 const OrderObj = (props) => {
@@ -90,7 +91,7 @@ const OrderObj = (props) => {
     <>
       <div className="Review-box Order-box">
         <img
-          src={props.data.productPicture}
+          src={fetchPicture(props.data.productPicture)}
           alt="List_goods"
           className="mini-pic-goods"
           onClick={navigateTo}

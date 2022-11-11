@@ -162,7 +162,6 @@
 
 #jumbotron{
   background-color: #0A3E8A;
-  padding-top: 4em;
   padding-left: 5em;
   padding-bottom: 1em;
   border-radius: var(--radius);
@@ -173,21 +172,27 @@
 }
 
 #jumbotron div {
+  overflow:hidden;
   display: inline-block;
   width:50%;
 }
 #jumbotron div h1 {
+  padding-top: 3em;
   display: inline-block;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 #jumbotron div a{
-  padding: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   border: white;
   border-radius: var(--radius);
   background: #fff;
   color: #000;
   text-decoration: none;
+  font-size: 1.5em;
 }
 
 #jumbotron div a:hover{
@@ -196,5 +201,7 @@
 
 #jumbotron img {
   display: block;
-  height: 22em;
+  margin-right: auto;
+  margin-left: auto;
+  /* height: 70%; */
 }

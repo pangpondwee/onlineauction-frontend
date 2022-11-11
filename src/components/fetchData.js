@@ -1,4 +1,4 @@
-const API_SERVER = process.env.REACT_APP_API_SERVER || "localhost:4000"
+const API_SERVER = process.env.REACT_APP_API_SERVER || "/api"
 
 function set_header(){
 	let headers = {
@@ -64,4 +64,10 @@ export const patchData = async (url,data)=>{
 		throw new Error(res.message)
 	})
 }
+
+export const fetchPicture = (url)=>{
+		// TODO use auctionId
+		return API_SERVER+url;
+}
+
 export default getData;
