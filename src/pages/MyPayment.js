@@ -7,17 +7,17 @@ const MyPayment = () =>{
     const [data, setData]=useState({bankAccountName: "", bankNO: "", bankName: ""})
     const [status,setStatus]=useState("unknown");
     
-    // useEffect(()=>{
-	// 	getData(`/user/mypayment`).then((res)=>{
-	// 		setStatus(res.status);
-	// 		if(res.status === "success"){
-	// 			setData(res.data);
-	// 		}
-	// 		else{
-	// 			setData(res.message);
-	// 		}
-	// 	})
-	// },[]);
+    useEffect(()=>{
+		getData(`/user/mypayment`).then((res)=>{
+			setStatus(res.status);
+			if(res.status === "success"){
+				setData(res.data);
+			}
+			else{
+				setData(res.message);
+			}
+		})
+	},[]);
 
     // console.log(data)
     
