@@ -3,6 +3,7 @@ import bidderWaitingForShipping from '../pictures/waiting-for-shipping-bidder.pn
 import auctioneerWaitingForShipping from '../pictures/waiting-for-shipping-auctioneer.png'
 import { useNavigate } from 'react-router-dom'
 import PopupConfirm from './PopupConfirm'
+import { fetchPicture } from './fetchData'
 
 const TrackingCard = (props) => {
   const navigate = useNavigate()
@@ -55,7 +56,7 @@ const TrackingCard = (props) => {
         <div className="center-pic">
           <img
             className="package-picture"
-            src={props.packagePicture}
+            src={fetchPicture(props.packagePicture)}
             alt="package"
           ></img>
         </div>
