@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import "../css/Auction.css";
-import {getData, postData} from '../components/fetchData';
+import {fetchPicture, getData, postData} from '../components/fetchData';
 import {getDateSince,getDate,prepend} from "../components/util";
 import PopupError from '../components/PopupError';
 import heart from '../pictures/heart-fill.svg';
@@ -90,7 +90,7 @@ const Gallery = (props)=>{
 		return (
 			<img 
 			className="list-picture" 
-			src={item} 
+			src={fetchPicture(item)} 
 			key={index} 
 			onClick={()=>setImage(item)}
 			/>
@@ -99,7 +99,7 @@ const Gallery = (props)=>{
 	return (
 		<div id="gallery">
 			<div id="main-picture-wrapper">
-			<img id="main-picture" src={main} className=""/>
+			<img id="main-picture" src={fetchPicture(main)} className=""/>
 			</div>
 			{pictures.length > 1?
 				<div id="picture-list" className='scrolling-wrapper row flex-row flex-nowrap'>

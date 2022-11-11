@@ -1,5 +1,5 @@
 import { Link, useNavigate  } from "react-router-dom";
-import { postData } from "./fetchData";
+import { fetchPicture, postData } from "./fetchData";
 import { useState, useEffect } from "react";
 import heart from '../pictures/heart-fill.svg';
 import {getDate} from "../components/util";

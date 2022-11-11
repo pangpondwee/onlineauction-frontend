@@ -64,4 +64,10 @@ export const patchData = async (url,data)=>{
 		throw new Error(res.message)
 	})
 }
+
+export const fetchPicture = (url)=>{
+		// TODO use auctionId
+		return API_SERVER+url;
+}
+
 export default getData;

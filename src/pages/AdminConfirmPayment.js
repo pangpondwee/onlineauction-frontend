@@ -33,7 +33,7 @@ const PopupConfirm = (props) => { // TODO use component popup confirm
         <h6>Transfer date and time</h6>
         <p>{String(time)}</p>
         <h6>Transaction Slip</h6>
-        <img src={props.data.transactionSlip} className="tracking-img"/>
+        <img src={fetch(props.data.transactionSlip)} className="tracking-img"/>
       </Modal.Body>
       <Modal.Footer>
         <button
