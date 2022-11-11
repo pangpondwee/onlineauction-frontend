@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import { fetchPicture } from "./fetchData";
 import { getDate } from "./util";
 function getPrice(price){
 	if(price < 1000000)
@@ -22,7 +23,7 @@ const AuctionCard = (props) =>{
 		<div className="card auctionCard border-light mb-3">
 			<div className="cardBody">
 				<Link to={"/auction/"+props.id} className="img-link">
-					<img src={props.picture} className="card-img-top"></img>
+					<img src={fetchPicture(props.picture)} className="card-img-top"></img>
 				</Link>
 				<div className={timeClass}>{getDate(props.time)}</div>
 				<Link to={"/auction/"+props.id} className="itemName-link">

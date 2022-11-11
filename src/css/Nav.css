@@ -107,3 +107,17 @@
 .navbar-toggler:focus{
 	box-shadow: none;
 }
+
+.offcanvas-title{
+	font-size: 1.25rem;
+	text-decoration: none;
+	color: var(--color-dark);
+	font-weight: 500;
+}
+.offcanvas-title:hover{
+	color: var(--color-blue);
+	/* background: var(--color-secondary); */
+}
+.offcanvas-header:hover{
+	/* background: var(--color-secondary); */
+}

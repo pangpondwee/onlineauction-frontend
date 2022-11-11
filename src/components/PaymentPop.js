@@ -52,7 +52,7 @@ const PaymentPop = (props) => {
                                 <input type="number" id={id_number} className="input-editing" maxlength="15" required/>
                             </div>
                             <div className="form-input-field">
-                                <label htmlFor="bankName" className="form-label">BANK</label><br/>
+                                <label htmlFor="bankName" className="form-label">Bank</label><br/>
                                 <select
                                     id={id_bank}
                                     className="input-editing"

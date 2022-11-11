@@ -1,7 +1,7 @@
 import styles from "../css/AdminConfirmDelivery.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect,useState } from "react";
-import getData, { postData } from "../components/fetchData";
+import getData, { fetchPicture, postData } from "../components/fetchData";
 import Modal from 'react-bootstrap/Modal'
 import PopupError from "../components/PopupError";
 
@@ -31,7 +31,7 @@ const PopupConfirm = (props) => { // TODO use component popup confirm
         <h6>Shipping Company</h6>
         <p>{props.data.shippingCompany ? props.data.shippingCompany : "-"}</p>
         <h6>Package Picture</h6>
-        <img src={props.data.packagePicture} className="tracking-img" alt="tracking-img"/>
+        <img src={fetchPicture(props.data.packagePicture)} className="tracking-img" alt="tracking-img"/>
       </Modal.Body>
       <Modal.Footer>
         <button

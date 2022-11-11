@@ -65,7 +65,7 @@ const Nav = (props) => {
 			{loggedIn ?
 				<div id="offcanvas-nav" className="offcanvas offcanvas-start">
 					<div className="offcanvas-header ps-4">
-						<h5 className="offcanvas-title"><img src="/icon-auction.png" className="nav-icon"/>Online Auction</h5>
+						<Link to="/" className="offcanvas-title"><img src="/icon-auction.png" className="nav-icon"/>Online Auction</Link>
 						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 					</div>
 					<div id="offcanvas-profile" className="ps-4 offcanvas-item">
@@ -91,7 +91,7 @@ const Nav = (props) => {
 				:
 				<div id="offcanvas-nav" className="offcanvas offcanvas-start">
 					<div className="offcanvas-header ps-4">
-						<h5 className="offcanvas-title"><img src="/icon-auction.png" className="nav-icon"/>Auction Online</h5>
+						<Link to="/" className="offcanvas-title"><img src="/icon-auction.png" className="nav-icon"/>Online Auction</Link>
 						<button className="btn-close" data-bs-dismiss="offcanvas"></button>
 					</div>
 				

@@ -47,6 +47,7 @@ const AuctioneerReport = () => {
     }
 
     function handleReport (e) {
+        // console.log(auctioneerID)
         // console.log(e.target.value)
         e.preventDefault()
         postData(`/report`, JSON.stringify(
@@ -57,10 +58,13 @@ const AuctioneerReport = () => {
         ))
         .then((res) => {
             console.log("Report successfully")
+            window.location.reload()
         })
         .catch(e => {
             console.log("error")
+            window.location.reload()
         })
+
     }
 
     return (
@@ -84,31 +88,31 @@ const AuctioneerReport = () => {
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="Reason1" id="flexCheck1" onChange={handleChange}/>
                                 <label className="form-check-label" htmlFor="flexCheck1">
-                                    Reason1
+                                    Pirated Items
                                 </label>
                             </div>
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="Reason2" id="flexCheck2" onChange={handleChange}/>
                                 <label className="form-check-label" htmlFor="flexCheck2">
-                                    Reason2
+                                    Prohibited Items
                                 </label>
                             </div>
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="Reason3" id="flexCheck3" onChange={handleChange}/>
                                 <label className="form-check-label" htmlFor="flexCheck3">
-                                    Reason3
+                                    Items that affect the person
                                 </label>
                             </div>
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="Reason4" id="flexCheck4" onChange={handleChange}/>
                                 <label className="form-check-label" htmlFor="flexCheck4">
-                                    Reason4
+                                    Fraudulent Items
                                 </label>
                             </div>
                             <div className="form-check">
                                 <input className="form-check-input" type="checkbox" value="Reason5" id="flexCheck5" onChange={handleChange}/>
                                 <label className="form-check-label" htmlFor="flexCheck5">
-                                    Reason5
+                                    Stolen Items
                                 </label>
                             </div>
                             <div className="form-check">

@@ -15,19 +15,19 @@ const PopupConfirm = (props) => {
     const [reviewtext, setReview] = useState("")
     const shippingDict = {
         "KEX":"Kerry Express" ,
-        "GRAB ":"Grab" ,
-        "LLMV ":"Lalamove" ,
+        "GRAB":"Grab" ,
+        "LLMV":"Lalamove" ,
         "NIM":"Nim Express" ,
         "LINE":"Line Man" ,
         "TNT":"TNT Express" ,
         "DHL":"DHL Express" ,
         "SCG":"SCG Express" ,
         "FLASH":"Flash Express" ,
-        "SKT ":"Skootar" ,
-        "J&T" :"J&T Express",
-        "BEST ":"Best Express" ,
-        "IEL ":"Inter Express Logistics" ,
-        "NINJA ":"Ninja Van" 
+        "SKT":"Skootar" ,
+        "J&T":"J&T Express",
+        "BEST":"Best Express" ,
+        "IEL":"Inter Express Logistics" ,
+        "NINJA":"Ninja Van" 
        }
 
     useEffect(() => {
@@ -66,9 +66,11 @@ const PopupConfirm = (props) => {
         ))
         .then((res) => {
             console.log("Confirmed successfully")
+            window.location.reload()
         })
         .catch(e => {
             console.log(e.message)
+            window.location.reload()
         })
     }
 
@@ -83,10 +85,16 @@ const PopupConfirm = (props) => {
         ))
         .then((res) => {
             console.log("Review Successfully")
+            window.location.reload()
         })
         .catch(e => {
             console.log("error")
+            window.location.reload()
         })
+    }
+
+    function onSkip() {
+        window.location.reload()
     }
 
     return (
@@ -181,7 +189,7 @@ const PopupConfirm = (props) => {
                                 <Rating 
                                     name="half-rating"
                                     className="star-rating"
-                                    dafaultValue={0}
+                                    defaultValue={0}
                                     precision={0.5}
                                     value={rating}
                                     onChange={(e) => setRating(e.target.value)}
@@ -192,7 +200,7 @@ const PopupConfirm = (props) => {
                         </div>
                         <div className="modal-footer-review">
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={onReview}>Confirm</button>
-                            <button type="button" className="btn btn-light" data-bs-dismiss="modal">Skip</button>
+                            <button type="button" className="btn btn-light" data-bs-dismiss="modal" onSkip={onSkip}>Skip</button>
                         </div>
                     </div>
                 </div>
