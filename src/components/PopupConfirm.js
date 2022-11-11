@@ -189,7 +189,7 @@ const PopupConfirm = (props) => {
                                 <Rating 
                                     name="half-rating"
                                     className="star-rating"
-                                    dafaultValue={0}
+                                    defaultValue={0}
                                     precision={0.5}
                                     value={rating}
                                     onChange={(e) => setRating(e.target.value)}
