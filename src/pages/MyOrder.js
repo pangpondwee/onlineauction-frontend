@@ -20,7 +20,7 @@ const MyOrder = () =>{
         "auction-waitingForShipping" : "shipped",
         "bid-waitingForConfirm" : "confirm",
         "auction-waitingForConfirm" : "confirm",
-        "bid-waitingForShipping" : "delivered",
+        "bid-waitingForShipping" : "shipped",
         "auction-waitingConfirmSlip": "pay",
         "auction-waitingAdminPayment": "confirm",
         "bid-failed": "failed",
