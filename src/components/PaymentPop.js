@@ -49,7 +49,7 @@ const PaymentPop = (props) => {
                         <div class="modal-body-confirm">
                             <div>
                                 <label>Account Number</label><br/>
-                                <input type="number" id={id_number} className="input-editing" maxlength="15" required/>
+                                <input type="number" id={id_number} className="input-editing" required/>
                             </div>
                             <div className="form-input-field">
                                 <label htmlFor="bankName" className="form-label">Bank</label><br/>
@@ -84,7 +84,7 @@ const PaymentPop = (props) => {
 
                             <div>
                                 <label>Account Name</label><br/>
-                                <input type="text" id={id_name} className="input-editing" maxlength="15" required/>
+                                <input type="text" id={id_name} className="input-editing" required/>
                             </div>
                         </div>
                         <div className="modal-footer-confirm">
