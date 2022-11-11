@@ -18,7 +18,7 @@ const formatPhoneNumber = (phone) => {
       phone.substring(2, 5) +
       '-' +
       phone.substring(5, 9)
-  } else {
+  } else if (phone.length === 9) {
     //เบอร์บ้านต่างจังหวัด
     phoneNumber =
       phone.substring(0, 3) +
@@ -26,6 +26,8 @@ const formatPhoneNumber = (phone) => {
       phone.substring(3, 6) +
       '-' +
       phone.substring(6, 9)
+  } else {
+    phoneNumber = phone
   }
   return phoneNumber
 }
