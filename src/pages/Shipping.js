@@ -116,7 +116,7 @@ const Shipping = () => {
         setShippingDetails({
           ...shippingDetails,
           bankAccountNO: 'bankNO' in res.data ? res.data.bankNO : '',
-          bankName: 'bankName' in res.data ? res.data.bankNO : '',
+          bankName: 'bankName' in res.data ? res.data.bankName : '',
           bankAccountName:
             'bankAccountName' in res.data ? res.data.bankAccountName : '',
         })
