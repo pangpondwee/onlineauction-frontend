@@ -35,7 +35,7 @@ const Profile = (props) => {
     const auctioneer = props.auctioneer
     const description = props.description
     const profilePicture = props.profilePicture
-    const rating = props.rating
+    const rate = props.rating
     const totalAuctioned = props.totalAuctioned
     const successAuctioned = props.successAuctioned
     const isFraud = props.isFraud
@@ -85,6 +85,8 @@ const Profile = (props) => {
         )
     }
 
+    const rating = Math.round(rate * 10) / 10
+
     if (rating === undefined) {
 
     } else {
@@ -93,7 +95,7 @@ const Profile = (props) => {
             star.push(<img src={fullStar} className="star" alt="star"/>)
             tmp-=1
         }
-        if(tmp===0.5) star.push(<img src={halfStar} className="star" alt="star"/>)
+        if(tmp >= 0.5) star.push(<img src={halfStar} className="star" alt="star"/>)
         while(star.length<5) star.push(<img src={emptyStar} className="star" alt="star"/>);
     }
 
