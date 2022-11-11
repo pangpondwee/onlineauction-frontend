@@ -70,11 +70,11 @@ const AuctionDetail = () => {
     }
 
     postData('/auction/upload', JSON.stringify(auctionData)).then((res) => {
-      console.log(res)
-      console.log(JSON.stringify(auctionData))
+      // console.log(res)
+      // console.log(JSON.stringify(auctionData))
       navigate(`/`)
     })
-    console.log(auctionData)
+    // console.log(auctionData)
   }
 
   return (

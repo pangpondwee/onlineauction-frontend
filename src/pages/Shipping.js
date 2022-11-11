@@ -60,16 +60,16 @@ const Shipping = () => {
   useEffect(() => {
     getData(`/payment/${auctionId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setItemDetails(res.data)
       })
       .catch((e) => {
-        console.log(e)
+        // console.log(e)
         setIsError(true)
       })
     getData(`/billingInfo/${auctionId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setShippingAddress({
           ...shippingAddress,
           name: res.data.bidderName,
@@ -78,7 +78,7 @@ const Shipping = () => {
         })
       })
       .catch((e) => {
-        console.log(e)
+        // console.log(e)
         setIsError(true)
       })
     setShippingAddress({
@@ -101,8 +101,8 @@ const Shipping = () => {
       `/shipping/${auctionId}/shipping`,
       JSON.stringify(shippingInfo)
     ).then((res) => {
-      console.log(shippingInfo)
-      console.log(res)
+      // console.log(shippingInfo)
+      // console.log(res)
       navigate('/account/myorder?list=auction&type=shipped')
     })
   }

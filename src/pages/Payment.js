@@ -62,28 +62,27 @@ const Payment = () => {
   useEffect(() => {
     getData(`/payment/${auctionId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setItemDetails(res.data)
       })
       .catch((e) => {
-        console.log(e)
+        // console.log(e)
         setIsError(true)
       })
   }, [])
 
   const getInformationFromProfileHandler = () => {
-    getData('/user/myprofile')
-      .then((res) => {
-        console.log(res)
-        setPaymentDetails({
-          ...paymentDetails,
-          bidderName: 'displayName' in res.data ? res.data.displayName : '',
-          phoneNumber: 'phoneNumber' in res.data ? res.data.phoneNumber : '',
-          bidderAddress: 'address' in res.data ? res.data.address : '',
-        })
-        console.log(paymentDetails)
+    getData('/user/myprofile').then((res) => {
+      // console.log(res)
+      setPaymentDetails({
+        ...paymentDetails,
+        bidderName: 'displayName' in res.data ? res.data.displayName : '',
+        phoneNumber: 'phoneNumber' in res.data ? res.data.phoneNumber : '',
+        bidderAddress: 'address' in res.data ? res.data.address : '',
       })
-      .catch((e) => console.log(e))
+      // console.log(paymentDetails)
+    })
+    // .catch((e) => console.log(e))
   }
 
   const submitHandler = () => {
@@ -100,8 +99,8 @@ const Payment = () => {
     // console.log(billingInfo)
     postData(`/payment/${auctionId}`, JSON.stringify(billingInfo)).then(
       (res) => {
-        console.log(billingInfo)
-        console.log(res)
+        // console.log(billingInfo)
+        // console.log(res)
         navigate('/account/myorder?list=bid&type=pay')
       }
     )

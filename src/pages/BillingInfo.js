@@ -71,7 +71,7 @@ const BillingInfo = () => {
   useEffect(() => {
     getData(`/billingInfo/${auctionId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setOrderDetails({
           auctionID: auctionId,
           auctioneerDisplayname: res.data.auctioneerName
@@ -106,7 +106,7 @@ const BillingInfo = () => {
         }
       })
       .catch((e) => {
-        console.log(e)
+        // console.log(e)
         setIsError(true)
       })
   }, [])
