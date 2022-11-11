@@ -74,7 +74,11 @@ const TrackingCard = (props) => {
             <></>
           )}
         </div>
-        <PopupConfirm auctionID={props.auctionID} />
+        {props.status === 'waitingForConfirm' ? (
+          <PopupConfirm auctionID={props.auctionID} />
+        ) : (
+          <></>
+        )}
       </div>
     )
   }
