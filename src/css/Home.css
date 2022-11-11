@@ -1,12 +1,12 @@
-.auctionCard{
-	/* width: 9.5rem; */
+.auctionCard {
+  /* width: 9.5rem; */
   width: 12.4rem;
   border-radius: 20px;
   /* width: 18rem;
   min-width: 10rem; */
   margin: auto 20px;
   box-shadow: var(--box-shadow);
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   /* min-width: 15%; */
   /* height: 9.2rem; */
 }
@@ -17,27 +17,27 @@
   margin-right: -10%;
 } */
 
-.flexRow{
+.flexRow {
   display: flex;
   box-sizing: border-box;
   /* justify-content: space-around; */
   justify-content: left;
 }
 
-.headHome{
+.headHome {
   text-align: center;
   font-size: 36px;
   font-weight: bold;
 }
 
-.detail{
+.detail {
   font-size: 24px;
   font-weight: bold;
   margin-left: 2em;
   margin-top: 2em;
 }
 
-.itemName{
+.itemName {
   /* font-size: medium; */
   /* height: 55px; */
   font-size: medium;
@@ -54,23 +54,23 @@
   overflow: hidden;
 }
 
-.timeBox{
+.timeBox {
   position: absolute;
   margin-top: -1rem;
   margin-left: 0.5rem;
   background-color: white;
   width: 7rem;
   border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.30) 0px 4px 4px 0;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 4px 0;
   text-align: center;
 }
 
-.timeBox-red{
-  background-color: #FF3131;
+.timeBox-red {
+  background-color: #ff3131;
   color: white;
 }
 
-.card-img-top{
+.card-img-top {
   /* height: 15vm; */
   border-radius: 16px 16px 0 0;
   height: 200px;
@@ -79,42 +79,42 @@
   min-height: 112.5px;
 }
 
-.card-text{
-  font-size:1.7em;
+.card-text {
+  font-size: 1.7em;
   font-weight: bold;
   margin-top: -18px;
   margin-bottom: -10px;
   padding: 10px 10px 10px 20px;
 }
 
-.itemTime{
+.itemTime {
   border: 1px solid black;
   border-radius: 15px;
   border-radius: 15px;
   margin-bottom: -5px;
 }
 
-.button{
+.button {
   width: 1rem;
   opacity: 50%;
   margin-top: 6.5rem;
 }
 
-.filter{
+.filter {
   position: absolute;
   left: 85.1%;
 }
 
-.itemName-link{
+.itemName-link {
   text-decoration: none;
   color: black;
 }
 
-.itemName-link:hover{
+.itemName-link:hover {
   color: black;
 }
 
-.row>* {
+.row > * {
   padding: 0px;
 }
 
@@ -122,7 +122,7 @@
   margin-left: 2em;
 }
 
-.scrolling-wrapper{
+.scrolling-wrapper {
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
@@ -144,10 +144,10 @@
   border-radius: 100px;
   background-color: white;
 }
- 
+
 /* Handle */
 .scrolling-wrapper::-webkit-scrollbar-thumb {
-  background: rgb(200, 200, 200); 
+  background: rgb(200, 200, 200);
   border-radius: 100px;
   border: 5px solid transparent;
   background-clip: content-box;
@@ -155,13 +155,13 @@
 
 /* Handle on hover */
 .scrolling-wrapper::-webkit-scrollbar-thumb:hover {
-  background: rgb(175, 175, 175); 
+  background: rgb(175, 175, 175);
   border: 5px solid transparent;
   background-clip: content-box;
 }
 
-#jumbotron{
-  background-color: #0A3E8A;
+#jumbotron {
+  background-color: #0a3e8a;
   padding-left: 5em;
   padding-bottom: 1em;
   border-radius: var(--radius);
@@ -172,17 +172,17 @@
 }
 
 #jumbotron div {
-  overflow:hidden;
+  overflow: hidden;
   display: inline-block;
-  width:50%;
+  width: 50%;
 }
 #jumbotron div h1 {
-  padding-top: 3em;
+  padding-top: 1.5em;
   display: inline-block;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
 }
 
-#jumbotron div a{
+#jumbotron div a {
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 0.5em;
@@ -192,14 +192,15 @@
   background: #fff;
   color: #000;
   text-decoration: none;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
-#jumbotron div a:hover{
+#jumbotron div a:hover {
   background: #eee;
 }
 
 #jumbotron img {
+  height: 300px;
   display: block;
   margin-right: auto;
   margin-left: auto;
