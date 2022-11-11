@@ -112,7 +112,6 @@ const Profile = (props) => {
                         <h1 className="auctioneer-name">{auctioneer}</h1>
                     }
                     {/* <h1>{auctioneer}</h1> */}
-                    <h6>Auctioneer Veteran</h6>
                     {(description === "")?
                         <div><h6>No description</h6></div>
                         :
