@@ -86,12 +86,12 @@ const OrderObj = (props) => {
         }
         else return
     }
-
+    
   return (
     <>
       <div className="Review-box Order-box">
         <img
-          src={props.data.productPicture}
+          src={props.data.productPicture ? (props.data.productPicture) : ""}
           alt="List_goods"
           className="mini-pic-goods"
           onClick={navigateTo}
