@@ -31,18 +31,18 @@ const PopupConfirm = (props) => {
        }
 
     useEffect(() => {
-        console.log("Begin getData tracking")
+        // console.log("Begin getData tracking")
         getData(`/shipping/${auctionID}/tracking`).then((res) => {
             setData(res.data.trackingInfo)
         })
     },[]);
 
-    console.log(data)
-    console.log(data.delivery)
+    // console.log(data)
+    // console.log(data.delivery)
 
     function onConfirm(e) {
         // e.preventDefault()
-        console.log("Begin postData confirm popupConfirm")
+        // console.log("Begin postData confirm popupConfirm")
         postData(`/shipping/${auctionID}`, JSON.stringify(
             {
                 "confirm": true
@@ -58,7 +58,7 @@ const PopupConfirm = (props) => {
 
     function onDeny(e) {
         // e.preventDefault()
-        console.log("Begin postData deny popupconfirm")
+        // console.log("Begin postData deny popupconfirm")
         postData(`/shipping/${auctionID}`, JSON.stringify(
             {
                 "confirm": false
@@ -76,7 +76,7 @@ const PopupConfirm = (props) => {
 
     function onReview(e) {
         // e.preventDefault()
-        console.log("Begin postData review")
+        // console.log("Begin postData review")
         postData(`/review/${auctionID}`, JSON.stringify(
             {
                 "rating": rating,

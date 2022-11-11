@@ -145,7 +145,7 @@ const AccountEdit = () =>{
                     <div>
                         <div>
                             <label><h5>Display Name</h5></label><br/>
-                            <input type="text" id="displayName" className="input-editing" placeholder={data.displayName} maxlength="15"/>
+                            <input type="text" id="displayName" className="input-editing" placeholder={data.displayName} maxlength="30"/>
                         </div>
                         <div>
                             <label><h5>Email</h5></label><br/>
