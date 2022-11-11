@@ -45,6 +45,25 @@ const AuctionDetail = () => {
   const [modalShow, setModalShow] = useState(false)
   const navigate = useNavigate()
 
+  // filter time
+  const filterTime = (time) => {
+    const currentDate = new Date()
+    const selectedDate = new Date(time)
+
+    return currentDate.getTime() + 3600 * 1000 < selectedDate.getTime()
+  }
+
+  // filter time
+  const filterDate = (date) => {
+    const currentDate = new Date()
+    const selectedDate = new Date(date)
+
+    return (
+      currentDate.getTime() - 24 * 3600 * 1000 < selectedDate.getTime() &&
+      currentDate.getTime() + 30 * 24 * 3600 * 1000 > selectedDate.getTime()
+    )
+  }
+
   const submitHandler = (event) => {
     const uploadedFile = uploadFileRef.current.getFiles()
 
@@ -266,6 +285,8 @@ const AuctionDetail = () => {
               }
               timeIntervals={10}
               showTimeSelect
+              filterTime={filterTime}
+              filterDate={filterDate}
               dateFormat="d MMMM yyyy HH:mm"
               timeFormat="HH:mm"
               required
