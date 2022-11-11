@@ -1,4 +1,4 @@
-const API_SERVER = process.env.REACT_APP_API_SERVER || "localhost:4000"
+const API_SERVER = process.env.REACT_APP_API_SERVER || "/api"
 
 function set_header(){
 	let headers = {
