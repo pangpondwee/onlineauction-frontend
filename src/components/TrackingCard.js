@@ -56,7 +56,7 @@ const TrackingCard = (props) => {
         <div className="center-pic">
           <img
             className="package-picture"
-            src={fetchPicture(props.packagePicture)}
+            src={props.packagePicture ? fetchPicture(props.packagePicture) : ""}
             alt="package"
           ></img>
         </div>
