@@ -31,7 +31,7 @@ const PopupConfirm = (props) => { // TODO use component popup confirm
         <h6>Shipping Company</h6>
         <p>{props.data.shippingCompany ? props.data.shippingCompany : "-"}</p>
         <h6>Package Picture</h6>
-        <img src={fetchPicture(props.data.packagePicture)} className="tracking-img" alt="tracking-img"/>
+        <img src={props.data.packagePicture} className="tracking-img" alt="tracking-img"/>
       </Modal.Body>
       <Modal.Footer>
         <button
