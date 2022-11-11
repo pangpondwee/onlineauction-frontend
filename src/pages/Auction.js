@@ -65,7 +65,6 @@ const Timer = (props)=>{
 		const timer = setInterval(() => {
 			if(time > props.timeRemaining){
 				setTime(props.timeRemaining)
-				console.log(time)
 			}
 			else{
 				setTime(time-1000)
@@ -163,7 +162,7 @@ const AuctionTop = (props)=>{
 			<div id="history-wrapper">
 			<button 
 				id="history-button" 
-				onClick={props.getHistory} 
+				onClick={props.getFetchHistory} 
 				className='btn' 
 				data-bs-toggle="modal"
 				data-bs-target="#historyModal"
@@ -310,14 +309,14 @@ const Bidding = (props)=>{
 	const [price,setPrice] = useState(0);
 	const [isAbsolute,setIsAbsolute] = useState(true);
 	const bidStep = props.bidStep;
-	const submitWrapper = (e)=>{ //wrapper for written bid price
-		submitBid(document.getElementById("bid-price").value,true);
-		e.preventDefault()
-	}
 	const submitBid = (price,isAbsolute) => {
 		setConfirmBidShow(true);
 		setPrice(price);
 		setIsAbsolute(isAbsolute);
+	}
+	const submitWrapper = (e)=>{ //wrapper for written bid price
+		submitBid(document.getElementById("bid-price").value,true);
+		e.preventDefault()
 	}
 	const submitHandler = ()=>{
 		props.submitBid(price,isAbsolute);
@@ -351,6 +350,11 @@ const Bidding = (props)=>{
 					</div>
 				</>
 				}
+				<PopupConfirmBid 
+				modalShow={confirmBidShow}
+				setModalShow={setConfirmBidShow}
+				submitHandler={submitHandler}
+				/>
 			</form>
 		)
 	}
@@ -417,7 +421,7 @@ const Auction = (props) =>{
 						return { ...prevData, currentPrice: price, myLastBid: price }
 					})
 				}
-				getHistory() // after bid
+				getFetchHistory() // after bid
 			})
 			.catch(e=>{
 				setError(e.message)
@@ -437,9 +441,10 @@ const Auction = (props) =>{
 			setError("Error: Could not follow/unfollow")
 		})
 	}
-	const getHistory = ()=>{
+	const getFetchHistory = ()=>{
 		getData(`/auction/${auctionId}/bid-history`)
 		.then((res)=>{
+			res.data = getHistory(res.data);
 			setHistory(res.data)
 			setHistoryError(false)
 		})
@@ -473,7 +478,7 @@ const Auction = (props) =>{
 		})
 		// history
 		.then(()=>{
-			return getHistory() // first time
+			return getFetchHistory() // first time
 		})
 		.catch((e)=>{
 			console.log(e)
@@ -486,7 +491,7 @@ const Auction = (props) =>{
 					return {...prev, currentPrice: res.data.currentPrice}
 				})
 			})
-			getHistory() // other times
+			getFetchHistory() // other times
 		},10000)
 		return ()=>clearInterval(timer)
 	},[]);

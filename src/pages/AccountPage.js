@@ -2,12 +2,8 @@ import blank_profile from "../pictures/blank_profile.png";
 import blank_star from "../pictures/star_blank.png";
 import half_star from "../pictures/star_half.png"
 import star from "../pictures/star.png";
-import badge1 from "../pictures/badge1.png";
-import badge2 from "../pictures/badge2.png";
-import badge3 from "../pictures/badge3.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import {getData} from '../components/fetchData';
 import "../css/AccountPage.css";
 
@@ -22,6 +18,36 @@ import badge_newbie from "../pictures/badge-newbie.png"
 import badge_admin from "../pictures/badge-admin.png"
 import badge_official from "../pictures/badge-official.png"
 import { Badge } from "react-bootstrap";
+
+const formatPhoneNumber = (phone) => {
+    let phoneNumber = ''
+    if (phone.length === 10) {
+      //เบอร์มือถือ
+      phoneNumber =
+        phone.substring(0, 3) +
+        '-' +
+        phone.substring(3, 6) +
+        '-' +
+        phone.substring(6, 10)
+    } else if (phone.length === 9 && phone.at(1) === '2') {
+      //เบอร์บ้านกรุงเทพ
+      phoneNumber =
+        phone.substring(0, 2) +
+        '-' +
+        phone.substring(2, 5) +
+        '-' +
+        phone.substring(5, 9)
+    } else {
+      //เบอร์บ้านต่างจังหวัด
+      phoneNumber =
+        phone.substring(0, 3) +
+        '-' +
+        phone.substring(3, 6) +
+        '-' +
+        phone.substring(6, 9)
+    }
+    return phoneNumber
+  }
 
 const dictBadge = {
     "top-10":badge_top_10 ,
@@ -64,8 +90,8 @@ const AccountPage = () =>{
 		}))
     }, [])
 
-    // console.log(data)
-    // console.log(other_data)
+    console.log(data)
+    console.log(other_data)
 
     const allstar = []
     let badges = []
@@ -103,7 +129,7 @@ const AccountPage = () =>{
                     <h4>Email</h4>
                     {data.email? <div className="account-info"><h5>{data.email}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                     <h4>Phone Number</h4>
-                    {data.phoneNumber? <div className="account-info"><h5>{data.phoneNumber}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
+                    {data.phoneNumber? <div className="account-info"><h5>{formatPhoneNumber(data.phoneNumber)}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                     <h4>Address</h4>
                     {data.address? <div className="account-info"><h5>{data.address}</h5></div> : <div className="account-info"><h5>No information</h5></div>}
                 </div>

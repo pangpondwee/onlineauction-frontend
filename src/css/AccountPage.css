@@ -354,3 +354,14 @@ input[type='number'] {
   width: 3vw;
   margin: 1vw;
 }
+
+.add-payment {
+  border: 3px #fff solid;
+  border-radius: 5px;
+  color: white;
+  background-color: #228be6;
+  padding: 3px 8px;
+  position: absolute;
+  right: 4vw;
+  top: 20vh;
+}
